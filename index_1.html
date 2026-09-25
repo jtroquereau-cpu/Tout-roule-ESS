@@ -1,0 +1,2440 @@
+<title>Tout Roule</title>
+<style>
+  :root {
+    --paper: #faf9f6;
+    --paper-raised: #ffffff;
+    --ink: #23303c;
+    --ink-soft: #58656e;
+    --ink-faint: #838f96;
+    --line: #e2e4de;
+    --line-strong: #c7ccc0;
+    --petrol: #283c50;
+    --petrol-soft: rgba(40, 60, 80, 0.14);
+    --petrol-faint: rgba(40, 60, 80, 0.07);
+    --accent: #b4643c;
+    --accent-soft: rgba(180, 100, 60, 0.14);
+    --status-good: #4f8063;
+    --status-good-soft: rgba(79, 128, 99, 0.16);
+    --status-watch: #b8862f;
+    --status-watch-soft: rgba(184, 134, 47, 0.17);
+    --status-urgent: #a83232;
+    --status-urgent-soft: rgba(168, 50, 50, 0.15);
+    --shadow: 0 1px 2px rgba(35, 48, 60, 0.06), 0 8px 24px -12px rgba(35, 48, 60, 0.18);
+    --font-display: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #16212b;
+      --paper-raised: #1c2936;
+      --ink: #e9edf0;
+      --ink-soft: #b7c2c9;
+      --ink-faint: #8695a0;
+      --line: #2c3b48;
+      --line-strong: #3e5063;
+      --petrol: #8fb3d1;
+      --petrol-soft: rgba(143, 179, 209, 0.22);
+      --petrol-faint: rgba(143, 179, 209, 0.10);
+      --accent: #e2915f;
+      --accent-soft: rgba(226, 145, 95, 0.18);
+      --status-good: #86bb9a;
+      --status-good-soft: rgba(134, 187, 154, 0.18);
+      --status-watch: #dbae55;
+      --status-watch-soft: rgba(219, 174, 85, 0.18);
+      --status-urgent: #dd8a8a;
+      --status-urgent-soft: rgba(221, 138, 138, 0.18);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #16212b;
+    --paper-raised: #1c2936;
+    --ink: #e9edf0;
+    --ink-soft: #b7c2c9;
+    --ink-faint: #8695a0;
+    --line: #2c3b48;
+    --line-strong: #3e5063;
+    --petrol: #8fb3d1;
+    --petrol-soft: rgba(143, 179, 209, 0.22);
+    --petrol-faint: rgba(143, 179, 209, 0.10);
+    --accent: #e2915f;
+    --accent-soft: rgba(226, 145, 95, 0.18);
+    --status-good: #86bb9a;
+    --status-good-soft: rgba(134, 187, 154, 0.18);
+    --status-watch: #dbae55;
+    --status-watch-soft: rgba(219, 174, 85, 0.18);
+    --status-urgent: #dd8a8a;
+    --status-urgent-soft: rgba(221, 138, 138, 0.18);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0 1.75rem 4rem;
+  }
+
+  /* ---------- Brand nav ---------- */
+  .topnav {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    padding: 0.9rem 1.75rem;
+    margin: 0 -1.75rem 2.25rem;
+    background: color-mix(in srgb, var(--paper) 90%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand-mark { display: flex; align-items: center; gap: 0.6rem; margin-right: auto; min-width: 0; }
+  .brand-mark svg, .brand-mark img { flex: none; }
+  .brand-mark .bm-text { display: flex; flex-direction: column; gap: 0.05rem; line-height: 1.1; min-width: 0; }
+  .brand-mark .bm-title { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; color: var(--petrol); white-space: nowrap; }
+  .brand-mark .bm-sub {
+    font-family: var(--font-body); font-size: 0.66rem; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink-faint); white-space: nowrap;
+  }
+  .brand-mark .bm-sub strong { color: var(--accent); font-weight: 600; }
+
+  .topnav-tabs { display: flex; gap: 0.2rem; background: var(--paper-raised); border: 1px solid var(--line); border-radius: 100px; padding: 0.2rem; flex-wrap: wrap; }
+  .topnav-tab {
+    font-family: var(--font-body); font-size: 0.82rem; font-weight: 500; padding: 0.5rem 0.95rem; border-radius: 100px;
+    border: none; background: transparent; color: var(--ink-soft); cursor: pointer; white-space: nowrap;
+  }
+  .topnav-tab.is-active { background: var(--petrol); color: var(--paper-raised); }
+  .topnav-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (max-width: 720px) {
+    .topnav { padding: 0.75rem 1.1rem; margin: 0 -1.1rem 1.75rem; }
+    .topnav-tabs { width: 100%; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; }
+    .topnav-tab { flex: none; }
+  }
+
+  .page-view[hidden] { display: none; }
+
+  /* ---------- Home page ---------- */
+  .hero-cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.6rem; }
+  .hero-cta {
+    font-family: var(--font-body); font-size: 0.88rem; font-weight: 600; padding: 0.7rem 1.15rem; border-radius: 10px;
+    border: 1px solid var(--line-strong); background: var(--paper-raised); color: var(--ink); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .hero-cta:hover { border-color: var(--accent); }
+  .hero-cta.is-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .hero-cta.is-primary:hover { filter: brightness(1.06); }
+
+  .philosophy-block {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 2.5rem;
+    margin: 2.5rem 0 3rem;
+    align-items: start;
+  }
+  @media (max-width: 860px) { .philosophy-block { grid-template-columns: 1fr; gap: 1.75rem; } }
+
+  .philosophy-block h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin: 0 0 0.9rem; }
+  .philosophy-block p { font-size: 0.98rem; line-height: 1.65; color: var(--ink-soft); margin: 0 0 1rem; }
+  .philosophy-block p strong { color: var(--ink); font-weight: 600; }
+
+  .posture-card {
+    background: var(--petrol); color: #fff; border-radius: 16px; padding: 1.5rem 1.6rem; box-shadow: var(--shadow);
+  }
+  .posture-card .pc-eyebrow { font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: color-mix(in srgb, #fff 65%, var(--petrol)); margin-bottom: 0.5rem; }
+  .posture-card h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; margin: 0 0 0.9rem; }
+  .posture-row { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 0.6rem; }
+  .posture-item { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.55rem 0.7rem; border-radius: 9px; background: rgba(255,255,255,0.06); }
+  .posture-item.is-us { background: var(--accent); }
+  .posture-item .pi-label { font-weight: 600; font-size: 0.88rem; white-space: nowrap; }
+  .posture-item .pi-note { font-size: 0.78rem; color: rgba(255,255,255,0.75); }
+  .posture-item.is-us .pi-note { color: rgba(255,255,255,0.92); }
+
+  .how-it-works {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin: 0 0 2.75rem;
+  }
+  @media (max-width: 780px) { .how-it-works { grid-template-columns: 1fr; } }
+  .hiw-card { background: var(--paper-raised); border: 1px solid var(--line); border-radius: 14px; padding: 1.3rem 1.4rem; box-shadow: var(--shadow); }
+  .hiw-card .hiw-num { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--accent); display: block; margin-bottom: 0.4rem; }
+  .hiw-card h4 { font-size: 0.98rem; font-weight: 600; margin: 0 0 0.5rem; }
+  .hiw-card p { font-size: 0.86rem; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+
+  header.head {
+    max-width: 68ch;
+    padding-top: 2.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--petrol);
+    margin: 0 0 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 1.5rem;
+    height: 1px;
+    background: var(--petrol);
+    display: inline-block;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    line-height: 1.12;
+    margin: 0 0 0.85rem;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+
+  .tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.28rem;
+    color: var(--accent);
+    margin: 0 0 1rem;
+    letter-spacing: -0.005em;
+  }
+
+  .tagline .em {
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-weight: 600;
+  }
+
+  .lede {
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 1.15rem;
+  }
+
+  .example-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    padding: 0.4rem 0.8rem;
+    border-radius: 100px;
+  }
+
+  .example-flag::before { content: "●"; font-size: 0.55rem; }
+
+  .stat-row {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 1.4rem;
+  }
+
+  .stat-chip {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.55rem 0.85rem;
+  }
+
+  .stat-chip .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    align-self: center;
+  }
+
+  .stat-chip strong {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.05rem;
+  }
+
+  .stat-chip span.label {
+    color: var(--ink-soft);
+    font-size: 0.86rem;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(380px, 560px) minmax(320px, 1fr);
+    gap: 2.25rem;
+    align-items: start;
+  }
+
+  @media (max-width: 920px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+  }
+
+  /* ---------- Thématiques page ---------- */
+  .themes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .theme-card { padding: 1.3rem 1.4rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .theme-card .tc-head { display: flex; align-items: center; gap: 0.6rem; }
+  .theme-card .tc-code {
+    font-family: var(--font-body); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.05em;
+    color: var(--paper-raised); background: var(--petrol); border-radius: 6px; padding: 0.2rem 0.5rem;
+  }
+  .theme-card h3 { font-size: 1rem; font-weight: 600; margin: 0; }
+  .theme-card p { font-size: 0.87rem; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  .theme-card .tc-source {
+    font-size: 0.72rem; color: var(--ink-faint); margin-top: auto; padding-top: 0.5rem; border-top: 1px solid var(--line);
+  }
+  .theme-card .tc-source strong { color: var(--accent); font-weight: 600; }
+
+  /* ---------- Questionnaires page ---------- */
+  .quest-list { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2.5rem; }
+  .quest-row {
+    display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; text-align: left;
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow);
+    cursor: pointer; width: 100%; font-family: var(--font-body);
+  }
+  .quest-row:hover { border-color: var(--accent); }
+  .quest-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .quest-row .qr-code {
+    font-weight: 700; font-size: 0.72rem; letter-spacing: 0.05em; color: var(--paper-raised); background: var(--petrol);
+    border-radius: 6px; padding: 0.25rem 0.5rem; flex: none;
+  }
+  .quest-row .qr-text { flex: 1; min-width: 0; text-align: left; }
+  .quest-row .qr-label { font-size: 0.93rem; font-weight: 600; color: var(--ink); display: block; }
+  .quest-row .qr-teaser { font-size: 0.8rem; color: var(--ink-soft); display: block; margin-top: 0.15rem; }
+  .quest-row .qr-status {
+    font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.02em;
+    padding: 0.3rem 0.6rem; border-radius: 100px; white-space: nowrap; flex: none;
+  }
+  .quest-row .qr-status.status-good { background: var(--status-good-soft); color: var(--status-good); }
+  .quest-row .qr-status.status-watch { background: var(--status-watch-soft); color: var(--status-watch); }
+  .quest-row .qr-status.status-urgent { background: var(--status-urgent-soft); color: var(--status-urgent); }
+  .quest-row .qr-arrow { flex: none; color: var(--accent); font-size: 1.1rem; }
+
+  .wheel-card { padding: 1.75rem 1.5rem 1.5rem; }
+
+  .view-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.2rem;
+  }
+  .view-toggle-row h2 { margin: 0; }
+
+  .view-toggle {
+    display: flex;
+    gap: 0.2rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 0.2rem;
+    flex: none;
+  }
+  .view-toggle-btn {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    border-radius: 100px;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .view-toggle-btn.is-active { background: var(--petrol); color: var(--paper-raised); }
+
+  .kanban {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+  @media (max-width: 700px) {
+    .kanban { grid-template-columns: 1fr; }
+  }
+  .kanban-col { display: flex; flex-direction: column; gap: 0.65rem; min-width: 0; }
+  .kanban-col-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .kanban-col-head .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .kanban-col-head .count { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+  .kanban-empty { font-size: 0.78rem; color: var(--ink-faint); font-style: italic; margin: 0; }
+
+  .dash-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--line-strong);
+    border-radius: 10px;
+    padding: 0.75rem 0.85rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .dash-card:hover { border-color: var(--line-strong); box-shadow: var(--shadow); }
+  .dash-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .dash-card.status-good { border-left-color: var(--status-good); }
+  .dash-card.status-watch { border-left-color: var(--status-watch); }
+  .dash-card.status-urgent { border-left-color: var(--status-urgent); }
+  .dash-card.is-selected { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .dash-card .dc-code {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .dash-card .dc-label { font-size: 0.86rem; font-weight: 600; color: var(--ink); margin: 0 0 0.5rem; line-height: 1.3; }
+  .dash-card .dc-bar {
+    display: flex;
+    height: 5px;
+    border-radius: 100px;
+    overflow: hidden;
+    background: var(--line);
+    margin-bottom: 0.4rem;
+  }
+  .dash-card .dc-bar span { height: 100%; }
+  .dash-card .dc-caption { font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-soft); margin: 0 0 0.4rem; }
+  .dash-card .dc-next { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.4; margin: 0; }
+  .dash-card .dc-next strong { color: var(--ink); font-weight: 600; }
+
+  .wheel-card h2, .panel h2 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0 0 0.2rem;
+  }
+
+  .wheel-card .hint {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    margin: 0 0 1rem;
+  }
+
+  svg.wheel { width: 100%; height: auto; display: block; }
+
+  .sector { cursor: pointer; transition: transform 0.25s ease; }
+  @media (prefers-reduced-motion: reduce) { .sector { transition: none; } }
+
+  .ring { stroke: var(--paper-raised); stroke-width: 2; }
+  .ring-1.status-good { fill: var(--status-good); }
+  .ring-1.status-watch { fill: var(--status-watch); }
+  .ring-1.status-urgent { fill: var(--status-urgent); }
+  .ring-2 { fill: var(--petrol-soft); }
+  .ring-3 { fill: var(--petrol-faint); }
+
+  .sector:hover .ring { stroke: var(--line-strong); }
+  .sector:focus-visible { outline: none; }
+  .sector:focus-visible .ring-1 { stroke: var(--accent); stroke-width: 2.5; }
+
+  .tick { stroke: var(--paper-raised); stroke-width: 1.4; opacity: 0.9; }
+  .action-marker { fill: var(--accent); }
+  .task-dot { fill: var(--ink); opacity: 0.72; }
+  .status-dot.status-good { fill: var(--status-good); }
+  .status-dot.status-watch { fill: var(--status-watch); }
+  .status-dot.status-urgent { fill: var(--status-urgent); }
+
+  .sector-label {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    fill: var(--ink);
+  }
+
+  .hub-bg { fill: var(--paper-raised); stroke: var(--line-strong); stroke-width: 1.5; }
+  .hub-title { font-family: var(--font-display); font-size: 27px; fill: var(--ink); font-weight: 500; }
+  .hub-sub { font-family: var(--font-body); font-size: 12px; fill: var(--ink-faint); }
+
+  .selection-ring {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    pointer-events: none;
+    transition: d 0.25s ease, opacity 0.25s ease;
+  }
+
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem;
+    margin-top: 1.4rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .legend-item { display: flex; gap: 0.55rem; align-items: flex-start; }
+
+  .legend-swatch {
+    flex: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    margin-top: 0.1rem;
+    position: relative;
+  }
+
+  .legend-swatch.l1 {
+    background: conic-gradient(var(--status-urgent) 0 33%, var(--status-watch) 33% 66%, var(--status-good) 66% 100%);
+  }
+  .legend-swatch.l2 {
+    background: var(--petrol-soft);
+    border: 2px solid var(--petrol-soft);
+  }
+  .legend-swatch.l2::after {
+    content: "";
+    position: absolute; inset: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .legend-swatch.l3 {
+    background: var(--petrol-faint);
+    border: 1.5px dashed var(--line-strong);
+  }
+  .legend-swatch.l3::after {
+    content: "";
+    position: absolute; top: 4px; left: 10px;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--ink);
+  }
+
+  .legend-text .k {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.15rem;
+  }
+  .legend-text .v { font-size: 0.85rem; line-height: 1.35; color: var(--ink-soft); }
+
+  .diag-summary { margin: 1rem 0 1.3rem; }
+  .diag-bar {
+    display: flex;
+    height: 8px;
+    border-radius: 100px;
+    overflow: hidden;
+    background: var(--line);
+  }
+  .diag-bar span { height: 100%; }
+  .seg-oui { background: var(--status-good); }
+  .seg-en_cours { background: var(--status-watch); }
+  .seg-non_besoin { background: var(--status-urgent); }
+  .seg-non_pas_besoin { background: var(--line-strong); }
+  .seg-ne_sait_pas { background: var(--ink-faint); }
+  .seg-ok { background: var(--status-good); }
+  .seg-preoccupant { background: var(--status-watch); }
+  .seg-grave { background: var(--status-urgent); }
+  .seg-tres_grave { background: var(--status-urgent); }
+
+  .diag-caption {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin: 0.6rem 0 0;
+  }
+  .diag-caption strong { color: var(--status-urgent); font-weight: 600; }
+
+  .diag-source {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--ink-faint);
+    margin: 0.3rem 0 0;
+  }
+
+  ul.diag-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  .diag-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: 0.87rem;
+    line-height: 1.45;
+  }
+  .diag-item .q { color: var(--ink); }
+  .diag-pill {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.02em;
+    padding: 0.22rem 0.55rem;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .diag-pill.a-oui { background: var(--status-good-soft); color: var(--status-good); }
+  .diag-pill.a-en_cours { background: var(--status-watch-soft); color: var(--status-watch); }
+  .diag-pill.a-non_besoin { background: var(--status-urgent-soft); color: var(--status-urgent); }
+  .diag-pill.a-non_pas_besoin { background: var(--line); color: var(--ink-soft); }
+  .diag-pill.a-ne_sait_pas { background: var(--paper); color: var(--ink-faint); border: 1px dashed var(--line-strong); }
+  .diag-pill.a-ok { background: var(--status-good-soft); color: var(--status-good); }
+  .diag-pill.a-preoccupant { background: var(--status-watch-soft); color: var(--status-watch); }
+  .diag-pill.a-grave { background: var(--status-urgent-soft); color: var(--status-urgent); }
+  .diag-pill.a-tres_grave { background: var(--status-urgent); color: var(--paper-raised); font-weight: 600; }
+
+  .diag-meta { display: flex; align-items: center; gap: 0.5rem; flex: none; }
+  .diag-value {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  .panel { padding: 1.85rem 1.85rem 2rem; position: sticky; top: 1.75rem; }
+
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .panel-code {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  .status-pill {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    padding: 0.3rem 0.65rem;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .status-pill.status-good { background: var(--status-good-soft); color: var(--status-good); }
+  .status-pill.status-watch { background: var(--status-watch-soft); color: var(--status-watch); }
+  .status-pill.status-urgent { background: var(--status-urgent-soft); color: var(--status-urgent); }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--petrol);
+    margin: 1.5rem 0 0.55rem;
+  }
+  .section-label:first-of-type { margin-top: 0; }
+
+  .diagnostic-text { font-size: 0.93rem; line-height: 1.6; color: var(--ink); margin: 0; }
+
+  ul.actions { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
+  ul.actions li {
+    display: flex;
+    gap: 0.6rem;
+    font-size: 0.91rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  ul.actions li::before {
+    content: "";
+    flex: none;
+    width: 7px; height: 7px;
+    margin-top: 0.5em;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  table.tasks { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+  table.tasks th {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    padding: 0 0.5rem 0.5rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  table.tasks td {
+    padding: 0.55rem 0.5rem 0.55rem 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    color: var(--ink);
+  }
+  table.tasks tr:last-child td { border-bottom: none; }
+  table.tasks td.period { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--petrol); white-space: nowrap; }
+  table.tasks td.resp { color: var(--ink-soft); white-space: nowrap; }
+
+  footer.note {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    max-width: 68ch;
+  }
+  footer.note strong { color: var(--ink); }
+
+  .site-footer {
+    max-width: 1220px;
+    margin: 3rem auto 0;
+    padding: 1.25rem 1.75rem 2rem;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .site-footer p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+  }
+  .site-footer a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .site-footer a:hover { text-decoration: underline; }
+  @media (max-width: 720px) {
+    .site-footer { padding: 1.1rem 1.1rem 1.75rem; }
+  }
+
+  .data-badge {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
+    padding: 0.3rem 0.65rem;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .data-badge.is-example { background: var(--accent-soft); color: var(--accent); }
+  .data-badge.is-user { background: var(--petrol-soft); color: var(--petrol); }
+
+  .theme-form-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 0.7rem 0.9rem;
+    margin: 0 0 1.1rem;
+  }
+
+  .btn-theme-form {
+    font-family: var(--font-body);
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: var(--paper-raised);
+    background: var(--petrol);
+    border: none;
+    border-radius: 100px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  .btn-theme-form:hover { opacity: 0.9; }
+
+  .theme-link-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    border-radius: 12px;
+    padding: 0.75rem 0.9rem;
+    margin: 0 0 1.1rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: border-color 0.15s ease;
+  }
+  .theme-link-cta:hover { border-color: var(--accent); }
+  .theme-link-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .theme-link-cta .tlc-icon {
+    flex: none;
+    width: 34px; height: 34px;
+    border-radius: 100px;
+    background: var(--accent);
+    color: var(--paper-raised);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .theme-link-cta .tlc-text { min-width: 0; }
+  .theme-link-cta .tlc-label { font-size: 0.9rem; font-weight: 600; color: var(--accent); display: block; }
+  .theme-link-cta .tlc-caption { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.4; display: block; margin-top: 0.15rem; }
+  .theme-link-cta .tlc-arrow { margin-left: auto; flex: none; font-size: 1.1rem; color: var(--accent); }
+
+  .quest-field-row {
+    display: grid;
+    grid-template-columns: 1fr 168px;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .quest-field-row:last-child { border-bottom: none; }
+  .quest-field-row .ql { font-size: 0.87rem; color: var(--ink); line-height: 1.4; }
+  .quest-field-row select {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    padding: 0.4rem 0.5rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(23, 38, 42, 0.55);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2.5rem 1.25rem;
+    overflow-y: auto;
+    z-index: 100;
+  }
+  .modal-overlay[hidden] { display: none; }
+
+  .modal-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    max-width: 640px;
+    width: 100%;
+    padding: 1.75rem 1.85rem 2rem;
+  }
+
+  .modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .modal-head h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0;
+  }
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--ink-faint);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.2rem;
+  }
+  .modal-hint {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin: 0 0 1.2rem;
+  }
+  .modal-hint.limits { font-size: 0.76rem; color: var(--ink-faint); font-style: italic; }
+
+  .eco-fieldset { border: none; padding: 0; margin: 0 0 1.3rem; }
+  .eco-fieldset legend {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--petrol);
+    padding: 0;
+    margin-bottom: 0.6rem;
+  }
+  .eco-field-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 100px;
+    gap: 0.6rem;
+    align-items: center;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .eco-field-row:last-child { border-bottom: none; }
+  .eco-field-row .fl { font-size: 0.83rem; color: var(--ink); }
+  .eco-field-row input {
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+    padding: 0.35rem 0.45rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    background: var(--paper);
+    color: var(--ink);
+    text-align: right;
+  }
+  .eco-col-heads {
+    display: grid;
+    grid-template-columns: 1fr 100px 100px;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-bottom: 0.4rem;
+  }
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+  }
+  .btn-secondary, .btn-primary {
+    font-family: var(--font-body);
+    font-size: 0.87rem;
+    font-weight: 600;
+    border-radius: 100px;
+    padding: 0.55rem 1.1rem;
+    cursor: pointer;
+    border: 1px solid var(--line-strong);
+  }
+  .btn-secondary { background: transparent; color: var(--ink-soft); }
+  .btn-primary { background: var(--petrol); color: var(--paper-raised); border-color: var(--petrol); }
+
+  /* ---------- Sauvegarde des données (export / import) ---------- */
+  .data-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .data-btn {
+    font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; padding: 0.5rem 0.85rem; border-radius: 100px;
+    border: 1px solid var(--line-strong); background: var(--paper-raised); color: var(--ink); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap;
+  }
+  .data-btn:hover { border-color: var(--accent); }
+  .data-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .data-hint {
+    font-size: 0.78rem; font-style: italic; color: var(--ink-faint); line-height: 1.5;
+    margin: 0.75rem 0 0; max-width: 62ch;
+  }
+
+  .field-row { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .field-row .field-label { font-size: 0.83rem; color: var(--ink); font-weight: 500; }
+  .field-input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .field-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .toast-wrap {
+    position: fixed;
+    left: 50%;
+    bottom: 1.5rem;
+    transform: translateX(-50%);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    width: min(92vw, 480px);
+    pointer-events: none;
+  }
+  .toast {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.45;
+    padding: 0.75rem 1.05rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+    background: var(--paper-raised);
+    color: var(--ink);
+    text-align: left;
+    width: 100%;
+  }
+  .toast.is-success { border-color: color-mix(in srgb, var(--status-good) 45%, transparent); background: var(--status-good-soft); color: var(--status-good); }
+  .toast.is-error { border-color: color-mix(in srgb, var(--status-urgent) 45%, transparent); background: var(--status-urgent-soft); color: var(--status-urgent); }
+
+  @media (max-width: 720px) {
+    .data-actions { width: 100%; }
+    .data-btn { flex: 1 1 auto; justify-content: center; }
+  }
+</style>
+
+<nav class="topnav">
+  <div class="brand-mark">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADACAYAAABBCyzzAAByiElEQVR42u29d3yj2V0u/pzzqvdiybLc5CI3TddsXzbaNEgngBPK5RIgJJdwKblwbyAQ4iUXLgkQCKEkC6Fc2i9rIJAQlkuaNputM5ouN7nIlotsSVbves/5/fG+chvP1tndKfrOR2OPRuUt5znf/nwJ51xAS1rSkkOFti5BS1pybVG0LsGrK0GAGEMh4vf7eSgUIgDg9/u5/H/7JCD/bL4u7/fzAMBbV/HVE9Iysa7ftQzKizoYlJZ6IpHgADA+Ps4BYEJ+yJp7r/Ym8uOgcAAMu6BgExPyJ0xMwDc5Kb1nfByOYJAgENj5/kAg0AJSCyCvzTULAcQv7ewAgHw+zwOBQHNBE3nxawCYAdgAaBuVhqaKhrraqJpypVJbpVK11RsNY52JWsZEBQgUrMEFAARU+hQBtKZSCVmtUp/UqlTbKq2qoCaKgk6tLisUijKALIA8gCKAKoAaAB4MBgkAGI1GAr8f/v2AawGnBZDre42av0wEg3jowQdFAJyAgHFGAWgBWLKFwuhGKnEiXcz1FatVW6lStpUqNWelXjPV63VFQxQFURQVDc5UDSZqRFFUcwIKQgAOMHCA8336hICCcA5KSF1BhQohtCFQUhcobSgFoaFUKmtqlbqkUarSBq0mbVIb4m5H2zM9TtfTABIASkqFoiyKIhjnNBQKCXvAjBZYWgB5aRoiFCLw+5sOAPx+vygvJh2Ajkyh0LtdyPZuplOjmXyhr1gptRXLFW+uXOyoMUYq9RqK5TKKlQrKtRrqjRoaDRENsYGGKEJkDJwxzjjnHODgEjKIQIlAJHhwDhBCQAghhBKAEBAQEEJAKYGCUigVSqjVGmjVaujVGph0ehg12pJZZ5jVq5RxnVqXtZmMC21my2yvs2MewDKAJIBGMBikTQ0jn2NLu7QA8jw+RDCIYDDIHnroIQYAnHMlAEemUBhZTcRPJbLpo9uFwkixXO4sVMsdxVqFpgt5ZAsF5ItFVGs1NMQGY4xzzjlnXF5zhECgCqJQCIJSUEClUEKlVEKpVEClVEKtVkGjVEFJCCghnFLKQcAJCAcIBwFnjBMRDGAcXGRE5EzRAFCt1VCp1VCv19AQGSBQqFQqaBVK6GXg6JSqilGrjZn1hmi7xX6xq639XHd7+zkAy5SQCggBY0wI7voxNzNQCPb4gTsBj5eoNW93gJADDjEBYKzVaj2xdHJsM508mikWfZlc7lQil+lK5nNIZjPIl4qo1esQWYMxEU0YQBAIURCBqBQKolapodVooFYqoVFroFWpoRIUdZ1KVVYrVA21WtlQq1QllUqV16nUGZ1akzSqNUtalXqTCkKVKKioJEKVUFKjEDiDSDmYAMZIXYSmWCp058qlwWKl2lat1Uz1es1Qrjf01UZVWazWVJV6RdNoiKpao4FqowoOAr1GC4veCKNaU7QYjOfaTOanbUbzVHebbdqkMy3IPo0YDAbpy1lUr0VkMCBH+/x+P9tzL5uPnedCoRB9MdrydgUIAUAmJyeZHGHSAeicW4+d2sps35/M5e7ZyqaPpYp5YSudQjqbRaFY4iJjDOBEurrSr4IgAcJoMBCb0QyTTg+dSlkzaY05i8mYNWg0a3qNdsOgMyxZ9forJr0uptcasyqgBlRFQF0HUAZQAdAAIMo3FPJPdsjxCwCU8kMNQCX/rgCgTmYybblqaaBQKvdXalVXrlTuLJRL3ZlSwZQvF43VRsNEVQro1BpoCIFZp5+y6U2PWQ2mc26742Kb2bwog4XJAYcbGSB0T7RPB8CRSKe7M4Vcd7FesQiUihqFKum2tkX0ev0GgDQAJgOFtQBybY2hAmCNJ5PDiWL2vvXt1NuWt+Kn17aTwnoigUK5CJGJIhMZ4dJSJZIXTbhCEAStVgOTwQibyQS7wQiX1ZbosDq+7bRZv21S6xe1anXcrNOlAJTk6FJdfojyY+eYJicnicPhIAgAgZ3sB665eweDQRIIBJrhXHbI65oAEmTQKAFoa7WaJVstWjP5wmAyn79/M514MJnN9pbFOhRKJYwqDdr0xktum/1LVoPlKYfJOa/RICVHyZh8/W4YsASDQeJwOKjP59Nv53Ij8e3kg/Ht5IOpXO5oMp9tL9dqECiBXqNlLot91mG1PtFmtX5zoN39JIB4MBgUA5Kq5Lc7QJo5CiLvuJ7FrbXvWt7c/N7lRPyujVTKnMhlkc5lUa5WxIYoEs45ATgB54wDUAkKYjGaictmR5vRjDazdd1iNITNev0lk9ZwxWWxzdhNphiAbQAVSohkenFODqh7yMciJwaDQBAvJ2+xk39pimxq8GAwiEQiwcPhMG/6VXL0TQXAli1lO+PJ7f5MuTCaK5ZPlevVE6VKpZcxBoGgaNabw50O57/0OF3fMOt0i3JIWbwRzC5ZA1AAvefnZj44vbbyI9H4ensyl0auWESpUoEoMk4poFKqiNlghFlvQIfN1hju6XtstNPzWXdbWzAUCpWeS5Pc0gAJyck4v/RTV6qXhhY3t962GF///mh8bWR9O0WT2QxK5QoXWYMTEAKAMJFxxkSuoJQY9AbisNrQaWtDh9U+77DYvuWymp9ss9kjNq1xXQZEkVLaYIxRAFTe2Z9XE7wGWnMHQIuLi+y9732vKB+zHoA1lc261rcTnmK55MuWim8pVat31DmDVqFe7HU6/tbb0f0fWq12AUAhFArVmxUAr8G5EQDKfL586tnI5d+4uDj/+unYErKFHBeZyDmTgn+E7Jw6JwRcIARatYZ2ulwY6ezZPuYZ+rx3wPt5LbB2rfO4JQESlCNSE5L5YS4UCv7Z+Or3zW+svX15a6N7M5tBMr2NSrXKQAgRqIKAcC6KIgfjXKtWC642B9zWNjjNluU2k+kZp7XtycGunid1SuUcISQrR7lIKBRSaPx+AoThg4/dRKFSEgaoTwIM/8pXviI+9NBDTNYw+kKtNrCwvHg6Wy2fqNfZyXK1NEIEutVmNH+nt739yy6r41l5cyCvZua+6ZBnKoX7H79w/g/Pzk4djawus1qjDkopJQQAP2gJElAZK5xzzsC5zWShR/oHcaJ/+G/v9x3/5VAotHWYJrmVAELkKAX8Ug7Dvrm9/eBUbOkHFzfX74lvpxzxTAqpdIaLjHGBUkopBeeACJEpqEAdVhs6He2w600Zl9X6VIe17bFhd9cTWq12DkAKAAsBCsgZ9Fssd0BCoRCx2+1CsVhkR44cqQmUoiGKlmyp5J1bX3lduVI6xTnpJ0BZr9Y+626zBztsjssAtg4EE16Ra9KMQJXqpVPfPHP2D5+JTN01t7wkAkQglEjpJMIP/XZy4JeGyLhWrcbp0aPkTu/Yw/eMHf21YDCYPgj0WwUgZAIT7CHyEOOc2+Lb22+4tBB5XzS5fu9GLmuJxTeQy+c5wCFQgRBCwcA4Y4xrlGra6XTCbbE1OuyOMx32tlBfe+c33Xb7MwDiAHgIUPilBcRvk4QaCYVCxGQy0Vqtxo8ePVpjjCkAdM/H106ns5kxQoiTcW4jhGy4LJb/1+10nwOQQjBI8cpoExKJRASv16t5/NL5Tz89G/6J0ExYBIEgIXLPV3J+bfuyefMIAWMiM2oN5O5RX/ld977u/e02xz9hf+3bTQ8Qsif2bY4lkw/Mry9//8pm/K3LyU3bwuoq8pUSEwglAqGEyAFBDs60Gg3tsDvhMlnqnnb35eGurkeGe/r+CUCUENI4e/as0u/3EwCsVfy3m0T9xG98golM1GaKxZFofPXNlXp9VK/RbGmU6mmDQXu5w9zWdOav60YSRJAEECDbudybvvLM43/5+KXzjkKpBBBOrlJa/Nqu395/UQLU6nU23NtPHzzhD77p1D0/EgqFEntNrZsZIGRiYoJNTEygVKqfvrg0/cHZjZUfWE0lTYvrqygUSyIA2vTUOGfg4EyjUNOe9g50ORyl/o6uZwdc7n8c7Oz+dwCrk+EwGQPg8/n23txW+cXeDQkge0pTVFWgd3Vz/USdiW6NUlHSKrRzeoXiisFg2MbhOZyXHNINBAL6b18Kffap2fCPnp+bYeCg17xN/PkBIlf5cK1Gi9Pe0dr33f/gj3U6XF+GVPhJgJuwH0S+UFwGiGs2tvyWmdXln51dXzk+FV1AqVwWOSeUECLIThk4B1cplHBYbbSnzYnhLs/ZI/2Df9jrdP47gPTk5CTp7++njnye+Vpl4s8l3A/wnTo1oKYG5gfa3UsAjJu53CAXRbuoUBgAZK4XQILBIAkGgywQCLhXkwl/dHODg3BQECk9BYCAg/Pd37GjV8g+aJADioYSSgqlIt/IbqvXtpNv7nS4vjExMVGdmJiQ3P2bSYPsKRMQEvn0nTMryz8/tbz0fXPrMbK6FWeccamab9cW5YRSbjNaaF+HG8NdPTND7t6/Gu3p+UcAsUlAHG8t+uspKkh5poa8C18vDUIBNFKZzLsfefzrf/7E1EUra4gchJCmv8GvMrMOPsMPtcQIAepig3W73PTNJ+8+/9Y77xsHsAgpycpvxo5C6+rW1vc8Gwn/2pXV6NBcNMrrjTrjkEvHd41HplGpaZ+7iwx3erJHevv/9Fhf/19CqmhtBINBMn51rqIlL0+a1QLXNeMeAuAHEE8nfJV6zVJviFxBCLmOqp5Ua3Xky8WOTCZjslqt/OzZs8Tv998UAGmuesHv93ufCl/6yOXo/PjMeky9nkowUeSynyHFMQgHFyhhHY52YbijpzHU3ftvfe2df+1pb38CUtx+r5nWkutsgr1SfptCEPizU5e1hFJCCBgIJeAMO5si5/txScgBrUFwqI0lv5ZzBlFkpNFo7LOobnSAkHA4TH0+nyqeTj94LjI1cWl58dTsyhKKlQonhNAdaBAAnDGdWkeHPf3CcGf3wpEuz2eGunu/BCAeRBDGkJH6/X7WAsfNKUqFUJYayKR8ICEETDalduGwV3nJv+/TZ3tBJAOJgBNKiVKhEDUaTQ3Y5Qm4kQFCg8EgDwQC5unlpf8Wmp/9uXBssW1pY42JjBFCKOHN6DfnnHOwLmeHMNrZ0xjt8fzzWFff59sslqcBVEKhkBDwBzj81y+q0pJXT/wAGqJIljZWtwQqVAgVNOCMc75rVHNCDo1kEcl9v8oo4QecEY1SBaNGu6lQKIq86e3fwAAhAEggEBh9curi/zo/H3nv1MqiYiuzzQgIJVQ+QanRh+tVGjLc0yuMdHpmxzyez492eb4IIBFGmPjge0FlzS25sU03QgjPl8vzOo0mrVGpOiqVylXWHTlglfMdnULkJoUDmoRI76GEwKDVwmGxPKPRaLKTAB3fEx24oYARCoUoALaVzQYePfvU556ZnfqRc5FpRSKd5hSE7nSocg6xXmdtRgu50zvauGfI929vOHH6Q6NdnofD4XAyAlAffCJaeYybXoLBID7OOTVoNAs2g3nZbjKDQ+T8eW4t2ZdHJ3uAswM7MHAoFApqUKsbDovtKQAFTE7uvOxG0iBUrqPSriXi3/Ps3PT/vrS85J1bXhQZ41QglDA56s2YCEoo63N10qOegdydQ0d+f8zj+ZNwOJxZA+Dz+cTWsrp1RPYZKYCtbofjyY5N+92r8Q0Csnf3O2Bi8b0g4YdGDwg4GlxkbRYr7Xa44i6LPQSgMT6+G/y/UTQICQaD3O/3Gy8tzv3sY5fPf+7ZuWlvZHlJBIcAwgknkpUkMhECodzXN0hfd+Tk1IPH7/jQmMfzmRCQ9vl8zOfztcypWxEkAMLhcGOoo+/LLrN12WI0EanDc58h9vwFLkTqCeVSTygoFdDd1oGxPu8XVSrVcpOk70YCCAkB5J577ul/du7Krz05felj35m5bI3GVxkDFxjhO1E6xkWuVavZSe8IuWf4yNffee8DP9Lb3v7FUChU8O8WmbVMqlvUD6lUKtxo1D7b5+qcHOn2QCUoOX+R95vveYicsV5XJx3s6J4+0ef9awA1v9+/7/WvtYlFIoDgB/qDM1d+L7Q095bw4jzK1QonoJTvCdyJIud6tRZ3jByhdwyNfeHOEd8nI5HISi6XI3sad1pyK0ezJLrWxt1+/+dK1Yq3Korvujg/02iIokAIIZLTTQ7Joh9UIRyMM+ayO+nxXm/mbt/x3wYQ3VOtvfvq17jURCiVSseejYQfenI2/NappXlWb4iEyH0vTWGMMYvBRE8ODOOOwdFP+UdGPz05OZkcHx+/oXqkW/LqbKoAeK1WG338ysVPnl2ce+tMdBGlWoURzqmEk6sBwmSXnnHOKQFrdziFU4PDuQfGTnxkoKPzb8PhcO0w3/U1AYhcU0VyudKp78yc/3xocfbY9PIiE+siJVLiBruNYZy1W9vo6cGx/InBwd892uf9HKTmpZbcHkKxS0DRLGUBAKFYLI6dX5r/pZmV5ffMra8o15ObXBRFxsEJDhQpSqkyTnQ6HR3tHcBwZ8/MSLfnMyOdPZNBIBu4xkb7WgBE6sqo1ca+ceXC739n5tLrp5YWRMaYQEEA2ow8EHDCWZejnZ72jiXu9Po+MtDZ+Y9BBMsvk+SgJTeVtkhqt7bpfWVWb9OptM86TKb5UCgkaPx+4pNeY59bXX77/Nrq+5Y21+/dzGWQLRZRq9fQEEWAECgVChh0WthNZrgtbYlBd+cjQ+7ev7WbTJexyzSDGwEgNIggv7d2r+/x8MXfe2rm8hvCixGxLooS4yaRkjZNrdjf2U1PD46u3Dly9CPdDse/BoPB+h6S6Jbc+qaUUENt+PHLF//YrNWfPT049gdBBNeMISM5QBhBAQxeiS58d3x7+85ipeyuNRpWxhoaUCoqKC3qtLpNk04/73G5vt5pdXwHQC4cDivkqOcNQftDAfAa4AuGnvmdM/Mzb7o0P8NEUaRNHjzJuiIAIPZ3dQt3eMfmHjh2+sMOk+kb4XCYP9/JtOTWEbmgtPvJ2UsTiWLuv7brzb989/DRL6ACCzRIQ+o3aQIJzeY5AAZIjPoW2TRjkIj5UpBI4xohKTD0giKerxZAmq2xfcFLod99dm76Hedmw6zRECmAnTIAQijAOfO4OuldI77lB476f77dav0qdrNALXDcBhJCiPrhV85uxd73nfCFPzKpdPn7R4/90GY63Z2tlH9ILyi/dnpk7NOhUKixt4woFApRjV9DEkiwB8mD4h4HhDwyOUkd4+PEKI2ueMFrSfEqgqP/25dCv3U2MvOOS/MzjDcY3XHE90Srel1uenpobON+38lfardaH5WreVuZ8dtFcwAkAD+roTY4F1v+YLpcJC699TsdNkfh21cu/sxyauuoQ6M/0eV0zPn9/i/v3ThlsMgt1vs3/uC4o0nK/aI22Vc6UUgAEL/fr3/yysVfObcY+b4LkVlWr4mE75hU8hkxzjvsDnp6aHTr7rGjH+2w278ajUZpKzN+29lWAGC5tLDwoyvJxDGrQlsddHd97fLi3Nvi26mRK7PTjcj6svnJ8MXfSuS2Xy9Htw6SkF/1COClBXVeSYCQSCQiALBeWZz/0IXFyHsuL0R4vVYj8vyZ3TNinFtMJn56eKR0cmDstzxO1xejAPd4PI2WWXWbaY9AgEdTG6+bWVt5f65Q5L121/9zmmypiwuz/zW2taEEIKxubbKLS/ODz06HP1mq14/KlhB5pRznV0y8Xq96Nrb8vienLz90aXFOWygWZS98X6cw16hV/PTwEXqif/hTYz09fxmNRrlHCr21wHEbRa2CExMMgGNhbfW9i1ubFotWz3o7Or4VXo68azmx5dpMpTghlHBKaTS+zi5FF48+M3Xx/9RqNe8rGVl6RXYCAMJmOhk4E5n+5QuLc4pUPstAiFQmJrvcDIBKqeQnvGP0hKf/L04ODH9+EigWi8Vr0f635BYFBwA6MTFBF+Ir3xPd2nh7tVxBn7PjCY1CI86txt68kUrKJPtSH5DIQediK+z8wvwbLy8vvg+AYVIqUyc3OkBIAECpVDp6dm7mE5eXF62JTJoREMr3tEJyaZwYG+rpo6f6hv/jHt+JTwaB5Dha5eq3XdQqFCLhcBgARqZXln9yM5fV9dgc1T5HxzdnYgvvjiUTxmyhAFDslOsSAJVaBbFEnG9ltl8PwP6e97znum+q9BXYCTgA26Xo/C9cXFk6Ft1YYwCRw7nSqXEOMMa5y+agRz0DsTvHjvwmgMXAK2RHtuTGF5/PhwvRufdEkxv3slodvr6Bf2uAqWbXVh5YTWxyJtMtSCMlpIdAKawmIzHotLMA8h//+MfJDQ2Qhx9+mABQzC0vvevC0sJ7Z1aiTBQZwb4T4xAZ4zaTCaeHRksnB4YmjFrtefkjWmbVbWhe5f1+Xq7X75yOLf7wdjFPu+3OrT6n6xsL6yvfu7y1JRSrFWkY8B6PlHHGrWYLHezqyfS63X8PYLtJ9nZDAiQE0A988AONXC53Khxb+h/h5SVFqVTa054CucyYQ61WY8TTT04NjvxBv6vzHyGNH2s55LehPBx6mAQA17NzF38hltoaUEPBR7r6v76VSfdFE5tjW+ltDoCwPSkMaR6kgC6HC8Odnr/psbY/BYlD+YbVIGRR8p86QguzvzC1FhvZ2k6KRE4DcvDdpkdKmLfbQ04MDP3n0b6BPwmFQuXWMrltfQ/6Af8HGnNryz84FYu+s1Aqos/ZEemw2i7Pxlb+y/zaKq81anuMK0k4Z7zd4SADHe7lo129X0A0mgcgvBIFrNdNg4wD2gvzMx+YWlv5/vDSAhM56MGjFcFYp6Od+ro9i2847v/1CJDUaDQtv+M2Na388APA6YvLcx+MpeJKm87U8PUO/sdCfPWOyOZqRzKzjb0WiDypk2u1OvQ5XY3jA4N/osqpFkOplPhKmecvGyAhhCihpJHIpQPh5egHLy/OC7VqjUiJ8t0/nIPrVFoy0tlbPzHo/WMAF2u7BYgtuR3Fj46vh5/95NT6yqCCKDHQ7j5LOCkuxjfeMr8WY4wxAr7f9+Cc896OTjLU1fMtr6v77yPpyFVtsjcUQDRhDeGMt11ciPzUfHzNtZXeFiUq0P2Ft5SAD3d7iK/H8+hwZ8//NxkOMzmc2/I9bjOR8xXay7GFD56Pzj+4mUrxXntHZrTH++3p5cXvmVlb1pYqFXCQXbXApW5Ak15Puq329Om+kc8C2PJ6va9ohffLAQgBQH0+nzC7vPQTkdXVt8zHlplCGlOz37RiInPZHXSos3v2vjH/b0UikdR4S3PclhIEyPj4OE3ktu8/H438XGRtlfc5u8hIl+c/ktm0K5qMn4zF1xmFPPtDtq0kokDG+91dxOvu+qrVZHpMzp3wGxYgkUiEluv1U+cXIh+cW11RVms1YN/8AYAzDkoIvO4ePtLV/YhSiXOtZXL7SiAYRA21kXNLcw9F4jGDQaEh3Za2eZfVtjq7uvyWubUVMCaN+NhVHhwN1mAdNgftc7RH7ho68ocASq+GBfKSARIKheD1elWX5md/ciW52b+e3GSEULqjW3ZOjrF+dy/ta+94+sTgyD8AYF6vt2Va3YZO+cTEBEcgYLkYifxceCN6R2J7m4109DbGevoenY4u3DMfX3dsZ7NsxzHn0oMxziko+l2d9aM9g3+hVCrPB6Wq3xdi5ZDXAiDE7/fTbLF4z+zq8tuXN+Oc851RP/IPAnDODVod8fX25Y/1ef8MwKJMLdoCx+1nWmFiYkIzsxb9gYsrCz8eiS2zLls7HXR1/is4V87H1+6ejy1zALRJLdu0njgHG/MM0sGOrm+Oevr//oXMjEwCOkjdhS+r0vflmFjmKyuLP7WynXSk8hkuCJTs0smTnZDcQFcP6etw/bPH5fpqGGHe4rC6LYUGAHErnz41HYv+8lRsSSAiIR57e2qsp+/bV6LzDy5txoVKrcab1RbgHJxxMJFxp9lKRzt7Z+8ZPf5JAOvGQOD5Fjyj29uWTLHoAWB6tTUIBaBIZbPH5tdjb1xLboFJlYcgex7g4Dq1lvQ424u9zq4vA0j54GvlPG5D0+phaa68PbK6/L6FZLw3k8uJ/e1dpM/p/s/I+sob5jfWh9aTm1yghDajn03zihLCR3v7yEhX759ZDIZgKBQi/ufPeRCtVotao9G+lc97IY2Ge1UAQiTFAOPS1sZ4LJGwZHM5LlBKmvSgUuqcAJRwj7uT9Ld3/LvH6XxGNq1avsdtJqFQiHzA7yezseh7ZtdXf2h6aUm06c3CQJtr3qDTVs5Gpt+6EF8jjGHfOGf5b9bb0UkHOzqfOT449NXJyUn6Ai0QotVqU7VaTbGdydxdqVTaX6q19FIAolhNp++cjS2/Zz2VAGNNwoXdVzDOuFGnIwMud8Hj6p4EsIW9Z9+S20JzRCIRhX/Rz8r1+p1X1hY/fCm2pGMiI32OdrHX6XpyZmXpuxc21hX5UokTeiC4wzm3GkzkSE9/frS37w8BLPT3979Q/5UAqFDOs6IoOuOZzF0ANK84QILBIAfQtrwe+6/zW+uWdC7LpZFx8lHJvxEK3uVsJ/2uzkd7HI4ngwi2fI/bULzeGsc4nE/NXPilmY3VwfjWltjraKe+noEnUvnsYHgl6t5Mp/gO0yzZ3WmVSoGPevrIUc/A5zzt7kfD4fCL5mB2O53TgoIuJPOZB3O5nPulaJEX8wYaCATIWjJ+KhKPvW11K845Y9L5yJN6CCTtodOoaY+9rdHjdH4JwJYxZGxx6N5mEgYo4NNcXox8aHpt5R1T0QXWYbULvs7eDa1Gk7qysnTv4sYGZ4zvzBskoE07nXW3d9Dhrp5LR4YH/hZAvuLzvZiEIAdAKSEpQvhCrVHvTpcK9wMwA+Avpur3hQKkucCN66ntN61ubekL+QIknuD9I0wI4dxps6HP7X6iw2I/C0DM5/MtcNxefgf1AXRlY+N7zy/O/PdLi3NEp1DTIVdnfrCr55szseU3zMViqFSre5k05TmsnNtNZnKsdzDv8wx+UgXVHADufwnFiBxAh9G6olYqlpcTiR/ZzG175Y2eX2+AAACPZzLHl7c2v289kcAuMHaryThn0Ko0tNPWJnqcnf+gVqs3XuwBteTm9jsAUL/fL5TL5bvOzk99LLy6bCmVKny4s1cc6x28tLwZ90/Flk3pfF5ifuK72TwODp1Ww0d6+3HCO/wnnnb3N0Kh0Etuv37kkUcEk8m0phCE6a3t1OtW41vvgsS4yPECcyMvCCBy1lK7lth4/cr2Vme2mGNkf0UJCDgYY6zNYoWnvTPSZXM8BqCKG28OYkteOaHRaFQA0PXYlXOfvLiyMLi4Fmv0Ot30SFf/JVBkZtZjIyvxNca4SED4jnkOAJRSNtTjoScGhr521DP4MIDsy6jU5f39/ZRSWjJptBcJF8uxrY33R5PxI4QQdj0BQgKBACvWat61ZPJty2urnDF21cdzAEqFkrosdjbU2fv3arV6FZJabBEw3AaaIxwOC+FwGB6Px/rMzOWPXIrO3zUdnWdWg1nR73Bt282mjdnl6Otmlxd4QxTJvgGchACEs94ON/X19M3fPTr2m9FodB1AAy+jz8Pv93PGGO3r6J5x2e3/WBbr9ngyeR/nXBu+nhoEAInF1++KZ1LHU9nMoe9jnDGn3YGe9o6l0e7eL4fD4Vpr3dw+mkOlUhGfz6eaj8W+//z8zPsuL0UYFznxdnRVh7p7L0dWY8emYlFDoVzC7jBBab65yDk36oxkqLO36B8a+6RWqQ1Fo9HrQRrIg8EgBZDoaHN+pVguifF08kfz5bLfB7Agnt9Zfz6AkMlwmAIwxDOp04l8loqcMUL3coZK30EJJS6bHQMdXV8DsNBqhLq9xOv10u1s9r5zi9P/6+JSRJHJ5nm/q4t4O7pXStWqcW4j1rW6FecgsnEulyQB4CqVgo/2DpDRbs8jvY72f4lGo6I85uJli9FoJIQQZtQallQKZS6ezwxfjs69A4DmhdCRPq8GcfgSDIA3mUmfXk8k5CpEsjPkRtIenJsMRmI3mJODHV1fAlBCK6x7u4hCNoP6QgvTH7u0vNC9vpVkDpNVGHb3buu1WsWlpbnjC2sxTijdW8oKwjlEsc4HO3vpkd6+J+8bO/apRx99NH89KWebuROHxZJoM5qnY1ubPLa1GQDQPQHw0PNggD5PuI4EECBXlhceTOSyvkwuxwmkkna+p0+FgXO7zQ6nzX7ZrNefkx37Vt3VbeB7BINBEYDjianzv3RhKXLfQmxF1Ks05Gi/t+F2tOcja6vOmZWoUK3VyMHac84Yd9kddLizZ/30qO9TABacTud17xD8OOcUwHabyXymUWuQrUzm+GJ8/d6JF/A9zwkQOX9hiW1u3h/PbitELlfMkD0akkjmlc1gQKfd/iyA9KRMQtxaP7e8Y04DgYDq4uL0+y5HIz8emr3CxAajQ129ZLird2MjveWYXlvSZ4sFOVS1v7ncoNfz097Rkt878sk2nfFroVAIe+d9XCfhExIuq1aT5aJOqWbJclG9uLF2PwCDKRJ56RokkUjwOureRGb7+OrW5s74pwPRK67XaIlJrc942l3fwSQw3lo8t7zIc1uE1Y2NH7i8GPnw2ZkrvFGvo9vRTkZ6+grpQrbjcnRet7mdwsGUAAeHUqXkp0d89ETf0B+OdPX+1cMPP1x/pcqRgvIkcYPOsOi02SqpdBqb6e07AYzVvN7nzKzTa39okIyPj2MhtnZPplzoKpRLnBJCdzI7Mr8u4yK3Wa1oM5vnrXrTdKg/1Mp73MJaAwANh8OCz+fDdm478MTM+d98evaKYzuTgcNkpccGvHVBQRSXliLCeiq5551yKwQApaAQfQND9Iin/19ODY18HkDhAx/4wCvWWx4AMDExQTqs1pWuNuciAGxmM0NTa7E3+aT5Ii9BgwQBAJqNVOp4vlIV5IjcVWdAQOA0W+EwWi4DWMcrSMHSkhtCBKvVqsiX8/c8MX35t89FI10r8bho1pvISPcAdBoNmV5e1KyltojIWBMb+5KB3h6PcKrP+8w9Q0c+AWANzcnHr6DI8wtTXW2OoE6p4hvbScXy+uobAFify2em11JJwUCQAWjfzmVGUtk0KKX7+Ink7YSrFWpqVqlLnTb7U5TSMqTmmJbcohKNRuF2u73funTu956cDR+bWYoynUorDHb28U6XuzS3uqKYX4+hLoqgZDfWKU1qZazL0U5P9Q1H7h4Y/ahKpbqya6m/osInJycJgHK71fakWW9obG6nsJbY8pbL9UEAuFaX4qEAMQJkAhMkV8yNpPLZvnQuJ40vB+QcD2n6Wdyg08GgMyz1ubvOMcZJq6z9lhUajUYVHo/H840Lz/zumbkZ/5XILFNSBR1w96C7vYNEN1bVi+urqNRr+40yadmwzrZ26h8cSd457PuoxWJ5OiiFh1+VfNn4+DgAiBajZcGiNxTq9RrShXz7WjZ1XMq5hF6EiSVpAWF5c+ueQrViL1UqHJySg94545ybjQYYNdoFAPPB4LcEtPIft6TvEQGox+Np+87lc7/x7OzUG8OLc4yCkMGOLjbW3VfJFnKYiS4IxUpZ5iTYXS6McW41mKivd7B4enjsNzrs9v8MAfXAq7hWmiaUTqncsBkMKb1Gg0K1okhmUycAqK+Bj+eMYmmXN9bu3S7k5Tbb3T5hziW2VJEzmPUGmPX6eYHSrNFobOU+bkHNAYB6Aev5uakPn1uYGT83d4VVKhXSZW8nI739nHGxMRuLIlsqQuRsdweVuQkMej0/2j/ET3lHHh50d/9fACX/azDqQjazsg6rddliNCGZyyCeSh0H4LiW5XMoQOT8hyOe3XZvpbdBKJHp5/coEA4QBqpXqmHWGTcYbymOW03C4bDwqJQn0EwtLbz/mfmpnw3Nhnm1Uic9bS5ypM8LkTPh/OKcYSub2Wt97ywSpULBj/R56bGBoUdODgz9AV6jKotAIMAdDgcBULWbrZfNBj3ShSyS+UxvtlLxAqCHOer0Gp+GQqXSW6pUHKVKReZiODBZlzOuVimJTqXKOa2WxdZyujXlLV4vXUnEv+fs4sxHQpFpZbZYhMNkJUcHhmHQ6TCzEsVKYhMNzq6OcBKwoZ4+eqS77/H7R0d+G8DmtWz9VwkkAMDsevOMVqmqiowjXSra49uJkwCUhyW36SFqCAEA27n0UK1etzTqDWkyFJMeTbeKc851Gg0MOl2szW5dBiFoOei3lvbw+Xw8k8ncfWFh9uPnoxHDdi7LjDoDGe7th0atxWxsGbFkHM3mCiJX6Umcb1zs7+qhx/oGZ+7xHf8YoJqVVs5rvkaIzWyeN2l122qVCoVahWxkUvcBUMvMO+TaANlVMUIylz5SZaIgsgY/oDhlC5PDoNNBp9JGlVBuffzXf72VILyFnHKfz1fPlUqnnoxc+Z2n58Nja1sbTK/W0qEuD8wGM+bXljG/voK6KF61LjgY83R2CacHRxfvGT3+UaNW+0x4l/KJv8bAh0GjWTbqDTmjQY90MY9ENuOB1K+OgwBR7MNHIIBx6QS0qVxhpNJogIFzgYOASD4VAwBGQEC41WiCQauOAkgFAoEWpegtAo4ggADge3Lm/G+djc76F9ZiolqhEnrbOuCy2rGyuYHlrQ3UWGOnrnv3L8a62zvo3UNHFu8aPvrhdovl6wBE3w0ADgCoVCocQMqo1W+adMbhrWwauVKxo1wvdwNYfU4Ta0/YzZnMZXqzxTwIoTIVpByY2JlWzYlJq4dOqdkQKC29ADrIltwcESt2b6147NGzj3/+zML062eWF0WVoBS62lxot7VhNbGJ5cQGao26lAiUi1apRK7Jup0d9E6vL3HKO/Kxzra2/wBQww0CDgBcDkBVDBpd3KjToVSu8GyhaNrO5fv9fj8JHUh00/0WVpAAIJlCoXs7l3HkigW5ZXi/g845h0AFqqYCjFr9KuMcmnC4BZCbW5o5rJFvXbrw6WcXZu8NLy0wJVEIXTYn3HYHNrYTWNpaR6VRA6EUlFBQQkAJBThnbquD3jV8dO3esaMf9rS7v4LdUO4NY1nIqQjRqNetaRRK1Oo1FMpFVbZc6AOgOOhH00O8fEW+XO7LFgvqSrUCSvbPpm4SmCiVKui0mqLRoNsCAJ/EW9SSm1DkpiGWL5fv+/Izj/3F0/PTr5tZjooqQUW7bO3otLcjmUljNbklgYMQUCppD0ooAMZcdge9a9SXunfsyK/2trsng0D5RgPHXk1i0utiCkLrnDFUxQbJ5AsjAJQHxyoc1CAAoMgWsgOVWk3dqDewy9W+e7acgKvVKug0mjWb3pwEpHkhLbn5/A0A1A/Qcrl817cunvnM2cXIXdPLS0wBKnSY2+C0tiGRy2B5K45qow5CqFyZK5G9Mc6402qnp7zDubtGT/xaj7PjX0OhEA/cqOCQamm5WlClVYKiqqACKZZL2C7khgCYD7b6HtQgHIAyXywOiOBg2KUU3m9iAWqVCjq1Jq7T6dIAWiHem1NzEADIl/N3fv3SmT96en7q+NTSPFMQgXa3taOrrR2ZQh4L6zGU6zVIJP4ye7/cAdVhd5A7h3yZ+8dOfXygo+OvABTkpqcbdD1ICNGqtUWBEFEhUBRLJaRzeVdN4syi2FMCT/f6H/JwRU2uUuqSdgscTo5CwBVKJQQqZCFlRlv+x80GjlCI+gGaz+fv+falC58+Mz91Yi4WFZVUQTutDnTbXSiWy4jG11BnjV19IwvjnDmsNuIfGks/cOTkr3i7uv4yHA7fLEQdhFBao5SKCkJRqVaRLRa06UzGAanf5XANIlc86orViqtWr8u0kFevfQ5AEARQQVUCUP34xz/eAshNZlr5/X6ylU7f8Z2Zi793ZnHm9NxKVFRRpdDT5kK3w4VkLo2plUWUalWp8JDsRnI549xutNAT/SOVO7xjn/J0dP4VgOLNNLVYqVSWKaENgQooV6s8VyoaypViD6TBtPxQgABAulg0FioVY61RBwElUmEi2WtgAZxDQQVQ8CqAus/XGoxzswBDdsiFcrnsP7808zvPLs6enltZFpWCSuh1uNDT7ka6kENkfQXlRhV8T12u1NHBmMVgJHeMjFXvHj36u6M9nr8IRoM3zQVotvOZNZq0gpKSUqlAvdFglXpdyFfK/bKjvkNNehVAqhVRU6nWlPWGuDv0g2D/OEQCKAQBSkEoosWceFOJH0A6n777m1dCf/hUZOru2eWoqBQUQldbB9qtbVjdXMdsLCprjoOWA2c2o4XeMeITT/V5P+nr8fxBFMgFPIHrRtPzakhYSkmUlZQWKaVgjKNSq6FSrbXjQE0WPeCgA0JNV2vUVaLYuIZxJQUxlAoBCioUAIgYH8cLnDraktfQ5wCgzBQKDzwxc+XTZxbnTs9Fo6KKCEKH1QG7yYLVRBzRrfV94ODNP5wxt81B7x87nrlnxPerJwZHPhcG8p7mzLSbT+qgpCFQCkLARSaiWq86II1r2zkfxUEVXK03dHVWFxoiOzwqSBgoFaBUCFAqFEUAzBEMtmh+XqbpE5QiJUgEAhxSsETa7RwOEggAAQTwUhfiZDgsjPv9fC2RePsz8+H/c3ZhZiC6tiqqBaXgtjth0hmwkUpgPbmFSqO+MwhJynlxCISIg90e4Vjv4OqpgaGHBt3dXwRQUUUiFNJI75tLfBJAFApFVaVUQiEQiJyhWKt1AFAR7HaXK/aoHcHn84HXmUpkosA526X52XtbOAEllCgFBQSFoozXoPHllvEHQiGSz+d5IBCQ8gaBgBKAFuPjOgBKAI1xKUpYACDKWqAZUucvFHjjPp+wlUz+wOPhc588F53tWIlvML1KJ7Rb7FArVVhLbiKRSaMmNiRw7GHpESjlw55+4c6B0Usn+oc/1tnW9o0QUPMD3Ov1Nm7OS+8DAFFBaU2pUIBQClFkqFSqjmq1qoFGw5sQ2QGI7LkLdYg6kTGBcw5CCJoD0Pk+PUIgUAFUoM06m5aT/iLBEQ6HqZwvMGYqlVOLsaXXp7K5/kKlaK3W62aRiWqlQlHVabWpNpMl2udyf8Pv9z8GIBsBFF7puovPCQ5pnrhuZnnpA8/OT3/k/OJM23pyk1m0JtpmtkFBBWylU0jm0hCZuJPfIABExrhGreJHegfp8X7vk/eOHvuo1Wh8KhQK8VeA3O3VdkIAn08ECCOEgHICxhjqYl1Vr9f3TcQ9aGJRkYtGgIBLE3LIHuNqV5nImwwX5cBWoAWQFxFFIn6A+3w+aywef3B+I/buWGLz/u1i3p0tFVGslFCt1yCKIgRBgEGjhcVowvTy4g8Oubv/7dSg9wterfECgAqAQ0fbhREWfPDxQCDgODc/97Nn5sP/49z8rCqdyzCHyU6dZhs4Y9jMpJAtFaRIFaHSh3EpFaxRqnCsb4je7fU9+uCp078IYHGP9ro1bgahfCd0Lc1lpw3SEA4FSAgh+OEHa3DVVbWXe1jcmwVZjDFwwgQABEFI7FwtuaYEg0GSSCT4+Pi4IlMo3HtpYfb9S/H1t8ZSW+boxhryhQIHwECkag5pB+KIiwwiYzAbTfZENv1jG+nU/SPd/Z8/0jfwNwCSV/kbmMQ4xhkA73eunPvY+ej8D52dnUKlWmUui4M6LFaIDRHxTArZYk7OcVAQuUKCcZFb9AZytN+LYx7vlx48efqjk0Bk/BpgvCkNLJ8PAARCZX3JJYAwzgmgJM+lQXbfsU9v7HFECAHjgMg4uOTxt/pAnl+aY+iMc6sr77kcXfhfs+vLAwurKyiVS4xwQqhCIOB7WP5kBU4ECioAxXKZn5+dYauJxECmkP2teq1iPjns+wyA9J5IFRn3jyNXKp16ZubS/76wHHnj+blZThhHt62dOqw2FMplrKU2UalVweUgJkGzJY4zl62NHu/z1k8PjvzJqeHRT8VisXT/1hbFzW5W7Q/zwufzKUTOlU1yO/miU9JokOa19Pv9/GqAiE0bSlr2ZD88ZD+d8wZjpFFvqFtr//k1OQBSrVYHriwvvO/S0vzPXY4uaDeSWyJAKAGlu/2ah6xBvrNvERAIW6kt8dlKQUGAX1JrNFtjvQN/AaAaDAZ5IBBQR9fX3zS1uvArocWZO6aWFkQlVQoddiecVjtypQLWk5soVav7cloAQEHErvYO4UTfUMI/MPKpkd7eLwDIdXd3k+7u7ltxA9SJDVHfEEUQHCAPPkSDED+kAjOqlGBBQMCbONlxRzhApay6yBgYmBK3kOq93hIKhajf7xdqwMgzs+HfvBCNvPXyQgSlUpkJRBA44bvNaC9IOAilQrZcYOeX5tRmvfEjTrP5Upul7YlAIGBa3Fh775n58G+EFmfbVjfWRa1CLXQ7OmAzmbGW3EJ8Oym3yJJ94FBShejp6hZODwwt3zUw+j9dDse/hYCG/+q98ZYQn8/H64Cp3miY6o36Ht+aXJO0gcvjqAghpEGIvLfJIT9Cmw8KKjnwaDARDVHUACCJQIC35oFcLX6/X7G1vRX4Vujph5+cufLW85FZVipXOKGE8j33gpCdVs39mmPPBFhCdqMjlChoKptl0eSme2517Z0Ajj07M/WJx66c/92nZsJtsfUNZtaahD5XN8x6A1a3NhHfTqIq1ncTf1LjG9co1fyYd1i4b+ToM3cOjf60y+H4KuQw7i25ack/S5WKoS6K+kaDAXTHYuJcIcV3m8GIHRMrgAABwCmECoU086PBrxVFJJwxDsaIAYACk5ONwHhr6MHeEK7P56PxZPKNZyLTvxtanBtaWltnotig5HpsIxJYSGwrztfa2r/3Gxdq3zUdWz49tbKETD7HrAYT9bg6QYiAla11pHJZ1MXGns4eDs4YM+tN9OTQKI56Bh+5e+jYp5RKTEEanHlLag5ZrQN+P0qVirEhiqqG3FcvtQ8TziEt+mv5IJwqhDKlVKSUCoSJkvPGyY4dJfUfA3UuosEaFgDacDhcHh8fv+01SBAgAYkRxBRZXfkv5xfn/ueV6KJ7aX2FcVAq9e09x8o76PCRHV99jxaB1JcBQtL5HC7Hon3KjdW+lXicV2t1uK1t1Gmzoi42EE9tYjuXAWPyLsmluWAUROzp6BJ8PQOl4wODnz3ZP/R5ADHcPvksXqtXLTWxrmKiCBBOiNQ6zJVcyQ4zsZoFXFyAUCaEMpk1ku/enb0JVk5q9TpqjZoNgOGhhx5qZdMBagyFCADPmbnpT3x76uJvPTs35Y7G1xgIpTsmFDlUGzTDh2CcMcaZTJ4jBR4BIs2eaJq88oc0RIbl+Bqfiy2zRkMkbnsbabfbUCiXsBJfx3Y+I9NrkGasn6sEJT/qHRbuGzs2FTh+6r+f7B/63TDCa/JBvGpk0q+1li/Vq/Z6o6beSZASAk44r1/DSW9m0jklpEQpFUGIcjfceLXOrdaqqDbqbbVazdTSGtJFHxoauuubF0MfmVpZetv0yiIyhRwTQOnOTHDOr9YekooGY4wrKEGP000dZgsoCOLpNImnElxkjDSHzxwEV73eIAaNjjisdhh1OmQKeWykkqjUqnu6/zgaYoPZzVY63OXhvt7+r9015PuU2WD4thzy5Li9SoZouVRyMU4ExiQlQCmFIAhMqdp/HXYAIocJmUahKAqUioTQ/SPl9v+DVKpVVKu19mK1apadH+K//aJZBMEgEAhooonNd1xamP21qbWVsbnoEq/X66CEUgZ+2NShHS4+Ag7GObMajHSwqwcDrs4Zj6vzK2qVshJeWvjx8wuRrujGKm9GevduVRQEBp0eTqsNGo0GqVwWifQ2amIDlEoJQMZErqAEfR29dKi7N3fcM/KFkwODfwRgPQRw/202rlt2vtX5crmjwZisnAkEQqEUFFUlVzYOddIBaQrPz/zCL5RVCkVDkPmwmvVYB6VaraJUrbSli0UzsNuIcpuJGAgE2sLRxZ+8tDz/Py+vLNpWNzcZGKOEEDCwnYrYvWq4ucxFzqCglPe1d1NvR1fG5xn4+9Mjvi8AmAIgWnWmSKla+0wqn7XkC3m+w9LGAIEKsJnMsJgkBb6e3EI6XwCTikzBCYHIGsyo0dHh7l74uvtDR/oHf7+7rf3RYDRachSLzH8bzrKX69P0xUqpo1gu7exXSkGARiFsq9XqKue7mandKFYggEAgwHPValGjUtUUCsVOoeLuprVzo4nYaPBKvaYqVfPtTR9GTuHf8lojiCACCNBqtTp0fjHy85dX5n9yanlJkcpmGOegfJ/O5Yf64oxzrlOpMdTjIUd6+s/e4R37P067/esAis2QeSAQ+GpPu/Pda5mOd1+Zz7Om86FWqmA2GNFmtSJfqWArnUKlVtt17Ak4peCdtnY65O6unewf+qs7+4/8IVRYiCDCAx7v7eJrXHXpZV4sU65YbM+XSgCh4JxBEASoVZpNADVMTBBII9v2dxROTEwQk1pd1mu0BY1SKVdwNaMffIcfCxxgoshK9SqypZKHc05lSsdb3t8AwAIICMlM5rsen770uacXpz/47OyUIplOc84JPTRCKnMlNc0qkTFmMRqJf2gM3zV6/Itvu/u73ue0278SlErbEQgExEAgwABk+9q7v9xusZS0eh0FIVyv0aHd3gab1YpkPoe15BaK1QoY52DSzBamVanJEY+X3j92Mvrmk3f+3J0jRz4aVAVnATS88Iq4jVsU/H4/KdfLrkK5ZCiWS+CcEwYOgQrQqdTxHYAcjGJJCAEAVIwa7YZWpZZMq2Z898A9Z4whmU2jUC53AzDJlI63smomAelqaFYS8Xc9NnX+z751JfTAhekpsVyuSbbooS7YrmstXU4idjjb6d0jx5JvOnXXL9579MQvBIHZIMADcts3kTO6E8Eg8bhc/6/L4Xq82+WGWW9kns4umIwmxJNJbG5vo1av79FXnDltbfSOQR970/G7/vDB48fe3dfR9dfBYDAbQIDjxqEAfU21SGI7M1KsVmylarXJRk8UCgqVUrENoLE36b3XB+GBYIAigIrdaJ5WK5X3AnsLFzn2+5uM5AoFlKRGd0cgEMhil77ylrqgoVCo2THZG4pM/+zl5cWfmIpFDeuJTQZOhB3yl926KblJhsgLV6qV1ahUGPX0CyPu7ss+z+Bv97vdXwFQkoHHCJEYwjnnQjAYJBMSIbgNRKFxWtugVapJvlBAIr2NfLmMBhdldipwrVqDod4+OuTqWvT1eH5vtNvzjwBSkwDGD5Ch3bYRR8n/IPFs5o5yvaGtNRpcEAQiUMIVlEKlVKdkvxKHAQSQ/qNqtZgvKKlQF6igPNgXsic8SfKFIvLFordQKXQbtcYIvzWnTFG730/r9brv8fDFT1xZXXrL9MoS8sUiI5CbKA4qC75TrS4HrLjYZrYKo10eHO0b+IdT/d7f1+l0F0MA9+/mH7gMDgqABAIBRQ3wPnPl8i8ns9l7C4UC30gkaDqfQ7VWk/NShANgDotNGO3q5Uf7h/7xaLfns1aj8dlQKCT6/X463ur43JFEIMEBqFK5zFCpVpbzfBwqpZJoFKqqXqNehVSu27wn+wEiq/i6RWNY1Km1FaVCoazVa/sVyZ6aoVKphHyl7FjZ2hoG8M1mev5W0hx+v1+t2k68/dG5qV+7srI0Flld4bVaA5TuSf5d9U658oAzrlAoMNjdK4y4ule83T2fO94/+DcA1oPBIN3Tx88BEM55s9xdvbG9/cDixtr7V1Ob71hJxJUr8Q2kczkwxkAEiSxaq9LQ4d4+YbDdvTLc1fNnx/oG/hrAhmxro2VOXR1cB2DIlYqOfLkMEKDBRBg1Gpj1+rxZb1rCbqnNIRpEFpvJtGExGot6rc5YlRNO+xxOyXkhdSaK5XpVSOdyPfTWqVIge9Sx7VJ0/mfORWY/NL0ata8nNhlnoISQfXxRe4HR/AjOGTMbTXSkqxe+7v5/8fV4/qTdbn8CQBW7/SFNkYARiQjwem0La2vfs7S1/jNr6aR/OR5HbCvOs8UiYZwBIFwBoLvDTYc6usvDnT3/4uvp+iu72f40bmzC6Nf8vo5jnKbzee92PteRKxYBECJykatVKmLS6YsmnW4LB9qYDxt/AAAJm8m8bjYYwDg73HKSs7SZQgH5YtEjcqa5BQisSTgcpnIkafiJ8KVPPTV9+VfOzIXtKxvrjImcSpG83Wm/B7UGAE4pZT0uN71jaCx/l3f0868/6f/5drv9W6FQqL7fW5FqTEJSiYoq29l55Pzi/C+EY0ufmFlb8YcXF/jS2ipP53Kk0aiDMZGZ9XpyaniM3OUdnXngyPFffeDo8V+ym+3fCkstuC1wXFs4AMV2MX88Wyyay9UKCAhhjEGrVsOkM8QBlA5Wpe83sQIBPjk5ScbHx7NtRtO8XqM5JRnS/NDQJSWEpHNZZEqFIQB96+vrs7h5OwylyUo+nzqeTgYuRhd+6cry4gNTCxGUKxUmEEHOivM9GpXsUFbI9C9Mr9HRPnc3GenojhzzDP5eX0fHP0UikbzX66V+v3/v7kQigOCVzCHzWiLxusjG6n+LbsYfXEnGSWwzzvLFAq03GmCMMbVKRXs7OumQu6t0pHfwkVO93j9R6pSXw+Ew8/l83NfyNZ7z3k5OTvLx8XHDejL++mK1AlEUmSAIlBACvUYLm9E0s0cDX9vEkvl5G1ajcVolKECoQJ/DFiG5Yg65Ur5/fTtx4qGHHpp+x8SEcLOVnAQRJAEEWABwXVxaeP/U6tJPz64uuxZWooyJnFBCKSNsv5XJd6NVnDNQSllHm5N6O7qrw509/+9Y3+BnLAbDmVgs1vB6vYeRq3EvgFqxNjq1vvRfFjfXf2RpM+6Kbqwjlc3wSr1GRVHkSoGix+Gi/R3uxmB377ljPf2f63a5vhoFch6A+aRseEtrPE/0anx8nJfqpZ7oRvz+VC4DcE44Z1wpKKhWoWw4LZZzACoHxx8orvGZdYfZHtYq1UWVQqmvNxrXoPYhpFKp8kK1allNJO/inP/jTWZkSRlrBIQqqkOhmblfuLS08JMXFyM0m8uKRPYN2GHKGmgyDnIqEN7rdNPjfd61Y/2Dvzvc1fNFAJlgMFg/SKgndxkCgGUtnbhrNrr83xc2Vr87sraK2OYGK1UqlHFGKKHMajTSAZcboz2ehZPekc8OdPV8CcBmKBRieb+fe1rAeEEi3wNhLb51bC2VtKVzuaZ5xbUaDXRaXcVutM5jl8KKPydAggACZvOMVqWNa1SagWo9xyk52I8omRoi4yy+nRI2Ept3YnjU6Qc2b7IoFd3a3n7w4sr8xOXlxbvCC/MoVSqcEgkc/OBZc6kDUCpHB9NrtGSkt58e7x0Mnez3fsxhsz0eDAYbcjac77mmBAgi4A8os6XS2OJa7McWNlZ/ZGFz3Tq3vMy3czlUa1XKwZlGqcZwTy/19fTlxzx9fz/a7/kznVI3EwEaXoC9COK4lkgLXgSg384X/YVqmdTqNaZUKCgTGTQqDYwabUarUm3JvVQvSIMAwLrNYNqyGk0D6UKWX9UKJ82lAyWEbm4nsZnZHiwUCsMGgyF+s1w5v99viG1uvuXJSPgTF6Pz/dG1FZGLoIRIELimt8c5GGeizWwRjvd6+SnvyKfuHPE9HI1G18I2W0NW0zuOeDNBBQSMG5mtB8/PzX90fmPt1NLGGja3k6xQrtCG2GCCQLnTaqdH+gZxzDP4ZV+v5/ddbW3nZOcRBz63JS8UIYRwzrltM528L5PPg4kcECTtbzYYidVoXlMqlZv+QypuDwWIMRQi8PvzvS7XMwtbsXsW15YJBGFfb8hOGIwQFMolni0XHEuJzfuPGgyP3egmlRxI8IQWZz98YWHux66sLGo3EgkGzgVK9zKzchx0PDjnXKGgfLhrQPD19sfG3H1/4Ovv/ysA6Wg0KgQ8nn2MYmEppKtO59MnZtc33j+3tvK9S5sbptV4nBeKRVRqVSiVAuvpcFOvuxuetvYLfR2uvz82MPSPAKKTk5PU4XC0uI9fosgRQqxtpgZjm5tjmVwOlBDCGAcYiEWjh8tqvwggFwqFriLGu6YGmZycFN/xjnf8x5nZ8I9o1BpHvdHYLbduLhiZSYAzLmbKJWEttXn30b4B3eTkZOkGvKlEBgap1WpjT0xf/uTZpbk3TS8voVwqcUpA+d5xD5zvxwiXchs6jZb6+gbJ8T7v1/zekU9Yjcazk5isjWNcOHC+zd50YywRf1coMvcr8/G1wZWtDWTzBVatVwEC0tnhogMdXRhwdZ4bcLr/wtff/00A87JZIMhBkxY4XuI9/4rfL3LO9aG56TclCzllpVplVCCUc86VCgXRqVQNl9V6DkD9MEpVeg3Tg4fDYa7RaGasJlPMajaD093MWLM/uokVgVKa2E5iPZE4UUf9WHh8/Ea7oTSMMAWg2Ewnv/s/zj39t0/NXXnTpcgck8BB93JH7tManAOccTAmih2OdnrfkePV+0aP/fEbT93x320m0+PBYLDuwPjedlUix9Jp/9CQ/4nwpT959Nwzn31mfnrwyuIiS6XTYrVeJS57G73v6AnyphN3hF535ORD77z7/vcd83r/mBAyHUSQ7wmXt8DxMrTHQ4SwTLHoXVpb/aHN7SSkThkim1cmWA3GtY629vORSEQ8jJnnWhqEB6RCuS2H2TLttNhObWwnoKC7xH+EN9MAHJRQkivkeSqfdc0uxd4+0dcfQiDQuEEuEvX7/dwHnyYaX/v+0GLk1y4szg1E4xsMnFEFFcD2xqn2LEkCgDHGBUGAt9cjjHZ6lo4NeD892t37DyGEcpxzxZ4FTAFwubCxfXZ15QfCK9H3L8Q3fPNrMRRKRZFwTu0WK+1xOtHrcF3ob+/4kn/Y9yUAMwDYpUuXVK2w7fUVzjm5sjR/bCOd6s4V8hI7AzgY47CZzXBYrQtKYCmXy7HDLB7Fc4TGIAhCObwQOW/S6H6IiyCge3dZss+oFznjm9k0nVld+t4jff1/FQqFFl/juiyypzas88LC7AcuR+c/FI5FLatbcUYgSI1NhB8I3TaRwcE4YzaLhXo7e+Hr7X/s9ODIb9vM5q8fcJhJCKEm8Z7O7fG86ZuXzv/E3Frsexa2NoTVeFykhBKH1Sp02R3otNsXvO7ufzs9NPoFgdLLH/v1X6fveMc7BAAHE4kteZn3f3Fxkfn9fmumWLgnnknzGmvsZHkpBawGA5wW80UA2Wt9yDUBEgwGIYoiqVQqIaNGv6nVaDtqYpUJhNDD/F6BCHQjlcTy1sZgdHPjQb/fvxIKhRqvEVU+BcD9fj/NVAr3XJib/R+Xo/PvmIpFkSvk5aw42++GN9s5CAdnnKsUCnS1d9CRzp7Mib6hPz024H0YwNqe0ncAoEGAB+Cn9Xr92KWV5R+ZWV3+L/Ob6465lWXGOWMOq01w2+zwOJyr3s6eSf/g0F8DmJoAxGfPnFHKAG5lwV8B8+o973lPI5nNDm0kEm9LZtMETAIG5+AalYYa1Np8h81xRvb36IsCSEBiSxQCgcC0w2q53OVs71hYW+EQyAHdwXeyK7VGjaWKecVCfO0HPO0dX/b7/Zt4lalJg9K0KxGAY2p56b1Tq9Gfn11b7p9bifJ6owGBUNrs295LUEt2zgTMajLTIXc3hjt7zhztHfz97vb2rwaDwVIgECB+v5/LGkSExGjSfzm6+K75+PqPzcfXj86uLKNcLontNrvgttrR7Whf6nN3/udoV8/fG7XaswCqoVCIBvJ56pe6BlvyCkg+n+eccyE0N/VdG9lUd75YYIRK7QkMnNstVmI3GFfdNsel5mCiFwUQADAGAgRAqrfD/Z2V1Nabo+sxepDXdd8YKg6ytZ3E4kbsnrHu/uMdNts35IErrwZASKjZR1Gr9V9eXvxv5+ZnPnhlZVGZ2E6JAARCAMZFGbL0gD/OuSBQ3mF30uHOnqp/cPhzJ/qH/gjAssz4guZOHwgEBADtS5ubp6Ob6z85HVt5RzgWRTqb4XaTmYx0Dgled9fCUFfXX492930JQBRSFS+TgyAtYLzCa0FuWR5aT229YyWxCcYZJCIN6W532Bxw2touA1hrTvl60QDxAzwYDOKu++77+sxy9L1Wk9mXKeSYlCW8KuADSgjJFwo8trWpW93a+P4Om+2c3+9PBqWd9pUECZGP1za/HnvHTCz6i+HV5ZG5lSUUyiVGIXX9cU4OTASSPHIGzgxaPR3zDJBhd/el0Z7BT/c5nY+GEc7Ig2j2WmOO5c3NN8xvrL5vdi0WWE5sKrZzObjsdpzq7W90OxxPdzodX+0yt33TbDbPACjv8Vla8iqZV36/n1xamH3najJx/2YqySmR+MkIwHUqNW0zGIv9rs5vYLcK+sVrEAAcgQDRAlfazJYnu5ztvkw+x0GuNpwIl5IkdVbHRiqJ+Y3Yu/tc7X/XZmn7tswd9cqYVBL4BAD9z85O/cLl6PyPhpcXtBvJBOOMEyqPTmrS73AiHSu41N1KBMLdbe10rKuvdmxg8PPHBwYeVkG1AKBewb7578ZkJuOfWYv91OXo0rtm1pY12VIenvYO3D/myw10dH252+78Yq/LdRFACsDOeLpWku/VEzlUywF0xbbib15JbpG62GCUStR7hHPmsrcJDov1mZ729m9FIhH+XPfn+QCCAACBCvnZleXvLMbXfnxaUAgia3CCw2mYKaUkW8yz5eSmLbq1+c42S9v5RCKRv96+SAghihAQ8Ps166nUGy8uzf3qlZVFf2RlCZl8ngGEUkJ2yHd2/CbZYWJgzKwz0FFPPxlwdV0ZdPd8brS7958AbIVCIQF+P9FIb1PX6/UjoYXIT19Zib4zmohbqvU63DY7Tvd7470drq/1O9xf7nI6nwCwSQhhH+ecThw+WqUlr4IEAgE6F1t+5/p26r7NRJJTea02o/duRztcVvsZAMterxcvR4MAAD726x+jg11dT82uLz/RbrO/bj25yXbDPntXgTTrriE2sLy5zqOJ+LuHuvsnx8fHn8b1JUamGmiIz+8zzMSWf/L80tz/uhSdb1teXeUNUQQhlGKHqEjSGLzJbsA5p4TwnvZOeqS3Lzvc2fuFk/1Df6NSqWZCoZC4qNEo+v3+Zq/4wPnF+R+/FF38kbX0tltkDTiNZrG7zXHG42h/dNDl/qbRaJyCVLlLA4GAgnPOWsB47XyPYDDIAoGAd2Z16UejiU1NuVFlhEgRKs4516jU1KYzZLrbHc8AqIdCIYXf739ZAGkmDWOdDsdX+zs6X5dIb5OG2LgKHM1/UUppOp9jS1sbvfNr0e89NTgahsz59DIXTrN8o+4tek9+e+H8r15eXnjb7NqyOp5MMHJAa+zGDqR0ByOcGTU6emTAS7wd3efGegZ+v7+j48sACsFgkCYSCf6D732vKDLW90xk9meiW1vvanBxEAoBbpM55jBbQgMd7m+OdPd+HcA8IaT+yCOPCA6Ho+mTtfIYr6XvgRCZmJggMytLb15Lpk6ubcWlKnS+s3kzp8MhOO22p9z29nMyOPjL1iCyg1nrb+/69tL6+qJZb+xPZrf3tNbt/w5KCBqiSBbWYrzP6X6vp73rX21G45MAhJcDjolgEBOBgGIzmXzL2fnpX57eiN09tbiAUqnMBSJQLpeh70luSNy3El8672hz0tGevvrR3oH/764R32eUSuXlIIIsgAAJBAKoAD2X77zz/semLr8rWyq9jQBFnULxjU6749ywe+AbZr0mBGBbBqrAOVeiVQ5yw/genYFOCqBtObn5lq1CRlGXzAk5QMOhVAi0x+GC2+78FoBNjd//vGa/4kUcAzXpdHOdjvavuNscP5/KZcA438tTsCcNLY2qSuezbCW11bO0tf4Gm3H4XBhh0YcXXUpBgsEgHnzwwQbn3HE+Mv2hqZXln5leW3YsrcfERoNRQghptsNKeCWgRIqpNhhjWrWWDnb1kFF39/LRAe+fjvb0/TmADAAhgICQzOf7UoXsHdVafaxSq/eJjJvsJuMXhp3ur7dZLGcAbBBC2COPPCKMj49TAPD5fC1tcWP5HRwAWUluviOW2Lp/bXOLE9KkgQUAwuwWG+11uC6N9A58A0DD9wIsmhcKkGYuMNdtsf9HV5vjx5c2N0yZvNRIdVjQtclysrge4x6H84f6ne6gz+h76kVrjYkJNjExoczkM4HgxXM/dTk6/56p5SVs5zOMEirIiR/Z19g9AJExrlQq0Ol00YGOrvpYd/+jdw+P/I5Wqz0Xli4OASDkctXuYrVyX6lWPy2KYtVhMf3znY6hZwFsyTYq4PcLZ8+eFVqNSje2BgkEAt2XlhZ+anU7qS9VSnI6QrpdgiCgu90Nt935Tyqp9o2+EJN4LxfT8x5AIhHg4+NwPDl1+fe+fvHsD4cX5zmXYqaHe+AyA//JYR+9a3D0LwJH/L8UCoUKz7fQ5B7xZglGTygy+1/n1pY/GNlY65xdXuL1Rh2UUHKQHppAqrzlnDOzwUiHunox3NV7+Whf/5/2d3R+KQgkjbv1WRyAdjOXO9IQaw6NWrlp1yligD4bCoXqe2zTFiBuEgd9dnXlF/8j9PQnLkRmFfVGHRxMHm7NmcVkJq877o+/6cSd43aT6YkrV66oXogV8IJNrEAgwKWUvD816Or8m4X4+ttXE5um7VyGU9ocMUkO0z1kammetxst70j0pL/k9/v/Hdeoe2macgEEGAB9Ip0+GV5Z+vnLK0vvvrg4i0w+x+RxomBgUj4DclsKl2JUSoUCTqudHvEM1k4ODn/u1KD3jyCNF2vOfdibxa62m0yXZGzVAbAggECLdO3mccx3e/x7Zlaj74slNpWlSpkplQLd4XATCLrbXaTX2f5lm9E4LVdhv6BqBvpiDiafz/NgMMidNtuFoc7uf+psc4GSa3zEbkUKKVfLfC2dcFxamP9RAKbQ4YPIdtpLAPRcWIh85D8vnPmnr1048+6nrpxn6WyWEzmDf7AdljOpa8NutpG7xo6Rt9xx73cePHbqx08Nej+BSSyGEBKxSw69VxikhF5VVrfN17TAcVPYVSAyabrt3PzM/5hdjY1sbW8zBRVoc3QHY4xbTRbqdXXGB9u7HgHwonJyL8ZJ33GEAKQHOt1/1xdr/96N1JY1mdnmCoWwkxfZM0AJIIBABLK4GuNOnfmtAy73D/s7Ov8KQK3ZDgm/H3LeQZvMpR+4sLjwi5ej86+bWY4incsyzrk0AbM5e4HIowSkWX5Mp9HRgc4eMtLVu+Z1d/35aHfvI2q1eimIYB0OEFkjPZd/1ZKbEh9BBAIBRTQef0soMvcT82sx1Ot1IrVNS7sfpRQdtjZ4O7v/us1iuQBAlHNWuO4AaS6oUCjE/H7/+dGu3n9aSyV+MlPIcSkbd7A+dldDlKoVNre+YrAYDL/Q2eY8e+nSpfMmk4kqvV7iAWithr4rq3PvDy8t/lhkfcW6tBbj5VpN4sDl2NGIMoktODgTBAXxdHRTb0dX0dvV/S/D7u6/ddpsTwEoyKYaR6C1kG5VnyMQCCBTLI5dXor84szqsiZbyDGBECqN7SAQucgcJhv1ONyJPlfXlwDkD3AivyIAabbkFu7w+f4kurn+hq1cum8tEWcCpXRPoHffHk0IoavJLeYwW71nZsM/f6/f/3OyunOubG29/eLKwoemlheOLKzFkMnlGOGgQhMbzb+5lA3lBLyjzUlHuj0YcHU+PtLV/ed9HV3/CSAlT+sVWmHYW9rxoDI/T/t0dOHDU7HokfXEJiOAxH4JybpQUIF4nC4c6xv4c5NONx2Ukt4vymJQvMRD5HJr6NRob//fxrYTH91MJSnf8XsOddZBQMj8+io36wzvarPYwiadYf5CNPL++fXV+1dSm9qV9TW5Z0OgaMao+K6fIbIGNxvNdKinjwy0uyPezu7JU97hvwMwH0KIIwS0uvJufQlrNMQHKGaW5999YSHy3unlJSaKDdLMOBACNFiD9bi66ZC7+/wRifW+FHgJ5rTiZRwnDwaDYiAQ+Pu51eW3J7Lpk0sbq4xKFuDhEQFCSL5UxEwsqqegvy4ohNJKJmmNxJZRrVSYQClVCHLUmUtZHnkMJjfodLTT6SIeZ3t+zDPwpTu9ow8rlcpzcvSJ+OHn8Lf8idtAqM/nY/FM5u7wyvKHL0cjymKpwAghhBMus89wrlVqSG+bq3Z0cPjzAJZe6pe9HIBAHoi4cNzj/Xwql/n0ZiqprdRrHIeP9G4SXiOZTfNnymE1CNTZUpEREKKgCrq3OxGcQ2Qi06g01NPRRbrsbXmPy31mrHvwL7rb2x6dBLL9uyG+VgPSbeJ3PBwK4QN+v/vywtzPhWPRvq3tbZFINHAgTApOiVzkvT0eOuju+k5fe8dX5QJG/qoDxO/3MzkO/cXlrfU3buWzP3BlMcIIoeTQQZYyVBjnpFQtc3BAIU2D2VN5C4iiyLVKFelo66Rdbe310R7P48f6+//YabF/B0AmFArxfonkoAWM20gejTwqfMD/FlxZmvuvkdjy26YWIgyc052wP6dgjHGb2UQH2zvSJ4ZHPwtgS2K1xKsPkKbDTgjJpgqFP49ntu/eSCa6tvNZRshumn/Xaec7AWiywxy0G/riDKCUsDZzG/U43dznGXh6zDPwhV6H41EASbl9lz1XeXJLbl3t8RbvW5DYTrzh8tLiT02vLCrERoPtdXibc5i93b1ktKf//2s3Wr6GPePtXhOAAOBnz55V2PT6x0a6PF/IFAsff3r6MkQuHtAe/CptstcOEwiFwahHb3sHHXR1xY96hj4z3NPzd5BqosQQbqnxbi15keAAwOv1+pGnZ6d/K7y81LOZSuyrtQLn4JyxHpeb9jldkVOjI38xOTlZkRk+X7rDcz2O3u/384mJidqpoZE/G3J3//Ngt0fyr/dxlR5+1gQAYZxbjSbcPXJk+w0n7vz03b6j7x7u6fnsBLAGqUSEy7xTLYDcjlEraepXx2OXzz90aXnxeGQ1ykDIvhmRnHFu1Otx1DOQ9Q+P/YESyqnx8fGX3e5Mr9M58ImJCUopXTs6OPK5ka7eDbvRQnEoRfpeTSKXqDMOLopQKZTUbW+73GVvPx8Oh+sTL69/pCU3uQTlvhufz9f55NTlT15cmnvbdHSegXNKKKR2pB0+Zcp8/V461OX5h/6O7i+Gw+HrwuxJr9vJBIM4c+aMst1sfuKoZ+A3j/b0M61SxTljfD8gZK3BmxYjBycgmXyeX1ycszw1demj29lsQM6ztOQ2F5/PZzgTmfmVZyJXfvjSwhyv1+tSvoNQELmXlnDOetpdwpC7O3xqdPjPAWxXKpXrUlMnTExMXBeQeDweuN1uAKg7zJalar3uqtRrJ7bS24xx0EMZDPjennZO0rksEzlvA2dHuuzui0qlsIFXmXiuJTeGzxEOh4U7nU77pYXIh5+ZvfJzF+amUaxUpBHD8sBUImXMeZvVRu8aPpK5Z+zoR9tMtm+HESbH3cevywZLr/OJ8WAQFMD2ae/I74x1eb7tcXUK4Jxx7NYa7g357q3eokSgS2sxdn5h7kTw0jP/B7XaGKTaL9paM7cPOCYnJ7nP59NfWJr/+SdnLv/ixcgsSuUqFGRvDpqAcw6VWsWP9A+yE96h3+1ud38VQMOH61dmdN00yK4mkZqrBgYGki67Y65QLH53ulgw58tSQvDwYYfyfiARpZDtbEaEQPtqjPf2udzn3G53OowwccLZ0iS3vuaggUDAeXEh8vNnIlO/dHZ2SpXN50HkEYBSOYk0e0OtVLCjAyPUPzj6L3eMHPmtCUykAghc1ynL1x0gTXNrEsBJpXLDrDNs5cvFN6cLBVW5WuGE7O3RvcZ5EE7T+Rxj4EPlWsXbaXNc6BA6NnF9qYNacgNJKAT6hHuSB5wB+7n52V9+NhL+xdDslCJXKOzOxyS7s2koJczb3UfvGhl7/M6x4x9VCcJyZ6RTsNvt17UW7xUBCADIDfEw6fVLlAqacq12dyqXJY1GA4Tw51zoBIAoikhm07wussFaoz5kNZgXtGr1JqSuP+JpralbSnPMzQXxNs/bOs7MXvmVs5GZDz0zdYnmCwUQcLIbziVNNjbW1d5BT3mHF15/6vRP61WaSwBEu91+3S2MVwwgOzsD0DhptZ+v1Rq9NbF+JJHZZpwzyvke0+oQcwsgpME4SWUzYk0UBxq8ftKsN0T0Gm0sFQpxt9vdMrduEXCEAHKvx+N4dvrKr4cWZj90ZuYKKRZLAJWHqUqkoVLLEWeszWylJwdGst917OQv2w2Wb4bDYeZ0Ol+RqOcrDhA3gFAoVLn7xMnLpUp5SCR8MJXOiIwzuhcS+wGyR5MwRlOZtJivVt0iF+8zqvVrw4ODC5O7zCQtuUklGAySaDSKez0ez5NTlz5xJjL1k2emLvNSuYzmJCiQXd5ncHCjwUBODY027j1y9DcGXF1/DaDudL5yvukrDhAAzfBvtt3uuFCrVn1VseFJbW+LHESe8kT2AWRfXJcQcIBm8lmWLRVttUb9DWqFKvGAyTwVCoVYS5PcvFL0eIQ7PZ6+b5w/8/tnI1Pj5+amWKlSJRwgnPCdGj5ppiDnOp0OJ4fH2J3DRz5zrG/ws8FgsOjZP1X45gQIAEQiEepyOjfajZb5Uq12R5WJru1cRpQr4K8CyGGqOJvPsUypqKvVa68Hh/HUkWPToVCo4Ha7W5rkZjKpQiHqdrtVqkLhvm+ef/Zzz85Nve7ywhyrVqu7tUkEewHC1SolPzXso3eMjP3fO4fG/ncoFErfe++9r/jBvmoAsdvtDABVq9XrdqN+SmTkRKnR6NjOZESyM9Ztt+L3qqsqRYBJoVxkiWxGVapX76nVa/33nPCfA5AMBoPE42m57je0SYUgOTN5hr/xjW9UrG1tvOdbF8989tnI1HBkJcoadZHSvVtlcwIYB1cqlOyOsWOCf3D4H+4bO/ZxAOuyVcJvGYA0JRwOE0+PZ9lq0kfEBjtdFevOTC4j7iFjPED3sGuBcSLFMcrVKk9mtlGsVEYyxdydBrUmd8x3ZCEcDvOY00ncrcz7Dac1AFAPPPD5fO7z8zMfeWL6yi+fm59pX9lYZ+Cgu+2yZCfXQTigECg/PXZMODng/ecHjp76NQDLIYC+Wvf4BTMrXs/vlBnaaaZQuCd44cwfnY1Mjy2sroiEEmHv5nEQLpzvhvs4GAgB63W5qbejO3NycOSPT3pHP00I2ZbPqVWicoOAY2Jigj300EOsVqv5vx2+8BtXlubfOhOTKJ0IZBaSPWOGuTymQqVQ8uPeMXp6aOTfHjxx+hcBzEMqYH3V6vReC4DsRDACgQDLFAqve+zCmT8+vxQZnY8tM5Exes2u9p1ryHcAUxdF0WY0Csf6B3G8b+SvR3v7/6rNYnlmEqjJLbktIrjXRmgkEqFer7cBwDG3uvLO8OrSB6eWl05NLUaY2GCENknH94BDpnTiaqUKx72j5I5h379+19ETvwggGgKo/1Vur37NANI08QAIpXr9+JOXzv7OszPT90+vLPEGEwkl11AAB0ACAIwzrlWpMeoZIB5HR8zb1ft/T3qH/xLAUigUEoDW4MxXe/NLJBJ8fHxckakU7rkQifzszGr0XZG1mLCxuSkCXOCHtWRzgDGRG3V6HBsYIqcGR754/7GTvw5pCOpr0g/0WgOEAKBhAD5g6BuhZ37//NL8G6ejC7xSreBa80eu5Z0RDtFqNAkjvX0Y7up5dLRn8I+6HI4nIA3Iac0KfBW0RgiAH0ClUumNxFffObe+9tMza8uDM4vzqNVqjMrTv3DQgpaeYhaDgfo8g417xo79mX9o9JMA1vEa0sG+6k76YeIEEIvFsidGxp7gQBuh9Ggqm0WtUW8mUQ9F1lUuPQEtVstsLbHF8/XqULlWeTPAudNiW/F4PHkcEgNoyfXRGB6PhwCAG9AnM5l7zi3O/eb5pfkPnZ2bsi3FVhgXReAqnoJ9CGFtFhs9NTRau3fs+GdODg7/TiQS2ZKjn6/ZxnZDAAQAzGYzDwaD2w/ccdczCkIJIbgjVy4K5WqFEULIcyuh3U2IgBAGRhLpbRbfThqK1fLrS9XKmFZQpQx6fRLPM/a3JS/eCjhz5gz3+XwKAL1T0cUffzoy9cln5qZOXI7M8nw+z4k0lH4f080epgVQQkSX3SH4B0eL9/iOf9zn6f/TcDicGhkZec3brF9rE+tQNQ3AGo4u/sT5+Zn/eWlp3ra+tSly0my/3dtktR83zSiXHAUBZ4xr1RrS4+7EoLsrO9bTN3nC631YCeVUEKgGnttia8nzrJ0ggIB0v2xLGxtvnl2Pfmg2tnzX/Poqkuk0Y5xLXLTNEUf8oN/BQSkVB7p7heOeodixgcFPDHX1/mM4HC4mEgl2I5jEN4wGOaCyy3eeOHnJqNUtqwWljwFt2UKeiYwBctNM0/K6pmohBIRQUhMbSGUzLJnNaNPFwqlEJvMGcGiO6/TbgiDkwwCLhUJETjy15AUAIxQK0VqtpjhhsViTyWTg7OLsrz47d+XD5+ZnPbMrSzybL4CQZhfp4f4j4eAqlYof844Kp/qHz93vO/6R7nbXl0OhUPn48eP8lS4huZk1SPMmEL/fr0yk03dcXpr/pZnVlbdfWppDOp9jAhWoVMR2YL7unn/zvXF1AoBxrlAKvN1mp112J/pc7vnRrr7/O9rb93dylITLUTWC1oyQQ+9HPp/nr3/w9Q3Gma5Qqdx9fmHmZ2ZWlt60srVpXN3aREFqitudykd2GTX3KmqRicysN9GT3hEcGxj+e3+/99M6nS4cDoeZzEVww1z7GxUgAACZ0UIE0HNmZuq/T68s/mgkvuZYWl/jIhMhUEo4351suxcU7MA1bjbaMCZNoepwOEmXra3R295xtsfh+uZo1+B/aLXKSwCKzbklt3kOhTSvw6Lfz8YlU8oRS2y+bmE99rblzY0HYqlE9+L6KrK5HKOU7vbC7amI2Cmt4gAnEh1Jt7uTDHf25I73Df65f2js9wFsRCIRhZwzubEuwo0MkOalDgaDCAQCuq1U6k1nF2Z/Nrw0/7q51WXkK0UmUAXd0Rs7TCnAwTlUTYBIg6EBDsYUCgXtaHPCZbGj3Wxd6Wlr/8apYd/fGDSaC5Cm4CIYDApGo5H4/X4uHwe/1UGR9/t5UM5+y+ujZ34t9ta59dV3xxLxu5L5rGF5Yx3pTIZzAFSeWMMPOOA7aOEAYw2m02npaG8/Rnv6zx3t9/5Jv8v9zwCKkUiE3IjguBkAsusQ7o6C7npm+tKvXlpY+LHFzTXtejKButjgUs+ypEkYP3zjJwdq4RjARdbgnIOYDUbi7epFj90Ra7NYn+qwtD17tH/wWwDmAJQmJycJxscxvt/tudnBQgCgaT4Fg0E2MTHBAagAOOPpxLFoPP5APLt9Xzy1fefy9pZyZX0V5WpNFDihBJzwq4OJ+/1CDk4IuKutjQ519YhHe71feuD4qY8BmNsz6emGvY43C0B2jvfhUIh8wO83LKytfe9sbOmnZ1aip5c2N0gqn2EckmPIrwGQJl3MPr9l9z4yQgiMOgNtt9nhMlvhNFmmXfa27/Q4Xd/ytLvPANgAUAbAgwgKCAIHaC35zQCIplZGIIDgxAT7jd/4DcYYUwFoSxUKvsWNtddtZpJ3b2W2T6VKBet6IoHkdhrVelUi3uCcgLE9tXGHCQcomFFroP2dXRjp7F040jv4uZHe3r8Lh8OpSqXCb4bqhpsNINLNBYgcXnSei0z/3JXFpf82s7Zs3EgleKVW4ZDi7i8OIDsUr5wDYJSCmvQG4mnvQLfVmW+3tz1h0euftBiN4V5Hx7Rard6ANCGLTUxMEJ/PRzA+DoeUsb8hwCJXDzRNVD4BcExMQNYSAKAB4FhJbQ4lc9nRTD53byKX/66NbKpzYWMVye1t1Bo1RjkFkeg2COdM3k741WHb3WAJV6uUcDvbyWBHV3W0p/8rdw+P/ZZKpQo3Cchvmh35ZgQI5D7mfDDIA4GAIba5GZjfWP3Q9MrSmxY2VrG5nWQNJoIAlOyroSf7PJOD4NhzVSBrIkYJgU6toxaTEVa9AQ6jhXc6nFecFstjdqMlZDVaZm0m0zqANKQkZENenLS5OIGrNA2uhz8T3AXjrlbY/11NVUogbSgqAPpaDY71zNZwJpc5lshlXreRTt25kd3WJfMZbOeyKJZKjDEGaVAskXo6m8JkfSuzZO67eBxcUFDeZrHRkd5+jHR2P+brHfijDrv9MQCZEELw4+YKfNysANmRyclJjI+PEwCO6Wj03ZGN1Z9Z2FofW95YQzKzzUSxASLxVEr+4v77eQ2AHLSjOQcBp4RAoJQatDq0WSywG0zcZXFstpnNYbPRcMlpsIUMBsOC3WTalJ38CuT565D4iwkATExMYHJykgDA+Pg4JicnIfs3L+Xc+cTEBJqfuydcrQKgBWDKlkptmUK2N5XLHytXy8OJXPbYZirZlyhk1YlsBtl8DtVanYtgnDNZVRAiDRLmB0pDDgEI5+CUUGYxGgVvjwdDnV1zg+7uP/L19n0JQFx+101Z4nPTA2RPESIDoMuVSkcW4+tvjG1u/NDC5rpvPraM7XyGSV05lF4FEA7wg+4D2V/+tde1Z1zkDJxTSqBWqqhOo4NOrYFJb4BRrRbbTNa83WSJ2k2myxa9PmzQaVcNeuOKVWtMyCZZVdYyonzMTP79heyqzddQSKMrBPl3QQaDLVkoOMvlojNXLnoyxcKJdD7nzRQK3duFnDlfLikLlSqKlRKKpSLKtSoTGyJ2A3y7GpZf65v5nnEDjHMQzk16E+3v7EFfe3vK29n91/1dXZN2nekygJJ8fDdtb85ND5BD1jEDoCzWar6phfkfjibWfzCWSnQubawhmUkzBi6zK8mv51cvCXKVCtnzvExD08y/iIxxBs4JAVSCkmrVapj0Rpj1OmgUKujV2obZYMjo1Nq0TqXO6zS6TZ1avaZRKbdVSnVBQUhepVQX1EplTqVW56gg1K5aTI0GIQCtM6ZtNBqaBmtoitW6o1wtdZRqFWelVnOWKxVHoVyw5YolR6la1ZRqFUW5XkOuVEKxXEK1VkOtXuciZ5xCqjKgcuJCKs3Z15nxnADh4IxycKPeKAx09aDH4Uz1ONz/1tfuekSuns6FQiHFrZBHupUAcjDCyAAYkoWMf2l9/btXtjbfGdtOjkZWV5DKpNEQ60wgAqEyLRl/AQDZtxE2NQ9pPsshMs45Y+CEc0IIlIKCqpRKaNQaqBQKKBVK6acgQCEIoIRCIBQKSqFUKmoalbqsEGiDUoE1GdK41EREGozRulhX1RuiqsFERa0h0mqjhrrYgCgyNMQGytUqKtUq6qKIRqOBhthgnDEQECJQCkEQCJG1I+fYXz7YBAg/AJDd8+NMZBwcxG62ksHuXnTZHBvdDte/DnS4v9xhs50BsB0EaODWCYPfcgDZd27BYBByaYS6XC77QwvzP7aciAe20qmBTKkgrCe3kCsUuMhFLu2nIBKxK3k+bFzlx1wFLi5xOjHOOeccjDPOGNtdc82kMyVEIARKhQJqlQoClYDT/DQu2fhgnKHeqKPWECEyhoYognEmBd045wQEVKCgkmYAbWZ9CNmZ8NWcp0EOO6kdTbL/3BhjnANcr9bSdnsbnBYbXBbrSo+j47Hh7t5HXFbr44SQ7J4251sCGLcDQJorgIRCoWZHoQ7A6Nxa7IGV+EZgPZU4Ec9mOreyaWylkyiXy5IzTulurV3zfpM9WuPAsrrml+9NnpGDy5IfXKScHxYtONhmvOeTCSF7Ksf4Pr/qMP+J7C3zPExJyklWzjlnYFxBBGo0GOCytqHDaq2625xhj8v9zRF391c1Gk0IUhZc6fV6GW7R+rVbHSBXmV8TAPsEpUxkzFQul0/Mbay+fSm+/ub1RMK7XczpUrksUrkMyrUa44wRSimhlO5Gbl7EFkkOM/xwLXZ7fsiLDpbzH9BaHIeCAtcIMOzAg1z9raLIuCiKXKlQEIPeQJxWK2x6A5wW+6bb3nZ5sNcz2dfW/jUAK5D4kYVbyZRqAeSg+QVAvsEqAJ2pTObY4ubGG2Nb8cB6MtGXLObUyWwGuWIBtXqNi1zknIMQQuR+eXLoYn3O1i7yQlynaz/V/A52la233zQ6EJDbE2DYhQTnnHPCOQUlCkEBvUZLTHo9bAYTnBZbtqvNccXjcj/aabV/x2g0RgBsN6Nt8rW7LYo4b1eA7ISIAUAmGAAANYDOla2te1a34m9bTWzdv55KuNOlPHKlIvLFAgrlMq9Jzi9pVrDucjm9XIDwq/f9na78PYub7TG39kwQ5oft5Ts0OpDG4VHKlQpKtEo1NeoNMGp1sOiNcJot2Q5r25zb4fhmp93xLZvZfAHA9uTkJAOAPdNib6vq5tsaIM8hCgCmYq3YFU9khjP53Ml0MXfvVjp1bH1727SZzSBfLqBYKaFRb3CRMQ5CpGmLkBPxzZlAhyz2lwIQeaL8PoDImmCviw3OZF9GfrkAykFABUEgeq0OFpMFdoMJ7UZz3WGxzDtN1setJvM5o9E402G1LsmaotoEhrxx3NYLoSVXSwNASq/SJwc69ZeBzn8HYFtNxvtTmdypTD5/LF8t96Zz2WPbxbylVK+TUrWCfKkohVkbdTniVGeccy6y3YoPQrikbJhEYM7l5w415eWSY9A9lpEMCr7r03NAqtKkhBKVWkkVSiWUCiUxanWwGkzQqJQwavRim9k8a9WbLpv0+is2vfFiW1vbrEmtTkJKYDYAYHJyko6Pj8PhcNxyEamWBnll/BQ+IT/kJauWo2G29VTKkylkewqVsrtcrfaWqtW+crXaValV7IVy2VxmDUWmUECxVERNFCGKDTTEBhqiKOUv5JAtYxycM84J3z+9cQ9lMQUhCkEggkIBgSqgUAhQKgQoBBXUKhX0ajVMOgN0KlXNqNGk1QrVlkGji+o12hmdWr1i0hvjXXb7okqlWgVQAFAmhHDOOZmcnKRNE+p28i9aALnOETAAmAR4eGKCP/TQQzthTYUgoN5oGAHYa6hZtjM5W75ccWeLhd5SpeSslGuWBmeGBmPmRqNur7OGsVYX9fVGXS+KolrkTEUoPaSPRQ7H7kx1hahSqQpKqiiqlcqcSkG3BEGVUApCTq1QZvVabdJqsCzY9PpVvdGYVUnmUoISUtv15zl5RNISzbZm3gJFCyDX1bHfW0F7sANvj2/QrJFSypGyZvGgOV8umyv1uqFcrRrERlVbrdc1dVFUc8YpA9vnqVBKOQflCspFlUJdUmnUeaNGXTCqzGmlEglZG1QhFUXWATSa8y4/zjnxAaRfnhIsl37c8qHZFkBuYC0TAghCoZ0n8/k8TwQCHJOTCIfD3OfzkfHxcdacS/lShHNOII1LJgAwNjYmrKhU5C1eLwvt+e7bpE24BZBbTevs1T77nvA/16f40QTeAU3Q0gYtgLSkJa+N/P/ogEt8jh8XygAAAABJRU5ErkJggg==" alt="ActivESS Conseil" width="34" height="34" style="object-fit:contain;">
+    <span class="bm-text">
+      <span class="bm-title">Tout Roule</span>
+      <span class="bm-sub">par <strong>ActivESS</strong> Conseil</span>
+    </span>
+  </div>
+  <div class="topnav-tabs" role="group" aria-label="Navigation de l'outil">
+    <button type="button" class="topnav-tab" data-page="home">Accueil</button>
+    <button type="button" class="topnav-tab" data-page="themes">Thématiques</button>
+    <button type="button" class="topnav-tab" data-page="quest">Questionnaires</button>
+    <button type="button" class="topnav-tab" data-page="dashboard">Tableau de bord</button>
+  </div>
+  <div class="data-actions" role="group" aria-label="Sauvegarde des données">
+    <button type="button" class="data-btn" id="btn-export-nav">⬇ Exporter</button>
+    <button type="button" class="data-btn" id="btn-import-nav">⬆ Importer</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <section class="page-view" data-page="home">
+    <header class="head">
+      <p class="eyebrow">ActivESS Conseil · Outil de pilotage ESS/IAE</p>
+      <h1>Tout Roule</h1>
+      <p class="tagline">Pilotez l'<span class="em">ESS</span>entiel, gardez le cap.</p>
+      <p class="lede">Un outil de pilotage stratégique pour les structures de l'ESS et de l'IAE : douze thématiques, un diagnostic sur chacune, les actions à mener à moyen terme, et les tâches positionnées dans l'année avec leur responsable.</p>
+      <span class="example-flag">Exemple illustratif — « Racines &amp; Chemins », chantier d'insertion fictif</span>
+      <div class="hero-cta-row">
+        <button type="button" class="hero-cta" data-goto="themes">Découvrir les 12 thématiques</button>
+        <button type="button" class="hero-cta" data-goto="quest">Répondre aux questionnaires</button>
+        <button type="button" class="hero-cta is-primary" data-goto="dashboard">Ouvrir le tableau de bord →</button>
+      </div>
+    </header>
+
+    <div class="how-it-works">
+      <div class="hiw-card">
+        <span class="hiw-num">01</span>
+        <h4>Diagnostiquer</h4>
+        <p>Douze thématiques, chacune avec son questionnaire ou ses indicateurs chiffrés. Vous répondez, l'outil situe chaque axe sur une échelle d'alerte — sans jugement, juste un état des lieux.</p>
+      </div>
+      <div class="hiw-card">
+        <span class="hiw-num">02</span>
+        <h4>Prioriser</h4>
+        <p>Chaque réponse à risque déclenche une action à moyen terme, elle-même déclinée en tâches datées avec un responsable. Rien ne se perd entre le constat et le plan d'action.</p>
+      </div>
+      <div class="hiw-card">
+        <span class="hiw-num">03</span>
+        <h4>Piloter</h4>
+        <p>Vue en roue ou en tableau de bord, au choix. Le thème « Projet associatif » ouvre directement l'outil de rédaction guidée pour passer du diagnostic à l'écrit.</p>
+      </div>
+    </div>
+
+    <div class="philosophy-block">
+      <div>
+        <h2>Pourquoi cet outil existe</h2>
+        <p>Tout Roule n'est pas un audit de plus. C'est un outil que <strong>vous</strong> utilisez vous-même, thématique par thématique, pour transformer un diagnostic en actions réellement suivies — pas un rapport qu'on referme après la réunion de restitution.</p>
+        <p>Il applique la posture qui structure tout l'accompagnement d'ActivESS Conseil : ce n'est ni nous qui décidons pour vous, ni nous qui remplissons l'outil à votre place. C'est votre conseil d'administration, votre direction et vos équipes qui s'en emparent, le mettent à jour, et en gardent la maîtrise longtemps après une mission.</p>
+        <p>Les données affichées par défaut sont celles d'un exemple fictif (« Racines &amp; Chemins »), pour que l'outil se présente déjà rempli plutôt que vide. Trois thématiques reposent déjà sur une vraie méthodologie sourcée — les neuf autres restent à enrichir, thématique par thématique, avec vos diagnostics réels.</p>
+      </div>
+      <div class="posture-card">
+        <p class="pc-eyebrow">Notre conviction</p>
+        <h3>La posture « faire avec »</h3>
+        <div class="posture-row">
+          <div class="posture-item">
+            <span class="pi-label">Dire quoi faire</span>
+            <span class="pi-note">— un rapport de diagnostic, refermé après la restitution.</span>
+          </div>
+          <div class="posture-item">
+            <span class="pi-label">Faire à la place</span>
+            <span class="pi-note">— un consultant qui pilote pour vous, et repart avec la compétence.</span>
+          </div>
+          <div class="posture-item is-us">
+            <span class="pi-label">Faire avec ★</span>
+            <span class="pi-note">— un outil que vous vous appropriez, faites vivre, et gardez.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-view" data-page="themes" hidden>
+    <header class="head">
+      <p class="eyebrow">ActivESS Conseil · Douze axes de pilotage</p>
+      <h1>Les 12 thématiques</h1>
+      <p class="lede">Chaque thématique couvre une dimension du pilotage d'une structure ESS/IAE. Certaines s'appuient déjà sur une méthodologie sourcée ; les autres sont des questionnaires construits en interne, à enrichir progressivement.</p>
+    </header>
+    <div class="themes-grid" id="themes-grid"></div>
+  </section>
+
+  <section class="page-view" data-page="quest" hidden>
+    <header class="head">
+      <p class="eyebrow">ActivESS Conseil · Accès direct</p>
+      <h1>Questionnaires</h1>
+      <p class="lede">Un accès direct à chaque questionnaire, avec son statut actuel. Cliquez une thématique pour ouvrir sa fiche complète dans le tableau de bord.</p>
+    </header>
+    <div class="quest-list" id="quest-list"></div>
+  </section>
+
+  <section class="page-view" data-page="dashboard" hidden>
+    <header class="head">
+      <p class="eyebrow">ActivESS Conseil · Pilotage stratégique</p>
+      <h1>Tableau de bord</h1>
+      <p class="lede">Une vue d'ensemble des thématiques de pilotage d'une structure ESS : le niveau de diagnostic sur chaque axe, les actions à mener à moyen terme, et les tâches positionnées dans l'année avec leur responsable.</p>
+      <span class="example-flag">Exemple illustratif — « Racines &amp; Chemins », chantier d'insertion fictif</span>
+      <div class="stat-row" id="stat-row"></div>
+      <div class="data-actions" role="group" aria-label="Sauvegarde des données">
+        <button type="button" class="data-btn" id="btn-export-dash">⬇ Exporter mes données</button>
+        <button type="button" class="data-btn" id="btn-import-dash">⬆ Importer un fichier</button>
+      </div>
+      <p class="data-hint">Vos réponses sont enregistrées uniquement sur ce navigateur. Exportez-les régulièrement et rangez le fichier dans le dossier partagé de votre structure.</p>
+    </header>
+
+    <div class="layout">
+      <div class="card wheel-card">
+        <div class="view-toggle-row">
+          <h2>Vue d'ensemble</h2>
+          <div class="view-toggle" role="group" aria-label="Choix de la présentation">
+            <button type="button" class="view-toggle-btn" data-view="wheel">Roue</button>
+            <button type="button" class="view-toggle-btn" data-view="dashboard">Tableau de bord</button>
+          </div>
+        </div>
+        <p class="hint" id="overview-hint">Cliquez un secteur pour ouvrir sa fiche détaillée.</p>
+
+        <div id="wheel-view">
+          <svg class="wheel" viewBox="0 0 720 720" role="group" aria-label="Roue des 12 thématiques de pilotage">
+            <g id="wheel-root"></g>
+          </svg>
+          <div class="legend">
+            <div class="legend-item">
+              <span class="legend-swatch l1"></span>
+              <span class="legend-text"><span class="k">Anneau 1</span><span class="v">Diagnostic — questionnaire qualitatif ou indicateurs chiffrés selon la thématique, positionnés sur une échelle d'alerte. La couleur reflète le nombre de signaux nécessitant une action.</span></span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-swatch l2"></span>
+              <span class="legend-text"><span class="k">Anneau 2</span><span class="v">Actions moyen terme — chaque point marque un chantier à engager pour progresser.</span></span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-swatch l3"></span>
+              <span class="legend-text"><span class="k">Anneau 3</span><span class="v">Tâches — positionnées sur l'année (T1 → T4), responsable au survol.</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div id="dashboard-view" hidden>
+          <div class="kanban" id="kanban-root"></div>
+        </div>
+      </div>
+
+      <div class="card panel" id="panel"></div>
+    </div>
+
+    <footer class="note">
+      <strong>Prochaine étape :</strong> remplacer ces données d'exemple par vos diagnostics réels, thématique par thématique, à partir des sources que vous m'enverrez. Trois thématiques utilisent déjà une vraie méthodologie : « Maturité numérique » (autodiagnostic Solidatech, 2020), « Pilotage économique » (DiagFlash, France Active Nouvelle-Aquitaine / INAÉ) et « Projet associatif et projet d'insertion » (CNAR Sport / CNOSF, Ligue de l'enseignement). Sur « Pilotage économique », vous pouvez désormais saisir vos propres chiffres de bilan et de compte de résultat (bouton dans la fiche ECO) : le diagnostic, les actions et les tâches sont recalculés automatiquement selon les formules DiagFlash. Les 9 autres thématiques restent illustratives en attendant leurs sources. La structure (roue à 3 anneaux, 12 thématiques) reste la même — seul le contenu change.
+    </footer>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  <p>Cet outil a été conçu et élaboré avec l'aide du Chantier d'Insertion <a href="https://www.agerad.fr/" target="_blank" rel="noopener noreferrer">AGERAD</a>.</p>
+</footer>
+
+<div class="modal-overlay" id="eco-modal-overlay" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="eco-modal-title">
+    <div class="modal-head">
+      <h3 id="eco-modal-title">Diagnostic économique — vos données</h3>
+      <button type="button" class="modal-close" id="eco-modal-close" aria-label="Fermer">×</button>
+    </div>
+    <p class="modal-hint">Saisissez les montants de votre bilan et de votre compte de résultat pour les deux derniers exercices clos (N-1 et N). Le diagnostic, les actions et les tâches de la roue seront recalculés selon les formules DiagFlash (France Active Nouvelle-Aquitaine / INAÉ).</p>
+    <form id="eco-form">
+      <div class="eco-col-heads"><span></span><span>Exercice N-1</span><span>Exercice N</span></div>
+      <fieldset class="eco-fieldset">
+        <legend>Bilan</legend>
+        <div id="eco-bilan-fields"></div>
+      </fieldset>
+      <fieldset class="eco-fieldset">
+        <legend>Compte de résultat</legend>
+        <div id="eco-cr-fields"></div>
+      </fieldset>
+      <p class="modal-hint limits">Simplifications assumées par rapport au DiagFlash complet : délai créances clients et délai dettes fiscales/sociales calculés sur le CA et la masse salariale totale, sans distinction HT/TTC ; capacité d'autofinancement calculée hors remboursement d'emprunts (donnée non demandée ici) ; les paliers « très grave » de l'évolution des fonds propres et du résultat net, qui nécessitent 3 exercices dans l'outil d'origine, ne sont pas atteignables avec les 2 exercices saisis ici ; le taux d'endettement utilise un palier « préoccupant » (100–150 %) estimé, non documenté explicitement dans le classeur source.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" id="eco-modal-cancel">Annuler</button>
+        <button type="submit" class="btn-primary">Calculer le diagnostic</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="quest-modal-overlay" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="quest-modal-title">
+    <div class="modal-head">
+      <h3 id="quest-modal-title">Questionnaire</h3>
+      <button type="button" class="modal-close" id="quest-modal-close" aria-label="Fermer">×</button>
+    </div>
+    <p class="modal-hint" id="quest-modal-source"></p>
+    <form id="quest-form">
+      <div id="quest-fields"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" id="quest-modal-cancel">Annuler</button>
+        <button type="submit" class="btn-primary">Mettre à jour le plan d'action</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="export-modal-overlay" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="export-modal-title">
+    <div class="modal-head">
+      <h3 id="export-modal-title">Exporter mes données</h3>
+      <button type="button" class="modal-close" id="export-modal-close" aria-label="Fermer">×</button>
+    </div>
+    <p class="modal-hint">Toutes les réponses enregistrées sur ce navigateur (questionnaires, indicateurs économiques, préférences d'affichage) seront regroupées dans un fichier JSON à télécharger. C'est votre seule sauvegarde : conservez-le dans le dossier partagé de votre structure.</p>
+    <form id="export-form">
+      <div class="field-row">
+        <label class="field-label" for="export-structure-name">Nom de la structure (facultatif)</label>
+        <input type="text" id="export-structure-name" class="field-input" placeholder="Ex. Racines &amp; Chemins" autocomplete="off">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" id="export-modal-cancel">Annuler</button>
+        <button type="submit" class="btn-primary">Télécharger le fichier</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="import-confirm-overlay" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="import-confirm-title">
+    <div class="modal-head">
+      <h3 id="import-confirm-title">Importer un fichier</h3>
+      <button type="button" class="modal-close" id="import-confirm-close" aria-label="Fermer">×</button>
+    </div>
+    <p class="modal-hint" id="import-confirm-text"></p>
+    <p class="modal-hint limits">Seules les clés de données Tout Roule contenues dans ce fichier seront appliquées ; le reste de votre navigateur n'est pas modifié.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn-secondary" id="import-confirm-cancel">Annuler</button>
+      <button type="button" class="btn-primary" id="import-confirm-apply">Remplacer mes données</button>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="import-file-input" accept=".json,application/json" hidden aria-hidden="true">
+
+<div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+
+<script>
+(function () {
+  var ANSWER_LABEL = {
+    oui: "Oui",
+    en_cours: "En cours",
+    non_besoin: "Besoin identifié",
+    non_pas_besoin: "Non concerné",
+    ne_sait_pas: "À vérifier",
+    ok: "Ok",
+    preoccupant: "Préoccupant",
+    grave: "Grave",
+    tres_grave: "Très grave"
+  };
+
+  var DATA = [
+    { id: "ins", code: "INS", label: "Projet associatif et projet d'insertion",
+      source: "Questionnaire inspiré de « La construction du projet associatif — un outil d'aide à la structuration » (CNAR Sport / CNOSF) et du « Guide pratique de l'association » (Ligue de l'enseignement Loire-Atlantique) — outils issus du secteur sportif, adaptés ici à l'ESS/IAE. Le volet financier et logistique du projet associatif est couvert par « Pilotage économique » ; l'ancrage territorial et les partenariats par les thématiques dédiées, pour éviter les doublons.",
+      writeTool: { url: "https://claude.ai/code/artifact/0a9afcc3-6138-46e2-8eba-5b964a29d97e", label: "Rédiger le projet associatif", caption: "Outil d'écriture guidée en 7 volets, avec repères sourcés (HCVA, DG'ASSO, Gouvernance associative, Leadership ESS)" },
+      questions: [
+        { q: "Le projet associatif est-il formalisé dans un document écrit ?", a: "en_cours",
+          action: "Formaliser le projet associatif selon la trame en 6 volets (période, valeurs, objectifs, partenaires, actions, évaluation) et le diffuser à toutes les parties prenantes",
+          task: { task: "Rédaction du projet associatif (trame 6 volets) et du plan d'actions", period: "T2-T3", responsible: "Direction / CA" } },
+        { q: "Ce projet est-il connu de l'ensemble des parties prenantes (salariés, bénévoles, adhérents) ?", a: "non_besoin",
+          action: "Formaliser le projet associatif selon la trame en 6 volets (période, valeurs, objectifs, partenaires, actions, évaluation) et le diffuser à toutes les parties prenantes",
+          task: { task: "Rédaction du projet associatif (trame 6 volets) et du plan d'actions", period: "T2-T3", responsible: "Direction / CA" } },
+        { q: "A-t-il été construit ou révisé de façon concertée et collective (CA, salariés, bénéficiaires) ?", a: "non_besoin",
+          action: "Organiser un temps de construction concertée du projet associatif avec le CA, les salariés et les bénéficiaires (séminaire dédié)",
+          task: { task: "Séminaire CA — construction concertée du projet associatif", period: "T1", responsible: "Présidence" } },
+        { q: "Une évaluation des attentes et des besoins des adhérents/bénéficiaires a-t-elle été réalisée ?", a: "ne_sait_pas",
+          action: "Mener une évaluation des attentes et des besoins des bénéficiaires/adhérents (enquête ou entretiens)",
+          task: { task: "Enquête attentes et besoins des bénéficiaires", period: "T1-T2", responsible: "Direction" } },
+        { q: "Un plan d'actions décline-t-il le projet associatif en axes de travail concrets ?", a: "en_cours",
+          action: "Structurer un plan d'actions par axes de développement avec fiches action (tâches, échéances, moyens, indicateurs) pour chaque chantier prioritaire",
+          task: { task: "Rédaction du projet associatif (trame 6 volets) et du plan d'actions", period: "T2-T3", responsible: "Direction / CA" } },
+        { q: "L'organigramme de l'association est-il formalisé et connu de tous ?", a: "oui",
+          action: "Formaliser et diffuser l'organigramme de l'association",
+          task: { task: "Formalisation et diffusion de l'organigramme", period: "T1", responsible: "Direction" } },
+        { q: "Des commissions ou groupes de travail thématiques structurent-ils la gouvernance opérationnelle ?", a: "non_pas_besoin" },
+        { q: "Les parcours d'insertion sont-ils formalisés par type de poste (référentiel partagé) ?", a: "en_cours",
+          action: "Formaliser un référentiel de parcours d'insertion par type de poste",
+          task: { task: "Formalisation du référentiel de parcours d'insertion", period: "T3", responsible: "Direction / Encadrants techniques" } },
+        { q: "L'agrément IAE est-il à jour et son bilan annuel réalisé ?", a: "oui",
+          action: "Réaliser le bilan annuel de l'agrément IAE",
+          task: { task: "Bilan annuel agrément IAE", period: "T4", responsible: "Direction" } }
+      ] },
+    { id: "qvt", code: "QVT", label: "Qualité de vie au travail",
+      questions: [
+        { q: "Un accord ou baromètre QVT a-t-il été mené au cours des 2 dernières années ?", a: "non_besoin",
+          action: "Lancer une enquête QVT (baromètre social) auprès de l'ensemble des salariés",
+          task: { task: "Diffusion du baromètre social", period: "T1", responsible: "RH" } },
+        { q: "Le taux d'absentéisme est-il suivi et maîtrisé ?", a: "non_besoin",
+          action: "Mettre en place un suivi mensuel de l'absentéisme partagé avec l'encadrement",
+          task: { task: "Suivi mensuel de l'absentéisme", period: "T1-T4", responsible: "RH" } },
+        { q: "Des actions de prévention des risques psychosociaux sont-elles en place ?", a: "ne_sait_pas",
+          action: "Négocier un accord QVT / prévention des risques psychosociaux avec les représentants du personnel",
+          task: { task: "Négociation accord QVT", period: "T2-T3", responsible: "Direction / CSE" } }
+      ] },
+    { id: "eco", code: "ECO", label: "Pilotage économique, financier et modèle de ressources",
+      source: "Indicateurs issus de l'outil DiagFlash — autodiagnostic financier flash co-construit par France Active Nouvelle-Aquitaine et INAÉ Nouvelle-Aquitaine, à destination des SIAE.",
+      questions: [
+        { q: "Fonds propres : évolution sur les 3 derniers exercices (alerte si baisse > 30 % ou fonds propres négatifs)", value: "-35 %", a: "grave" },
+        { q: "Fonds de roulement en jours de charges d'exploitation (Ok si > 30 j, préoccupant si < 30 j, grave si < 15 j)", value: "22 jours", a: "preoccupant" },
+        { q: "Trésorerie nette en jours de charges d'exploitation (Ok si > 20 j, préoccupant si < 20 j, grave si < 10 j)", value: "8 jours", a: "grave" },
+        { q: "Situation de la trésorerie nette sur le dernier exercice (alerte si négative)", value: "+12 400 €", a: "ok" },
+        { q: "Évolution de la trésorerie nette sur l'exercice (alerte si en baisse)", value: "en baisse", a: "grave" },
+        { q: "Taux d'endettement net sur le dernier exercice (Ok si < 100 %)", value: "68 %", a: "ok" },
+        { q: "Délai de paiement des créances clients (alerte si > 60 jours)", value: "74 jours", a: "grave" },
+        { q: "Délai de paiement des dettes fiscales et sociales (alerte si > 45 jours)", value: "30 jours", a: "ok" },
+        { q: "Résultat net (préoccupant si négatif sur le dernier exercice, grave si sur 2 exercices)", value: "négatif (dernier exercice)", a: "preoccupant" },
+        { q: "Capacité d'autofinancement disponible après remboursement des emprunts (alerte si négative)", value: "positive", a: "ok" }
+      ],
+      actions: [
+        "Plan de relance des créances clients et lissage des délais fournisseurs",
+        "Reconstituer les fonds propres (subvention d'investissement, titres associatifs, apport en fonds associatifs)",
+        "Mettre en place un tableau de bord de trésorerie mensuel partagé avec le CA",
+        "Solliciter un accompagnement France Active / DLA pour un plan de consolidation financière"
+      ],
+      tasks: [
+        { task: "Plan de relance des créances clients", period: "T1", responsible: "Direction / Trésorerie" },
+        { task: "Revue du plan de trésorerie avec France Active", period: "T1-T2", responsible: "Direction" },
+        { task: "Point fonds propres et solutions de consolidation", period: "T2", responsible: "Direction / CA" },
+        { task: "Restitution DiagFlash aux financeurs (DDETS, CPOM)", period: "T4", responsible: "Direction" }
+      ] },
+    { id: "num", code: "NUM", label: "Maturité numérique",
+      source: "Questionnaire inspiré de l'autodiagnostic numérique Solidatech (2020) — piliers « Travaillez collaborativement » et « Sécurisez votre association ».",
+      questions: [
+        { q: "Hébergez-vous vos documents dans le cloud, avec des outils de partage/coédition ?", a: "oui",
+          action: "Généraliser l'hébergement cloud des documents avec partage et coédition",
+          task: { task: "Migration des documents vers le cloud", period: "T1", responsible: "Direction" } },
+        { q: "Utilisez-vous un outil de messagerie instantanée et de visioconférence ?", a: "oui",
+          action: "Déployer un outil unique de messagerie instantanée et de visioconférence",
+          task: { task: "Déploiement outil de messagerie / visio", period: "T1", responsible: "Direction" } },
+        { q: "Avez-vous un outil de gestion de projet collaboratif (Trello, Wimi, Asana...) ?", a: "en_cours",
+          action: "Déployer un outil de gestion de projet collaboratif partagé (Trello, Wimi, Asana...)",
+          task: { task: "Déploiement outil de gestion de projet", period: "T2", responsible: "Direction" } },
+        { q: "Avez-vous défini des règles d'usage partagées pour les outils numériques ?", a: "non_besoin",
+          action: "Formaliser une charte des règles d'usage des outils numériques",
+          task: { task: "Rédaction de la charte numérique", period: "T1", responsible: "DLA / Direction" } },
+        { q: "Avez-vous un antivirus unique et à jour sur l'ensemble des postes ?", a: "ne_sait_pas",
+          action: "Généraliser un antivirus unique et à jour sur l'ensemble des postes",
+          task: { task: "Audit et déploiement antivirus", period: "T1", responsible: "DLA / Direction" } },
+        { q: "Appliquez-vous une politique de gestion des mots de passe et des accès ?", a: "non_besoin",
+          action: "Mettre en place une politique de gestion des mots de passe et des accès",
+          task: { task: "Audit mots de passe et accès", period: "T2", responsible: "Direction" } },
+        { q: "Avez-vous mis en place une sauvegarde régulière des données ?", a: "en_cours",
+          action: "Sécuriser une procédure de sauvegarde régulière et testée des données",
+          task: { task: "Mise en place sauvegarde régulière", period: "T1-T2", responsible: "Direction" } },
+        { q: "Avez-vous mené une réflexion sur votre conformité RGPD ?", a: "non_besoin",
+          action: "Mener une mise en conformité RGPD (registre des traitements, mentions légales)",
+          task: { task: "Constitution du registre RGPD", period: "T2", responsible: "Direction" } },
+        { q: "Existe-t-il une personne référente sur les sujets numériques ?", a: "non_pas_besoin" },
+        { q: "Le numérique est-il abordé en CA avec un budget identifié ?", a: "non_besoin",
+          action: "Inscrire le numérique à l'ordre du jour du CA avec un budget dédié",
+          task: { task: "Point numérique au CA + budget", period: "T4", responsible: "Direction / CA" } }
+      ] },
+    { id: "terr", code: "TERR", label: "Responsabilité territoriale, utilité sociale et impact",
+      questions: [
+        { q: "Des indicateurs d'impact social sont-ils suivis annuellement ?", a: "oui",
+          action: "Structurer un tableau de bord d'indicateurs d'impact social suivi annuellement",
+          task: { task: "Collecte des indicateurs d'impact N-1", period: "T1", responsible: "Direction" } },
+        { q: "Un rapport d'impact est-il diffusé publiquement ?", a: "en_cours",
+          action: "Construire un rapport d'impact social annuel diffusé publiquement",
+          task: { task: "Publication du rapport d'impact", period: "T2", responsible: "Communication" } },
+        { q: "La structure est-elle reconnue par la CRESS ou un réseau régional ?", a: "oui",
+          action: "Renforcer les partenariats avec les prescripteurs locaux (France Travail, Mission locale)",
+          task: { task: "Prospection de nouveaux prescripteurs locaux", period: "T3", responsible: "Direction" } }
+      ] },
+    { id: "comp", code: "COMP", label: "Plan de montée en compétences / GPEC",
+      questions: [
+        { q: "Les entretiens professionnels sont-ils réalisés pour l'ensemble des salariés ?", a: "en_cours",
+          action: "Systématiser les entretiens professionnels tous les 2 ans pour l'ensemble des salariés",
+          task: { task: "Recueil des besoins en formation", period: "T1", responsible: "RH" } },
+        { q: "Un plan de formation pluriannuel existe-t-il ?", a: "non_besoin",
+          action: "Construire un plan de développement des compétences à 3 ans",
+          task: { task: "Plan de développement des compétences", period: "T4", responsible: "Direction / RH" } },
+        { q: "La mobilité interne des encadrants est-elle organisée ?", a: "ne_sait_pas",
+          action: "Organiser un dispositif de mobilité interne pour les encadrants",
+          task: { task: "Cartographie des parcours et mobilités internes", period: "T3", responsible: "Direction / RH" } }
+      ] },
+    { id: "gouv", code: "GOUV", label: "Gouvernance associative",
+      questions: [
+        { q: "Le conseil d'administration est-il renouvelé régulièrement (âge, ancienneté équilibrés) ?", a: "non_besoin",
+          action: "Lancer une campagne de recrutement d'administrateurs pour rééquilibrer le CA",
+          task: { task: "Campagne de recrutement d'administrateurs", period: "T1-T2", responsible: "Présidence" } },
+        { q: "Tous les postes du bureau sont-ils pourvus ?", a: "non_besoin",
+          action: "Pourvoir les postes vacants du bureau lors du prochain renouvellement",
+          task: { task: "Renouvellement du bureau", period: "T2", responsible: "Présidence" } },
+        { q: "Le quorum est-il facilement atteint en assemblée générale ?", a: "ne_sait_pas",
+          action: "Réviser les statuts pour faciliter la participation (visio, procurations)",
+          task: { task: "Assemblée générale", period: "T2", responsible: "CA" } }
+      ] },
+    { id: "rh", code: "RH", label: "Ressources humaines / conditions d'emploi",
+      questions: [
+        { q: "Le turnover des encadrants techniques est-il maîtrisé (moins de 15 %/an) ?", a: "non_besoin",
+          action: "Analyser les causes du turnover des encadrants techniques et engager un plan de fidélisation",
+          task: { task: "Diagnostic turnover encadrants", period: "T1", responsible: "RH" } },
+        { q: "La grille salariale a-t-elle été revue au cours des 2 dernières années ?", a: "en_cours",
+          action: "Revoir la grille salariale au regard de la convention collective",
+          task: { task: "Étude comparative de la grille salariale", period: "T2", responsible: "RH" } },
+        { q: "Un parcours d'intégration existe-t-il pour les nouveaux encadrants ?", a: "en_cours",
+          action: "Structurer un parcours d'intégration pour les nouveaux encadrants",
+          task: { task: "Déploiement du parcours d'intégration", period: "T3", responsible: "RH" } }
+      ] },
+    { id: "env", code: "ENV", label: "Impact environnemental / transition écologique",
+      questions: [
+        { q: "Un bilan carbone, même simplifié, a-t-il été réalisé ?", a: "non_besoin",
+          action: "Réaliser un bilan carbone simplifié (méthode ADEME)",
+          task: { task: "Bilan carbone simplifié", period: "T2", responsible: "Direction" } },
+        { q: "Le tri des déchets est-il organisé sur l'ensemble des chantiers/sites ?", a: "en_cours",
+          action: "Généraliser le tri des déchets sur l'ensemble des chantiers et sites",
+          task: { task: "Déploiement du tri des déchets", period: "T2-T3", responsible: "Direction" } },
+        { q: "Des critères environnementaux sont-ils intégrés à la politique d'achats ?", a: "ne_sait_pas",
+          action: "Intégrer des critères environnementaux dans la politique d'achats",
+          task: { task: "Charte achats responsables", period: "T4", responsible: "Direction" } }
+      ] },
+    { id: "part", code: "PART", label: "Relations partenariales et institutionnelles",
+      questions: [
+        { q: "La structure dispose-t-elle d'un CPOM ou de conventions avec plusieurs financeurs ?", a: "oui",
+          action: "Diversifier les financeurs au-delà des 3 principaux",
+          task: { task: "Prospection de nouveaux financeurs", period: "T3", responsible: "Direction" } },
+        { q: "Une cartographie des partenaires et de leur niveau d'engagement existe-t-elle ?", a: "en_cours",
+          action: "Formaliser une cartographie des partenaires et de leur niveau d'engagement",
+          task: { task: "Cartographie des partenaires", period: "T1", responsible: "Direction" } },
+        { q: "La structure siège-t-elle dans une instance territoriale (DLA, CRESS...) ?", a: "oui",
+          action: "Renforcer la présence dans les instances territoriales (DLA, CRESS)",
+          task: { task: "Participation aux instances territoriales", period: "T1-T4", responsible: "Direction" } }
+      ] },
+    { id: "com", code: "COM", label: "Communication et image",
+      questions: [
+        { q: "Le site internet est-il à jour ?", a: "non_besoin",
+          action: "Refondre le site internet",
+          task: { task: "Refonte du site internet", period: "T1-T2", responsible: "Communication" } },
+        { q: "La structure est-elle présente et active sur au moins un réseau social ?", a: "non_besoin",
+          action: "Créer une présence active sur un réseau social pertinent",
+          task: { task: "Lancement présence réseau social", period: "T2", responsible: "Communication" } },
+        { q: "Une communication interne régulière (lettre, réunion) existe-t-elle ?", a: "oui",
+          action: "Mettre en place une lettre d'information interne trimestrielle",
+          task: { task: "Lancement de la lettre interne", period: "T3", responsible: "Direction" } }
+      ] },
+    { id: "lab", code: "LAB", label: "Labellisation et réseaux",
+      questions: [
+        { q: "La structure est-elle adhérente à un réseau représentatif (CRESS, Coorace...) ?", a: "oui",
+          action: "Renforcer la participation aux groupes de travail du réseau Coorace",
+          task: { task: "Participation groupes de travail réseau", period: "T1-T4", responsible: "Direction" } },
+        { q: "Un label qualité (Qualiopi...) est-il obtenu et à jour ?", a: "oui",
+          action: "Maintenir la conformité Qualiopi (audit de renouvellement)",
+          task: { task: "Audit de renouvellement Qualiopi", period: "T2", responsible: "Direction" } },
+        { q: "Une veille sur d'autres labels pertinents (ESUS...) est-elle engagée ?", a: "en_cours",
+          action: "Engager la démarche de labellisation ESUS",
+          task: { task: "Dépôt du dossier de label ESUS", period: "T4", responsible: "Direction" } }
+      ] }
+  ];
+
+  var STATUS_LABEL = { good: "Maîtrisée", watch: "En progrès", urgent: "Urgente" };
+
+  function computeStatus(theme) {
+    var gaps = theme.questions.filter(function (x) { return x.a === "non_besoin" || x.a === "grave" || x.a === "tres_grave"; }).length;
+    var inProgress = theme.questions.filter(function (x) { return x.a === "en_cours" || x.a === "ne_sait_pas" || x.a === "preoccupant"; }).length;
+    var status = "good";
+    if (gaps >= 2) status = "urgent";
+    else if (gaps === 1 || inProgress >= 2) status = "watch";
+    theme.gaps = gaps;
+    theme.status = status;
+  }
+  DATA.forEach(computeStatus);
+
+  // --- Questionnaire générique (thématiques qualitatives) : dérivation du plan d'action ---
+  var QUAL_GAP_VALUES = ["non_besoin", "grave", "tres_grave", "en_cours", "ne_sait_pas", "preoccupant"];
+  var QUAL_ANSWER_OPTIONS = ["oui", "en_cours", "non_besoin", "non_pas_besoin", "ne_sait_pas"];
+
+  function deriveActionsAndTasks(questions) {
+    var actions = [];
+    var tasks = [];
+    var seenActions = {};
+    var seenTasks = {};
+    questions.forEach(function (q) {
+      if (!q.action || QUAL_GAP_VALUES.indexOf(q.a) === -1) return;
+      if (!seenActions[q.action]) {
+        seenActions[q.action] = true;
+        actions.push(q.action);
+      }
+      if (q.task && !seenTasks[q.task.task]) {
+        seenTasks[q.task.task] = true;
+        tasks.push(q.task);
+      }
+    });
+    if (actions.length === 0) {
+      actions.push("Maintenir les pratiques actuelles sur cette thématique et poursuivre le suivi");
+      tasks.push({ task: "Point de suivi annuel", period: "T4", responsible: "Direction" });
+    }
+    return { actions: actions, tasks: tasks };
+  }
+
+  DATA.forEach(function (theme) {
+    if (theme.id === "eco") return;
+    var result = deriveActionsAndTasks(theme.questions);
+    theme.actions = result.actions;
+    theme.tasks = result.tasks;
+  });
+
+  function restoreQualAnswersFromStorage() {
+    DATA.forEach(function (theme) {
+      if (theme.id === "eco") return;
+      try {
+        var saved = JSON.parse(localStorage.getItem("toutroule-quest-" + theme.id) || "null");
+        if (!saved || !saved.answers || saved.answers.length !== theme.questions.length) return;
+        theme.questions.forEach(function (q, i) { q.a = saved.answers[i]; });
+        var result = deriveActionsAndTasks(theme.questions);
+        theme.actions = result.actions;
+        theme.tasks = result.tasks;
+        theme.isUserData = true;
+        theme.dataDate = saved.dataDate || "";
+        computeStatus(theme);
+      } catch (e) {}
+    });
+  }
+  restoreQualAnswersFromStorage();
+
+  // --- Diagnostic économique : calcul à partir des données saisies (formules DiagFlash) ---
+  var ECO_BILAN_FIELDS = [
+    { key: "fp", label: "Fonds propres" },
+    { key: "prov", label: "Provisions pour risques et charges" },
+    { key: "dmlt", label: "Dettes financières moyen/long terme" },
+    { key: "dct", label: "Dettes financières court terme / découvert bancaire" },
+    { key: "ain", label: "Actif immobilisé net" },
+    { key: "actcirc", label: "Actif circulant (total)" },
+    { key: "dispo", label: "Disponibilités" },
+    { key: "dexpl", label: "Dettes d'exploitation (total)" },
+    { key: "creances", label: "Créances clients" },
+    { key: "dfiscsoc", label: "Dettes fiscales et sociales" }
+  ];
+  var ECO_CR_FIELDS = [
+    { key: "ca", label: "Chiffre d'affaires" },
+    { key: "chexpl", label: "Charges d'exploitation (total)" },
+    { key: "dotations", label: "Dotations aux amortissements et provisions" },
+    { key: "salaires", label: "Salaires bruts" },
+    { key: "chsoc", label: "Charges sociales" },
+    { key: "rn", label: "Résultat net" }
+  ];
+  var ECO_ALL_FIELDS = ECO_BILAN_FIELDS.concat(ECO_CR_FIELDS);
+
+  function computeEcoFromInputs(inputs) {
+    var n1 = inputs.n1, n = inputs.n;
+
+    function fr(x) { return (x.fp + x.prov + x.dmlt) - x.ain; }
+    function bfr(x) { return (x.actcirc - x.dispo) - x.dexpl; }
+    function tn(x) { return fr(x) - bfr(x); }
+
+    var fr_n = fr(n);
+    var tn_n1 = tn(n1), tn_n = tn(n);
+    var chargesJour_n = n.chexpl / 360;
+
+    var questions = [];
+    var actions = [];
+    var tasks = [];
+
+    // 1. Évolution des fonds propres
+    var fpEvolPct = n1.fp !== 0 ? ((n.fp - n1.fp) / Math.abs(n1.fp)) * 100 : (n.fp < 0 ? -100 : 0);
+    var a1;
+    if (n.fp < 0 || fpEvolPct <= -30) a1 = "grave";
+    else if (fpEvolPct < 0) a1 = "preoccupant";
+    else a1 = "ok";
+    questions.push({ q: "Fonds propres : évolution N-1 → N (alerte si baisse > 30 % ou fonds propres négatifs)", value: fpEvolPct.toFixed(0) + " %", a: a1 });
+
+    // 2. Fonds de roulement en jours
+    var frJours = chargesJour_n > 0 ? fr_n / chargesJour_n : 0;
+    var a2 = frJours > 30 ? "ok" : (frJours < 15 ? "grave" : "preoccupant");
+    questions.push({ q: "Fonds de roulement en jours de charges d'exploitation (Ok si > 30 j, préoccupant si < 30 j, grave si < 15 j)", value: Math.round(frJours) + " jours", a: a2 });
+
+    // 3. Trésorerie nette en jours
+    var tnJours = chargesJour_n > 0 ? tn_n / chargesJour_n : 0;
+    var a3 = tnJours > 20 ? "ok" : (tnJours < 10 ? "grave" : "preoccupant");
+    questions.push({ q: "Trésorerie nette en jours de charges d'exploitation (Ok si > 20 j, préoccupant si < 20 j, grave si < 10 j)", value: Math.round(tnJours) + " jours", a: a3 });
+
+    // 4. Situation de la trésorerie nette
+    var a4 = tn_n >= 0 ? "ok" : "grave";
+    questions.push({ q: "Situation de la trésorerie nette sur le dernier exercice (alerte si négative)", value: Math.round(tn_n).toLocaleString("fr-FR") + " €", a: a4 });
+
+    // 5. Évolution de la trésorerie nette
+    var a5 = tn_n >= tn_n1 ? "ok" : "grave";
+    questions.push({ q: "Évolution de la trésorerie nette sur l'exercice (alerte si en baisse)", value: (tn_n >= tn_n1 ? "en hausse" : "en baisse"), a: a5 });
+
+    // 6. Taux d'endettement net
+    var endettement = n.fp !== 0 ? ((n.dmlt - n.dispo) / n.fp) * 100 : null;
+    var a6;
+    if (endettement === null) a6 = "grave";
+    else if (endettement < 100) a6 = "ok";
+    else if (endettement <= 150) a6 = "preoccupant";
+    else a6 = "grave";
+    questions.push({ q: "Taux d'endettement net sur le dernier exercice (Ok si < 100 %)", value: (endettement === null ? "n/a" : endettement.toFixed(0) + " %"), a: a6 });
+
+    // 7. Délai de paiement des créances clients (simplifié)
+    var delaiCreances = n.ca > 0 ? (n.creances / n.ca) * 360 : 0;
+    var a7 = delaiCreances > 60 ? "grave" : "ok";
+    questions.push({ q: "Délai de paiement des créances clients (alerte si > 60 jours) — estimation simplifiée", value: Math.round(delaiCreances) + " jours", a: a7 });
+
+    // 8. Délai de paiement des dettes fiscales et sociales (simplifié)
+    var masseSalariale = n.salaires + n.chsoc;
+    var delaiFiscal = masseSalariale > 0 ? (n.dfiscsoc / masseSalariale) * 360 : 0;
+    var a8 = delaiFiscal > 45 ? "grave" : "ok";
+    questions.push({ q: "Délai de paiement des dettes fiscales et sociales (alerte si > 45 jours) — estimation simplifiée", value: Math.round(delaiFiscal) + " jours", a: a8 });
+
+    // 9. Résultat net
+    var a9;
+    if (n.rn < 0 && n1.rn < 0) a9 = "grave";
+    else if (n.rn < 0) a9 = "preoccupant";
+    else a9 = "ok";
+    questions.push({ q: "Résultat net (préoccupant si négatif sur le dernier exercice, grave si négatif 2 exercices de suite)", value: Math.round(n.rn).toLocaleString("fr-FR") + " €", a: a9 });
+
+    // 10. Capacité d'autofinancement (simplifiée, hors remboursement d'emprunts)
+    var caf = n.rn + n.dotations;
+    var a10 = caf >= 0 ? "ok" : "grave";
+    questions.push({ q: "Capacité d'autofinancement (résultat net + dotations, hors remboursement d'emprunts) — estimation simplifiée", value: Math.round(caf).toLocaleString("fr-FR") + " €", a: a10 });
+
+    var tresoAlerts = [a2, a3, a4, a5].filter(function (x) { return x !== "ok"; }).length;
+    if (tresoAlerts > 0) {
+      actions.push("Mettre en place un tableau de bord de trésorerie mensuel partagé avec le CA");
+      tasks.push({ task: "Revue du plan de trésorerie", period: "T1-T2", responsible: "Direction" });
+    }
+    if (a1 !== "ok") {
+      actions.push("Reconstituer les fonds propres (subvention d'investissement, titres associatifs, apport en fonds associatifs)");
+      tasks.push({ task: "Point fonds propres et solutions de consolidation", period: "T2", responsible: "Direction / CA" });
+    }
+    if (a7 !== "ok") {
+      actions.push("Plan de relance des créances clients et lissage des délais de paiement");
+      tasks.push({ task: "Plan de relance des créances clients", period: "T1", responsible: "Direction / Trésorerie" });
+    }
+    if (a6 !== "ok") {
+      actions.push("Revoir la structure d'endettement avec le partenaire bancaire / France Active");
+      tasks.push({ task: "Revue de la structure financière", period: "T2", responsible: "Direction" });
+    }
+    if (a9 !== "ok" || a10 !== "ok") {
+      actions.push("Solliciter un accompagnement France Active / DLA pour un plan de consolidation financière");
+      tasks.push({ task: "Accompagnement DLA / France Active", period: "T2-T3", responsible: "Direction" });
+    }
+    if (actions.length === 0) {
+      actions.push("Maintenir le suivi trimestriel des indicateurs financiers");
+      tasks.push({ task: "Point trimestriel indicateurs financiers", period: "T1-T4", responsible: "Direction" });
+    }
+    actions.push("Restituer l'analyse DiagFlash aux financeurs (DDETS, CPOM)");
+    tasks.push({ task: "Restitution DiagFlash aux financeurs", period: "T4", responsible: "Direction" });
+
+    return { questions: questions, actions: actions, tasks: tasks };
+  }
+
+  function restoreEcoFromStorage() {
+    try {
+      var saved = JSON.parse(localStorage.getItem("toutroule-eco-inputs") || "null");
+      if (!saved) return;
+      var result = computeEcoFromInputs(saved);
+      var ecoTheme = DATA.filter(function (t) { return t.id === "eco"; })[0];
+      ecoTheme.questions = result.questions;
+      ecoTheme.actions = result.actions;
+      ecoTheme.tasks = result.tasks;
+      ecoTheme.isUserData = true;
+      var meta = JSON.parse(localStorage.getItem("toutroule-eco-meta") || "null");
+      ecoTheme.dataDate = meta && meta.dataDate ? meta.dataDate : "";
+      computeStatus(ecoTheme);
+    } catch (e) {}
+  }
+  restoreEcoFromStorage();
+
+  var CX = 360, CY = 360;
+  var R_HUB = 70;
+  var R1_IN = 76, R1_OUT = 136;
+  var R2_IN = 140, R2_OUT = 200;
+  var R3_IN = 204, R3_OUT = 264;
+  var R_LABEL = 288;
+  var R_DOT = 300;
+  var PAD = 1.6;
+  var STEP = 360 / DATA.length;
+
+  function toRad(deg) { return (deg - 0) * Math.PI / 180; }
+  function polar(cx, cy, r, deg) {
+    var rad = toRad(deg);
+    return { x: cx + r * Math.sin(rad), y: cy - r * Math.cos(rad) };
+  }
+  function annularPath(rIn, rOut, startDeg, endDeg) {
+    var p1 = polar(CX, CY, rOut, startDeg);
+    var p2 = polar(CX, CY, rOut, endDeg);
+    var p3 = polar(CX, CY, rIn, endDeg);
+    var p4 = polar(CX, CY, rIn, startDeg);
+    var large = (endDeg - startDeg) > 180 ? 1 : 0;
+    return "M " + p1.x.toFixed(2) + " " + p1.y.toFixed(2) +
+      " A " + rOut + " " + rOut + " 0 " + large + " 1 " + p2.x.toFixed(2) + " " + p2.y.toFixed(2) +
+      " L " + p3.x.toFixed(2) + " " + p3.y.toFixed(2) +
+      " A " + rIn + " " + rIn + " 0 " + large + " 0 " + p4.x.toFixed(2) + " " + p4.y.toFixed(2) + " Z";
+  }
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+  function titled(el, text) {
+    el.appendChild(svgEl("title", {}));
+    el.lastChild.textContent = text;
+    return el;
+  }
+
+  function quarterOf(period) {
+    var m = /T(\d)/.exec(period);
+    return m ? parseInt(m[1], 10) : 1;
+  }
+
+  var root = document.getElementById("wheel-root");
+  var selectionRing = svgEl("path", { class: "selection-ring", d: "" });
+  var currentSelectedThemeId = null;
+
+  function buildSector(theme, i) {
+    var start = i * STEP + PAD;
+    var end = (i + 1) * STEP - PAD;
+    var span = end - start;
+    var mid = (start + end) / 2;
+
+    var g = svgEl("g", {
+      class: "sector", "data-id": theme.id, tabindex: "0", role: "button",
+      "aria-label": theme.label + " — statut " + STATUS_LABEL[theme.status]
+    });
+
+    // Ring 1 — diagnostic
+    var ring1 = svgEl("path", { class: "ring ring-1 status-" + theme.status, d: annularPath(R1_IN, R1_OUT, start, end) });
+    titled(ring1, theme.label + " — " + STATUS_LABEL[theme.status] + " : " + theme.gaps + " besoin(s) identifié(s) sur " + theme.questions.length + " questions");
+    g.appendChild(ring1);
+
+    // Ring 2 — actions
+    var ring2 = svgEl("path", { class: "ring ring-2", d: annularPath(R2_IN, R2_OUT, start, end) });
+    titled(ring2, theme.actions.length + " action(s) moyen terme sur " + theme.label);
+    g.appendChild(ring2);
+
+    var rMid2 = (R2_IN + R2_OUT) / 2;
+    theme.actions.forEach(function (action, ai) {
+      var a = start + ((ai + 0.5) / theme.actions.length) * span;
+      var p = polar(CX, CY, rMid2, a);
+      var dot = svgEl("circle", { class: "action-marker", cx: p.x.toFixed(2), cy: p.y.toFixed(2), r: "5" });
+      titled(dot, action);
+      g.appendChild(dot);
+    });
+
+    // Ring 3 — tasks
+    var ring3 = svgEl("path", { class: "ring ring-3", d: annularPath(R3_IN, R3_OUT, start, end) });
+    titled(ring3, theme.tasks.length + " tâche(s) positionnée(s) dans l'année pour " + theme.label);
+    g.appendChild(ring3);
+
+    for (var q = 1; q <= 3; q++) {
+      var tAngle = start + (q / 4) * span;
+      var t1 = polar(CX, CY, R3_IN, tAngle);
+      var t2 = polar(CX, CY, R3_OUT, tAngle);
+      g.appendChild(svgEl("line", { class: "tick", x1: t1.x.toFixed(2), y1: t1.y.toFixed(2), x2: t2.x.toFixed(2), y2: t2.y.toFixed(2) }));
+    }
+
+    var rMid3 = (R3_IN + R3_OUT) / 2;
+    theme.tasks.forEach(function (task) {
+      var q = quarterOf(task.period);
+      var a = start + ((q - 0.5) / 4) * span;
+      var p = polar(CX, CY, rMid3, a);
+      var dot = svgEl("circle", { class: "task-dot", cx: p.x.toFixed(2), cy: p.y.toFixed(2), r: "4" });
+      titled(dot, task.task + " — " + task.period + " — " + task.responsible);
+      g.appendChild(dot);
+    });
+
+    // Outer label
+    var lp = polar(CX, CY, R_LABEL, mid);
+    var anchor = "middle";
+    if (mid > 12 && mid < 168) anchor = "start";
+    else if (mid > 192 && mid < 348) anchor = "end";
+    var label = svgEl("text", { class: "sector-label", x: lp.x.toFixed(2), y: lp.y.toFixed(2), "text-anchor": anchor, "dominant-baseline": "middle" });
+    label.textContent = theme.code;
+    g.appendChild(label);
+
+    g.addEventListener("click", function () { selectTheme(theme.id); });
+    g.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectTheme(theme.id); }
+    });
+
+    return g;
+  }
+
+  DATA.forEach(function (theme, i) {
+    root.appendChild(buildSector(theme, i));
+  });
+
+  function rebuildSector(theme) {
+    var i = DATA.indexOf(theme);
+    var oldG = document.querySelector('.sector[data-id="' + theme.id + '"]');
+    var newG = buildSector(theme, i);
+    if (oldG && oldG.parentNode) {
+      oldG.parentNode.replaceChild(newG, oldG);
+    } else {
+      root.appendChild(newG);
+    }
+  }
+
+  root.appendChild(selectionRing);
+
+  var hub = svgEl("g", {});
+  hub.appendChild(svgEl("circle", { class: "hub-bg", cx: CX, cy: CY, r: R_HUB }));
+  var hubTitle = svgEl("text", { class: "hub-title", x: CX, y: CY - 4, "text-anchor": "middle" });
+  hubTitle.textContent = "R & C";
+  var hubSub = svgEl("text", { class: "hub-sub", x: CX, y: CY + 16, "text-anchor": "middle" });
+  hubSub.textContent = "12 axes de pilotage";
+  hub.appendChild(hubTitle);
+  hub.appendChild(hubSub);
+  root.appendChild(hub);
+
+  function selectTheme(id) {
+    var theme = DATA.filter(function (t) { return t.id === id; })[0];
+    var i = DATA.indexOf(theme);
+    var start = i * STEP, end = (i + 1) * STEP;
+
+    document.querySelectorAll(".sector").forEach(function (el) {
+      var mid = (i * STEP + STEP / 2);
+      if (el.getAttribute("data-id") === id) {
+        var dx = Math.sin(toRad(mid)) * 9;
+        var dy = -Math.cos(toRad(mid)) * 9;
+        el.style.transform = "translate(" + dx.toFixed(2) + "px," + dy.toFixed(2) + "px)";
+        el.setAttribute("aria-pressed", "true");
+      } else {
+        el.style.transform = "";
+        el.removeAttribute("aria-pressed");
+      }
+    });
+
+    selectionRing.setAttribute("d", annularPath(R_HUB + 2, R3_OUT + 6, start + 0.8, end - 0.8));
+
+    currentSelectedThemeId = id;
+    document.querySelectorAll(".dash-card").forEach(function (el) {
+      el.classList.toggle("is-selected", el.getAttribute("data-id") === id);
+    });
+
+    renderPanel(theme);
+  }
+
+  var ANSWER_ORDER = ["oui", "ok", "en_cours", "preoccupant", "non_besoin", "grave", "tres_grave", "non_pas_besoin", "ne_sait_pas"];
+
+  function renderPanel(theme) {
+    var panel = document.getElementById("panel");
+    var actionsHtml = theme.actions.map(function (a) { return "<li>" + a + "</li>"; }).join("");
+    var tasksHtml = theme.tasks.map(function (t) {
+      return "<tr><td>" + t.task + "</td><td class=\"period\">" + t.period + "</td><td class=\"resp\">" + t.responsible + "</td></tr>";
+    }).join("");
+
+    var total = theme.questions.length;
+    var counts = {};
+    theme.questions.forEach(function (item) { counts[item.a] = (counts[item.a] || 0) + 1; });
+    var barHtml = ANSWER_ORDER.filter(function (k) { return counts[k] > 0; }).map(function (k) {
+      return "<span class=\"seg-" + k + "\" style=\"width:" + ((counts[k] / total) * 100) + "%\"></span>";
+    }).join("");
+    var diagItemsHtml = theme.questions.map(function (item) {
+      var valueHtml = item.value ? "<span class=\"diag-value\">" + item.value + "</span>" : "";
+      return "<li class=\"diag-item\"><span class=\"q\">" + item.q + "</span><span class=\"diag-meta\">" + valueHtml + "<span class=\"diag-pill a-" + item.a + "\">" + ANSWER_LABEL[item.a] + "</span></span></li>";
+    }).join("");
+    var sourceHtml = theme.source ? "<p class=\"diag-source\">" + theme.source + "</p>" : "";
+
+    var ctaHtml = "";
+    if (theme.id === "eco") {
+      var badgeHtml = theme.isUserData
+        ? "<span class=\"data-badge is-user\">Vos données" + (theme.dataDate ? " · " + theme.dataDate : "") + "</span>"
+        : "<span class=\"data-badge is-example\">Données d'exemple</span>";
+      ctaHtml = "<div class=\"theme-form-cta\">" + badgeHtml +
+        "<button type=\"button\" class=\"btn-theme-form\" id=\"btn-open-eco-form\">" + (theme.isUserData ? "Modifier mes données" : "Saisir mes données") + "</button>" +
+      "</div>";
+    } else {
+      var badgeHtml2 = theme.isUserData
+        ? "<span class=\"data-badge is-user\">Vos réponses" + (theme.dataDate ? " · " + theme.dataDate : "") + "</span>"
+        : "<span class=\"data-badge is-example\">Réponses d'exemple</span>";
+      ctaHtml = "<div class=\"theme-form-cta\">" + badgeHtml2 +
+        "<button type=\"button\" class=\"btn-theme-form\" data-quest-theme=\"" + theme.id + "\">" + (theme.isUserData ? "Modifier mes réponses" : "Répondre au questionnaire") + "</button>" +
+      "</div>";
+    }
+
+    var linkToolHtml = "";
+    if (theme.writeTool) {
+      linkToolHtml = "<a class=\"theme-link-cta\" href=\"" + theme.writeTool.url + "\" target=\"_blank\" rel=\"noopener noreferrer\">" +
+        "<span class=\"tlc-icon\">✍️</span>" +
+        "<span class=\"tlc-text\"><span class=\"tlc-label\">" + theme.writeTool.label + "</span><span class=\"tlc-caption\">" + theme.writeTool.caption + "</span></span>" +
+        "<span class=\"tlc-arrow\">↗</span>" +
+      "</a>";
+    }
+
+    panel.innerHTML =
+      "<div class=\"panel-head\">" +
+        "<div><span class=\"panel-code\">" + theme.code + "</span><h2>" + theme.label + "</h2></div>" +
+        "<span class=\"status-pill status-" + theme.status + "\">" + STATUS_LABEL[theme.status] + "</span>" +
+      "</div>" +
+      linkToolHtml +
+      ctaHtml +
+      "<p class=\"section-label\">① Diagnostic — " + total + " questions</p>" +
+      "<div class=\"diag-summary\">" +
+        "<div class=\"diag-bar\">" + barHtml + "</div>" +
+        "<p class=\"diag-caption\"><strong>" + theme.gaps + " besoin" + (theme.gaps > 1 ? "s" : "") + " identifié" + (theme.gaps > 1 ? "s" : "") + "</strong> sur " + total + " questions posées</p>" +
+        sourceHtml +
+      "</div>" +
+      "<ul class=\"diag-list\">" + diagItemsHtml + "</ul>" +
+      "<p class=\"section-label\">② Actions moyen terme</p>" +
+      "<ul class=\"actions\">" + actionsHtml + "</ul>" +
+      "<p class=\"section-label\">③ Tâches de l'année</p>" +
+      "<table class=\"tasks\"><thead><tr><th>Tâche</th><th>Période</th><th>Responsable</th></tr></thead><tbody>" + tasksHtml + "</tbody></table>";
+
+    if (theme.id === "eco") {
+      var openBtn = document.getElementById("btn-open-eco-form");
+      if (openBtn) openBtn.addEventListener("click", openEcoForm);
+    } else {
+      var qBtn = panel.querySelector("[data-quest-theme]");
+      if (qBtn) qBtn.addEventListener("click", function () { openQuestForm(theme.id); });
+    }
+  }
+
+  function renderStats() {
+    var counts = { urgent: 0, watch: 0, good: 0 };
+    DATA.forEach(function (t) { counts[t.status]++; });
+    var order = [
+      { key: "urgent", label: "urgentes" },
+      { key: "watch", label: "en progrès" },
+      { key: "good", label: "maîtrisées" }
+    ];
+    var row = document.getElementById("stat-row");
+    row.innerHTML = order.map(function (o) {
+      return "<div class=\"stat-chip\"><span class=\"dot status-dot status-" + o.key + "\" style=\"width:8px;height:8px;border-radius:50%;background:var(--status-" + o.key + ")\"></span><strong>" + counts[o.key] + "</strong><span class=\"label\">" + o.label + "</span></div>";
+    }).join("");
+  }
+
+  function renderDashboard() {
+    var kanbanRoot = document.getElementById("kanban-root");
+    if (!kanbanRoot) return;
+    var groups = [
+      { key: "urgent", label: "Urgentes" },
+      { key: "watch", label: "En progrès" },
+      { key: "good", label: "Maîtrisées" }
+    ];
+    kanbanRoot.innerHTML = groups.map(function (g) {
+      var themes = DATA.filter(function (t) { return t.status === g.key; });
+      var cardsHtml = themes.map(function (theme) {
+        var total = theme.questions.length;
+        var counts = {};
+        theme.questions.forEach(function (item) { counts[item.a] = (counts[item.a] || 0) + 1; });
+        var barHtml = ANSWER_ORDER.filter(function (k) { return counts[k] > 0; }).map(function (k) {
+          return "<span class=\"seg-" + k + "\" style=\"width:" + ((counts[k] / total) * 100) + "%\"></span>";
+        }).join("");
+        var nextAction = theme.actions && theme.actions[0] ? theme.actions[0] : "";
+        var selectedClass = theme.id === currentSelectedThemeId ? " is-selected" : "";
+        return "<div class=\"dash-card status-" + theme.status + selectedClass + "\" data-id=\"" + theme.id + "\" tabindex=\"0\" role=\"button\" aria-label=\"" + theme.label + "\">" +
+          "<span class=\"dc-code\">" + theme.code + "</span>" +
+          "<p class=\"dc-label\">" + theme.label + "</p>" +
+          "<div class=\"dc-bar\">" + barHtml + "</div>" +
+          "<p class=\"dc-caption\">" + theme.gaps + " besoin" + (theme.gaps > 1 ? "s" : "") + " identifié" + (theme.gaps > 1 ? "s" : "") + " sur " + total + "</p>" +
+          (nextAction ? "<p class=\"dc-next\"><strong>Prochaine action —</strong> " + nextAction + "</p>" : "") +
+        "</div>";
+      }).join("") || "<p class=\"kanban-empty\">Aucune thématique</p>";
+      return "<div class=\"kanban-col\">" +
+        "<div class=\"kanban-col-head\"><span class=\"dot\" style=\"background:var(--status-" + g.key + ")\"></span>" + g.label + "<span class=\"count\">" + themes.length + "</span></div>" +
+        cardsHtml +
+      "</div>";
+    }).join("");
+
+    kanbanRoot.querySelectorAll(".dash-card").forEach(function (card) {
+      card.addEventListener("click", function () { selectTheme(card.getAttribute("data-id")); });
+      card.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectTheme(card.getAttribute("data-id")); }
+      });
+    });
+  }
+
+  // --- Formulaire de saisie ECO ---
+  function ecoFieldRowHtml(f) {
+    return "<div class=\"eco-field-row\"><span class=\"fl\">" + f.label + "</span>" +
+      "<input type=\"number\" step=\"any\" id=\"eco-" + f.key + "-n1\">" +
+      "<input type=\"number\" step=\"any\" id=\"eco-" + f.key + "-n\"></div>";
+  }
+  document.getElementById("eco-bilan-fields").innerHTML = ECO_BILAN_FIELDS.map(ecoFieldRowHtml).join("");
+  document.getElementById("eco-cr-fields").innerHTML = ECO_CR_FIELDS.map(ecoFieldRowHtml).join("");
+
+  var ecoOverlay = document.getElementById("eco-modal-overlay");
+  var ecoForm = document.getElementById("eco-form");
+
+  function openEcoForm() {
+    try {
+      var saved = JSON.parse(localStorage.getItem("toutroule-eco-inputs") || "null");
+      if (saved) {
+        ECO_ALL_FIELDS.forEach(function (f) {
+          ["n1", "n"].forEach(function (ex) {
+            var el = document.getElementById("eco-" + f.key + "-" + ex);
+            if (el && saved[ex] && saved[ex][f.key] !== undefined) el.value = saved[ex][f.key];
+          });
+        });
+      }
+    } catch (e) {}
+    ecoOverlay.hidden = false;
+  }
+  function closeEcoForm() { ecoOverlay.hidden = true; }
+
+  document.getElementById("eco-modal-close").addEventListener("click", closeEcoForm);
+  document.getElementById("eco-modal-cancel").addEventListener("click", closeEcoForm);
+  ecoOverlay.addEventListener("click", function (e) { if (e.target === ecoOverlay) closeEcoForm(); });
+
+  ecoForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var inputs = { n1: {}, n: {} };
+    ECO_ALL_FIELDS.forEach(function (f) {
+      ["n1", "n"].forEach(function (ex) {
+        var el = document.getElementById("eco-" + f.key + "-" + ex);
+        inputs[ex][f.key] = el && el.value !== "" ? parseFloat(el.value) : 0;
+      });
+    });
+
+    var result = computeEcoFromInputs(inputs);
+    var ecoTheme = DATA.filter(function (t) { return t.id === "eco"; })[0];
+    ecoTheme.questions = result.questions;
+    ecoTheme.actions = result.actions;
+    ecoTheme.tasks = result.tasks;
+    ecoTheme.isUserData = true;
+    ecoTheme.dataDate = new Date().toLocaleDateString("fr-FR");
+
+    computeStatus(ecoTheme);
+    rebuildSector(ecoTheme);
+    renderStats();
+    renderDashboard();
+    renderQuestPage();
+    selectTheme("eco");
+
+    try { localStorage.setItem("toutroule-eco-inputs", JSON.stringify(inputs)); } catch (e) {}
+    try { localStorage.setItem("toutroule-eco-meta", JSON.stringify({ dataDate: ecoTheme.dataDate })); } catch (e) {}
+
+    closeEcoForm();
+  });
+
+  // --- Questionnaire générique (thématiques qualitatives) ---
+  var questOverlay = document.getElementById("quest-modal-overlay");
+  var questForm = document.getElementById("quest-form");
+  var currentQuestThemeId = null;
+
+  function openQuestForm(themeId) {
+    var theme = DATA.filter(function (t) { return t.id === themeId; })[0];
+    if (!theme) return;
+    currentQuestThemeId = themeId;
+    document.getElementById("quest-modal-title").textContent = theme.label + " — questionnaire";
+    document.getElementById("quest-modal-source").textContent = theme.source
+      ? "Source des questions : " + theme.source
+      : "Questionnaire illustratif — aucune source méthodologique communiquée pour cette thématique à ce stade.";
+    var fieldsHtml = theme.questions.map(function (q, i) {
+      var optionsHtml = QUAL_ANSWER_OPTIONS.map(function (k) {
+        return "<option value=\"" + k + "\"" + (q.a === k ? " selected" : "") + ">" + ANSWER_LABEL[k] + "</option>";
+      }).join("");
+      return "<div class=\"quest-field-row\"><span class=\"ql\">" + q.q + "</span><select data-idx=\"" + i + "\">" + optionsHtml + "</select></div>";
+    }).join("");
+    document.getElementById("quest-fields").innerHTML = fieldsHtml;
+    questOverlay.hidden = false;
+  }
+  function closeQuestForm() { questOverlay.hidden = true; }
+
+  document.getElementById("quest-modal-close").addEventListener("click", closeQuestForm);
+  document.getElementById("quest-modal-cancel").addEventListener("click", closeQuestForm);
+  questOverlay.addEventListener("click", function (e) { if (e.target === questOverlay) closeQuestForm(); });
+
+  questForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var theme = DATA.filter(function (t) { return t.id === currentQuestThemeId; })[0];
+    if (!theme) return;
+    document.querySelectorAll("#quest-fields select").forEach(function (sel) {
+      var idx = parseInt(sel.getAttribute("data-idx"), 10);
+      theme.questions[idx].a = sel.value;
+    });
+    var result = deriveActionsAndTasks(theme.questions);
+    theme.actions = result.actions;
+    theme.tasks = result.tasks;
+    theme.isUserData = true;
+    theme.dataDate = new Date().toLocaleDateString("fr-FR");
+
+    computeStatus(theme);
+    rebuildSector(theme);
+    renderStats();
+    renderDashboard();
+    renderQuestPage();
+    selectTheme(theme.id);
+
+    try {
+      var answers = theme.questions.map(function (q) { return q.a; });
+      localStorage.setItem("toutroule-quest-" + theme.id, JSON.stringify({ answers: answers, dataDate: theme.dataDate }));
+    } catch (e) {}
+
+    closeQuestForm();
+  });
+
+  // --- Sélecteur de présentation (roue / tableau de bord) ---
+  var wheelView = document.getElementById("wheel-view");
+  var dashboardView = document.getElementById("dashboard-view");
+  var overviewHint = document.getElementById("overview-hint");
+  var viewToggleBtns = document.querySelectorAll(".view-toggle-btn");
+
+  function setView(view) {
+    wheelView.hidden = view !== "wheel";
+    dashboardView.hidden = view !== "dashboard";
+    overviewHint.textContent = view === "wheel"
+      ? "Cliquez un secteur pour ouvrir sa fiche détaillée."
+      : "Cliquez une carte pour ouvrir sa fiche détaillée.";
+    viewToggleBtns.forEach(function (b) {
+      b.classList.toggle("is-active", b.getAttribute("data-view") === view);
+    });
+    try { localStorage.setItem("toutroule-view", view); } catch (e) {}
+  }
+  viewToggleBtns.forEach(function (b) {
+    b.addEventListener("click", function () { setView(b.getAttribute("data-view")); });
+  });
+
+  // --- Sens des thématiques (page « Thématiques » et teasers « Questionnaires ») ---
+  var THEME_MEANING = {
+    ins: { meaning: "Le projet associatif est le socle : pourquoi la structure existe, ce qu'elle vise, comment elle s'organise pour y arriver. Ce thème vérifie s'il est écrit, connu de tous, construit collectivement, et décliné en plan d'actions — jusqu'au référentiel de parcours d'insertion et au bilan de l'agrément IAE.", sourceTag: "CNAR Sport / CNOSF, Ligue de l'enseignement" },
+    qvt: { meaning: "Baromètre social, absentéisme, prévention des risques psychosociaux : ce thème regarde si la structure prend le pouls de ses équipes avant que les tensions ne deviennent des départs ou des arrêts.", sourceTag: null },
+    eco: { meaning: "Dix indicateurs chiffrés — fonds propres, fonds de roulement, trésorerie, délais de paiement, résultat net — pour objectiver la santé financière plutôt que la deviner. Seule thématique où vous pouvez saisir vos propres chiffres de bilan et de compte de résultat : le diagnostic se recalcule automatiquement.", sourceTag: "DiagFlash — France Active Nouvelle-Aquitaine / INAÉ" },
+    num: { meaning: "Cloud et coédition, outils collaboratifs, antivirus, sauvegardes, RGPD : ce thème couvre à la fois l'efficacité collective et la sécurité numérique, souvent traitées à la légère faute de temps.", sourceTag: "Autodiagnostic Solidatech (2020)" },
+    terr: { meaning: "Indicateurs d'impact suivis, rapport diffusé publiquement, reconnaissance par la CRESS ou un réseau régional : ce thème mesure si l'utilité sociale de la structure est démontrée, ou seulement affirmée.", sourceTag: null },
+    comp: { meaning: "Entretiens professionnels, plan de formation pluriannuel, mobilité interne des encadrants : ce thème anticipe les compétences dont la structure aura besoin, plutôt que de les découvrir au moment d'un départ.", sourceTag: null },
+    gouv: { meaning: "Renouvellement du conseil d'administration, postes du bureau pourvus, quorum en assemblée générale : ce thème regarde si les instances dirigeantes fonctionnent réellement, ou seulement sur le papier.", sourceTag: null },
+    rh: { meaning: "Turnover des encadrants techniques, grille salariale, parcours d'intégration : ce thème couvre les conditions concrètes qui donnent envie de rester — au-delà du seul climat social couvert par la Qualité de vie au travail.", sourceTag: null },
+    env: { meaning: "Bilan carbone, tri des déchets sur les chantiers, critères environnementaux dans les achats : ce thème regarde si la transition écologique reste un principe affiché ou devient une pratique sur le terrain.", sourceTag: null },
+    part: { meaning: "CPOM et diversité des financeurs, cartographie des partenaires, présence dans les instances territoriales (DLA, CRESS) : ce thème mesure la solidité et la diversité du réseau qui soutient la structure.", sourceTag: null },
+    com: { meaning: "Site internet à jour, présence active sur un réseau social, communication interne régulière : ce thème couvre à la fois l'image renvoyée à l'extérieur et l'information qui circule en interne.", sourceTag: null },
+    lab: { meaning: "Adhésion à un réseau représentatif (CRESS, Coorace...), labels qualité à jour (Qualiopi), veille sur d'autres labels (ESUS) : ce thème vérifie que la structure entretient activement sa reconnaissance externe, plutôt que de la laisser expirer.", sourceTag: null }
+  };
+
+  function renderThemesPage() {
+    var grid = document.getElementById("themes-grid");
+    if (!grid) return;
+    grid.innerHTML = DATA.map(function (theme) {
+      var info = THEME_MEANING[theme.id] || { meaning: "", sourceTag: null };
+      var sourceHtml = info.sourceTag
+        ? "<p class=\"tc-source\">Source : <strong>" + info.sourceTag + "</strong></p>"
+        : "<p class=\"tc-source\">Questionnaire construit en interne, à enrichir</p>";
+      return "<div class=\"card theme-card\">" +
+        "<div class=\"tc-head\"><span class=\"tc-code\">" + theme.code + "</span><h3>" + theme.label + "</h3></div>" +
+        "<p>" + info.meaning + "</p>" +
+        sourceHtml +
+      "</div>";
+    }).join("");
+  }
+
+  function renderQuestPage() {
+    var list = document.getElementById("quest-list");
+    if (!list) return;
+    list.innerHTML = DATA.map(function (theme) {
+      var info = THEME_MEANING[theme.id] || { meaning: "" };
+      var teaser = (info.meaning || "").split(". ")[0];
+      if (teaser && !/[.!?]$/.test(teaser)) teaser += ".";
+      return "<button type=\"button\" class=\"quest-row\" data-goto-theme=\"" + theme.id + "\">" +
+        "<span class=\"qr-code\">" + theme.code + "</span>" +
+        "<span class=\"qr-text\"><span class=\"qr-label\">" + theme.label + "</span><span class=\"qr-teaser\">" + teaser + "</span></span>" +
+        "<span class=\"qr-status status-" + theme.status + "\">" + STATUS_LABEL[theme.status] + "</span>" +
+        "<span class=\"qr-arrow\">→</span>" +
+      "</button>";
+    }).join("");
+    list.querySelectorAll("[data-goto-theme]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        selectTheme(btn.getAttribute("data-goto-theme"));
+        setPage("dashboard");
+      });
+    });
+  }
+
+  // --- Navigation entre les 4 pages (Accueil / Thématiques / Questionnaires / Tableau de bord) ---
+  var PAGE_IDS = ["home", "themes", "quest", "dashboard"];
+  var pageViews = {};
+  PAGE_IDS.forEach(function (id) {
+    pageViews[id] = document.querySelector('.page-view[data-page="' + id + '"]');
+  });
+  var topnavTabs = document.querySelectorAll(".topnav-tab");
+
+  function setPage(page) {
+    if (PAGE_IDS.indexOf(page) === -1) page = "home";
+    PAGE_IDS.forEach(function (id) {
+      if (pageViews[id]) pageViews[id].hidden = id !== page;
+    });
+    topnavTabs.forEach(function (b) {
+      b.classList.toggle("is-active", b.getAttribute("data-page") === page);
+    });
+    try { localStorage.setItem("toutroule-page", page); } catch (e) {}
+    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+  }
+  topnavTabs.forEach(function (b) {
+    b.addEventListener("click", function () { setPage(b.getAttribute("data-page")); });
+  });
+  document.querySelectorAll("[data-goto]").forEach(function (b) {
+    b.addEventListener("click", function () { setPage(b.getAttribute("data-goto")); });
+  });
+
+  renderStats();
+  renderDashboard();
+  renderThemesPage();
+  renderQuestPage();
+  selectTheme("eco");
+
+  var savedView = "wheel";
+  try { savedView = localStorage.getItem("toutroule-view") || "wheel"; } catch (e) {}
+  setView(savedView);
+
+  var savedPage = "home";
+  try { savedPage = localStorage.getItem("toutroule-page") || "home"; } catch (e) {}
+  setPage(savedPage);
+
+  // --- Sauvegarde des données : export / import d'un fichier JSON ---
+  var TOUTROULE_PREFIX = "toutroule-";
+  var KNOWN_EXPORT_VERSIONS = [1];
+  var pendingImportPayload = null;
+
+  function slugifyStructureName(str) {
+    return (str || "")
+      .toString()
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  function pad2(n) { return n < 10 ? "0" + n : "" + n; }
+
+  function todayStamp() {
+    var d = new Date();
+    return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate());
+  }
+
+  function formatDateFr(iso) {
+    try {
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return iso || "date inconnue";
+      return d.toLocaleDateString("fr-FR");
+    } catch (e) { return iso || "date inconnue"; }
+  }
+
+  function showToast(message, type) {
+    var wrap = document.getElementById("toast-wrap");
+    if (!wrap) return;
+    var el = document.createElement("div");
+    el.className = "toast" + (type === "success" ? " is-success" : type === "error" ? " is-error" : "");
+    el.setAttribute("role", type === "error" ? "alert" : "status");
+    el.textContent = message;
+    wrap.appendChild(el);
+    setTimeout(function () {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    }, 5000);
+  }
+
+  function collectToutRouleData() {
+    var data = {};
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        if (key && key.indexOf(TOUTROULE_PREFIX) === 0) {
+          data[key] = localStorage.getItem(key);
+        }
+      }
+    } catch (e) {}
+    return data;
+  }
+
+  function downloadJsonFile(filename, obj) {
+    try {
+      var json = JSON.stringify(obj, null, 2);
+      var blob = new Blob([json], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.rel = "noopener";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function performExport(structureName) {
+    var data = collectToutRouleData();
+    var payload = {
+      app: "tout-roule",
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      structure: structureName || "",
+      data: data
+    };
+    var slug = slugifyStructureName(structureName);
+    var filename = (slug ? "tout-roule-" + slug + "-" : "tout-roule-") + todayStamp() + ".json";
+    var ok = downloadJsonFile(filename, payload);
+    if (ok) {
+      showToast("Export réussi — fichier téléchargé : " + filename, "success");
+    } else {
+      showToast("Échec de l'export. Réessayez, ou changez de navigateur.", "error");
+    }
+  }
+
+  var exportOverlay = document.getElementById("export-modal-overlay");
+  var exportForm = document.getElementById("export-form");
+  var exportNameInput = document.getElementById("export-structure-name");
+
+  function openExportModal() {
+    if (exportNameInput) exportNameInput.value = "";
+    exportOverlay.hidden = false;
+    if (exportNameInput) exportNameInput.focus();
+  }
+  function closeExportModal() { exportOverlay.hidden = true; }
+
+  document.getElementById("btn-export-nav").addEventListener("click", openExportModal);
+  document.getElementById("btn-export-dash").addEventListener("click", openExportModal);
+  document.getElementById("export-modal-close").addEventListener("click", closeExportModal);
+  document.getElementById("export-modal-cancel").addEventListener("click", closeExportModal);
+  exportOverlay.addEventListener("click", function (e) { if (e.target === exportOverlay) closeExportModal(); });
+  exportForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    performExport(exportNameInput ? exportNameInput.value.trim() : "");
+    closeExportModal();
+  });
+
+  // --- Import ---
+  function validateImportPayload(parsed) {
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return "Fichier illisible : le contenu n'est pas un objet JSON valide.";
+    }
+    if (parsed.app !== "tout-roule") {
+      return "Ce fichier ne provient pas de Tout Roule.";
+    }
+    if (KNOWN_EXPORT_VERSIONS.indexOf(parsed.version) === -1) {
+      return "Version de fichier non reconnue (" + parsed.version + ").";
+    }
+    if (!parsed.data || typeof parsed.data !== "object" || Array.isArray(parsed.data)) {
+      return "Fichier invalide : les données sont absentes ou mal formées.";
+    }
+    return null;
+  }
+
+  function readFileAsText(file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function () { resolve(reader.result); };
+      reader.onerror = function () { reject(reader.error || new Error("read error")); };
+      reader.readAsText(file);
+    });
+  }
+
+  var importConfirmOverlay = document.getElementById("import-confirm-overlay");
+  var importFileInput = document.getElementById("import-file-input");
+
+  function openImportConfirm(parsed) {
+    var structureLabel = parsed.structure && ("" + parsed.structure).trim() ? ("" + parsed.structure).trim() : "cette structure";
+    var dateLabel = formatDateFr(parsed.exportedAt);
+    document.getElementById("import-confirm-text").textContent =
+      "Remplacer vos données actuelles par celles de " + structureLabel + " exportées le " + dateLabel + " ?";
+    pendingImportPayload = parsed;
+    importConfirmOverlay.hidden = false;
+  }
+  function closeImportConfirm() {
+    importConfirmOverlay.hidden = true;
+    pendingImportPayload = null;
+  }
+
+  function refreshAllViewsAfterImport() {
+    restoreQualAnswersFromStorage();
+    restoreEcoFromStorage();
+    DATA.forEach(function (theme) { computeStatus(theme); rebuildSector(theme); });
+    renderStats();
+    renderDashboard();
+    renderThemesPage();
+    renderQuestPage();
+    if (currentSelectedThemeId) {
+      var current = DATA.filter(function (t) { return t.id === currentSelectedThemeId; })[0];
+      if (current) renderPanel(current);
+    }
+    var v = "wheel";
+    try { v = localStorage.getItem("toutroule-view") || "wheel"; } catch (e) {}
+    setView(v);
+    var p = "home";
+    try { p = localStorage.getItem("toutroule-page") || "home"; } catch (e) {}
+    setPage(p);
+  }
+
+  function applyPendingImport() {
+    if (!pendingImportPayload) return;
+    var data = pendingImportPayload.data;
+    var applied = 0;
+    try {
+      Object.keys(data).forEach(function (key) {
+        if (key.indexOf(TOUTROULE_PREFIX) === 0) {
+          localStorage.setItem(key, data[key]);
+          applied++;
+        }
+      });
+    } catch (e) {
+      closeImportConfirm();
+      showToast("Échec de l'import : le stockage local est inaccessible sur ce navigateur.", "error");
+      return;
+    }
+    closeImportConfirm();
+    refreshAllViewsAfterImport();
+    showToast("Import réussi — " + applied + " élément(s) restauré(s).", "success");
+  }
+
+  function handleImportFile(file) {
+    if (!file) return;
+    readFileAsText(file).then(function (text) {
+      var parsed;
+      try {
+        parsed = JSON.parse(text);
+      } catch (e) {
+        showToast("Fichier invalide : ce n'est pas un JSON lisible.", "error");
+        return;
+      }
+      var err = validateImportPayload(parsed);
+      if (err) {
+        showToast(err, "error");
+        return;
+      }
+      openImportConfirm(parsed);
+    }).catch(function () {
+      showToast("Impossible de lire ce fichier.", "error");
+    });
+  }
+
+  function triggerImportPicker() { importFileInput.click(); }
+
+  document.getElementById("btn-import-nav").addEventListener("click", triggerImportPicker);
+  document.getElementById("btn-import-dash").addEventListener("click", triggerImportPicker);
+  importFileInput.addEventListener("change", function () {
+    var file = importFileInput.files && importFileInput.files[0];
+    handleImportFile(file);
+    importFileInput.value = "";
+  });
+  document.getElementById("import-confirm-close").addEventListener("click", closeImportConfirm);
+  document.getElementById("import-confirm-cancel").addEventListener("click", closeImportConfirm);
+  document.getElementById("import-confirm-apply").addEventListener("click", applyPendingImport);
+  importConfirmOverlay.addEventListener("click", function (e) { if (e.target === importConfirmOverlay) closeImportConfirm(); });
+})();
+</script>
