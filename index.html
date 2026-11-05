@@ -1,74 +1,97 @@
 <title>Tout Roule</title>
 <style>
   :root {
-    --paper: #faf9f6;
+    --paper: #f3faf6;
     --paper-raised: #ffffff;
-    --ink: #23303c;
-    --ink-soft: #58656e;
-    --ink-faint: #838f96;
-    --line: #e2e4de;
-    --line-strong: #c7ccc0;
-    --petrol: #283c50;
-    --petrol-soft: rgba(40, 60, 80, 0.14);
-    --petrol-faint: rgba(40, 60, 80, 0.07);
-    --accent: #b4643c;
-    --accent-soft: rgba(180, 100, 60, 0.14);
-    --status-good: #4f8063;
-    --status-good-soft: rgba(79, 128, 99, 0.16);
-    --status-watch: #b8862f;
-    --status-watch-soft: rgba(184, 134, 47, 0.17);
-    --status-urgent: #a83232;
-    --status-urgent-soft: rgba(168, 50, 50, 0.15);
-    --shadow: 0 1px 2px rgba(35, 48, 60, 0.06), 0 8px 24px -12px rgba(35, 48, 60, 0.18);
-    --font-display: 'Poppins', 'Segoe UI', Arial, sans-serif;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-mono: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --ink: #1b2a38;
+    --ink-soft: #3b4d5e;
+    --ink-faint: #66798a;
+    --line: #cfe5d9;
+    --line-strong: #aac8b8;
+    --petrol: #1b2a38;
+    --petrol-soft: rgba(27, 42, 56, 0.13);
+    --petrol-faint: rgba(27, 42, 56, 0.06);
+    --accent: #b04e26;
+    --accent-soft: rgba(227, 120, 74, 0.16);
+    --terra: #e3784a;
+    --on-terra: #1b2a38;
+    --sage: #5db58a;
+    --sage-d: #2e7350;
+    --menthe: #8ccba8;
+    --mint: #eaf6ef;
+    --hero-bg: #1b2a38;
+    --status-good: #2e7350;
+    --status-good-soft: rgba(93, 181, 138, 0.2);
+    --status-watch: #a56f0f;
+    --status-watch-soft: rgba(201, 150, 46, 0.2);
+    --status-urgent: #b83a2e;
+    --status-urgent-soft: rgba(184, 58, 46, 0.14);
+    --p1: #1b2a38; --p1d: #1b2a38;
+    --p2: #e3784a; --p2d: #b04e26;
+    --p3: #5db58a; --p3d: #2e7350;
+    --p4: #6f93ad; --p4d: #3f6280;
+    --shadow: 0 1px 2px rgba(27, 42, 56, 0.05), 0 10px 28px -14px rgba(27, 42, 56, 0.22);
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body: 'Carlito', Calibri, 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-mono: 'Carlito', Calibri, 'Segoe UI', system-ui, -apple-system, sans-serif;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --paper: #16212b;
-      --paper-raised: #1c2936;
-      --ink: #e9edf0;
-      --ink-soft: #b7c2c9;
-      --ink-faint: #8695a0;
-      --line: #2c3b48;
-      --line-strong: #3e5063;
-      --petrol: #8fb3d1;
-      --petrol-soft: rgba(143, 179, 209, 0.22);
-      --petrol-faint: rgba(143, 179, 209, 0.10);
-      --accent: #e2915f;
-      --accent-soft: rgba(226, 145, 95, 0.18);
-      --status-good: #86bb9a;
-      --status-good-soft: rgba(134, 187, 154, 0.18);
-      --status-watch: #dbae55;
-      --status-watch-soft: rgba(219, 174, 85, 0.18);
-      --status-urgent: #dd8a8a;
-      --status-urgent-soft: rgba(221, 138, 138, 0.18);
-      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+      --paper: #0f1a24;
+      --paper-raised: #1a2937;
+      --ink: #eaf3ee;
+      --ink-soft: #c3d3ca;
+      --ink-faint: #93a89c;
+      --line: #2c4052;
+      --line-strong: #3f586f;
+      --petrol: #8ccba8;
+      --petrol-soft: rgba(140, 203, 168, 0.22);
+      --petrol-faint: rgba(140, 203, 168, 0.09);
+      --accent: #ee9a72;
+      --accent-soft: rgba(238, 154, 114, 0.18);
+      --mint: #17303a;
+      --hero-bg: #0b141c;
+      --status-good: #7fd1a3;
+      --status-good-soft: rgba(127, 209, 163, 0.18);
+      --status-watch: #e0b657;
+      --status-watch-soft: rgba(224, 182, 87, 0.18);
+      --status-urgent: #ee8c82;
+      --status-urgent-soft: rgba(238, 140, 130, 0.18);
+      --p1: #9db7cf; --p1d: #bcd0e2;
+      --p2: #ee9a72; --p2d: #f2b394;
+      --p3: #7fd1a3; --p3d: #9be0b9;
+      --p4: #8fb1c9; --p4d: #b3cde0;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px -14px rgba(0, 0, 0, 0.55);
     }
   }
 
   :root[data-theme="dark"] {
-    --paper: #16212b;
-    --paper-raised: #1c2936;
-    --ink: #e9edf0;
-    --ink-soft: #b7c2c9;
-    --ink-faint: #8695a0;
-    --line: #2c3b48;
-    --line-strong: #3e5063;
-    --petrol: #8fb3d1;
-    --petrol-soft: rgba(143, 179, 209, 0.22);
-    --petrol-faint: rgba(143, 179, 209, 0.10);
-    --accent: #e2915f;
-    --accent-soft: rgba(226, 145, 95, 0.18);
-    --status-good: #86bb9a;
-    --status-good-soft: rgba(134, 187, 154, 0.18);
-    --status-watch: #dbae55;
-    --status-watch-soft: rgba(219, 174, 85, 0.18);
-    --status-urgent: #dd8a8a;
-    --status-urgent-soft: rgba(221, 138, 138, 0.18);
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+    --paper: #0f1a24;
+    --paper-raised: #1a2937;
+    --ink: #eaf3ee;
+    --ink-soft: #c3d3ca;
+    --ink-faint: #93a89c;
+    --line: #2c4052;
+    --line-strong: #3f586f;
+    --petrol: #8ccba8;
+    --petrol-soft: rgba(140, 203, 168, 0.22);
+    --petrol-faint: rgba(140, 203, 168, 0.09);
+    --accent: #ee9a72;
+    --accent-soft: rgba(238, 154, 114, 0.18);
+    --mint: #17303a;
+    --hero-bg: #0b141c;
+    --status-good: #7fd1a3;
+    --status-good-soft: rgba(127, 209, 163, 0.18);
+    --status-watch: #e0b657;
+    --status-watch-soft: rgba(224, 182, 87, 0.18);
+    --status-urgent: #ee8c82;
+    --status-urgent-soft: rgba(238, 140, 130, 0.18);
+    --p1: #9db7cf; --p1d: #bcd0e2;
+    --p2: #ee9a72; --p2d: #f2b394;
+    --p3: #7fd1a3; --p3d: #9be0b9;
+    --p4: #8fb1c9; --p4d: #b3cde0;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px -14px rgba(0, 0, 0, 0.55);
   }
 
   * { box-sizing: border-box; }
@@ -1192,7 +1215,37 @@
   .exec-head h2 { margin: 0 0 0.3rem; }
   .exec-head p { margin: 0; font-size: 0.85rem; color: var(--ink-soft); line-height: 1.5; max-width: 62ch; }
   .exec-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .exec-actions .data-btn.is-primary { background: var(--petrol); color: #fff; border-color: var(--petrol); }
+  .exec-actions .data-btn.is-primary, .tp-actions .data-btn.is-primary { background: var(--petrol); color: #fff; border-color: var(--petrol); }
+  .tp-card { padding: 1.4rem 1.5rem; margin-bottom: 2rem; }
+  .tp-opts { display: flex; gap: 1.2rem; align-items: flex-end; flex-wrap: wrap; margin-bottom: 1.2rem; }
+  .tp-f { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
+  .tp-lab { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.03em; color: var(--ink-soft); }
+  .tp-card input[type="text"], .tp-card input[type="email"], .tp-card select { font: inherit; font-size: 0.88rem; padding: 0.5rem 0.65rem; border: 1px solid var(--line); border-radius: 8px; background: var(--paper-raised); color: var(--ink); min-width: 0; width: 100%; }
+  .tp-card input:focus-visible, .tp-card select:focus-visible, .tp-card summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .tp-year select { width: 7rem; }
+  .tp-check { display: flex; gap: 0.5rem; align-items: center; font-size: 0.86rem; color: var(--ink-soft); }
+  .tp-h { font-size: 1rem; margin: 0 0 0.3rem; }
+  .tp-hint, .tp-empty { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.5; margin: 0 0 0.9rem; max-width: 70ch; }
+  .tp-team { display: flex; flex-direction: column; border-top: 1px solid var(--line); margin-bottom: 1rem; }
+  .tp-row { display: grid; grid-template-columns: minmax(10rem, 1.1fr) 1.2fr 1.4fr; gap: 0.8rem; align-items: end; padding: 0.7rem 0; border-bottom: 1px solid var(--line); }
+  .tp-role { display: flex; flex-direction: column; gap: 0.1rem; font-size: 0.9rem; font-weight: 600; color: var(--ink); overflow-wrap: anywhere; }
+  .tp-role small { font-weight: 400; font-size: 0.76rem; color: var(--ink-faint); }
+  .tp-more { border-bottom: 1px solid var(--line); }
+  .tp-more > summary { cursor: pointer; padding: 0.7rem 0; font-size: 0.86rem; font-weight: 600; color: var(--ink); }
+  .tp-more .tp-row:last-child { border-bottom: 0; }
+  .tp-sum { font-size: 0.86rem; color: var(--ink-soft); margin: 0 0 0.8rem; }
+  .tp-sum strong { color: var(--ink); }
+  .tp-warn { color: var(--accent); font-weight: 600; }
+  .tp-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .tp-actions .data-btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+  .tp-msg { min-height: 1.3em; font-size: 0.84rem; color: var(--status-good); margin: 0.7rem 0 0; }
+  .tp-how, .tp-prev { margin-top: 0.8rem; font-size: 0.85rem; color: var(--ink-soft); }
+  .tp-how summary, .tp-prev summary { cursor: pointer; font-weight: 600; color: var(--ink); }
+  .tp-how ul { margin: 0.7rem 0; padding-left: 1.1rem; line-height: 1.55; max-width: 75ch; }
+  .tp-how li { margin-bottom: 0.45rem; }
+  .tp-fine { font-size: 0.78rem; color: var(--ink-faint); margin: 0; max-width: 75ch; }
+  .tp-prev textarea { width: 100%; margin-top: 0.6rem; font: 0.8rem/1.5 ui-monospace, Menlo, Consolas, monospace; padding: 0.7rem; border: 1px solid var(--line); border-radius: 8px; background: var(--paper-raised); color: var(--ink); resize: vertical; }
+  @media (max-width: 700px) { .tp-card { padding: 1rem; } .tp-row { grid-template-columns: 1fr; gap: 0.5rem; } }
   .exec-scroll { background: var(--line); border-radius: 12px; padding: 14px; overflow-x: auto; }
   #exec-print-root { display: none; }
 
@@ -1250,6 +1303,257 @@
     body.printing-exec .xs { width: 100%; max-width: none; box-shadow: none; font-size: 7.55pt; padding: 0; }
     body.printing-exec .xs, body.printing-exec .xs * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
+
+  /* =====================================================================
+     Charte V3 — alignée sur activ-ess.fr (Fraunces + Carlito, navy / sauge / menthe / orange)
+     ===================================================================== */
+  html { font-size: 106.25%; }
+  body { overflow-x: clip; line-height: 1.55; }
+  h1, h2, h3 { font-family: var(--font-display); color: var(--ink); }
+  a { text-underline-offset: 3px; }
+  button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  .ic { width: 1.15em; height: 1.15em; flex: none; vertical-align: -0.2em; }
+  .ti { display: inline-flex; flex: none; }
+  .ti .ic { width: 1.05rem; height: 1.05rem; vertical-align: 0; }
+
+  /* Titrage */
+  h1 { font-weight: 900; letter-spacing: -0.02em; line-height: 1.08; }
+  .tagline { font-family: var(--font-display); font-style: italic; font-weight: 600; color: var(--accent); }
+  .tagline .em { font-family: var(--font-display); font-weight: 900; font-style: normal; }
+  .eyebrow { font-family: var(--font-body); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.16em; color: var(--accent); }
+  .eyebrow::before { width: 1.6rem; height: 3px; border-radius: 3px; background: var(--terra); }
+  .lede { color: var(--ink-soft); font-size: 1.06rem; }
+
+  /* Navigation */
+  .topnav { background: color-mix(in srgb, var(--paper-raised) 94%, transparent); border-bottom: 1px solid var(--line); box-shadow: 0 1px 0 rgba(27,42,56,0.03); }
+  .brand-mark .bm-title { font-family: var(--font-display); font-weight: 900; font-size: 1.2rem; letter-spacing: -0.015em; color: var(--ink); }
+  .brand-mark .bm-sub { font-weight: 700; letter-spacing: 0.1em; }
+  .brand-mark .bm-sub strong { color: var(--accent); }
+  .topnav-tabs { background: var(--mint); border-color: var(--line); }
+  .topnav-tab { display: inline-flex; align-items: center; gap: 0.42rem; font-size: 0.9rem; font-weight: 700; color: var(--ink-soft); transition: background 0.18s ease, color 0.18s ease; }
+  .topnav-tab:hover { background: color-mix(in srgb, var(--paper-raised) 80%, transparent); color: var(--ink); }
+  .topnav-tab.is-active { background: var(--petrol); color: var(--paper-raised); box-shadow: 0 2px 8px -2px rgba(27,42,56,0.4); }
+  .data-btn { font-weight: 700; font-size: 0.86rem; display: inline-flex; align-items: center; gap: 0.45rem; transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease; }
+  .data-btn:hover { border-color: var(--terra); background: var(--accent-soft); }
+  .exec-actions .data-btn.is-primary, .tp-actions .data-btn.is-primary { background: var(--terra); color: var(--on-terra); border-color: var(--terra); }
+  .exec-actions .data-btn.is-primary:hover, .tp-actions .data-btn.is-primary:hover { background: #f08a5d; }
+  @media (max-width: 720px) { .topnav-tab .tl { display: none; } .topnav-tab.is-active .tl { display: inline; } .topnav-tab { padding: 0.5rem 0.8rem; } }
+
+  /* Boutons d'appel */
+  .hero-cta { font-weight: 700; font-size: 0.95rem; border-radius: 10px; border: 2px solid var(--line-strong); padding: 0.72rem 1.2rem; transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease; }
+  .hero-cta:hover { border-color: var(--terra); }
+  .hero-cta.is-primary { background: var(--terra); border-color: var(--terra); color: var(--on-terra); }
+  .hero-cta.is-primary:hover { background: #f08a5d; border-color: #f08a5d; filter: none; }
+  .hero-cta .ic { width: 1.1rem; height: 1.1rem; vertical-align: 0; }
+  .btn-primary { background: var(--terra); color: var(--on-terra); }
+  .btn-primary:hover { background: #f08a5d; }
+
+  /* Hero d'accueil : bandeau marine, panneau orange, roue animée */
+  .hero-band { position: relative; margin-inline: calc(50% - 50vw); margin-top: -2.25rem; margin-bottom: 2.75rem; background: var(--hero-bg); color: #fff; overflow: hidden; isolation: isolate; }
+  .hero-band::before { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 31%; background: var(--terra); clip-path: path('M120 0 H2400 V2400 H0 C90 1700 40 800 120 0 Z'); z-index: -1; }
+  .hero-in { max-width: 1220px; margin: 0 auto; padding: 2.8rem 1.75rem 3rem; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: 2.5rem; align-items: center; }
+  .hero-band header.head { max-width: none; padding: 0; margin: 0; }
+  .hero-band h1 { color: #fff; font-size: clamp(2.6rem, 5.4vw, 4rem); margin-bottom: 0.7rem; }
+  .hero-band .eyebrow { color: var(--menthe); }
+  .hero-band .eyebrow::before { background: var(--terra); }
+  .hero-band .tagline { color: var(--terra); font-size: 1.5rem; }
+  .hero-band .lede { color: #d5e3db; max-width: 54ch; }
+  .hero-band .example-flag { color: var(--menthe); background: rgba(140,203,168,0.14); border-color: rgba(140,203,168,0.4); font-family: var(--font-body); font-weight: 700; }
+  .hero-band .hero-cta { background: transparent; color: #fff; border-color: rgba(255,255,255,0.7); }
+  .hero-band .hero-cta:hover { background: #fff; color: #1b2a38; border-color: #fff; }
+  .hero-band .hero-cta.is-primary { background: var(--terra); border-color: var(--terra); color: #1b2a38; }
+  .hero-band .hero-cta.is-primary:hover { background: #f08a5d; border-color: #f08a5d; }
+  .hero-art { justify-self: center; width: min(100%, 330px); filter: drop-shadow(0 18px 30px rgba(0,0,0,0.28)); }
+  .hero-art svg { display: block; width: 100%; height: auto; }
+  .hw-hub { filter: drop-shadow(0 2px 6px rgba(0,0,0,0.18)); }
+  .hw-n { font-family: var(--font-display); font-weight: 900; font-size: 40px; fill: #1b2a38; }
+  .hw-t { font-family: var(--font-body); font-weight: 700; font-size: 8.5px; letter-spacing: 0.08em; fill: #3b4d5e; text-transform: uppercase; }
+  @media (max-width: 860px) {
+    .hero-in { grid-template-columns: minmax(0, 1fr); gap: 1.8rem; padding: 2.2rem 1.1rem 2.6rem; }
+    .hero-band::before { width: 100%; top: auto; height: 46%; clip-path: path('M0 70 C300 0 700 40 2400 0 V2400 H0 Z'); }
+    .hero-art { width: 210px; justify-self: center; }
+  }
+  .hero-band .identity-card { background: var(--paper-raised); }
+
+  /* En-têtes des pages internes : bandeau marine + disque orange (comme le site) */
+  .page-view:not([data-page="home"]) header.head { position: relative; overflow: hidden; isolation: isolate; max-width: none; margin: 0 0 1.9rem; padding: 2rem 2rem 1.8rem; background: var(--hero-bg); border-radius: 18px; color: #fff; }
+  .page-view:not([data-page="home"]) header.head::after { content: ""; position: absolute; right: -56px; top: -56px; width: 190px; height: 190px; border-radius: 50%; background: var(--terra); z-index: -1; }
+  .page-view:not([data-page="home"]) header.head h1 { color: #fff; font-size: clamp(1.9rem, 3.6vw, 2.6rem); }
+  .page-view:not([data-page="home"]) header.head .eyebrow { color: var(--menthe); }
+  .page-view:not([data-page="home"]) header.head .lede { color: #d5e3db; max-width: 66ch; }
+  .page-view:not([data-page="home"]) header.head .data-hint { color: #aec1b2; }
+  .page-view:not([data-page="home"]) header.head .example-flag { color: var(--menthe); background: rgba(140,203,168,0.14); border-color: rgba(140,203,168,0.4); font-family: var(--font-body); font-weight: 700; }
+  .page-view[data-page="resources"] header.head { background: var(--mint); color: var(--ink); border: 1px solid var(--line); }
+  .page-view[data-page="resources"] header.head h1 { color: var(--ink); }
+  .page-view[data-page="resources"] header.head .eyebrow { color: var(--accent); }
+  .page-view[data-page="resources"] header.head .lede { color: var(--ink-soft); }
+  .page-view[data-page="resources"] header.head::after { opacity: 0.9; }
+  @media (max-width: 720px) { .page-view:not([data-page="home"]) header.head { padding: 1.5rem 1.15rem; } .page-view:not([data-page="home"]) header.head::after { width: 84px; height: 84px; right: -30px; top: -30px; } }
+
+  /* Cartes */
+  .card { border-radius: 14px; border-color: var(--line); }
+  .how-it-works { gap: 1.2rem; }
+  .hiw-card { position: relative; border-radius: 14px; border-top: 4px solid var(--sage); padding: 1.4rem 1.4rem 1.5rem; }
+  .hiw-card:nth-child(2) { border-top-color: var(--petrol); }
+  .hiw-card:nth-child(3) { border-top-color: var(--terra); }
+  .hiw-card .hiw-ico { width: 46px; height: 46px; border-radius: 12px; background: var(--mint); color: var(--sage-d); display: grid; place-items: center; margin-bottom: 0.9rem; }
+  .hiw-card:nth-child(2) .hiw-ico { color: var(--ink); }
+  .hiw-card:nth-child(3) .hiw-ico { color: var(--accent); background: var(--accent-soft); }
+  .hiw-card .hiw-ico .ic { width: 24px; height: 24px; vertical-align: 0; }
+  .hiw-card .hiw-num { position: absolute; top: 1rem; right: 1.2rem; font-family: var(--font-display); font-weight: 900; font-size: 2rem; color: var(--line); margin: 0; }
+  .hiw-card h4 { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; }
+  .philosophy-block h2, .about-block h2 { font-weight: 700; }
+  .posture-card { background: var(--hero-bg); border-radius: 14px; border: 0; }
+  .posture-item.is-us { background: var(--terra); color: #1b2a38; }
+  .posture-item.is-us .pi-note { color: #1b2a38; }
+  .about-block .ab-eyebrow, .ab-links a { color: var(--accent); }
+  .ab-facts li strong { letter-spacing: 0.1em; font-weight: 700; }
+
+  /* Piliers : pastille d'icône + filet de couleur */
+  [data-pillar="1"] { --pc: var(--p1); --pc-d: var(--p1d); }
+  [data-pillar="2"] { --pc: var(--p2); --pc-d: var(--p2d); }
+  [data-pillar="3"] { --pc: var(--p3); --pc-d: var(--p3d); }
+  [data-pillar="4"] { --pc: var(--p4); --pc-d: var(--p4d); }
+  .pillar-head { align-items: center; gap: 0.95rem; padding-bottom: 0.85rem; margin-bottom: 1rem; border-bottom: 2px solid color-mix(in srgb, var(--pc, var(--line)) 40%, var(--line)); }
+  .pillar-ico { position: relative; flex: none; width: 48px; height: 48px; border-radius: 13px; display: grid; place-items: center; color: var(--pc-d, var(--ink)); background: color-mix(in srgb, var(--pc, var(--sage)) 18%, var(--paper-raised)); }
+  .pillar-ico .ic { width: 26px; height: 26px; vertical-align: 0; }
+  .pillar-n { position: absolute; right: -7px; top: -7px; width: 1.35rem; height: 1.35rem; font-size: 0.74rem; background: var(--pc, var(--petrol)); color: #fff; border: 2px solid var(--paper); }
+  [data-pillar="1"] .pillar-n { background: var(--petrol); color: var(--paper-raised); }
+  .pillar-title { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; letter-spacing: -0.01em; }
+  .pillar-why { font-size: 0.9rem; }
+  .pillar-stat { font-weight: 700; font-size: 0.78rem; letter-spacing: 0.04em; color: var(--ink-faint); }
+
+  /* Thématiques */
+  .theme-card { border-top: 4px solid var(--pc, var(--sage)); transition: transform 0.22s ease, box-shadow 0.22s ease; }
+  .theme-card .tc-head { gap: 0.75rem; }
+  .tc-ico, .qr-ico, .dc-ico { flex: none; display: grid; place-items: center; border-radius: 11px; color: var(--pc-d, var(--ink)); background: color-mix(in srgb, var(--pc, var(--sage)) 16%, var(--paper-raised)); }
+  .tc-ico { width: 42px; height: 42px; }
+  .qr-ico { width: 44px; height: 44px; }
+  .dc-ico { width: 30px; height: 30px; border-radius: 9px; }
+  .tc-ico .ic, .qr-ico .ic { width: 23px; height: 23px; vertical-align: 0; }
+  .dc-ico .ic { width: 17px; height: 17px; vertical-align: 0; }
+  .theme-card .tc-code { background: transparent; color: var(--ink-faint); padding: 0; font-weight: 700; letter-spacing: 0.1em; display: block; font-size: 0.7rem; }
+  .theme-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; line-height: 1.25; }
+  .theme-card .tc-source strong { color: var(--accent); }
+
+  /* Questionnaires */
+  .quest-row { border-radius: 14px; gap: 0.95rem; border-left: 4px solid var(--pc, var(--line)); transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+  .quest-row:hover { border-color: var(--terra); border-left-color: var(--pc, var(--terra)); }
+  .quest-row .qr-code { background: transparent; color: var(--ink-faint); padding: 0; min-width: 2.6rem; font-size: 0.72rem; letter-spacing: 0.1em; }
+  .quest-row .qr-label { font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; }
+  .quest-row .qr-status { display: inline-flex; align-items: center; gap: 0.3rem; font-weight: 700; font-size: 0.76rem; }
+  .quest-row .qr-status .ic, .status-pill .ic { width: 0.95rem; height: 0.95rem; vertical-align: 0; }
+  .quest-row .qr-arrow { display: inline-flex; transition: transform 0.2s ease; }
+  .quest-row .qr-arrow .ic { width: 1.15rem; height: 1.15rem; vertical-align: 0; }
+  .status-pill { display: inline-flex; align-items: center; gap: 0.3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.8rem; }
+  .qr-state { font-weight: 700; }
+  .qr-state.is-done .qr-ic { box-shadow: 0 0 0 4px var(--status-good-soft); }
+  .qr-state.is-todo .qr-ic { color: var(--ink-faint); }
+  .quest-progress { font-weight: 700; }
+  .quest-progress .qp-bar { height: 8px; }
+  .quest-progress .qp-bar i { background: linear-gradient(90deg, var(--menthe), var(--sage)); border-radius: 100px; transform-origin: left center; }
+  @media (max-width: 600px) { .quest-row .qr-code { display: none; } .qr-ico { width: 38px; height: 38px; } }
+
+  /* Tableau de bord */
+  .stat-chip { border-radius: 100px; padding: 0.4rem 0.95rem 0.4rem 0.45rem; align-items: center; gap: 0.55rem; font-family: var(--font-body); }
+  .stat-chip .si { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; }
+  .stat-chip .si .ic { width: 16px; height: 16px; vertical-align: 0; }
+  .stat-chip .si.status-urgent { background: var(--status-urgent-soft); color: var(--status-urgent); }
+  .stat-chip .si.status-watch { background: var(--status-watch-soft); color: var(--status-watch); }
+  .stat-chip .si.status-good { background: var(--status-good-soft); color: var(--status-good); }
+  .stat-chip strong { font-family: var(--font-display); font-weight: 900; font-size: 1.25rem; }
+  .stat-chip span.label { font-weight: 700; }
+  .page-view[data-page="dashboard"] header.head .stat-chip { background: var(--paper-raised); color: var(--ink); border-color: transparent; }
+  .dash-card { border-radius: 12px; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+  .dash-card .dc-top { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; }
+  .dash-card .dc-code { margin: 0; font-weight: 700; letter-spacing: 0.1em; flex: 1; display: flex; justify-content: space-between; gap: 0.5rem; align-items: center; }
+  .dash-card .dc-label { font-family: var(--font-display); font-weight: 700; font-size: 0.98rem; }
+  .dash-card .dc-bar { height: 8px; border-radius: 100px; overflow: hidden; }
+  .dash-card .dc-bar span { transform-origin: left center; }
+  .dash-card .dc-rank { font-weight: 700; color: var(--accent); }
+  .dash-card.is-selected { outline-color: var(--terra); }
+  .kanban-col-head { font-family: var(--font-body); font-weight: 700; }
+  .kanban-col-head .dot { display: none; }
+  .kanban-col-head .kc-ic { display: inline-flex; }
+  .kanban-col-head .kc-ic .ic { width: 1.1rem; height: 1.1rem; vertical-align: 0; }
+  .view-toggle-btn, .group-btn { font-weight: 700; }
+  .view-toggle-btn.is-active, .group-btn.is-active { background: var(--petrol); color: var(--paper-raised); }
+
+  /* Roue */
+  .ring-2 { fill: var(--petrol-soft); }
+  .ring-3 { fill: var(--petrol-faint); }
+  .sector-label { font-family: var(--font-body); font-weight: 700; font-size: 14px; }
+  .hub-title { font-family: var(--font-display); font-weight: 900; }
+  .selection-ring { stroke: var(--terra); }
+  .action-marker { fill: var(--terra); }
+
+  /* Fiche, résumé, plan d'équipe */
+  .panel-head h2 { font-family: var(--font-display); font-weight: 700; }
+  .exec-card, .tp-card { border-top: 4px solid var(--terra); }
+  .tp-card { border-top-color: var(--sage); }
+  .exec-head h2, .tp-card h2 { font-weight: 700; }
+  .tp-actions .data-btn .ic { width: 1.05rem; height: 1.05rem; vertical-align: 0; }
+  .res-warn { border-radius: 12px; }
+
+  /* Fenêtres modales */
+  .modal-overlay { background: rgba(15, 26, 36, 0.62); }
+  .modal-card { border-radius: 16px; border-top: 4px solid var(--terra); }
+  .modal-head h3 { font-family: var(--font-display); font-weight: 700; }
+
+  /* Pied de page : bandeau marine comme sur le site */
+  .site-footer { max-width: none; margin: 3.5rem 0 0; padding: 0; background: var(--hero-bg); color: #d6e4dc; border: 0; text-align: left; }
+  .site-footer .sf-in { max-width: 1220px; margin: 0 auto; padding: 2.4rem 1.75rem 1.4rem; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+  .site-footer .sf-brand { font-family: var(--font-display); font-weight: 900; font-size: 1.5rem; letter-spacing: -0.015em; color: #fff; }
+  .site-footer .sf-brand span { color: var(--terra); }
+  .site-footer .sf-tag { font-weight: 700; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--menthe); margin-top: 0.3rem; }
+  .site-footer .sf-pitch { margin: 0.9rem 0 0; max-width: 40ch; font-size: 0.95rem; color: #b9cfc4; }
+  .site-footer .sf-links { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; font-size: 0.98rem; }
+  .site-footer a { color: #d6e4dc; font-weight: 600; text-decoration: none; }
+  .site-footer a:hover { color: #fff; text-decoration: underline; }
+  .site-footer .sf-bottom { border-top: 1px solid #2c3e50; }
+  .site-footer .sf-bottom p { max-width: 1220px; margin: 0 auto; padding: 1rem 1.75rem 1.4rem; font-size: 0.85rem; color: #aec1b2; }
+  .site-footer .sf-bottom a { color: var(--menthe); }
+  @media (max-width: 720px) { .site-footer .sf-in { grid-template-columns: minmax(0, 1fr); padding: 1.9rem 1.1rem 1rem; } .site-footer .sf-bottom p { padding: 0.9rem 1.1rem 1.4rem; } }
+
+  /* Impression du résumé exécutif : mêmes polices et couleurs que la charte */
+  .xs { --xs-petrol: #1b2a38; --xs-sage: #5db58a; --xs-terra: #b04e26; --xs-good: #2e7350; font-family: var(--font-body); }
+  .xs-code, .xs-pn, .xs-pillar strong, .xs-sec { font-family: var(--font-display); }
+
+  /* ---------- Animations (sobres, coupées si l'appareil demande moins de mouvement) ---------- */
+  @keyframes toutFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes toutReveal { from { opacity: 0; translate: 0 16px; } to { opacity: 1; translate: 0 0; } }
+  @keyframes toutGrowX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes toutDraw { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+  @keyframes toutPop { 0% { transform: scale(0.4); opacity: 0; } 70% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+  @keyframes toutSeg { from { transform: scale(0.55); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  @keyframes toutWheelIn { from { opacity: 0; transform: scale(0.9) rotate(-8deg); } to { opacity: 1; transform: none; } }
+  @keyframes toutModal { from { opacity: 0; transform: translateY(14px) scale(0.98); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .page-view:not([hidden]) { animation: toutFade 0.32s ease-out both; }
+    .modal-overlay:not([hidden]) .modal-card { animation: toutModal 0.24s ease-out both; }
+    .hw-seg, .hw-dot { transform-box: fill-box; transform-origin: 50% 50%; animation: toutSeg 0.55s cubic-bezier(.34,1.4,.64,1) both; animation-delay: calc(var(--i) * 55ms + 120ms); }
+    .hw-hub, .hw-n, .hw-t { transform-box: fill-box; transform-origin: 50% 50%; animation: toutPop 0.5s cubic-bezier(.34,1.56,.64,1) both; animation-delay: 0.9s; }
+    .qp-bar i, .dash-card .dc-bar span { animation: toutGrowX 0.9s cubic-bezier(.4,0,.2,1) both; animation-delay: 0.15s; }
+    .qr-state.is-done .qr-ic path { stroke-dasharray: 24; animation: toutDraw 0.5s ease-out 0.15s both; }
+    .qr-state.is-done .qr-ic { animation: toutPop 0.45s cubic-bezier(.34,1.56,.64,1) both; }
+    #wheel-root .sector.sector-in { transform-box: view-box; transform-origin: 360px 360px; animation: toutWheelIn 0.6s cubic-bezier(.4,0,.2,1) both; animation-delay: calc(var(--i) * 60ms); }
+    .btn-primary:hover, .hero-cta:hover, .data-btn:hover, .view-toggle-btn:hover, .group-btn:hover { transform: translateY(-1px); }
+    .pillar-ico { transition: transform 0.25s ease; }
+    .pillar-head:hover .pillar-ico { transform: rotate(-6deg) scale(1.05); }
+    .quest-row:hover .qr-arrow { transform: translateX(4px); }
+    .topnav-tab .ti { transition: transform 0.2s ease; }
+    .topnav-tab:hover .ti { transform: translateY(-1px) scale(1.08); }
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .theme-card:hover, .dash-card:hover, .hiw-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -14px rgba(27,42,56,0.3); }
+    .quest-row:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -14px rgba(27,42,56,0.28); }
+    .hiw-card, .dash-card { transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.2s ease; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .theme-card, .quest-row, .pillar-head, .hiw-card, .about-block, .philosophy-block { animation: toutReveal linear both; animation-timeline: view(); animation-range: entry 0% entry 80%; }
+    }
+  }
 </style>
 
 <nav class="topnav">
@@ -1261,22 +1565,24 @@
     </span>
   </div>
   <div class="topnav-tabs" role="group" aria-label="Navigation de l'outil">
-    <button type="button" class="topnav-tab" data-page="home">Accueil</button>
-    <button type="button" class="topnav-tab" data-page="themes">Thématiques</button>
-    <button type="button" class="topnav-tab" data-page="quest">Questionnaires</button>
-    <button type="button" class="topnav-tab" data-page="dashboard">Tableau de bord</button>
-    <button type="button" class="topnav-tab" data-page="resources">Ressources</button>
+    <button type="button" class="topnav-tab" data-page="home"><span class="ti" data-ic="home"></span><span class="tl">Accueil</span></button>
+    <button type="button" class="topnav-tab" data-page="themes"><span class="ti" data-ic="grid"></span><span class="tl">Thématiques</span></button>
+    <button type="button" class="topnav-tab" data-page="quest"><span class="ti" data-ic="clipboard"></span><span class="tl">Questionnaires</span></button>
+    <button type="button" class="topnav-tab" data-page="dashboard"><span class="ti" data-ic="gauge"></span><span class="tl">Tableau de bord</span></button>
+    <button type="button" class="topnav-tab" data-page="resources"><span class="ti" data-ic="book"></span><span class="tl">Ressources</span></button>
   </div>
   <div class="data-actions" role="group" aria-label="Sauvegarde des données">
-    <button type="button" class="data-btn" id="btn-export-nav">⬇ Exporter</button>
-    <button type="button" class="data-btn" id="btn-import-nav">⬆ Importer</button>
+    <button type="button" class="data-btn" id="btn-export-nav"><span class="ti" data-ic="download"></span>Exporter</button>
+    <button type="button" class="data-btn" id="btn-import-nav"><span class="ti" data-ic="upload"></span>Importer</button>
   </div>
 </nav>
 
 <div class="page">
 
   <section class="page-view" data-page="home">
-    <header class="head">
+    <div class="hero-band">
+      <div class="hero-in">
+    <header class="head hero-copy">
       <p class="eyebrow">ActivESS Conseil · Outil de pilotage ESS/IAE</p>
       <h1>Tout Roule</h1>
       <p class="tagline">Pilotez l'<span class="em">ESS</span>entiel, gardez le cap.</p>
@@ -1284,25 +1590,28 @@
       <span class="example-flag">Exemple illustratif — « Racines &amp; Chemins », chantier d'insertion fictif</span>
       <div data-identity-slot="home"></div>
       <div class="hero-cta-row">
-        <button type="button" class="hero-cta" data-goto="themes">Découvrir les 13 thématiques</button>
-        <button type="button" class="hero-cta" data-goto="quest">Répondre aux questionnaires</button>
-        <button type="button" class="hero-cta is-primary" data-goto="dashboard">Ouvrir le tableau de bord →</button>
+        <button type="button" class="hero-cta" data-goto="themes"><span class="ti" data-ic="grid"></span>Découvrir les 13 thématiques</button>
+        <button type="button" class="hero-cta" data-goto="quest"><span class="ti" data-ic="clipboard"></span>Répondre aux questionnaires</button>
+        <button type="button" class="hero-cta is-primary" data-goto="dashboard">Ouvrir le tableau de bord<span class="ti" data-ic="arrow"></span></button>
       </div>
     </header>
+        <div class="hero-art" id="hero-art"></div>
+      </div>
+    </div>
 
     <div class="how-it-works">
       <div class="hiw-card">
-        <span class="hiw-num">01</span>
+        <span class="hiw-ico" data-ic="search"></span><span class="hiw-num">01</span>
         <h4>Diagnostiquer</h4>
         <p>Treize thématiques, chacune avec son questionnaire ou ses indicateurs chiffrés. Vous répondez, l'outil situe chaque axe sur une échelle d'alerte — sans jugement, juste un état des lieux.</p>
       </div>
       <div class="hiw-card">
-        <span class="hiw-num">02</span>
+        <span class="hiw-ico" data-ic="flag"></span><span class="hiw-num">02</span>
         <h4>Prioriser</h4>
         <p>Chaque réponse à risque déclenche une action à moyen terme, elle-même déclinée en tâches datées avec un responsable. Rien ne se perd entre le constat et le plan d'action.</p>
       </div>
       <div class="hiw-card">
-        <span class="hiw-num">03</span>
+        <span class="hiw-ico" data-ic="gauge"></span><span class="hiw-num">03</span>
         <h4>Piloter</h4>
         <p>Vue en roue ou en tableau de bord, au choix. Le thème « Projet associatif » ouvre directement l'outil de rédaction guidée pour passer du diagnostic à l'écrit.</p>
       </div>
@@ -1411,8 +1720,8 @@
       <div data-identity-slot="dash"></div>
       <div class="stat-row" id="stat-row"></div>
       <div class="data-actions" role="group" aria-label="Sauvegarde des données">
-        <button type="button" class="data-btn" id="btn-export-dash">⬇ Exporter mes données</button>
-        <button type="button" class="data-btn" id="btn-import-dash">⬆ Importer un fichier</button>
+        <button type="button" class="data-btn" id="btn-export-dash"><span class="ti" data-ic="download"></span>Exporter mes données</button>
+        <button type="button" class="data-btn" id="btn-import-dash"><span class="ti" data-ic="upload"></span>Importer un fichier</button>
       </div>
       <p class="data-hint">Vos réponses sont enregistrées uniquement sur ce navigateur. Exportez-les régulièrement et rangez le fichier dans le dossier partagé de votre structure.</p>
     </header>
@@ -1424,10 +1733,20 @@
           <p>Une page A4 pour le conseil d'administration ou le comité de direction : la démarche, le niveau d'avancement de chaque thématique, les travaux à mener et pourquoi. Elle se recalcule à chaque modification de vos réponses.</p>
         </div>
         <div class="exec-actions">
-          <button type="button" class="data-btn is-primary" id="btn-exec-print">Imprimer / enregistrer en PDF (A4)</button>
+          <button type="button" class="data-btn is-primary" id="btn-exec-print"><span class="ti" data-ic="printer"></span>Imprimer / enregistrer en PDF (A4)</button>
         </div>
       </div>
       <div class="exec-scroll"><div id="exec-sheet-inline"></div></div>
+    </section>
+
+    <section class="card tp-card" id="tp-card" aria-labelledby="tp-title">
+      <div class="exec-head">
+        <div>
+          <h2 id="tp-title">Plan d'action partagé : répartir les tâches</h2>
+          <p>Transforme les tâches des thématiques en fichier de suivi, réparties par référent : Excel pour l'équipe, CSV pour une liste Slack ou Microsoft Lists, ou un récapitulatif à coller dans Teams ou Slack.</p>
+        </div>
+      </div>
+      <div id="tp-root"></div>
     </section>
 
     <div class="layout">
@@ -1483,7 +1802,19 @@
 </div>
 
 <footer class="site-footer">
-  <p>Cet outil a été conçu et élaboré avec l'aide du Chantier d'Insertion <a href="https://www.agerad.fr/" target="_blank" rel="noopener noreferrer">AGERAD</a>.</p>
+  <div class="sf-in">
+    <div>
+      <div class="sf-brand">ActiV<span>ESS</span> Conseil</div>
+      <div class="sf-tag">Conseil&nbsp;·&nbsp;Formation&nbsp;·&nbsp;Coaching</div>
+      <p class="sf-pitch">Tout Roule : l'outil de pilotage des structures de l'ESS et de l'IAE qui gardent la main sur leurs décisions.</p>
+    </div>
+    <nav class="sf-links" aria-label="Liens du pied de page">
+      <a href="https://www.activ-ess.fr/" target="_blank" rel="noopener noreferrer">activ-ess.fr</a>
+      <a href="mailto:jtroquereau@activ-ess.fr">jtroquereau@activ-ess.fr</a>
+      <span>Nouvelle-Aquitaine &amp; Occitanie · distanciel France entière</span>
+    </nav>
+  </div>
+  <div class="sf-bottom"><p>Cet outil a été conçu et élaboré avec l'aide du Chantier d'Insertion <a href="https://www.agerad.fr/" target="_blank" rel="noopener noreferrer">AGERAD</a>.</p></div>
 </footer>
 
 <div class="modal-overlay" id="eco-modal-overlay" hidden>
@@ -1591,7 +1922,7 @@
 
 <div id="exec-print-root" aria-hidden="true"></div>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&display=swap">
 
 <script>
 (function () {
@@ -3466,7 +3797,7 @@
     panel.innerHTML =
       "<div class=\"panel-head\">" +
         "<div><span class=\"panel-code\">" + theme.code + "</span><h2>" + theme.label + "</h2></div>" +
-        "<span class=\"status-pill status-" + theme.status + "\">" + STATUS_LABEL[theme.status] + "</span>" +
+        "<span class=\"status-pill status-" + theme.status + "\">" + ic(STATUS_IC[theme.status]) + STATUS_LABEL[theme.status] + "</span>" +
       "</div>" +
       linkToolHtml +
       ctaHtml +
@@ -3500,6 +3831,79 @@
   }
 
 
+
+  // --- Pictogrammes (SVG au trait, grille 24, couleur héritée) ---
+  var IC_PATHS = {
+    home: '<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-6h4v6"/>',
+    grid: '<rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/>',
+    clipboard: '<rect x="5" y="4.5" width="14" height="16.5" rx="2"/><path d="M9 4.5v-1h6v1"/><path d="m8.8 13.2 2.2 2.2 4.2-4.4"/>',
+    gauge: '<path d="M3.8 17a8.2 8.2 0 1 1 16.4 0"/><path d="m12 17 3.8-5"/><circle cx="12" cy="17" r="1.3"/>',
+    book: '<path d="M4 5.5a2 2 0 0 1 2-2h13.5V17H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 0 2 2h13.5v-4"/>',
+    download: '<path d="M12 4v11"/><path d="m7.5 11 4.5 4.5 4.5-4.5"/><path d="M5 20h14"/>',
+    upload: '<path d="M12 16V5"/><path d="m7.5 9 4.5-4.5L16.5 9"/><path d="M5 20h14"/>',
+    printer: '<path d="M7 9V4h10v5"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M7 14h10v6H7z"/>',
+    copy: '<rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5"/>',
+    table: '<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 10h17M9.5 4.5v15"/>',
+    send: '<path d="M4 12 20 4l-4 16-4.5-6.5z"/><path d="m11.5 13.5 8-9.5"/>',
+    arrow: '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',
+    pen: '<path d="m4 20 1-4L16.5 4.5a2.1 2.1 0 0 1 3 3L8 19z"/><path d="m14.5 6.5 3 3"/>',
+    check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+    search: '<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+    target: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>',
+    flag: '<path d="M5 21V4"/><path d="M5 5h11l-2 3.5 2 3.5H5"/>',
+    compass: '<circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+    heart: '<path d="M12 20.5S4 15.8 4 9.8a4.3 4.3 0 0 1 8-2.2 4.3 4.3 0 0 1 8 2.2c0 6-8 10.7-8 10.7z"/>',
+    coins: '<ellipse cx="12" cy="6.5" rx="8" ry="3"/><path d="M4 6.5v5c0 1.7 3.6 3 8 3s8-1.3 8-3v-5"/><path d="M4 11.5v5c0 1.7 3.6 3 8 3s8-1.3 8-3v-5"/>',
+    monitor: '<rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>',
+    shield: '<path d="M12 3 20 6v6c0 4.500-3.300 8-8 9-4.700-1-8-4.500-8-9V6z"/><path d="m8.500 12 2.500 2.500 4.500-5"/>',
+    pin: '<path d="M12 21s-7-6.200-7-11a7 7 0 0 1 14 0c0 4.800-7 11-7 11z"/><circle cx="12" cy="10" r="2.500"/>',
+    cap: '<path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11.500V16c0 1.500 2.700 3 6 3s6-1.500 6-3v-4.500"/><path d="M22 9v6"/>',
+    scales: '<path d="M12 3v18M5 21h14M6 7h12"/><path d="m6 7-3 7a3 3 0 0 0 6 0z"/><path d="m18 7-3 7a3 3 0 0 0 6 0z"/>',
+    users: '<circle cx="9.500" cy="8" r="3.500"/><path d="M3 20v-1.500a4 4 0 0 1 4-4h5a4 4 0 0 1 4 4V20"/><path d="M16 4.200a3.500 3.500 0 0 1 0 7M21 20v-1.500a4 4 0 0 0-3-3.800"/>',
+    leaf: '<path d="M5 19C5 10.500 10 5 20 5c0 9-5 15-12 15-1 0-2-.3-3-1z"/><path d="M5 19c2-5 5-8 9-10"/>',
+    link: '<path d="M10 14a4 4 0 0 0 5.700 0l3-3a4 4 0 0 0-5.700-5.700l-1 1"/><path d="M14 10a4 4 0 0 0-5.700 0l-3 3a4 4 0 0 0 5.700 5.700l1-1"/>',
+    megaphone: '<path d="M3 11v3a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15 9a4 4 0 0 1 0 6M18 6.500a8 8 0 0 1 0 11"/>',
+    award: '<circle cx="12" cy="9" r="6"/><path d="m8.500 14.500L7 21l5-3 5 3-1.500-6.500"/>',
+    layers: '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 12.500 9 5 9-5"/><path d="m3 17 9 5 9-5"/>',
+    "shield-user": '<path d="M12 3 20 6v6c0 4.500-3.300 8-8 9-4.700-1-8-4.500-8-9V6z"/><circle cx="12" cy="10" r="2.300"/><path d="M7.800 16.200c.8-1.800 2.300-2.700 4.200-2.700s3.400.9 4.200 2.700"/>',
+    anchor: '<circle cx="12" cy="5" r="2"/><path d="M12 7v14"/><path d="M5 13a7 7 0 0 0 14 0"/><path d="m3 11 2 2.500L7.500 11M16.500 11l2.500 2.500 2-2.500"/>',
+    route: '<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7a3.500 3.500 0 0 0 0-7H9a3.500 3.500 0 0 1 0-7h7"/>',
+    alert: '<path d="m12 3.500 9.500 16.500H2.500z"/><path d="M12 10v4.500M12 17.500v.01"/>',
+    clock: '<circle cx="12" cy="12" r="8.500"/><path d="M12 7.500V12l3 2"/>',
+    "check-circle": '<circle cx="12" cy="12" r="8.500"/><path d="m8.300 12.500 2.700 2.700 4.800-5.200"/>'
+  };
+  function ic(name, cls) {
+    return '<svg class="ic' + (cls ? " " + cls : "") + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + (IC_PATHS[name] || "") + "</svg>";
+  }
+  var THEME_IC = { ins: "compass", qvt: "heart", eco: "coins", num: "monitor", sec: "shield", terr: "pin", comp: "cap", gouv: "scales", rh: "users", env: "leaf", part: "link", com: "megaphone", lab: "award" };
+  var PILLAR_IC = { 1: "layers", 2: "shield-user", 3: "anchor", 4: "route" };
+  var STATUS_IC = { urgent: "alert", watch: "clock", good: "check-circle" };
+  document.querySelectorAll("[data-ic]").forEach(function (el) { el.innerHTML = ic(el.getAttribute("data-ic")); });
+
+  // --- Hero : roue décorative (13 axes), construite une fois à l'ouverture ---
+  function heroWheelHtml() {
+    var cx = 160, cy = 160, n = 13, step = Math.PI * 2 / n, pad = 0.035;
+    function pt(r, a) { return [cx + r * Math.sin(a), cy - r * Math.cos(a)]; }
+    function arc(r1, r2, a1, a2) {
+      var p1 = pt(r2, a1), p2 = pt(r2, a2), p3 = pt(r1, a2), p4 = pt(r1, a1);
+      return "M" + p1[0].toFixed(1) + " " + p1[1].toFixed(1) + " A" + r2 + " " + r2 + " 0 0 1 " + p2[0].toFixed(1) + " " + p2[1].toFixed(1) +
+        " L" + p3[0].toFixed(1) + " " + p3[1].toFixed(1) + " A" + r1 + " " + r1 + " 0 0 0 " + p4[0].toFixed(1) + " " + p4[1].toFixed(1) + " Z";
+    }
+    var cols = ["#5DB58A", "#8CCBA8", "#5DB58A", "#E3784A", "#8CCBA8", "#5DB58A", "#8CCBA8", "#E3784A", "#5DB58A", "#8CCBA8", "#5DB58A", "#E3784A", "#8CCBA8"];
+    var out = '<circle cx="160" cy="160" r="156" fill="#1b2a38"/><circle cx="160" cy="160" r="156" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>';
+    for (var i = 0; i < n; i++) {
+      var a1 = i * step + pad, a2 = (i + 1) * step - pad;
+      out += '<path class="hw-seg" style="--i:' + i + '" d="' + arc(92, 148, a1, a2) + '" fill="' + cols[i] + '"/>';
+      out += '<path class="hw-seg hw-mid" style="--i:' + (i + 3) + '" d="' + arc(66, 86, a1, a2) + '" fill="#fff" fill-opacity=".22"/>';
+      var m = pt(76, (a1 + a2) / 2);
+      out += '<circle class="hw-dot" style="--i:' + (i + 8) + '" cx="' + m[0].toFixed(1) + '" cy="' + m[1].toFixed(1) + '" r="3.2" fill="#fff"/>';
+    }
+    out += '<circle class="hw-hub" cx="160" cy="160" r="54" fill="#fff"/>' +
+      '<text class="hw-n" x="160" y="170" text-anchor="middle">13</text>' +
+      '<text class="hw-t" x="160" y="187" text-anchor="middle">axes de pilotage</text>';
+    return '<svg viewBox="0 0 320 320" role="img" aria-label="Roue des treize axes de pilotage">' + out + "</svg>";
+  }
+  (function () { var el = document.getElementById("hero-art"); if (el) el.innerHTML = heroWheelHtml(); })();
 
   // --- Piliers de priorité et score ---
   var PILLARS = [
@@ -3546,7 +3950,7 @@
     return bits.join(" · ");
   }
   function pillarHeadHtml(p, tag, withStat) {
-    return "<header class=\"pillar-head\"><span class=\"pillar-n\" aria-hidden=\"true\">" + p.n + "</span><div>" +
+    return "<header class=\"pillar-head\" data-pillar=\"" + p.n + "\"><span class=\"pillar-ico\" aria-hidden=\"true\">" + ic(PILLAR_IC[p.n]) + "<span class=\"pillar-n\">" + p.n + "</span></span><div>" +
       "<" + tag + " class=\"pillar-title\">Pilier " + p.n + " · " + p.name + "</" + tag + ">" +
       "<p class=\"pillar-why\">" + p.why + "</p>" +
       (withStat ? "<p class=\"pillar-stat\">" + pillarStatusLine(p) + "</p>" : "") +
@@ -3734,9 +4138,10 @@
     ];
     var row = document.getElementById("stat-row");
     row.innerHTML = order.map(function (o) {
-      return "<div class=\"stat-chip\"><span class=\"dot status-dot status-" + o.key + "\" style=\"width:8px;height:8px;border-radius:50%;background:var(--status-" + o.key + ")\"></span><strong>" + counts[o.key] + "</strong><span class=\"label\">" + o.label + "</span></div>";
+      return "<div class=\"stat-chip\"><span class=\"si status-" + o.key + "\">" + ic(STATUS_IC[o.key]) + "</span><strong>" + counts[o.key] + "</strong><span class=\"label\">" + o.label + "</span></div>";
     }).join("");
     renderExecSummary();
+    if (typeof renderTeamPlan === "function") renderTeamPlan();
   }
 
   var dashGroup = "pillar";
@@ -3752,8 +4157,9 @@
     var selectedClass = theme.id === currentSelectedThemeId ? " is-selected" : "";
     var pr = ranks[theme.id];
     var rankHtml = pr && pr.rank > 0 ? "<span class=\"dc-rank\" title=\"Score de priorité " + fmtScore(pr.score) + "\">Priorité n° " + pr.rank + "</span>" : "";
-    return "<div class=\"dash-card status-" + theme.status + selectedClass + "\" data-id=\"" + theme.id + "\" tabindex=\"0\" role=\"button\" aria-label=\"" + theme.label + "\">" +
-      "<span class=\"dc-code\">" + theme.code + rankHtml + "</span>" +
+    var pn = pillarOf(theme.id);
+    return "<div class=\"dash-card status-" + theme.status + selectedClass + "\" data-pillar=\"" + (pn ? pn.n : "") + "\" data-id=\"" + theme.id + "\" tabindex=\"0\" role=\"button\" aria-label=\"" + theme.label + "\">" +
+      "<div class=\"dc-top\"><span class=\"dc-ico\" aria-hidden=\"true\">" + ic(THEME_IC[theme.id]) + "</span><span class=\"dc-code\">" + theme.code + rankHtml + "</span></div>" +
       "<p class=\"dc-label\">" + theme.label + "</p>" +
       "<div class=\"dc-bar\">" + barHtml + "</div>" +
       "<p class=\"dc-caption\">" + theme.gaps + " besoin" + (theme.gaps > 1 ? "s" : "") + " identifié" + (theme.gaps > 1 ? "s" : "") + " sur " + total + "</p>" +
@@ -3770,7 +4176,7 @@
     if (dashGroup === "pillar") {
       kanbanRoot.className = "kanban is-pillars";
       kanbanRoot.innerHTML = PILLARS.map(function (p) {
-        return "<section class=\"pillar-block\">" + pillarHeadHtml(p, "h3", true) +
+        return "<section class=\"pillar-block\" data-pillar=\"" + p.n + "\">" + pillarHeadHtml(p, "h3", true) +
           "<div class=\"pillar-cards\">" + p.themes.map(themeById).filter(Boolean).map(function (t) { return dashCardHtml(t, ranks); }).join("") + "</div></section>";
       }).join("");
     } else {
@@ -3784,7 +4190,7 @@
         var themes = DATA.filter(function (t) { return t.status === g.key; });
         var cardsHtml = themes.map(function (t) { return dashCardHtml(t, ranks); }).join("") || "<p class=\"kanban-empty\">Aucune thématique</p>";
         return "<div class=\"kanban-col\">" +
-          "<div class=\"kanban-col-head\"><span class=\"dot\" style=\"background:var(--status-" + g.key + ")\"></span>" + g.label + "<span class=\"count\">" + themes.length + "</span></div>" +
+          "<div class=\"kanban-col-head\"><span class=\"kc-ic\" style=\"color:var(--status-" + g.key + ")\">" + ic(STATUS_IC[g.key]) + "</span>" + g.label + "<span class=\"count\">" + themes.length + "</span></div>" +
           cardsHtml +
         "</div>";
       }).join("");
@@ -4017,13 +4423,13 @@
         var sourceHtml = info.sourceTag
           ? "<p class=\"tc-source\">Source : <strong>" + info.sourceTag + "</strong></p>"
           : "<p class=\"tc-source\">Questionnaire construit en interne, à enrichir</p>";
-        return "<div class=\"card theme-card\">" +
-          "<div class=\"tc-head\"><span class=\"tc-code\">" + theme.code + "</span><h3>" + theme.label + "</h3></div>" +
+        return "<div class=\"card theme-card\" data-pillar=\"" + p.n + "\">" +
+          "<div class=\"tc-head\"><span class=\"tc-ico\" aria-hidden=\"true\">" + ic(THEME_IC[theme.id]) + "</span><div><span class=\"tc-code\">" + theme.code + "</span><h3>" + theme.label + "</h3></div></div>" +
           "<p>" + info.meaning + "</p>" +
           sourceHtml +
         "</div>";
       }).join("");
-      return "<section class=\"pillar-sec\">" + pillarHeadHtml(p, "h2", false) + "<div class=\"themes-grid\">" + cards + "</div></section>";
+      return "<section class=\"pillar-sec\" data-pillar=\"" + p.n + "\">" + pillarHeadHtml(p, "h2", false) + "<div class=\"themes-grid\">" + cards + "</div></section>";
     }).join("");
   }
 
@@ -4057,15 +4463,16 @@
               ? "<svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 8.5l3.2 3.2L13 4.8\"/></svg>"
               : "<svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M10.8 2.8l2.4 2.4-7.4 7.4-3.1.7.7-3.1z\"/></svg>") +
           "</span><span class=\"qr-state-txt\" aria-hidden=\"true\">" + stateLabel + "</span></span>";
-        return "<button type=\"button\" class=\"quest-row\" data-goto-theme=\"" + theme.id + "\">" +
+        return "<button type=\"button\" class=\"quest-row\" data-pillar=\"" + p.n + "\" data-goto-theme=\"" + theme.id + "\">" +
+          "<span class=\"qr-ico\" aria-hidden=\"true\">" + ic(THEME_IC[theme.id]) + "</span>" +
           "<span class=\"qr-code\">" + theme.code + "</span>" +
           "<span class=\"qr-text\"><span class=\"qr-label\">" + theme.label + "</span><span class=\"qr-teaser\">" + teaser + "</span></span>" +
           stateHtml +
-          "<span class=\"qr-status status-" + theme.status + "\">" + STATUS_LABEL[theme.status] + "</span>" +
-          "<span class=\"qr-arrow\">→</span>" +
+          "<span class=\"qr-status status-" + theme.status + "\">" + ic(STATUS_IC[theme.status]) + STATUS_LABEL[theme.status] + "</span>" +
+          "<span class=\"qr-arrow\" aria-hidden=\"true\">" + ic("arrow") + "</span>" +
         "</button>";
       }).join("");
-      return "<section class=\"pillar-sec\">" + pillarHeadHtml(p, "h2", true) + "<div class=\"quest-list\">" + rows + "</div></section>";
+      return "<section class=\"pillar-sec\" data-pillar=\"" + p.n + "\">" + pillarHeadHtml(p, "h2", true) + "<div class=\"quest-list\">" + rows + "</div></section>";
     }).join("");
     list.querySelectorAll("[data-goto-theme]").forEach(function (btn) {
       btn.addEventListener("click", function () { openFiche(btn.getAttribute("data-goto-theme")); });
@@ -4189,6 +4596,12 @@
     });
     try { localStorage.setItem("toutroule-page", page === "fiche" ? "quest" : page); } catch (e) {}
     window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+    if (page === "dashboard" && !window.__wheelIntroDone) {
+      window.__wheelIntroDone = true;
+      var secs = document.querySelectorAll("#wheel-root .sector");
+      secs.forEach(function (el, i) { el.style.setProperty("--i", i); el.classList.add("sector-in"); });
+      setTimeout(function () { secs.forEach(function (el) { el.classList.remove("sector-in"); }); }, 1800);
+    }
   }
   topnavTabs.forEach(function (b) {
     b.addEventListener("click", function () { setPage(b.getAttribute("data-page")); });
@@ -4288,6 +4701,386 @@
     } catch (e) {
       return false;
     }
+  }
+
+  // --- Plan d'action partagé : référents, export Excel / CSV, texte Slack / Teams ---
+  var TP_KEY = "toutroule-team";
+  var TP_COLS = ["Tâche", "Référent principal", "E-mail du référent", "Échéance", "Début", "Priorité", "Statut", "Thématique", "Pilier", "Période", "Rôle responsable", "Co-référents", "ID", "Notes", "Données"];
+
+  function tpState() {
+    if (!window.__tpState) {
+      var team = {};
+      try { team = JSON.parse(localStorage.getItem("toutroule-team") || "{}") || {}; } catch (e) { team = {}; }
+      var now = new Date();
+      window.__tpState = { team: team, year: now.getMonth() >= 8 ? now.getFullYear() + 1 : now.getFullYear(), onlyFilled: null };
+    }
+    return window.__tpState;
+  }
+  function tpSave() { try { localStorage.setItem("toutroule-team", JSON.stringify(tpState().team)); } catch (e) {} }
+  function tpReload() { window.__tpState = null; }
+
+  function tpRoles(resp) {
+    return String(resp || "").split("/").map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  function tpPad(n) { return (n < 10 ? "0" : "") + n; }
+  function tpSerial(y, m, d) { return Math.round((Date.UTC(y, m, d) - Date.UTC(1899, 11, 30)) / 86400000); }
+  function tpIso(y, m, d) { return y + "-" + tpPad(m + 1) + "-" + tpPad(d); }
+  function tpFr(y, m, d) { return tpPad(d) + "/" + tpPad(m + 1) + "/" + y; }
+  function tpQuarterEnd(q, y) { var m = q * 3 - 1; return new Date(Date.UTC(y, m + 1, 0)).getUTCDate(); }
+  function tpPeriod(period, y) {
+    var m = /T(\d)(?:\s*-\s*T?(\d))?/.exec(period || "");
+    var q1 = m ? Math.min(4, Math.max(1, +m[1])) : 4;
+    var q2 = m && m[2] ? Math.min(4, Math.max(1, +m[2])) : q1;
+    if (q2 < q1) q2 = q1;
+    var em = q2 * 3 - 1;
+    return { q1: q1, q2: q2, sy: y, sm: (q1 - 1) * 3, sd: 1, ey: y, em: em, ed: tpQuarterEnd(q2, y) };
+  }
+  function tpOnlyFilledDefault() {
+    return DATA.some(function (t) { return t.isUserData; });
+  }
+  function tpCollect() {
+    var st = tpState();
+    var only = st.onlyFilled === null ? tpOnlyFilledDefault() : st.onlyFilled;
+    var out = [];
+    PILLARS.forEach(function (p) {
+      p.themes.forEach(function (id) {
+        var th = themeById(id);
+        if (!th || (only && !th.isUserData)) return;
+        (th.tasks || []).forEach(function (t, i) {
+          var roles = tpRoles(t.responsible);
+          var per = tpPeriod(t.period, st.year);
+          var principal = roles[0] ? (st.team[roles[0]] || {}) : {};
+          var co = [];
+          roles.slice(1).forEach(function (r) { var n = (st.team[r] && st.team[r].name || "").trim(); if (n && co.indexOf(n) < 0 && n !== (principal.name || "").trim()) co.push(n); });
+          out.push({
+            id: th.code + "-" + tpPad(i + 1),
+            pillar: p.n + " · " + p.name,
+            theme: th.label,
+            code: th.code,
+            task: t.task,
+            period: t.period,
+            per: per,
+            role: t.responsible || "",
+            roles: roles,
+            name: (principal.name || "").trim(),
+            email: (principal.email || "").trim(),
+            co: co,
+            prio: th.status === "urgent" ? "Haute" : (th.status === "watch" ? "Moyenne" : "Normale"),
+            data: th.isUserData ? "Vos réponses" + (th.dataDate ? " (" + th.dataDate + ")" : "") : "Exemple illustratif"
+          });
+        });
+      });
+    });
+    return out;
+  }
+  function tpRow(t) {
+    return [t.task, t.name || "(à attribuer)", t.email, { date: tpSerial(t.per.ey, t.per.em, t.per.ed), iso: tpIso(t.per.ey, t.per.em, t.per.ed) },
+      { date: tpSerial(t.per.sy, t.per.sm, t.per.sd), iso: tpIso(t.per.sy, t.per.sm, t.per.sd) },
+      t.prio, "À faire", t.code + " · " + t.theme, t.pillar, t.period, t.role, t.co.join("; "), t.id, "", t.data];
+  }
+
+  // ---- Fichier .xlsx écrit à la main (zip sans compression) : aucune librairie externe ----
+  function tpXml(s) {
+    return String(s == null ? "" : s).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function tpColLetter(i) { return String.fromCharCode(65 + i); }
+  var TP_CRC = null;
+  function tpCrc(bytes) {
+    if (!TP_CRC) {
+      TP_CRC = [];
+      for (var n = 0; n < 256; n++) { var c = n; for (var k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; TP_CRC[n] = c >>> 0; }
+    }
+    var crc = 0xFFFFFFFF;
+    for (var i = 0; i < bytes.length; i++) crc = TP_CRC[(crc ^ bytes[i]) & 0xFF] ^ (crc >>> 8);
+    return (crc ^ 0xFFFFFFFF) >>> 0;
+  }
+  function tpZip(files) {
+    var enc = new TextEncoder();
+    var d = new Date();
+    var dosTime = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1);
+    var dosDate = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
+    var parts = [], central = [], offset = 0;
+    files.forEach(function (f) {
+      var name = enc.encode(f.name), data = enc.encode(f.data), crc = tpCrc(data);
+      var lh = new DataView(new ArrayBuffer(30));
+      lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x0800, true); lh.setUint16(8, 0, true);
+      lh.setUint16(10, dosTime, true); lh.setUint16(12, dosDate, true); lh.setUint32(14, crc, true);
+      lh.setUint32(18, data.length, true); lh.setUint32(22, data.length, true); lh.setUint16(26, name.length, true); lh.setUint16(28, 0, true);
+      parts.push(new Uint8Array(lh.buffer), name, data);
+      var ch = new DataView(new ArrayBuffer(46));
+      ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true); ch.setUint16(10, 0, true);
+      ch.setUint16(12, dosTime, true); ch.setUint16(14, dosDate, true); ch.setUint32(16, crc, true);
+      ch.setUint32(20, data.length, true); ch.setUint32(24, data.length, true); ch.setUint16(28, name.length, true);
+      ch.setUint16(30, 0, true); ch.setUint16(32, 0, true); ch.setUint16(34, 0, true); ch.setUint16(36, 0, true); ch.setUint32(38, 0, true); ch.setUint32(42, offset, true);
+      central.push(new Uint8Array(ch.buffer), name);
+      offset += 30 + name.length + data.length;
+    });
+    var csize = 0; central.forEach(function (c) { csize += c.length; });
+    var end = new DataView(new ArrayBuffer(22));
+    end.setUint32(0, 0x06054b50, true); end.setUint16(4, 0, true); end.setUint16(6, 0, true);
+    end.setUint16(8, files.length, true); end.setUint16(10, files.length, true); end.setUint32(12, csize, true); end.setUint32(16, offset, true); end.setUint16(20, 0, true);
+    return new Blob(parts.concat(central, [new Uint8Array(end.buffer)]), { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+  }
+  function tpBuildXlsx(tasks) {
+    var st = tpState();
+    var sst = [], sstIdx = {};
+    function si(s) { s = String(s == null ? "" : s); if (!(s in sstIdx)) { sstIdx[s] = sst.length; sst.push(s); } return sstIdx[s]; }
+    // styles: 1 entête, 2 texte, 3 date, 4 nombre, 5 titre, 6 texte libre
+    function cell(ref, v, style) {
+      if (v === null || v === undefined || v === "") return "<c r=\"" + ref + "\" s=\"" + style + "\"/>";
+      if (typeof v === "number") return "<c r=\"" + ref + "\" s=\"4\"><v>" + v + "</v></c>";
+      if (typeof v === "object" && v.date) return "<c r=\"" + ref + "\" s=\"3\"><v>" + v.date + "</v></c>";
+      return "<c r=\"" + ref + "\" s=\"" + style + "\" t=\"s\"><v>" + si(v) + "</v></c>";
+    }
+    function sheet(rows, o) {
+      var x = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><worksheet xmlns=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\">";
+      x += "<sheetViews><sheetView workbookViewId=\"0\"" + (o.first ? " tabSelected=\"1\"" : "") + (o.freeze ? "><pane ySplit=\"1\" topLeftCell=\"A2\" activePane=\"bottomLeft\" state=\"frozen\"/></sheetView>" : "/>") + "</sheetViews>";
+      x += "<sheetFormatPr defaultRowHeight=\"15\"/><cols>" + o.widths.map(function (w, i) { return "<col min=\"" + (i + 1) + "\" max=\"" + (i + 1) + "\" width=\"" + w + "\" customWidth=\"1\"/>"; }).join("") + "</cols><sheetData>";
+      rows.forEach(function (r, ri) {
+        x += "<row r=\"" + (ri + 1) + "\">";
+        r.forEach(function (v, ci) {
+          var style = o.header && ri === 0 ? 1 : (o.plain ? (ri === 0 && o.title ? 5 : 6) : 2);
+          var ref = tpColLetter(ci) + (ri + 1);
+          if (o.header && ri === 0) x += "<c r=\"" + ref + "\" s=\"1\" t=\"s\"><v>" + si(v) + "</v></c>";
+          else x += cell(ref, v, style);
+        });
+        x += "</row>";
+      });
+      x += "</sheetData>";
+      if (o.validations) x += o.validations;
+      x += "<pageMargins left=\"0.5\" right=\"0.5\" top=\"0.6\" bottom=\"0.6\" header=\"0.3\" footer=\"0.3\"/><pageSetup paperSize=\"9\" orientation=\"landscape\" fitToHeight=\"0\"/>";
+      if (o.table) x += "<tableParts count=\"1\"><tablePart r:id=\"rId1\"/></tableParts>";
+      return x + "</worksheet>";
+    }
+    var n = tasks.length;
+    var rows1 = [TP_COLS].concat(tasks.map(tpRow));
+    var lastRow = n + 1;
+    var val = "<dataValidations count=\"2\">" +
+      "<dataValidation type=\"list\" allowBlank=\"1\" showErrorMessage=\"1\" sqref=\"F2:F" + lastRow + "\"><formula1>\"Haute,Moyenne,Normale\"</formula1></dataValidation>" +
+      "<dataValidation type=\"list\" allowBlank=\"1\" showErrorMessage=\"1\" sqref=\"G2:G" + lastRow + "\"><formula1>\"À faire,En cours,Terminé,Bloqué\"</formula1></dataValidation></dataValidations>";
+    var s1 = sheet(rows1, { first: true, header: true, freeze: true, widths: [62, 22, 26, 13, 13, 11, 12, 34, 28, 10, 30, 26, 10, 30, 22], validations: val, table: true });
+
+    // Charge par référent (référent principal)
+    var load = {}, order = [];
+    tasks.forEach(function (t) {
+      var k = t.name || "(à attribuer)";
+      if (!load[k]) { load[k] = { name: k, roles: {}, n: 0, h: 0, q: [0, 0, 0, 0] }; order.push(k); }
+      var L = load[k]; L.n++; if (t.prio === "Haute") L.h++; L.q[t.per.q1 - 1]++; if (t.roles[0]) L.roles[t.roles[0]] = 1;
+    });
+    order.sort(function (a, b) { return load[b].n - load[a].n || a.localeCompare(b, "fr"); });
+    var rows2 = [["Référent principal", "Rôle(s)", "Tâches", "dont priorité haute", "Début T1", "Début T2", "Début T3", "Début T4"]].concat(order.map(function (k) {
+      var L = load[k]; return [L.name, Object.keys(L.roles).join(" ; "), L.n, L.h, L.q[0], L.q[1], L.q[2], L.q[3]];
+    }));
+    var s2 = sheet(rows2, { header: true, freeze: true, widths: [30, 40, 10, 18, 11, 11, 11, 11] });
+
+    // Équipe
+    var roleCount = {};
+    tasks.forEach(function (t) { t.roles.forEach(function (r) { roleCount[r] = (roleCount[r] || 0) + 1; }); });
+    var rows3 = [["Rôle", "Nom du référent", "E-mail", "Tâches concernées"]].concat(Object.keys(roleCount).sort(function (a, b) { return roleCount[b] - roleCount[a] || a.localeCompare(b, "fr"); }).map(function (r) {
+      var m = st.team[r] || {}; return [r, m.name || "", m.email || "", roleCount[r]];
+    }));
+    var s3 = sheet(rows3, { header: true, freeze: true, widths: [34, 28, 30, 18] });
+
+    // Mode d'emploi
+    var today = new Date();
+    var help = [
+      ["Tout Roule — plan d'action partagé"],
+      ["Exporté le " + tpFr(today.getFullYear(), today.getMonth(), today.getDate()) + " · année du plan : " + st.year + " · " + n + " tâche(s)."],
+      ["Source : thématiques de Tout Roule (ActivESS Conseil). Les tâches « Exemple illustratif » sont des exemples, pas votre diagnostic : vérifiez la colonne « Données » avant diffusion."],
+      ["Les échéances sont calculées à la fin du dernier trimestre de la période (T1 = 31 mars, T2 = 30 juin, T3 = 30 septembre, T4 = 31 décembre de l'année du plan) : ce sont des repères à ajuster, pas des dates réglementaires."],
+      ["Le référent principal est celui du premier rôle cité dans « Rôle responsable » ; les autres référents sont dans « Co-référents »."],
+      [""],
+      ["Microsoft Lists / Teams : onglet Fichiers du canal > Plus d'options > À partir d'Excel (ou depuis Lists > Nouvelle liste > À partir d'Excel), puis choisir le tableau « PlanAction ». Limite indiquée par Microsoft : 5 000 lignes."],
+      ["Slack : Listes > Nouvelle > Importer un CSV (sur ordinateur) avec le fichier .csv exporté par Tout Roule. Ensuite, associer la colonne « Référent principal » à un champ de type Personne."],
+      ["Microsoft Planner : pas d'import Excel natif. Passer par Power Automate (« Lister les lignes d'un tableau » puis « Créer une tâche »), ou copier les tâches à la main."],
+      ["Outil d'aide à la décision : ce plan ne remplace ni un avis juridique ni l'accompagnement d'un professionnel."]
+    ];
+    var s4 = sheet(help, { plain: true, title: true, widths: [140] });
+
+    var sheets = ["Plan d'action", "Charge par référent", "Équipe", "Mode d'emploi"];
+    var sstXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><sst xmlns=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" count=\"" + sst.length + "\" uniqueCount=\"" + sst.length + "\">" +
+      sst.map(function (s) { return "<si><t xml:space=\"preserve\">" + tpXml(s) + "</t></si>"; }).join("") + "</sst>";
+    var R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
+    var XH = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
+    var styles = XH + "<styleSheet xmlns=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\">" +
+      "<numFmts count=\"1\"><numFmt numFmtId=\"164\" formatCode=\"dd/mm/yyyy\"/></numFmts>" +
+      "<fonts count=\"3\"><font><sz val=\"11\"/><name val=\"Calibri\"/></font><font><b/><sz val=\"11\"/><color rgb=\"FFFFFFFF\"/><name val=\"Calibri\"/></font><font><b/><sz val=\"14\"/><color rgb=\"FF283C50\"/><name val=\"Calibri\"/></font></fonts>" +
+      "<fills count=\"3\"><fill><patternFill patternType=\"none\"/></fill><fill><patternFill patternType=\"gray125\"/></fill><fill><patternFill patternType=\"solid\"><fgColor rgb=\"FF283C50\"/><bgColor indexed=\"64\"/></patternFill></fill></fills>" +
+      "<borders count=\"2\"><border><left/><right/><top/><bottom/><diagonal/></border><border><left style=\"thin\"><color rgb=\"FFD9D9D9\"/></left><right style=\"thin\"><color rgb=\"FFD9D9D9\"/></right><top style=\"thin\"><color rgb=\"FFD9D9D9\"/></top><bottom style=\"thin\"><color rgb=\"FFD9D9D9\"/></bottom><diagonal/></border></borders>" +
+      "<cellStyleXfs count=\"1\"><xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\"/></cellStyleXfs>" +
+      "<cellXfs count=\"7\">" +
+      "<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\"/>" +
+      "<xf numFmtId=\"0\" fontId=\"1\" fillId=\"2\" borderId=\"1\" xfId=\"0\" applyFont=\"1\" applyFill=\"1\" applyBorder=\"1\" applyAlignment=\"1\"><alignment vertical=\"center\" wrapText=\"1\"/></xf>" +
+      "<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"1\" xfId=\"0\" applyBorder=\"1\" applyAlignment=\"1\"><alignment vertical=\"top\" wrapText=\"1\"/></xf>" +
+      "<xf numFmtId=\"164\" fontId=\"0\" fillId=\"0\" borderId=\"1\" xfId=\"0\" applyNumberFormat=\"1\" applyBorder=\"1\" applyAlignment=\"1\"><alignment horizontal=\"center\" vertical=\"top\"/></xf>" +
+      "<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"1\" xfId=\"0\" applyBorder=\"1\" applyAlignment=\"1\"><alignment horizontal=\"center\" vertical=\"top\"/></xf>" +
+      "<xf numFmtId=\"0\" fontId=\"2\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"/>" +
+      "<xf numFmtId=\"0\" fontId=\"0\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyAlignment=\"1\"><alignment vertical=\"top\" wrapText=\"1\"/></xf>" +
+      "</cellXfs><cellStyles count=\"1\"><cellStyle name=\"Normal\" xfId=\"0\" builtinId=\"0\"/></cellStyles></styleSheet>";
+    var tableXml = XH + "<table xmlns=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" id=\"1\" name=\"PlanAction\" displayName=\"PlanAction\" ref=\"A1:" + tpColLetter(TP_COLS.length - 1) + lastRow + "\" totalsRowShown=\"0\">" +
+      "<autoFilter ref=\"A1:" + tpColLetter(TP_COLS.length - 1) + lastRow + "\"/><tableColumns count=\"" + TP_COLS.length + "\">" +
+      TP_COLS.map(function (c, i) { return "<tableColumn id=\"" + (i + 1) + "\" name=\"" + tpXml(c) + "\"/>"; }).join("") +
+      "</tableColumns><tableStyleInfo name=\"TableStyleLight1\" showFirstColumn=\"0\" showLastColumn=\"0\" showRowStripes=\"1\" showColumnStripes=\"0\"/></table>";
+    var files = [
+      { name: "[Content_Types].xml", data: XH + "<Types xmlns=\"http://schemas.openxmlformats.org/package/2006/content-types\"><Default Extension=\"rels\" ContentType=\"application/vnd.openxmlformats-package.relationships+xml\"/><Default Extension=\"xml\" ContentType=\"application/xml\"/>" +
+        "<Override PartName=\"/xl/workbook.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml\"/>" +
+        [1, 2, 3, 4].map(function (i) { return "<Override PartName=\"/xl/worksheets/sheet" + i + ".xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml\"/>"; }).join("") +
+        "<Override PartName=\"/xl/tables/table1.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml\"/>" +
+        "<Override PartName=\"/xl/styles.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml\"/>" +
+        "<Override PartName=\"/xl/sharedStrings.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml\"/></Types>" },
+      { name: "_rels/.rels", data: XH + "<Relationships xmlns=\"http://schemas.openxmlformats.org/package/2006/relationships\"><Relationship Id=\"rId1\" Type=\"" + R + "/officeDocument\" Target=\"xl/workbook.xml\"/></Relationships>" },
+      { name: "xl/workbook.xml", data: XH + "<workbook xmlns=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" xmlns:r=\"" + R + "\"><bookViews><workbookView xWindow=\"0\" yWindow=\"0\" windowWidth=\"24000\" windowHeight=\"12000\"/></bookViews><sheets>" +
+        sheets.map(function (nm, i) { return "<sheet name=\"" + tpXml(nm) + "\" sheetId=\"" + (i + 1) + "\" r:id=\"rId" + (i + 1) + "\"/>"; }).join("") + "</sheets></workbook>" },
+      { name: "xl/_rels/workbook.xml.rels", data: XH + "<Relationships xmlns=\"http://schemas.openxmlformats.org/package/2006/relationships\">" +
+        sheets.map(function (nm, i) { return "<Relationship Id=\"rId" + (i + 1) + "\" Type=\"" + R + "/worksheet\" Target=\"worksheets/sheet" + (i + 1) + ".xml\"/>"; }).join("") +
+        "<Relationship Id=\"rId5\" Type=\"" + R + "/styles\" Target=\"styles.xml\"/><Relationship Id=\"rId6\" Type=\"" + R + "/sharedStrings\" Target=\"sharedStrings.xml\"/></Relationships>" },
+      { name: "xl/styles.xml", data: styles },
+      { name: "xl/worksheets/sheet1.xml", data: s1 },
+      { name: "xl/worksheets/_rels/sheet1.xml.rels", data: XH + "<Relationships xmlns=\"http://schemas.openxmlformats.org/package/2006/relationships\"><Relationship Id=\"rId1\" Type=\"" + R + "/table\" Target=\"../tables/table1.xml\"/></Relationships>" },
+      { name: "xl/tables/table1.xml", data: tableXml },
+      { name: "xl/worksheets/sheet2.xml", data: s2 },
+      { name: "xl/worksheets/sheet3.xml", data: s3 },
+      { name: "xl/worksheets/sheet4.xml", data: s4 },
+      { name: "xl/sharedStrings.xml", data: sstXml }
+    ];
+    return tpZip(files);
+  }
+
+  // ---- CSV (UTF-8 avec BOM, séparateur virgule : import Slack Listes, Microsoft Lists, Trello, etc.) ----
+  function tpBuildCsv(tasks) {
+    function q(v) { v = String(v == null ? "" : v); return /[",\n\r]/.test(v) ? "\"" + v.replace(/"/g, "\"\"") + "\"" : v; }
+    var lines = [TP_COLS.map(q).join(",")];
+    tasks.forEach(function (t) {
+      lines.push(tpRow(t).map(function (v) { return q(v && typeof v === "object" ? v.iso : v); }).join(","));
+    });
+    return new Blob(["﻿" + lines.join("\r\n") + "\r\n"], { type: "text/csv;charset=utf-8" });
+  }
+
+  // ---- Texte par référent, à coller dans Slack ou Teams ----
+  function tpBuildText(tasks, flavor) {
+    var st = tpState();
+    var groups = {}, order = [];
+    tasks.forEach(function (t) {
+      var k = t.name || ("À attribuer — " + (t.roles[0] || "sans rôle"));
+      if (!groups[k]) { groups[k] = []; order.push(k); }
+      groups[k].push(t);
+    });
+    order.sort(function (a, b) { var A = a.indexOf("À attribuer") === 0, B = b.indexOf("À attribuer") === 0; return A - B || groups[b].length - groups[a].length || a.localeCompare(b, "fr"); });
+    var bold = flavor === "slack" ? function (s) { return "*" + s + "*"; } : function (s) { return s.toUpperCase(); };
+    var out = [bold("Plan d'action " + st.year + " — Tout Roule") + " · " + tasks.length + " tâche(s)", ""];
+    order.forEach(function (k) {
+      var arr = groups[k].slice().sort(function (a, b) { return tpSerial(a.per.ey, a.per.em, a.per.ed) - tpSerial(b.per.ey, b.per.em, b.per.ed) || a.id.localeCompare(b.id); });
+      out.push(bold(k) + " (" + arr.length + ")");
+      arr.forEach(function (t) {
+        out.push("• " + tpFr(t.per.ey, t.per.em, t.per.ed) + " · " + t.task + " [" + t.code + "]" + (t.co.length ? " — avec " + t.co.join(", ") : "") + (t.prio === "Haute" ? " — priorité haute" : ""));
+      });
+      out.push("");
+    });
+    return out.join("\n").replace(/\n+$/, "\n");
+  }
+
+  function tpDownload(filename, blob) {
+    try {
+      var url = URL.createObjectURL(blob), a = document.createElement("a");
+      a.href = url; a.download = filename; a.rel = "noopener";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+      return true;
+    } catch (e) { return false; }
+  }
+  function tpFileBase() {
+    var d = new Date();
+    return "ToutRoule_plan-action_" + tpState().year + "_" + d.getFullYear() + tpPad(d.getMonth() + 1) + tpPad(d.getDate());
+  }
+  function tpSay(msg) {
+    var el = document.getElementById("tp-msg");
+    if (el) el.textContent = msg;
+  }
+
+  function tpSummaryHtml(tasks) {
+    var noRef = tasks.filter(function (t) { return !t.name; }).length;
+    var ex = tasks.filter(function (t) { return t.data.indexOf("Exemple") === 0; }).length;
+    var bits = ["<strong>" + tasks.length + " tâche" + (tasks.length > 1 ? "s" : "") + "</strong> prêtes à exporter"];
+    if (tasks.length) bits.push(noRef === 0 ? "tous les référents sont renseignés" : noRef + " sans référent (« à attribuer »)");
+    if (ex) bits.push("<span class=\"tp-warn\">" + ex + " issue" + (ex > 1 ? "s" : "") + " de données d'exemple</span>");
+    return bits.join(" · ");
+  }
+
+  function renderTeamPlan() {
+    var root = document.getElementById("tp-root");
+    if (!root) return;
+    var st = tpState();
+    var only = st.onlyFilled === null ? tpOnlyFilledDefault() : st.onlyFilled;
+    var tasks = tpCollect();
+    var roleCount = {};
+    tasks.forEach(function (t) { t.roles.forEach(function (r) { roleCount[r] = (roleCount[r] || 0) + 1; }); });
+    var roles = Object.keys(roleCount).sort(function (a, b) { return roleCount[b] - roleCount[a] || a.localeCompare(b, "fr"); });
+    var y0 = new Date().getFullYear();
+    var yearOpts = [y0 - 1, y0, y0 + 1, y0 + 2].map(function (y) { return "<option value=\"" + y + "\"" + (y === st.year ? " selected" : "") + ">" + y + "</option>"; }).join("");
+    function teamRowHtml(r, i) {
+      var m = st.team[r] || {};
+      return "<div class=\"tp-row\"><div class=\"tp-role\"><span>" + resEsc(r) + "</span><small>" + roleCount[r] + " tâche" + (roleCount[r] > 1 ? "s" : "") + "</small></div>" +
+        "<label class=\"tp-f\"><span class=\"tp-lab\">Nom du référent</span><input type=\"text\" id=\"tp-name-" + i + "\" data-role=\"" + resEsc(r) + "\" data-k=\"name\" value=\"" + resEsc(m.name || "") + "\" autocomplete=\"off\" placeholder=\"Prénom Nom\"></label>" +
+        "<label class=\"tp-f\"><span class=\"tp-lab\">E-mail (pour l'attribution)</span><input type=\"email\" id=\"tp-mail-" + i + "\" data-role=\"" + resEsc(r) + "\" data-k=\"email\" value=\"" + resEsc(m.email || "") + "\" autocomplete=\"off\" placeholder=\"prenom@structure.fr\"></label></div>";
+    }
+    var TP_SHOWN = 6;
+    var teamHtml = roles.length ? roles.slice(0, TP_SHOWN).map(teamRowHtml).join("") +
+      (roles.length > TP_SHOWN ? "<details class=\"tp-more\"><summary>Autres rôles (" + (roles.length - TP_SHOWN) + ", de 1 à " + roleCount[roles[TP_SHOWN]] + " tâche" + (roleCount[roles[TP_SHOWN]] > 1 ? "s" : "") + " chacun)</summary>" + roles.slice(TP_SHOWN).map(function (r, j) { return teamRowHtml(r, j + TP_SHOWN); }).join("") + "</details>" : "") : "<p class=\"tp-empty\">" + (only ? "Aucun questionnaire rempli pour l'instant : remplis au moins une thématique, ou décoche le filtre pour voir le plan d'exemple." : "Aucune tâche à exporter.") + "</p>";
+    root.innerHTML =
+      "<div class=\"tp-opts\">" +
+        "<label class=\"tp-f tp-year\"><span class=\"tp-lab\">Année du plan</span><select id=\"tp-year\">" + yearOpts + "</select></label>" +
+        "<label class=\"tp-check\"><input type=\"checkbox\" id=\"tp-only\"" + (only ? " checked" : "") + "> Seulement les thématiques dont j'ai rempli le questionnaire</label>" +
+      "</div>" +
+      "<h3 class=\"tp-h\">Qui est référent de quoi ?</h3>" +
+      "<p class=\"tp-hint\">Les tâches portent un rôle (Direction, CA, Encadrants…). Associe chaque rôle à une personne : le nom et l'e-mail sont repris dans les fichiers. Enregistré sur ce navigateur ; le premier rôle cité est le référent principal.</p>" +
+      "<div class=\"tp-team\">" + teamHtml + "</div>" +
+      "<p class=\"tp-sum\" id=\"tp-sum\" aria-live=\"polite\">" + tpSummaryHtml(tasks) + "</p>" +
+      "<div class=\"tp-actions\">" +
+        "<button type=\"button\" class=\"data-btn is-primary\" id=\"tp-xlsx\"" + (tasks.length ? "" : " disabled") + ">" + ic("table") + "Excel (.xlsx)</button>" +
+        "<button type=\"button\" class=\"data-btn\" id=\"tp-csv\"" + (tasks.length ? "" : " disabled") + ">" + ic("download") + "CSV (Slack, Lists…)</button>" +
+        "<button type=\"button\" class=\"data-btn\" id=\"tp-slack\"" + (tasks.length ? "" : " disabled") + ">" + ic("copy") + "Copier pour Slack</button>" +
+        "<button type=\"button\" class=\"data-btn\" id=\"tp-teams\"" + (tasks.length ? "" : " disabled") + ">" + ic("copy") + "Copier pour Teams</button>" +
+      "</div>" +
+      "<p class=\"tp-msg\" id=\"tp-msg\" role=\"status\" aria-live=\"polite\"></p>" +
+      "<details class=\"tp-how\"><summary>Comment l'importer dans Microsoft ou Slack ?</summary>" +
+        "<ul>" +
+          "<li><strong>Microsoft Lists / Teams</strong> : import possible depuis Excel ou CSV (Lists &gt; Nouvelle liste &gt; À partir d'Excel ; dans Teams, onglet Fichiers du canal &gt; Plus d'options). Dans le .xlsx, le tableau s'appelle « PlanAction » (limite indiquée : 5 000 lignes). Vérifie les types de colonnes après import ; la colonne « Référent principal » reste du texte tant que tu ne la convertis pas en colonne Personne. <a href=\"https://support.microsoft.com/en-us/topic/380cfeb5-6e14-438e-988a-c2b9bea574fa\" target=\"_blank\" rel=\"noopener noreferrer\">Page Microsoft ↗</a></li>" +
+          "<li><strong>Slack</strong> : Listes &gt; Nouvelle &gt; Importer un CSV, sur ordinateur uniquement ; pas d'import .xlsx mentionné. Le champ Assigné est de type Personne : à toi de faire la correspondance. L'accès aux listes dépend du forfait Slack. <a href=\"https://slack.com/help/articles/27452748828179-Use-lists-in-Slack\" target=\"_blank\" rel=\"noopener noreferrer\">Page Slack ↗</a></li>" +
+          "<li><strong>Microsoft Planner</strong> : pas d'import Excel natif d'après les réponses communautaires Microsoft ; la voie courante est Power Automate (lire le tableau, puis créer une tâche par ligne). À défaut, utilise Lists ou copie les tâches à la main.</li>" +
+          "<li><strong>Messages d'équipe</strong> : « Copier pour Slack » et « Copier pour Teams » produisent un récapitulatif par référent, à coller dans un canal. Rien n'est envoyé automatiquement.</li>" +
+        "</ul>" +
+        "<p class=\"tp-fine\">Les échéances sont posées à la fin du dernier trimestre de chaque période (T1 = 31 mars, etc.) : ce sont des repères à ajuster, pas des dates réglementaires. Vérifié le 05/11/2026 sur les pages citées ; les interfaces évoluent.</p>" +
+      "</details>" +
+      "<details class=\"tp-prev\" id=\"tp-prev\" hidden><summary>Aperçu du texte copié</summary><textarea id=\"tp-prev-text\" readonly rows=\"10\"></textarea></details>";
+
+    document.getElementById("tp-year").addEventListener("change", function (e) { st.year = +e.target.value; renderTeamPlan(); });
+    document.getElementById("tp-only").addEventListener("change", function (e) { st.onlyFilled = e.target.checked; renderTeamPlan(); });
+    root.querySelectorAll(".tp-team input").forEach(function (inp) {
+      inp.addEventListener("input", function () {
+        var r = inp.getAttribute("data-role"), k = inp.getAttribute("data-k");
+        if (!st.team[r]) st.team[r] = {};
+        st.team[r][k] = inp.value;
+        tpSave();
+        document.getElementById("tp-sum").innerHTML = tpSummaryHtml(tpCollect());
+      });
+    });
+    function copyText(flavor) {
+      var text = tpBuildText(tpCollect(), flavor);
+      var prev = document.getElementById("tp-prev"), ta = document.getElementById("tp-prev-text");
+      prev.hidden = false; prev.open = true; ta.value = text;
+      var ok = false;
+      function fallback() { try { ta.focus(); ta.select(); ok = document.execCommand("copy"); } catch (e) { ok = false; } done(); }
+      function done() { tpSay(ok ? "Texte copié (" + (flavor === "slack" ? "format Slack" : "format Teams") + "). Colle-le dans ton canal." : "Copie automatique impossible ici : sélectionne le texte de l'aperçu ci-dessous et copie-le."); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { ok = true; done(); }, fallback);
+      else fallback();
+    }
+    function dl(name, blob, label) {
+      tpSay(tpDownload(name, blob) ? label + " généré : « " + name + " » (vérifie ton dossier de téléchargements)." : "Le téléchargement a échoué sur ce navigateur.");
+    }
+    document.getElementById("tp-xlsx").addEventListener("click", function () { var t = tpCollect(); dl(tpFileBase() + ".xlsx", tpBuildXlsx(t), "Fichier Excel"); });
+    document.getElementById("tp-csv").addEventListener("click", function () { var t = tpCollect(); dl(tpFileBase() + ".csv", tpBuildCsv(t), "Fichier CSV"); });
+    document.getElementById("tp-slack").addEventListener("click", function () { copyText("slack"); });
+    document.getElementById("tp-teams").addEventListener("click", function () { copyText("teams"); });
   }
 
   // --- Identité de la session : structure, personne, date (sessionStorage : effacée à la fermeture de l'onglet ou au vidage des données du site) ---
