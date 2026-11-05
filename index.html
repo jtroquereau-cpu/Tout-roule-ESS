@@ -345,6 +345,18 @@
   .quest-row .qr-status.status-watch { background: var(--status-watch-soft); color: var(--status-watch); }
   .quest-row .qr-status.status-urgent { background: var(--status-urgent-soft); color: var(--status-urgent); }
   .quest-row .qr-arrow { flex: none; color: var(--accent); font-size: 1.1rem; }
+  .qr-state { display: flex; align-items: center; gap: 0.45rem; flex: none; min-width: 9.6rem; font-size: 0.72rem; font-weight: 600; color: var(--ink-faint); white-space: nowrap; }
+  .qr-ic { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+  .qr-ic svg { width: 14px; height: 14px; }
+  .qr-state.is-done { color: var(--status-good); }
+  .qr-state.is-done .qr-ic { background: var(--status-good); color: var(--paper-raised); }
+  .qr-state.is-todo .qr-ic { border: 1.5px dashed var(--ink-faint); color: var(--ink-faint); }
+  .quest-progress { display: flex; align-items: center; gap: 0.8rem; margin: 0 0 1.4rem; font-size: 0.85rem; color: var(--ink-soft); flex-wrap: wrap; }
+  .quest-progress strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .quest-progress .qp-bar { flex: 1 1 140px; max-width: 280px; height: 6px; border-radius: 100px; background: var(--line); overflow: hidden; }
+  .quest-progress .qp-bar i { display: block; height: 100%; background: var(--status-good); }
+  @media (max-width: 760px) { .qr-state { min-width: 0; } }
+  @media (max-width: 600px) { .qr-state-txt { display: none; } .quest-row { gap: 0.7rem; padding: 0.9rem; } }
 
   .wheel-card { padding: 1.75rem 1.5rem 1.5rem; }
 
@@ -1147,6 +1159,33 @@
     .data-btn { flex: 1 1 auto; justify-content: center; }
   }
 
+
+  /* ---------- Piliers de priorité ---------- */
+  .pillar-sec { margin-bottom: 1.8rem; }
+  .pillar-head { display: flex; gap: 0.75rem; align-items: flex-start; margin: 0 0 0.75rem; padding-bottom: 0.55rem; border-bottom: 1px solid var(--line); }
+  .pillar-n { flex: none; width: 1.75rem; height: 1.75rem; border-radius: 50%; background: var(--petrol); color: var(--paper-raised);
+    font-family: var(--font-body); font-weight: 700; font-size: 0.82rem; display: grid; place-items: center; }
+  .pillar-title { margin: 0; font-family: var(--font-body); font-size: 1.05rem; font-weight: 600; color: var(--ink); letter-spacing: 0; }
+  .pillar-why { margin: 0.15rem 0 0; font-size: 0.8rem; color: var(--ink-soft); line-height: 1.45; max-width: 70ch; }
+  .pillar-stat { margin: 0.3rem 0 0; font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-faint); }
+  .pillar-sec .themes-grid { margin-bottom: 0; }
+  .pillar-sec .quest-list { margin-bottom: 0; }
+  .kanban.is-pillars { display: block; }
+  .pillar-block { margin-bottom: 1.5rem; }
+  .pillar-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 0.65rem; }
+  .dash-group-row { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 1rem; flex-wrap: wrap; }
+  .dash-group-label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); }
+  .group-btn { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.4rem 0.8rem;
+    border-radius: 100px; border: none; background: transparent; color: var(--ink-soft); cursor: pointer; }
+  .group-btn.is-active { background: var(--petrol); color: var(--paper-raised); }
+  .dash-card .dc-rank { font-family: var(--font-mono); font-size: 0.66rem; color: var(--accent); float: right; letter-spacing: 0.03em; }
+
+  .xs-pillar { display: flex; gap: 0.6em; align-items: baseline; background: #eef1ec; border-left: 3px solid var(--xs-petrol); padding: 0.28em 0.6em; margin-top: 0.55em; break-after: avoid; }
+  .xs-pn { font-family: Poppins, Inter, sans-serif; font-size: 0.78em; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--xs-terra); white-space: nowrap; }
+  .xs-pillar strong { font-family: Poppins, Inter, sans-serif; font-size: 1.02em; color: var(--xs-petrol); white-space: nowrap; }
+  .xs-pw { font-size: 0.86em; color: var(--xs-soft); }
+  .xs-prio { white-space: nowrap; font-size: 0.8em; color: var(--xs-petrol); font-weight: 600; font-variant-numeric: tabular-nums; }
+
   /* ---------- Résumé exécutif (écran + impression A4) ---------- */
   .exec-card { padding: 1.4rem 1.5rem; margin-bottom: 2rem; }
   .exec-head { display: flex; gap: 1rem; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; margin-bottom: 1rem; }
@@ -1179,7 +1218,7 @@
   .xs-kpi.k-good { border-top-color: var(--xs-good); } .xs-kpi.k-good b { color: var(--xs-good); }
   .xs-kpi.k-all { border-top-color: var(--xs-petrol); } .xs-kpi.k-all b { color: var(--xs-petrol); }
   .xs-warn { border: 1px solid var(--xs-terra); background: #fbf1ea; color: #6b3a1f; border-radius: 4px; padding: 0.4em 0.7em; margin: 0.5em 0 0; font-size: 0.92em; }
-  .xs-row { display: grid; grid-template-columns: 3.4em minmax(0, 1fr) 8.6em; gap: 0.6em; padding: 0.3em 0 0.3em 0.55em; border-bottom: 1px solid var(--xs-line); border-left: 3px solid var(--xs-line); break-inside: avoid; }
+  .xs-row { display: grid; grid-template-columns: 3.4em minmax(0, 1fr) 10.6em; gap: 0.6em; padding: 0.3em 0 0.3em 0.55em; border-bottom: 1px solid var(--xs-line); border-left: 3px solid var(--xs-line); break-inside: avoid; }
   .xs-row.st-urgent { border-left-color: var(--xs-urgent); }
   .xs-row.st-watch { border-left-color: var(--xs-watch); }
   .xs-row.st-good { border-left-color: var(--xs-good); }
@@ -1274,7 +1313,7 @@
         <h2>Pourquoi cet outil existe</h2>
         <p>Tout Roule n'est pas un audit de plus. C'est un outil que <strong>vous</strong> utilisez vous-même, thématique par thématique, pour transformer un diagnostic en actions réellement suivies — pas un rapport qu'on referme après la réunion de restitution.</p>
         <p>Il applique la posture qui structure tout l'accompagnement d'ActivESS Conseil : ce n'est ni nous qui décidons pour vous, ni nous qui remplissons l'outil à votre place. C'est votre conseil d'administration, votre direction et vos équipes qui s'en emparent, le mettent à jour, et en gardent la maîtrise longtemps après une mission.</p>
-        <p>Les données affichées par défaut sont celles d'un exemple fictif (« Racines &amp; Chemins »), pour que l'outil se présente déjà rempli plutôt que vide. Onze thématiques reposent déjà sur une vraie méthodologie sourcée — les deux autres restent à enrichir, thématique par thématique, avec vos diagnostics réels.</p>
+        <p>Les données affichées par défaut sont celles d'un exemple fictif (« Racines &amp; Chemins »), pour que l'outil se présente déjà rempli plutôt que vide. Douze thématiques reposent déjà sur une vraie méthodologie sourcée — la dernière reste à enrichir, thématique par thématique, avec vos diagnostics réels.</p>
       </div>
       <div class="posture-card">
         <p class="pc-eyebrow">Notre conviction</p>
@@ -1324,9 +1363,9 @@
 
   <section class="page-view" data-page="themes" hidden>
     <header class="head">
-      <p class="eyebrow">ActivESS Conseil · Douze axes de pilotage</p>
+      <p class="eyebrow">ActivESS Conseil · Treize axes de pilotage, quatre piliers</p>
       <h1>Les 13 thématiques</h1>
-      <p class="lede">Chaque thématique couvre une dimension du pilotage d'une structure ESS/IAE. Certaines s'appuient déjà sur une méthodologie sourcée ; les autres sont des questionnaires construits en interne, à enrichir progressivement.</p>
+      <p class="lede">Chaque thématique couvre une dimension du pilotage d'une structure ESS/IAE. Certaines s'appuient déjà sur une méthodologie sourcée ; les autres sont des questionnaires construits en interne, à enrichir progressivement. Les thématiques sont regroupées en quatre piliers, du plus vital au plus différable : c'est l'ordre dans lequel nous recommandons de les traiter.</p>
     </header>
     <div class="themes-grid" id="themes-grid"></div>
   </section>
@@ -1335,7 +1374,7 @@
     <header class="head">
       <p class="eyebrow">ActivESS Conseil · Accès direct</p>
       <h1>Questionnaires</h1>
-      <p class="lede">Un accès direct à chaque questionnaire, avec son statut actuel. Cliquez une thématique pour ouvrir sa fiche : diagnostic, actions et tâches de cette thématique uniquement.</p>
+      <p class="lede">Un accès direct à chaque questionnaire, avec son statut actuel. Cliquez une thématique pour ouvrir sa fiche : diagnostic, actions et tâches de cette thématique uniquement. Les questionnaires suivent les quatre piliers de priorité.</p>
     </header>
     <div class="quest-list" id="quest-list"></div>
   </section>
@@ -1423,6 +1462,12 @@
         </div>
 
         <div id="dashboard-view" hidden>
+          <div class="dash-group-row"><span class="dash-group-label">Regrouper</span>
+            <div class="view-toggle" role="group" aria-label="Regroupement du tableau de bord">
+              <button type="button" class="group-btn" data-group="pillar">Par pilier</button>
+              <button type="button" class="group-btn" data-group="status">Par statut</button>
+            </div>
+          </div>
           <div class="kanban" id="kanban-root"></div>
         </div>
       </div>
@@ -1431,7 +1476,7 @@
     </div>
 
     <footer class="note">
-      <strong>Prochaine étape :</strong> remplacer ces données d'exemple par vos diagnostics réels, thématique par thématique, à partir des sources que vous m'enverrez. Onze thématiques utilisent déjà une vraie méthodologie : « Maturité numérique » (autodiagnostic Solidatech, 2020), « Pilotage économique » (DiagFlash, France Active Nouvelle-Aquitaine / INAÉ), « Projet associatif et projet d'insertion » (CNAR Sport / CNOSF, Ligue de l'enseignement), « Responsabilité territoriale, utilité sociale et impact » (COORACE, Avise, réseau Chantier École) « Plan de montée en compétences / GPEC » (ARSARA, adapté ; Code du travail), « Qualité de vie au travail » (CIDES / CHORUM, Malakoff Humanis, ARSARA ; Code du travail), « Ressources humaines » (ARSARA, adapté ; Code du travail et Code de la sécurité sociale ; convention collective des ACI à titre d'exemple), « Impact environnemental » (axes du guide TEDDA ; Code de l'environnement et Code du travail ; Trackdéchets), « Relations partenariales et institutionnelles » (guide COORACE/VITA ; guide PIC n° 6 ; Code de la commande publique ; contrat d'engagement républicain), « Gouvernance associative » (Gouvernomètre : INAÉ, EILAN Conseil, DLA, France Active Nouvelle-Aquitaine, CRESS Nouvelle-Aquitaine, Le Mouvement associatif Nouvelle-Aquitaine, Guid'Asso ; questions complémentaires : Fédération des acteurs de la solidarité, JF Conseil) et « Sécurité économique et continuité d'activité » (SGDSN, SISSE / DGE). Sur « Pilotage économique », vous pouvez désormais saisir vos propres chiffres de bilan et de compte de résultat (bouton dans la fiche ECO) : le diagnostic, les actions et les tâches sont recalculés automatiquement selon les formules DiagFlash. Les 2 autres thématiques restent illustratives en attendant leurs sources. La structure (roue à 3 anneaux, 13 thématiques) reste la même — seul le contenu change.
+      <strong>Prochaine étape :</strong> remplacer ces données d'exemple par vos diagnostics réels, thématique par thématique, à partir des sources que vous m'enverrez. Douze thématiques utilisent déjà une vraie méthodologie : « Maturité numérique » (autodiagnostic Solidatech, 2020), « Pilotage économique » (DiagFlash, France Active Nouvelle-Aquitaine / INAÉ), « Projet associatif et projet d'insertion » (CNAR Sport / CNOSF, Ligue de l'enseignement), « Responsabilité territoriale, utilité sociale et impact » (COORACE, Avise, réseau Chantier École) « Plan de montée en compétences / GPEC » (ARSARA, adapté ; Code du travail), « Qualité de vie au travail » (CIDES / CHORUM, Malakoff Humanis, ARSARA ; Code du travail), « Ressources humaines » (ARSARA, adapté ; Code du travail et Code de la sécurité sociale ; convention collective des ACI à titre d'exemple), « Impact environnemental » (axes du guide TEDDA ; Code de l'environnement et Code du travail ; Trackdéchets), « Relations partenariales et institutionnelles » (guide COORACE/VITA ; guide PIC n° 6 ; Code de la commande publique ; contrat d'engagement républicain), « Communication et image » (plan de communication ; CNIL ; associations.gouv.fr ; Code civil, Code pénal et Code de la propriété intellectuelle), « Gouvernance associative » (Gouvernomètre : INAÉ, EILAN Conseil, DLA, France Active Nouvelle-Aquitaine, CRESS Nouvelle-Aquitaine, Le Mouvement associatif Nouvelle-Aquitaine, Guid'Asso ; questions complémentaires : Fédération des acteurs de la solidarité, JF Conseil) et « Sécurité économique et continuité d'activité » (SGDSN, SISSE / DGE). Sur « Pilotage économique », vous pouvez désormais saisir vos propres chiffres de bilan et de compte de résultat (bouton dans la fiche ECO) : le diagnostic, les actions et les tâches sont recalculés automatiquement selon les formules DiagFlash. La dernière thématique (« Labellisation et réseaux ») reste illustrative en attendant ses sources. La structure (roue à 3 anneaux, 13 thématiques) reste la même — seul le contenu change.
     </footer>
   </section>
 
@@ -2268,13 +2313,113 @@
  "com": [
   {
    "t": "Comment faire un plan de communication",
-   "p": "présentation de Chrystel Skowron, Côte-d'Or Tourisme",
+   "p": "Chrystel Skowron, Côte-d'Or Tourisme",
    "y": "mars 2012",
+   "a": "check",
+   "use": "used",
+   "u": "",
+   "n": "Support de 17 pages, issu du secteur du tourisme : les sept questions (quoi, pourquoi, à qui, combien, comment, quand, avec qui) et la règle de dépenser moins que ce que la communication rapporte sont reprises. Ses conseils sur les médias de 2012 sont dépassés. Diffusion et droits non vérifiés.",
+   "v": "Fichier de ton dossier lu le 05/11/2026."
+  },
+  {
+   "t": "Le guide du chef d'entreprise — fiches réseaux sociaux, RGPD, nom de domaine",
+   "p": "Cabinet d'expertise comptable (éditeur non nommé dans le fichier)",
+   "y": "édition 2025",
+   "a": "check",
+   "use": "used",
+   "u": "",
+   "n": "Guide de 88 pages distribué par un cabinet à ses clients. Seules les idées générales sont reprises (être actif sur un réseau, répondre aux critiques, vérifier l'antériorité d'un nom de domaine). Le prix d'un nom de domaine et les chiffres de fréquentation des réseaux sont datés : non repris. Droits non précisés.",
+   "v": "Fichier de ton dossier lu le 05/11/2026."
+  },
+  {
+   "t": "Guide de sensibilisation au RGPD pour les associations",
+   "p": "CNIL",
+   "y": "date d'édition non visible",
+   "a": "free",
+   "use": "used",
+   "u": "https://www.cnil.fr/sites/default/files/atoms/files/cnil-guide_association.pdf",
+   "n": "Registre (une fiche par fichier), information à la collecte, durée de conservation (exemple : trois ans après la fin de l'adhésion), sécurité, notification d'une violation sous 72 heures, droits des personnes. Écrit pour les associations ; les principes valent aussi pour une société, mais le DPO et d'autres points peuvent différer. Les passages sur les photos et vidéos n'ont été lus que dans un résumé.",
+   "v": "PDF lu le 05/11/2026 : aucune mention de licence ; lecture partielle (environ 80 % du texte)."
+  },
+  {
+   "t": "Questions-réponses sur les lignes directrices modificatives et la recommandation « cookies et autres traceurs »",
+   "p": "CNIL",
+   "y": "29 avril 2026",
+   "a": "free",
+   "use": "used",
+   "u": "https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookies/FAQ",
+   "n": "La poursuite de la navigation n'est pas un consentement ; la mesure d'audience est exemptée sous conditions (statistiques anonymes, pour le seul compte de l'éditeur) ; conserver le choix de l'internaute six mois est présenté comme une bonne pratique. La durée maximale de conservation des traceurs n'a pas été trouvée.",
+   "v": "Page lue le 05/11/2026 : aucune mention de licence ; seconde moitié lue dans un résumé."
+  },
+  {
+   "t": "Le droit à l'image",
+   "p": "associations.gouv.fr (ministère chargé de la Vie associative)",
+   "y": "date non visible",
+   "a": "open",
+   "use": "used",
+   "u": "https://associations.gouv.fr/le-droit-limage",
+   "n": "Autorisation écrite avant toute captation ; consentement libre, spécifique et éclairé ; l'autorisation précise les supports, les finalités, la durée et la zone de diffusion. Destiné aux associations ; le cas des mineurs n'y est pas traité.",
+   "v": "Page lue le 05/11/2026 : licence etalab-2.0 indiquée en pied de page."
+  },
+  {
+   "t": "Droit d'auteur et droit à l'image",
+   "p": "associations.gouv.fr",
+   "y": "date non visible",
+   "a": "open",
+   "use": "used",
+   "u": "https://associations.gouv.fr/droit-dauteur-et-droit-limage",
+   "n": "Reproduction sans accord illicite, sauf exceptions (citation, copie privée) ; société de gestion citée pour la musique. La page évoque aussi un accord tacite sous 30 jours pour des coordonnées personnelles : à ne pas appliquer sans conseil. Polices et musiques ne sont pas traitées en détail.",
+   "v": "Page lue le 05/11/2026 : licence etalab-2.0 indiquée en pied de page."
+  },
+  {
+   "t": "Code civil, article 9 ; Code pénal, article 226-1 ; Code de la propriété intellectuelle, article L122-4",
+   "p": "Légifrance (Secrétariat général du Gouvernement, DILA)",
+   "y": "relus le 05/11/2026",
+   "a": "open",
+   "use": "used",
+   "u": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419288",
+   "n": "Respect de la vie privée ; fixer ou diffuser l'image d'une personne dans un lieu privé sans son consentement est puni d'un an d'emprisonnement et de 45 000 euros d'amende ; toute reproduction d'une œuvre sans l'accord de son auteur est illicite. Les deux autres articles sont dans le Code pénal (LEGITEXT000006070719) et le Code de la propriété intellectuelle (LEGITEXT000006069414).",
+   "v": "Légifrance : contenus sous licence etalab-2.0 sauf mention contraire (mentions légales du site lues le 05/11/2026)."
+  },
+  {
+   "t": "Accessibilité numérique — champ d'application du RGAA",
+   "p": "DINUM — accessibilite.numerique.gouv.fr",
+   "y": "RGAA 4 : mis à jour le 18/04/2023",
+   "a": "open",
+   "use": "used",
+   "u": "https://accessibilite.numerique.gouv.fr/obligations/champ-application/",
+   "n": "Sont tenus notamment les organismes publics et les entreprises à partir de 250 millions d'euros de chiffre d'affaires ; les organismes privés à but non lucratif sans service essentiel au public en sont exclus. La directive européenne applicable depuis juin 2025 n'a pas été vérifiée : à lire avant d'affirmer qu'un site n'est pas concerné.",
+   "v": "Page lue le 05/11/2026 : licence etalab-2.0 indiquée."
+  },
+  {
+   "t": "Loi n° 2004-575 du 21 juin 2004 (LCEN), article 6 — mentions légales d'un site",
+   "p": "Légifrance",
+   "y": "non relue",
    "a": "check",
    "use": "avail",
    "u": "",
-   "n": "Support de 17 pages dans ton dossier, issu du secteur du tourisme. Diffusion et droits non vérifiés.",
-   "v": "Fichier de ton dossier lu."
+   "n": "Référence vue citée dans un article du Code pénal ; aucune page officielle sur les mentions légales d'un site n'a pu être lue. À relire sur Légifrance avant d'affirmer le contenu de l'obligation, notamment pour une société ou une association.",
+   "v": "Aucune page officielle retrouvée le 05/11/2026 (service-public.gouv.fr : page non retrouvée ; associations.gouv.fr : aucune page dédiée aux sites web)."
+  },
+  {
+   "t": "Engagement collaborateur, fidélisation et performance : un trio gagnant ?",
+   "p": "LumApps (éditeur de logiciel)",
+   "y": "2023",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Livre blanc d'éditeur de logiciel de communication interne, mention « Tous droits réservés ». Non utilisé comme source : ses chiffres (Gallup, JLL) ne sont pas repris. À lire de façon critique.",
+   "v": "Fichier de ton dossier lu le 05/11/2026."
+  },
+  {
+   "t": "Guide pratique du travail collaboratif : théories, méthodes et outils",
+   "p": "Alexandre Piquet, service « Internet et Expression Multimédia », Brest",
+   "y": "août 2009",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Guide de 80 pages écrit pour un groupe de communication d'un réseau associatif ; outils largement dépassés. Non utilisé comme source ; la typologie des outils reste un cadre de lecture.",
+   "v": "Fichier de ton dossier lu le 05/11/2026."
   }
  ],
  "lab": []
@@ -2710,16 +2855,53 @@
           task: { task: "Bilan annuel aux financeurs et partenaires principaux", period: "T4", responsible: "Direction" } }
       ] },
     { id: "com", code: "COM", label: "Communication et image",
+      source: "Questionnaire construit à partir de cinq sources reformulées pour une structure ESS ou IAE : (1) la présentation « Comment faire un plan de communication » (Côte-d'Or Tourisme, mars 2012), dont est reprise la méthode en questions (quoi, pourquoi, à qui, combien, comment, quand, avec qui) ; ce support vient du secteur du tourisme et date de 2012 : ses conseils sur les médias sont dépassés, seule la méthode est utilisée ; (2) le « Guide du chef d'entreprise » d'un cabinet d'expertise (édition 2025) pour les réseaux sociaux, le nom de domaine et la protection de la marque ; (3) le guide de sensibilisation au RGPD pour les associations de la CNIL (date d'édition non visible) et la FAQ de la CNIL sur les cookies et autres traceurs (29/04/2026) ; (4) les pages « Le droit à l'image » et « Droit d'auteur et droit à l'image » d'associations.gouv.fr, sous licence Etalab 2.0, et la page sur le champ d'application du RGAA d'accessibilite.numerique.gouv.fr ; (5) le Code civil (article 9), le Code pénal (article 226-1) et le Code de la propriété intellectuelle (article L122-4), relus sur Légifrance le 05/11/2026. Non vérifiés : le texte de l'article 6 de la loi du 21 juin 2004 sur les mentions légales d'un site, la directive européenne sur l'accessibilité applicable depuis juin 2025, la page de la CNIL sur le registre des traitements et la durée maximale de conservation des traceurs. Outil d'aide à la décision, sans valeur d'avis juridique : les obligations dépendent du statut (association ou société), de la taille et du site ; confirme-les auprès de la CNIL, de ton réseau ou d'un conseil.",
       questions: [
-        { q: "Le site internet est-il à jour ?", a: "non_besoin",
-          action: "Refondre le site internet",
-          task: { task: "Refonte du site internet", period: "T1-T2", responsible: "Communication" } },
-        { q: "La structure est-elle présente et active sur au moins un réseau social ?", a: "non_besoin",
-          action: "Créer une présence active sur un réseau social pertinent",
-          task: { task: "Lancement présence réseau social", period: "T2", responsible: "Communication" } },
-        { q: "Une communication interne régulière (lettre, réunion) existe-t-elle ?", a: "oui",
-          action: "Mettre en place une lettre d'information interne trimestrielle",
-          task: { task: "Lancement de la lettre interne", period: "T3", responsible: "Direction" } }
+        { q: "Un plan de communication écrit existe-t-il pour l'année, avec des objectifs, des cibles, des messages, des supports, un budget, un calendrier et les personnes chargées de chaque action ?", a: "non_besoin",
+          action: "Rédiger un plan d'une à deux pages en reprenant les sept questions de la méthode : quoi, pourquoi, à qui, combien, comment, quand, avec qui ; le tenir comme carnet de bord de l'année et le relire en fin d'exercice",
+          task: { task: "Rédaction du plan de communication annuel", period: "T1", responsible: "Direction / Communication" } },
+        { q: "Les cibles de la communication externe sont-elles distinguées (financeurs et institutions, prescripteurs, clients et donneurs d'ordre, entreprises partenaires, candidats et salariés en parcours, grand public), avec un message adapté à chacune et des relais identifiés (réseau, fédération, presse locale) ?", a: "en_cours",
+          action: "Dresser un tableau cible, message, support, relais ; commencer par son propre réseau, qui est le premier prescripteur ; ne pas utiliser le même message pour un financeur et pour un candidat",
+          task: { task: "Tableau des cibles, messages et relais", period: "T1", responsible: "Direction / Communication" } },
+        { q: "L'identité de la structure est-elle stable et protégée : nom, logo et charte graphique documentés, nom de domaine enregistré au nom de la structure, recherche d'antériorité faite avant de déposer le nom comme marque ?", a: "ne_sait_pas",
+          action: "Vérifier que le nom de domaine est au nom de la structure et renouvelé, documenter la charte graphique, et faire une recherche d'antériorité avant tout dépôt de marque (coût de dépôt à demander à l'INPI)",
+          task: { task: "Vérification du nom de domaine, de la charte et de la marque", period: "T2", responsible: "Direction" } },
+        { q: "Le site internet présente-t-il des informations vérifiées et mises à jour dans les 12 derniers mois (offres, coordonnées, actualités, partenaires), avec une personne chargée de les actualiser et des mentions légales visibles (éditeur, hébergeur, responsable de la publication) ?", a: "non_besoin",
+          action: "Désigner un responsable du site, planifier une revue trimestrielle des contenus et contrôler les mentions légales ; l'obligation relève de la loi du 21 juin 2004 (article 6), non relue lors de la préparation de cet outil",
+          task: { task: "Revue trimestrielle du site et des mentions légales", period: "T1-T2", responsible: "Direction / Communication" } },
+        { q: "Les fichiers contenant des données personnelles (contacts, newsletters, clients ou adhérents, candidats, salariés en parcours, photos) sont-ils recensés dans un registre indiquant la finalité, les personnes qui y accèdent, la durée de conservation et la sécurité, et les personnes sont-elles informées à la collecte ?", a: "en_cours",
+          action: "Tenir un registre simple d'une fiche par fichier, informer à la collecte, fixer une durée de conservation (la CNIL cite l'exemple de trois ans après la fin de l'adhésion pour un ancien adhérent), clore les accès d'un salarié ou d'un bénévole qui part, et notifier la CNIL dans les 72 heures d'une violation présentant un risque (guide CNIL pour les associations)",
+          task: { task: "Registre des fichiers de données personnelles", period: "T2", responsible: "Direction / Administration" } },
+        { q: "Le site demande-t-il un consentement avant tout cookie ou traceur non essentiel (publicité, vidéos et boutons de réseaux sociaux, statistiques non exemptées), sans prendre la simple poursuite de la navigation pour un accord, et la mesure d'audience respecte-t-elle les conditions d'exemption de la CNIL ?", a: "ne_sait_pas",
+          action: "Lister les traceurs réellement déposés par le site, configurer un bandeau avec un acte positif clair et vérifier les conditions d'exemption de la mesure d'audience (statistiques anonymes, pour le seul compte de l'éditeur) dans la FAQ de la CNIL du 29/04/2026",
+          task: { task: "Audit des cookies et configuration du consentement", period: "T2", responsible: "Direction / Référent numérique" } },
+        { q: "Une autorisation écrite précisant les supports, les finalités, la durée et la zone de diffusion est-elle recueillie avant de publier la photo ou la vidéo d'une personne (salarié, salarié en parcours, bénévole, usager, mineur avec les titulaires de l'autorité parentale) ?", a: "en_cours",
+          action: "Utiliser un formulaire d'autorisation avec supports, finalités, durée, zone de diffusion et droit de retrait ; le consentement doit être libre : un salarié en parcours doit pouvoir refuser sans crainte (Code civil, article 9 ; Code pénal, article 226-1 ; associations.gouv.fr)",
+          task: { task: "Formulaire d'autorisation d'image et classement des accords", period: "T1", responsible: "Direction / Communication" } },
+        { q: "Les images, musiques, polices et textes publiés sont-ils créés par la structure, achetés ou utilisés avec une licence ou une autorisation, et la source et la licence de chaque visuel sont-elles notées ?", a: "ne_sait_pas",
+          action: "Tenir un tableau des visuels (source, licence, date), privilégier les créations propres et les banques d'images à licence claire ; toute reproduction sans l'accord de l'auteur est illicite (Code de la propriété intellectuelle, L122-4)",
+          task: { task: "Tableau des visuels et de leurs licences", period: "T2", responsible: "Communication" } },
+        { q: "La structure est-elle présente sur le ou les réseaux sociaux utiles à ses cibles (par exemple un réseau professionnel pour les financeurs et les entreprises), avec une personne responsable, un rythme de publication tenable et une réponse aux commentaires et aux messages ?", a: "en_cours",
+          action: "Choisir un ou deux réseaux selon les cibles plutôt que d'être partout, fixer un rythme réaliste et un délai de réponse aux messages, et suivre les comptes régulièrement : être présent sans être actif ne sert pas la stratégie",
+          task: { task: "Choix des réseaux, rythme de publication et responsable", period: "T1", responsible: "Direction / Communication" } },
+        { q: "Les règles de prise de parole sont-elles claires : qui parle au nom de la structure, ce que peuvent publier les salariés et les bénévoles sur la structure, et la conduite à tenir en cas de critique publique ou d'incident (réponse mesurée, sans nier l'évidence) ?", a: "non_besoin",
+          action: "Désigner un porte-parole et un suppléant, rédiger une charte d'expression d'une page et préparer une réponse type en cas de critique ou d'incident ; répondre sans surenchère et sans nier les faits établis",
+          task: { task: "Charte d'expression et désignation du porte-parole", period: "T3", responsible: "Direction / CA" } },
+        { q: "La structure entretient-elle des relations régulières avec la presse locale et avec les relais de son réseau (CRESS, fédération, collectivités, clubs d'entreprises) pour faire connaître ses résultats et ses événements ?", a: "ne_sait_pas",
+          action: "Établir une liste de dix contacts presse et relais, leur transmettre deux ou trois informations par an (résultat, événement, témoignage) et mutualiser avec le réseau d'appartenance",
+          task: { task: "Liste de contacts presse et relais, premier envoi", period: "T3", responsible: "Direction / Communication" } },
+        { q: "La communication interne est-elle organisée (point d'équipe régulier, affichage, comptes rendus du CA et des instances diffusés, outil partagé) et atteint-elle aussi les encadrants et salariés sans poste informatique ?", a: "oui",
+          action: "Fixer un rythme de réunions et d'affichage, diffuser un compte rendu court après chaque CA ou instance, et vérifier que l'information arrive sur le terrain ; le livre blanc LumApps (2023) et le guide du travail collaboratif (2009) de ton dossier sont à lire de façon critique",
+          task: { task: "Rythme de communication interne et compte rendu des instances", period: "T1", responsible: "Direction / Encadrants" } },
+        { q: "Les supports sont-ils lisibles par tous les publics de la structure (langage clair, contrastes et taille de police, sous-titres des vidéos, version papier ou orale pour les personnes en difficulté avec l'écrit ou le numérique), et la structure sait-elle si une obligation d'accessibilité numérique s'applique à son site ?", a: "en_cours",
+          action: "Tester trois supports clés avec des salariés en parcours, sous-titrer les vidéos et prévoir une version papier ou orale ; le RGAA s'impose notamment aux organismes publics et aux entreprises de plus de 250 millions d'euros de chiffre d'affaires, et exclut les organismes privés à but non lucratif sans service essentiel ; la directive européenne de 2025 n'a pas été vérifiée",
+          task: { task: "Test d'accessibilité de trois supports avec les salariés en parcours", period: "T3", responsible: "Direction / Conseillers en insertion" } },
+        { q: "Un budget annuel de communication, un temps de travail dédié et quelques indicateurs simples (visites du site, abonnés, demandes entrantes, candidatures, contacts de financeurs) sont-ils définis et revus au moins chaque trimestre ?", a: "non_besoin",
+          action: "Fixer un budget et un temps hebdomadaire, suivre quatre indicateurs maximum dans un tableau partagé et revoir chaque trimestre ce qui rapporte ; règle de la méthode : la communication doit rapporter plus qu'elle ne coûte",
+          task: { task: "Budget, temps dédié et tableau de suivi de la communication", period: "T1", responsible: "Direction / Trésorier" } },
+        { q: "La structure communique-t-elle sur ses résultats d'insertion et son utilité sociale avec des chiffres datés et sourcés, des témoignages donnés avec accord écrit, et sans promesse qu'elle ne peut pas tenir ?", a: "en_cours",
+          action: "Choisir trois chiffres clés datés (voir la thématique « Responsabilité territoriale, utilité sociale et impact »), recueillir des témoignages avec autorisation écrite et relire chaque message avec la direction avant diffusion",
+          task: { task: "Trois chiffres clés et témoignages autorisés", period: "T3", responsible: "Direction / Communication" } }
       ] },
     { id: "lab", code: "LAB", label: "Labellisation et réseaux",
       questions: [
@@ -3318,6 +3500,59 @@
   }
 
 
+
+  // --- Piliers de priorité et score ---
+  var PILLARS = [
+    { n: 1, name: "Fondations", why: "Sans trésorerie saine ni gouvernance qui décide, aucun autre chantier ne se finance ni ne se valide.", themes: ["eco", "gouv"] },
+    { n: 2, name: "Obligations et personnes", why: "Obligations légales, santé des équipes, continuité d'activité : le risque se paie en contentieux, en arrêts, en interruption.", themes: ["rh", "qvt", "sec"] },
+    { n: 3, name: "Modèle et ancrage", why: "Ce qui fait vivre le projet dans la durée : financeurs et partenaires, projet d'insertion, utilité sociale, compétences.", themes: ["part", "ins", "terr", "comp"] },
+    { n: 4, name: "Transitions et visibilité", why: "Importantes, mais décalables sans mettre la structure en danger à court terme : numérique, environnement, communication, labels.", themes: ["num", "env", "com", "lab"] }
+  ];
+  var PRIO_WEIGHT = { eco: 3, gouv: 2.5, rh: 2, sec: 2, qvt: 1.5, part: 1.5 };
+  var PRIO_RULE = "Score de priorité = poids de criticité × (3 × besoins + points en cours). Poids : ECO 3, GOUV 2,5, RH et SEC 2, QVT et PART 1,5, autres 1 ; GOUV reçoit en plus 3 points (zone « vigilances ») ou 6 points (zone « risques élevés ») du Gouvernomètre. Poids et seuils sont des hypothèses d'ActivESS Conseil, pas une norme.";
+  function themeById(id) { return DATA.filter(function (t) { return t.id === id; })[0]; }
+  function pillarOf(id) { return PILLARS.filter(function (p) { return p.themes.indexOf(id) >= 0; })[0]; }
+  function prioScore(theme) {
+    var gaps = 0, prog = 0;
+    theme.questions.forEach(function (x) {
+      if (x.a === "non_besoin" || x.a === "grave" || x.a === "tres_grave") gaps++;
+      else if (x.a === "en_cours" || x.a === "ne_sait_pas" || x.a === "preoccupant") prog++;
+    });
+    var pts = 3 * gaps + prog;
+    if (theme.gouvernometre && theme.gvPos) {
+      var z = gvZoneIndex(theme.gvPos);
+      if (z === 1) pts += 3; else if (z === 2) pts += 6;
+    }
+    return Math.round(pts * (PRIO_WEIGHT[theme.id] || 1) * 10) / 10;
+  }
+  function prioRanks() {
+    var list = DATA.map(function (t) { return { id: t.id, score: prioScore(t), pillar: pillarOf(t.id).n, idx: pillarOf(t.id).themes.indexOf(t.id) }; });
+    list.sort(function (a, b) { return b.score - a.score || a.pillar - b.pillar || a.idx - b.idx; });
+    var out = {};
+    var rank = 0;
+    list.forEach(function (x) { out[x.id] = { score: x.score, rank: x.score > 0 ? ++rank : 0 }; });
+    return out;
+  }
+  function fmtScore(n) { return String(n).replace(".", ","); }
+  function pillarStatusLine(p) {
+    var c = { urgent: 0, watch: 0, good: 0 };
+    p.themes.forEach(function (id) { var t = themeById(id); if (t) c[t.status]++; });
+    var bits = [];
+    if (c.urgent) bits.push(c.urgent + " urgente" + (c.urgent > 1 ? "s" : ""));
+    if (c.watch) bits.push(c.watch + " en progrès");
+    if (c.good) bits.push(c.good + " maîtrisée" + (c.good > 1 ? "s" : ""));
+    var filled = p.themes.filter(function (id) { var t = themeById(id); return t && t.isUserData; }).length;
+    bits.push(filled + "/" + p.themes.length + " remplis");
+    return bits.join(" · ");
+  }
+  function pillarHeadHtml(p, tag, withStat) {
+    return "<header class=\"pillar-head\"><span class=\"pillar-n\" aria-hidden=\"true\">" + p.n + "</span><div>" +
+      "<" + tag + " class=\"pillar-title\">Pilier " + p.n + " · " + p.name + "</" + tag + ">" +
+      "<p class=\"pillar-why\">" + p.why + "</p>" +
+      (withStat ? "<p class=\"pillar-stat\">" + pillarStatusLine(p) + "</p>" : "") +
+    "</div></header>";
+  }
+
   // --- Résumé exécutif (une page A4) ---
   var XS_RANK = { tres_grave: 0, grave: 1, non_besoin: 2, preoccupant: 3, en_cours: 4, ne_sait_pas: 5 };
   function xsEsc(t) {
@@ -3378,8 +3613,7 @@
   }
   function buildExecSheet() {
     var idn = (typeof identity !== "undefined" && identity) ? identity : { structure: "", person: "", date: "" };
-    var order = { urgent: 0, watch: 1, good: 2 };
-    var themes = DATA.slice().sort(function (a, b) { return order[a.status] - order[b.status] || b.gaps - a.gaps; });
+    var ranks = prioRanks();
     var counts = { urgent: 0, watch: 0, good: 0 };
     var userN = 0, sourcedN = 0, doneAll = 0, denomAll = 0, q = { 1: 0, 2: 0, 3: 0, 4: 0 };
     var illu = [];
@@ -3394,31 +3628,39 @@
       (t.tasks || []).forEach(function (tk) { var m = /T([1-4])/.exec(tk.period || ""); if (m) q[m[1]]++; });
     });
     var globalPct = denomAll ? Math.round((doneAll / denomAll) * 100) : 0;
-    var urgentCodes = themes.filter(function (t) { return t.status === "urgent"; }).map(function (t) { return t.code; });
-    var watchCodes = themes.filter(function (t) { return t.status === "watch"; }).map(function (t) { return t.code; });
+    var top = DATA.filter(function (t) { return ranks[t.id].rank > 0; }).sort(function (a, b) { return ranks[a.id].rank - ranks[b.id].rank; });
 
     var warn = "";
     if (userN < DATA.length) {
-      warn = "<p class=\"xs-warn\"><strong>À lire avant diffusion :</strong> " + (userN === 0 ? "aucune thématique n'est encore renseignée avec les réponses de la structure" : (DATA.length - userN) + " thématique" + (DATA.length - userN > 1 ? "s" : "") + " sur " + DATA.length + " reposent encore sur des données d'exemple") + ". Les statuts correspondants sont illustratifs et ne décrivent pas la situation réelle de la structure.</p>";
+      warn = "<p class=\"xs-warn\"><strong>À lire avant diffusion :</strong> " + (userN === 0 ? "aucune thématique n'est encore renseignée avec les réponses de la structure" : (DATA.length - userN) + " thématique" + (DATA.length - userN > 1 ? "s" : "") + " sur " + DATA.length + " reposent encore sur des données d'exemple") + ". Les statuts et les scores correspondants sont illustratifs et ne décrivent pas la situation réelle de la structure.</p>";
     }
 
-    var rows = themes.map(function (t) {
+    function rowHtml(t) {
       var inf = infos[t.id];
+      var pr = ranks[t.id];
       var base = t.isUserData ? "Vos réponses" + (t.dataDate ? " · " + xsEsc(t.dataDate) : "") : "Exemple";
       var label = { urgent: "Urgente", watch: "En progrès", good: "Maîtrisée" }[t.status];
+      var prio = pr.rank > 0 ? "<span class=\"xs-prio\">Priorité n° " + pr.rank + " · score " + fmtScore(pr.score) + "</span>" : "<span class=\"xs-pct\">Pas de priorité</span>";
       return "<div class=\"xs-row st-" + t.status + "\">" +
         "<div class=\"xs-code\">" + xsEsc(t.code) + "</div>" +
         "<div class=\"xs-main\"><div class=\"xs-title\">" + xsEsc(t.label) + "<span class=\"xs-base\">" + base + "</span></div>" +
           "<div class=\"xs-line\"><b>Pourquoi</b>" + xsEsc(inf.why) + "</div>" +
           "<div class=\"xs-line\"><b>À mener</b>" + xsEsc(inf.todo) + "</div></div>" +
-        "<div class=\"xs-side\"><span class=\"xs-pill\">" + label + "</span><div class=\"xs-bar\"><i style=\"width:" + inf.pct + "%\"></i></div><span class=\"xs-pct\">" + inf.pct + " % conforme</span></div>" +
+        "<div class=\"xs-side\"><span class=\"xs-pill\">" + label + "</span><div class=\"xs-bar\"><i style=\"width:" + inf.pct + "%\"></i></div><span class=\"xs-pct\">" + inf.pct + " % conforme</span><br>" + prio + "</div>" +
       "</div>";
+    }
+    var rows = PILLARS.map(function (p) {
+      var ths = p.themes.map(themeById).filter(Boolean).sort(function (a, b) { return ranks[b.id].score - ranks[a.id].score; });
+      return "<div class=\"xs-pillar\"><span class=\"xs-pn\">Pilier " + p.n + "</span><strong>" + xsEsc(p.name) + "</strong><span class=\"xs-pw\">" + xsEsc(p.why) + "</span></div>" + ths.map(rowHtml).join("");
     }).join("");
 
     var decisions = [];
-    if (urgentCodes.length) decisions.push("Arbitrer l'ordre de traitement des thématiques urgentes (" + urgentCodes.join(", ") + ") et n'en lancer qu'un nombre compatible avec la capacité de l'équipe.");
+    if (top.length) {
+      decisions.push("Traiter dans l'ordre du score de priorité : " + top.slice(0, 5).map(function (t) { return t.code + " (" + fmtScore(ranks[t.id].score) + ")"; }).join(", ") + (top.length > 5 ? "…" : ".") + " N'ouvrir en chantier que ce que l'équipe peut mener en parallèle ; les piliers 1 et 2 passent avant les piliers 3 et 4 à score voisin.");
+    } else {
+      decisions.push("Aucun besoin identifié : maintenir les pratiques et prévoir un point de suivi annuel au CA.");
+    }
     decisions.push("Valider un responsable et une échéance pour chaque tâche retenue ; charge positionnée par trimestre (première échéance) : T1 " + q[1] + " · T2 " + q[2] + " · T3 " + q[3] + " · T4 " + q[4] + ".");
-    if (watchCodes.length) decisions.push("Suivre en comité les thématiques en progrès (" + watchCodes.join(", ") + ") sans les ouvrir en chantier tant que les urgences ne sont pas traitées.");
     if (userN < DATA.length) decisions.push("Faire renseigner les questionnaires manquants par les personnes concernées avant de présenter ce résumé comme état des lieux.");
 
     var structure = idn.structure && idn.structure.trim() ? xsEsc(idn.structure.trim()) : "Structure non renseignée";
@@ -3429,7 +3671,7 @@
         "<div class=\"xs-id\"><strong>" + structure + "</strong><br>" + xsDateFr(idn.date) + person + "</div></div>" +
       "<div class=\"xs-body\">" +
         "<div class=\"xs-sec\">La démarche</div>" +
-        "<p>La structure est passée au crible de " + DATA.length + " thématiques de pilotage (projet, économie, ressources humaines, qualité de vie au travail, gouvernance, partenariats, environnement, numérique, sécurité…). Chaque questionnaire reprend des méthodes et des textes cités dans l'outil (" + sourcedN + " thématiques sur " + DATA.length + " sont sourcées" + (illu.length ? " ; " + illu.join(" et ") + " restent illustratives" : "") + "). Les réponses donnent un statut — <strong>urgente</strong> dès 2 besoins identifiés, <strong>en progrès</strong> dès 1 besoin ou 2 points en cours, <strong>maîtrisée</strong> sinon —, des actions à moyen terme et des tâches datées (T1 à T4) avec un responsable. « Conforme » : part des réponses positives, hors questions non concernées. Aide à la décision, pas un audit.</p>" +
+        "<p>La structure est passée au crible de " + DATA.length + " thématiques de pilotage, regroupées en quatre piliers du plus vital au plus différable. Chaque questionnaire reprend des méthodes et des textes cités dans l'outil (" + sourcedN + " thématiques sur " + DATA.length + " sont sourcées" + (illu.length ? " ; " + illu.join(" et ") + " restent illustratives" : "") + "). Les réponses donnent un statut — <strong>urgente</strong> dès 2 besoins identifiés, <strong>en progrès</strong> dès 1 besoin ou 2 points en cours, <strong>maîtrisée</strong> sinon —, un score de priorité, des actions à moyen terme et des tâches datées (T1 à T4) avec un responsable. « Conforme » : part des réponses positives, hors questions non concernées. Aide à la décision, pas un audit.</p>" +
         "<div class=\"xs-kpis\">" +
           "<div class=\"xs-kpi k-urgent\"><b>" + counts.urgent + "</b><span>thématiques urgentes</span></div>" +
           "<div class=\"xs-kpi k-watch\"><b>" + counts.watch + "</b><span>en progrès</span></div>" +
@@ -3441,7 +3683,7 @@
         "<div class=\"xs-sec\">Décisions attendues de la gouvernance</div>" +
         "<ol class=\"xs-dec\">" + decisions.map(function (d) { return "<li>" + xsEsc(d) + "</li>"; }).join("") + "</ol>" +
       "</div>" +
-      "<div class=\"xs-foot\">Synthèse générée automatiquement par Tout Roule à partir des réponses saisies dans ce navigateur. Outil d'aide à la décision, sans valeur d'avis juridique, comptable ou d'audit : les obligations légales citées dans les questionnaires dépendent de l'effectif, des sites et des financeurs. Sources détaillées : page « Ressources » de l'outil. ActivESS Conseil · www.activ-ess.fr</div>" +
+      "<div class=\"xs-foot\">" + xsEsc(PRIO_RULE) + " Synthèse générée automatiquement par Tout Roule à partir des réponses saisies dans ce navigateur. Outil d'aide à la décision, sans valeur d'avis juridique, comptable ou d'audit : les obligations légales citées dans les questionnaires dépendent de l'effectif, des sites et des financeurs. Sources : page « Ressources » de l'outil. ActivESS Conseil · www.activ-ess.fr</div>" +
     "</div>";
   }
   function renderExecSummary() {
@@ -3497,39 +3739,56 @@
     renderExecSummary();
   }
 
+  var dashGroup = "pillar";
+  try { var sg = localStorage.getItem("toutroule-dashgroup"); if (sg === "status" || sg === "pillar") dashGroup = sg; } catch (e) {}
+  function dashCardHtml(theme, ranks) {
+    var total = theme.questions.length;
+    var counts = {};
+    theme.questions.forEach(function (item) { counts[item.a] = (counts[item.a] || 0) + 1; });
+    var barHtml = ANSWER_ORDER.filter(function (k) { return counts[k] > 0; }).map(function (k) {
+      return "<span class=\"seg-" + k + "\" style=\"width:" + ((counts[k] / total) * 100) + "%\"></span>";
+    }).join("");
+    var nextAction = theme.actions && theme.actions[0] ? theme.actions[0] : "";
+    var selectedClass = theme.id === currentSelectedThemeId ? " is-selected" : "";
+    var pr = ranks[theme.id];
+    var rankHtml = pr && pr.rank > 0 ? "<span class=\"dc-rank\" title=\"Score de priorité " + fmtScore(pr.score) + "\">Priorité n° " + pr.rank + "</span>" : "";
+    return "<div class=\"dash-card status-" + theme.status + selectedClass + "\" data-id=\"" + theme.id + "\" tabindex=\"0\" role=\"button\" aria-label=\"" + theme.label + "\">" +
+      "<span class=\"dc-code\">" + theme.code + rankHtml + "</span>" +
+      "<p class=\"dc-label\">" + theme.label + "</p>" +
+      "<div class=\"dc-bar\">" + barHtml + "</div>" +
+      "<p class=\"dc-caption\">" + theme.gaps + " besoin" + (theme.gaps > 1 ? "s" : "") + " identifié" + (theme.gaps > 1 ? "s" : "") + " sur " + total + "</p>" +
+      (nextAction ? "<p class=\"dc-next\"><strong>Prochaine action —</strong> " + nextAction + "</p>" : "") +
+    "</div>";
+  }
   function renderDashboard() {
     var kanbanRoot = document.getElementById("kanban-root");
     if (!kanbanRoot) return;
-    var groups = [
-      { key: "urgent", label: "Urgentes" },
-      { key: "watch", label: "En progrès" },
-      { key: "good", label: "Maîtrisées" }
-    ];
-    kanbanRoot.innerHTML = groups.map(function (g) {
-      var themes = DATA.filter(function (t) { return t.status === g.key; });
-      var cardsHtml = themes.map(function (theme) {
-        var total = theme.questions.length;
-        var counts = {};
-        theme.questions.forEach(function (item) { counts[item.a] = (counts[item.a] || 0) + 1; });
-        var barHtml = ANSWER_ORDER.filter(function (k) { return counts[k] > 0; }).map(function (k) {
-          return "<span class=\"seg-" + k + "\" style=\"width:" + ((counts[k] / total) * 100) + "%\"></span>";
-        }).join("");
-        var nextAction = theme.actions && theme.actions[0] ? theme.actions[0] : "";
-        var selectedClass = theme.id === currentSelectedThemeId ? " is-selected" : "";
-        return "<div class=\"dash-card status-" + theme.status + selectedClass + "\" data-id=\"" + theme.id + "\" tabindex=\"0\" role=\"button\" aria-label=\"" + theme.label + "\">" +
-          "<span class=\"dc-code\">" + theme.code + "</span>" +
-          "<p class=\"dc-label\">" + theme.label + "</p>" +
-          "<div class=\"dc-bar\">" + barHtml + "</div>" +
-          "<p class=\"dc-caption\">" + theme.gaps + " besoin" + (theme.gaps > 1 ? "s" : "") + " identifié" + (theme.gaps > 1 ? "s" : "") + " sur " + total + "</p>" +
-          (nextAction ? "<p class=\"dc-next\"><strong>Prochaine action —</strong> " + nextAction + "</p>" : "") +
+    var ranks = prioRanks();
+    document.querySelectorAll(".group-btn").forEach(function (b) {
+      b.classList.toggle("is-active", b.getAttribute("data-group") === dashGroup);
+    });
+    if (dashGroup === "pillar") {
+      kanbanRoot.className = "kanban is-pillars";
+      kanbanRoot.innerHTML = PILLARS.map(function (p) {
+        return "<section class=\"pillar-block\">" + pillarHeadHtml(p, "h3", true) +
+          "<div class=\"pillar-cards\">" + p.themes.map(themeById).filter(Boolean).map(function (t) { return dashCardHtml(t, ranks); }).join("") + "</div></section>";
+      }).join("");
+    } else {
+      kanbanRoot.className = "kanban";
+      var groups = [
+        { key: "urgent", label: "Urgentes" },
+        { key: "watch", label: "En progrès" },
+        { key: "good", label: "Maîtrisées" }
+      ];
+      kanbanRoot.innerHTML = groups.map(function (g) {
+        var themes = DATA.filter(function (t) { return t.status === g.key; });
+        var cardsHtml = themes.map(function (t) { return dashCardHtml(t, ranks); }).join("") || "<p class=\"kanban-empty\">Aucune thématique</p>";
+        return "<div class=\"kanban-col\">" +
+          "<div class=\"kanban-col-head\"><span class=\"dot\" style=\"background:var(--status-" + g.key + ")\"></span>" + g.label + "<span class=\"count\">" + themes.length + "</span></div>" +
+          cardsHtml +
         "</div>";
-      }).join("") || "<p class=\"kanban-empty\">Aucune thématique</p>";
-      return "<div class=\"kanban-col\">" +
-        "<div class=\"kanban-col-head\"><span class=\"dot\" style=\"background:var(--status-" + g.key + ")\"></span>" + g.label + "<span class=\"count\">" + themes.length + "</span></div>" +
-        cardsHtml +
-      "</div>";
-    }).join("");
-
+      }).join("");
+    }
     kanbanRoot.querySelectorAll(".dash-card").forEach(function (card) {
       card.addEventListener("click", function () { selectTheme(card.getAttribute("data-id")); });
       card.addEventListener("keydown", function (e) {
@@ -3537,6 +3796,13 @@
       });
     });
   }
+  document.querySelectorAll(".group-btn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      dashGroup = b.getAttribute("data-group");
+      try { localStorage.setItem("toutroule-dashgroup", dashGroup); } catch (e) {}
+      renderDashboard();
+    });
+  });
 
   // --- Formulaire de saisie ECO ---
   function ecoFieldRowHtml(f) {
@@ -3737,23 +4003,27 @@
     rh: { meaning: "Recrutement, intégration, rémunération, formalités d'embauche, départs et remplacements, contrats d'insertion, obligations liées à l'effectif : ce thème couvre la gestion courante des ressources humaines. Les parcours professionnels relèvent de la thématique « Plan de montée en compétences » et le climat de travail de la « Qualité de vie au travail ».", sourceTag: "ARSARA (2017, adapté) · Code du travail · Légifrance" },
     env: { meaning: "Pilotage, déchets, produits dangereux, achats, énergie, mobilité, numérique, chantiers, aléas climatiques : ce thème regarde si la transition écologique reste un principe affiché ou devient une pratique de terrain, avec les obligations qui s'y attachent.", sourceTag: "TEDDA (axes) · Code de l'environnement · Code du travail · Trackdéchets" },
     part: { meaning: "Cartographie des partenaires, diversité des financeurs, conventions et subventions, marchés réservés et clauses sociales, relations aux entreprises, instances du territoire : ce thème mesure la solidité, la diversité et la formalisation du réseau qui soutient la structure.", sourceTag: "Guide COORACE/VITA · Guide PIC n° 6 · Code de la commande publique · Contrat d'engagement républicain" },
-    com: { meaning: "Site internet à jour, présence active sur un réseau social, communication interne régulière : ce thème couvre à la fois l'image renvoyée à l'extérieur et l'information qui circule en interne.", sourceTag: null },
+    com: { meaning: "Plan de communication, cibles et messages, site et mentions légales, données personnelles, cookies, droit à l'image et droit d'auteur, réseaux sociaux, prise de parole, communication interne, accessibilité : ce thème regarde si la structure se fait connaître avec méthode et dans le respect des règles, plutôt qu'au fil de l'eau.", sourceTag: "Plan de communication (Côte-d'Or Tourisme) · CNIL · associations.gouv.fr · Code civil, Code pénal, Code de la propriété intellectuelle" },
     lab: { meaning: "Adhésion à un réseau représentatif (CRESS, Coorace...), labels qualité à jour (Qualiopi), veille sur d'autres labels (ESUS) : ce thème vérifie que la structure entretient activement sa reconnaissance externe, plutôt que de la laisser expirer.", sourceTag: null }
   };
 
   function renderThemesPage() {
     var grid = document.getElementById("themes-grid");
     if (!grid) return;
-    grid.innerHTML = DATA.map(function (theme) {
-      var info = THEME_MEANING[theme.id] || { meaning: "", sourceTag: null };
-      var sourceHtml = info.sourceTag
-        ? "<p class=\"tc-source\">Source : <strong>" + info.sourceTag + "</strong></p>"
-        : "<p class=\"tc-source\">Questionnaire construit en interne, à enrichir</p>";
-      return "<div class=\"card theme-card\">" +
-        "<div class=\"tc-head\"><span class=\"tc-code\">" + theme.code + "</span><h3>" + theme.label + "</h3></div>" +
-        "<p>" + info.meaning + "</p>" +
-        sourceHtml +
-      "</div>";
+    grid.className = "";
+    grid.innerHTML = PILLARS.map(function (p) {
+      var cards = p.themes.map(themeById).filter(Boolean).map(function (theme) {
+        var info = THEME_MEANING[theme.id] || { meaning: "", sourceTag: null };
+        var sourceHtml = info.sourceTag
+          ? "<p class=\"tc-source\">Source : <strong>" + info.sourceTag + "</strong></p>"
+          : "<p class=\"tc-source\">Questionnaire construit en interne, à enrichir</p>";
+        return "<div class=\"card theme-card\">" +
+          "<div class=\"tc-head\"><span class=\"tc-code\">" + theme.code + "</span><h3>" + theme.label + "</h3></div>" +
+          "<p>" + info.meaning + "</p>" +
+          sourceHtml +
+        "</div>";
+      }).join("");
+      return "<section class=\"pillar-sec\">" + pillarHeadHtml(p, "h2", false) + "<div class=\"themes-grid\">" + cards + "</div></section>";
     }).join("");
   }
 
@@ -3771,16 +4041,31 @@
   function renderQuestPage() {
     var list = document.getElementById("quest-list");
     if (!list) return;
-    list.innerHTML = DATA.map(function (theme) {
-      var info = THEME_MEANING[theme.id] || { meaning: "" };
-      var teaser = (info.meaning || "").split(". ")[0];
-      if (teaser && !/[.!?]$/.test(teaser)) teaser += ".";
-      return "<button type=\"button\" class=\"quest-row\" data-goto-theme=\"" + theme.id + "\">" +
-        "<span class=\"qr-code\">" + theme.code + "</span>" +
-        "<span class=\"qr-text\"><span class=\"qr-label\">" + theme.label + "</span><span class=\"qr-teaser\">" + teaser + "</span></span>" +
-        "<span class=\"qr-status status-" + theme.status + "\">" + STATUS_LABEL[theme.status] + "</span>" +
-        "<span class=\"qr-arrow\">→</span>" +
-      "</button>";
+    list.className = "";
+    var filledN = DATA.filter(function (t) { return t.isUserData; }).length;
+    var progressHtml = "<div class=\"quest-progress\"><span><strong>" + filledN + " / " + DATA.length + "</strong> questionnaires remplis</span><span class=\"qp-bar\" aria-hidden=\"true\"><i style=\"width:" + Math.round(filledN / DATA.length * 100) + "%\"></i></span></div>";
+    list.innerHTML = progressHtml + PILLARS.map(function (p) {
+      var rows = p.themes.map(themeById).filter(Boolean).map(function (theme) {
+        var info = THEME_MEANING[theme.id] || { meaning: "" };
+        var teaser = (info.meaning || "").split(". ")[0];
+        if (teaser && !/[.!?]$/.test(teaser)) teaser += ".";
+        var done = !!theme.isUserData;
+        var stateLabel = done ? "Rempli" + (theme.dataDate ? " · " + resEsc(theme.dataDate) : "") : "À remplir";
+        var stateHtml = "<span class=\"qr-state " + (done ? "is-done" : "is-todo") + "\">" +
+          "<span class=\"qr-ic\" role=\"img\" aria-label=\"" + (done ? "Questionnaire rempli" : "Questionnaire à remplir") + "\">" +
+            (done
+              ? "<svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 8.5l3.2 3.2L13 4.8\"/></svg>"
+              : "<svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M10.8 2.8l2.4 2.4-7.4 7.4-3.1.7.7-3.1z\"/></svg>") +
+          "</span><span class=\"qr-state-txt\" aria-hidden=\"true\">" + stateLabel + "</span></span>";
+        return "<button type=\"button\" class=\"quest-row\" data-goto-theme=\"" + theme.id + "\">" +
+          "<span class=\"qr-code\">" + theme.code + "</span>" +
+          "<span class=\"qr-text\"><span class=\"qr-label\">" + theme.label + "</span><span class=\"qr-teaser\">" + teaser + "</span></span>" +
+          stateHtml +
+          "<span class=\"qr-status status-" + theme.status + "\">" + STATUS_LABEL[theme.status] + "</span>" +
+          "<span class=\"qr-arrow\">→</span>" +
+        "</button>";
+      }).join("");
+      return "<section class=\"pillar-sec\">" + pillarHeadHtml(p, "h2", true) + "<div class=\"quest-list\">" + rows + "</div></section>";
     }).join("");
     list.querySelectorAll("[data-goto-theme]").forEach(function (btn) {
       btn.addEventListener("click", function () { openFiche(btn.getAttribute("data-goto-theme")); });
