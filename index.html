@@ -96,8 +96,8 @@
     align-items: center;
     gap: 1.25rem;
     flex-wrap: wrap;
-    padding: 0.9rem 1.75rem;
-    margin: 0 -1.75rem 2.25rem;
+    padding: 0.9rem max(1.75rem, calc((100% - 1220px) / 2 + 1.75rem));
+    margin: 0 0 2.25rem;
     background: color-mix(in srgb, var(--paper) 90%, transparent);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
@@ -121,7 +121,7 @@
   .topnav-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   @media (max-width: 720px) {
-    .topnav { padding: 0.75rem 1.1rem; margin: 0 -1.1rem 1.75rem; }
+    .topnav { padding: 0.75rem 1.1rem; margin: 0 0 1.75rem; }
     .topnav-tabs { width: 100%; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; }
     .topnav-tab { flex: none; }
   }
@@ -801,6 +801,155 @@
   .theme-link-cta .tlc-caption { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.4; display: block; margin-top: 0.15rem; }
   .theme-link-cta .tlc-arrow { margin-left: auto; flex: none; font-size: 1.1rem; color: var(--accent); }
 
+  /* Fiche d'une thématique (page seule, ouverte depuis « Questionnaires ») */
+  .fiche-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.1rem; }
+  .fiche-wrap { max-width: 820px; }
+  #fiche-panel { position: static; }
+
+  /* Identité de la session */
+  .identity-card { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 2fr) minmax(0, 1.1fr); gap: 0.75rem; margin: 1rem 0 0.25rem; padding: 0.85rem 1rem; max-width: 780px; background: var(--paper-raised); border: 1px solid var(--line); border-radius: 14px; }
+  .identity-card .id-field { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
+  .identity-card label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); }
+  .identity-card input { width: 100%; min-width: 0; font: inherit; font-size: 0.92rem; padding: 0.5rem 0.65rem; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--paper); color: var(--ink); }
+  .identity-card input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .identity-card .id-hint { grid-column: 1 / -1; margin: 0; font-size: 0.74rem; color: var(--ink-faint); line-height: 1.45; }
+  @media (max-width: 720px) { .identity-card { grid-template-columns: minmax(0, 1fr); } }
+
+  /* Affichage téléphone : aucune largeur ne doit dépasser l'écran */
+  body { overflow-x: clip; }
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 921px) { .layout { grid-template-columns: minmax(380px, 560px) minmax(320px, 1fr); } }
+  .layout > * { min-width: 0; }
+  .panel, .card { min-width: 0; max-width: 100%; }
+  @media (max-width: 720px) {
+    .page { padding-left: 1.1rem; padding-right: 1.1rem; }
+    .wheel-card { padding: 1.25rem 1rem 1.1rem; }
+    .view-toggle-row { flex-wrap: wrap; }
+    .legend { grid-template-columns: minmax(0, 1fr); }
+    .legend-text { min-width: 0; }
+    .panel table.tasks { display: block; overflow-x: auto; max-width: 100%; }
+  }
+  @media (max-width: 480px) {
+    .gv-zone { grid-template-columns: 26px minmax(0, 1fr); }
+    .gv-zone-label { font-size: 0.68rem; padding: 6px 0; }
+    .gv-row { grid-template-columns: minmax(0, 1fr) 26px 14px; }
+    .gv-txt { padding: 8px 6px; font-size: 0.8rem; }
+    .gv-num { font-size: 0.68rem; }
+    .gv-resources { padding: 10px 11px; }
+    .gv-intro, .gv-howto { font-size: 0.82rem; }
+  }
+
+  /* Gouvernomètre (repris en l'état : échelle verticale vert → rouge) */
+  .gv-block { margin: 6px 0 18px; }
+  .gv-intro { font-size: 0.86rem; color: var(--ink-soft); line-height: 1.5; margin: 0 0 8px; }
+  .gv-howto { margin: 0 0 8px; padding-left: 18px; font-size: 0.84rem; color: var(--ink-soft); line-height: 1.5; }
+  .gv-pick { font-size: 0.86rem; font-weight: 600; color: var(--ink); margin: 6px 0; }
+  .gv-verdict { font-size: 0.88rem; margin: 0 0 10px; color: var(--ink); }
+  .gv-verdict.gv-v-good strong { color: var(--status-good); }
+  .gv-verdict.gv-v-watch strong { color: var(--status-watch); }
+  .gv-verdict.gv-v-urgent strong { color: var(--status-urgent); }
+  .gv-scale { border: 1px solid var(--line-strong); border-radius: 14px; overflow: hidden; background: var(--paper-raised); }
+  .gv-zone { display: grid; grid-template-columns: 34px minmax(0, 1fr); }
+  .gv-zone + .gv-zone { border-top: 2px solid var(--ink); }
+  .gv-zone-label { writing-mode: vertical-rl; transform: rotate(180deg); display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px 0; font-family: var(--font-display); font-weight: 600; font-size: 0.74rem; line-height: 1.15; color: var(--ink); }
+  .gv-rows { display: flex; flex-direction: column; min-width: 0; }
+  .gv-row { display: grid; grid-template-columns: minmax(0, 1fr) 30px 22px; align-items: stretch; width: 100%; padding: 0; margin: 0; border: 0; border-bottom: 1px solid rgba(20, 24, 28, 0.35); border-radius: 0; font: inherit; text-align: center; color: #14181c; }
+  .gv-rows .gv-row:last-child { border-bottom: 0; }
+  button.gv-row { cursor: pointer; }
+  button.gv-row:hover { filter: brightness(1.06); }
+  button.gv-row:focus-visible { outline: 3px solid #14181c; outline-offset: -3px; }
+  .gv-txt { display: flex; align-items: center; justify-content: center; padding: 9px 10px; font-size: 0.84rem; line-height: 1.3; }
+  .gv-num { display: flex; align-items: center; justify-content: center; background: #14181c; color: #fff; font-size: 0.72rem; font-variant-numeric: tabular-nums; }
+  .gv-ticks { background-color: #fff; background-image: repeating-linear-gradient(to bottom, #14181c 0 1px, transparent 1px 4px); }
+  .gv-row.is-selected { box-shadow: inset 0 0 0 3px #14181c; }
+  .gv-row.is-selected .gv-txt { font-weight: 700; }
+  .gv-credit { font-size: 0.74rem; color: var(--ink-faint); line-height: 1.45; margin: 8px 0 0; }
+  .gv-sep { font-family: var(--font-display); font-weight: 600; font-size: 0.82rem; color: var(--ink); margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--line); }
+  .gv-resources { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--petrol-faint); }
+  .gv-res-title { margin: 0 0 8px; font-size: 0.84rem; font-weight: 600; color: var(--ink); line-height: 1.45; }
+  .gv-resources ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .gv-resources li { display: flex; flex-direction: column; gap: 3px; font-size: 0.82rem; color: var(--ink); }
+  .gv-more { color: var(--ink-soft); font-size: 0.78rem; line-height: 1.4; }
+  .gv-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .gv-tag { font-size: 0.68rem; padding: 2px 8px; border-radius: 999px; background: var(--petrol-soft); color: var(--petrol); }
+
+  .role-fiches { margin-top: 14px; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: 12px; }
+  .role-fiches > .rf-title { margin: 0 0 8px; font-family: var(--font-display); font-weight: 600; font-size: 0.86rem; color: var(--ink); }
+  .role-fiches details { border-top: 1px solid var(--line); padding: 8px 0; }
+  .role-fiches details:first-of-type { border-top: 0; }
+  .role-fiches summary { cursor: pointer; font-size: 0.84rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+  .role-fiches summary:focus-visible { outline: 2px solid var(--petrol); outline-offset: 2px; }
+  .role-fiches .rf-obj { margin: 8px 0 4px; font-size: 0.82rem; color: var(--ink-soft); line-height: 1.5; }
+  .role-fiches h4 { margin: 8px 0 3px; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+  .role-fiches ul { margin: 0; padding-left: 18px; font-size: 0.82rem; color: var(--ink); line-height: 1.5; }
+  .role-fiches .rf-src { margin: 10px 0 0; font-size: 0.74rem; color: var(--ink-faint); line-height: 1.45; }
+
+
+
+  /* --- Accueil : mini présentation d'ActiVESS --- */
+  .about-block { margin: 40px 0 0; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px 40px; align-items: start; padding-top: 32px; border-top: 1px solid var(--line-strong); }
+  .about-block .ab-eyebrow { margin: 0 0 6px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--accent); }
+  .about-block h2 { margin: 0 0 12px; font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; line-height: 1.25; color: var(--ink); text-wrap: balance; }
+  .about-block p { margin: 0 0 10px; font-size: 0.92rem; line-height: 1.6; color: var(--ink-soft); max-width: 62ch; }
+  .about-block p strong { color: var(--ink); }
+  .ab-links { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 14px; font-size: 0.86rem; }
+  .ab-links a { color: var(--accent); font-weight: 600; text-underline-offset: 3px; }
+  .ab-links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .ab-facts { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .ab-facts li { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 0.84rem; line-height: 1.5; color: var(--ink-soft); }
+  .ab-facts li strong { display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; margin-bottom: 1px; }
+  .ab-note { margin: 10px 0 0; font-size: 0.74rem; line-height: 1.45; color: var(--ink-faint); }
+  @media (max-width: 760px) { .about-block { grid-template-columns: 1fr; } }
+
+  /* --- Page Ressources et liens --- */
+  .res-head { max-width: 760px; }
+  .res-legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px 20px; margin: 18px 0 8px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-raised); }
+  .res-legend p { margin: 0; font-size: 0.8rem; line-height: 1.45; color: var(--ink-soft); }
+  .res-legend .res-badge { margin-right: 6px; }
+  .res-warn { margin: 12px 0 0; font-size: 0.82rem; line-height: 1.5; color: var(--ink); max-width: 760px; }
+  .res-filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 4px; align-items: center; }
+  .res-chip { border: 1px solid var(--line-strong); background: var(--paper-raised); color: var(--ink-soft); border-radius: 100px; padding: 5px 12px; font: inherit; font-size: 0.78rem; cursor: pointer; }
+  .res-chip[aria-pressed="true"] { background: var(--petrol); border-color: var(--petrol); color: var(--paper-raised); }
+  .res-chip:focus-visible, .res-jump a:focus-visible, .res-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .res-count { font-size: 0.78rem; color: var(--ink-faint); margin: 6px 0 0; }
+  .res-jump { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 14px 0 0; font-size: 0.8rem; }
+  .res-jump a { color: var(--accent); text-underline-offset: 3px; }
+  .res-theme { margin: 28px 0 0; scroll-margin-top: 70px; }
+  .res-theme > h2 { margin: 0 0 10px; font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--ink); display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .res-theme > h2 .res-code { font-size: 0.7rem; letter-spacing: 0.08em; color: var(--ink-faint); font-weight: 600; }
+  .res-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--line); }
+  .res-item { padding: 14px 0; border-bottom: 1px solid var(--line); display: grid; gap: 4px; }
+  .res-item h3 { margin: 0; font-size: 0.92rem; font-weight: 600; line-height: 1.35; color: var(--ink); overflow-wrap: anywhere; }
+  .res-link { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 3px; }
+  .res-meta { margin: 0; font-size: 0.78rem; color: var(--ink-soft); line-height: 1.4; }
+  .res-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0; }
+  .res-badge { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.02em; padding: 2px 9px; border-radius: 100px; border: 1px solid var(--line-strong); color: var(--ink-soft); background: var(--paper); white-space: nowrap; }
+  .res-badge.a-open { background: var(--status-good-soft); border-color: transparent; color: var(--status-good); }
+  .res-badge.a-free { background: var(--petrol-faint); border-color: transparent; color: var(--petrol); }
+  .res-badge.a-signup, .res-badge.a-members { background: var(--status-watch-soft); border-color: transparent; color: var(--status-watch); }
+  .res-badge.a-paid, .res-badge.a-locked { background: var(--status-urgent-soft); border-color: transparent; color: var(--status-urgent); }
+  .res-badge.a-check { border-style: dashed; }
+  .res-badge.u-used { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+  .res-note { margin: 2px 0 0; font-size: 0.82rem; line-height: 1.5; color: var(--ink); }
+  .res-proof { margin: 0; font-size: 0.74rem; line-height: 1.45; color: var(--ink-faint); }
+  .res-url { margin: 0; font-size: 0.72rem; color: var(--ink-faint); overflow-wrap: anywhere; word-break: break-all; }
+  .res-empty { margin: 0; padding: 14px 0; font-size: 0.84rem; color: var(--ink-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .res-aside { margin-top: 12px; font-size: 0.82rem; color: var(--ink-soft); line-height: 1.5; }
+  .res-foot { margin: 32px 0 0; font-size: 0.76rem; line-height: 1.5; color: var(--ink-faint); max-width: 760px; }
+
+  .maqvt-aside { margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--line-strong); font-size: 0.82rem; color: var(--ink-soft); line-height: 1.5; }
+  .maqvt-open { background: none; border: 0; padding: 0; font: inherit; font-weight: 600; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+  .maqvt-open:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .maqvt-card .mq-sec { margin: 0 0 12px; }
+  .maqvt-card .mq-sec h4 { margin: 0 0 3px; font-family: var(--font-display); font-size: 0.92rem; font-weight: 600; color: var(--ink); }
+  .maqvt-card .mq-sec p { margin: 0; font-size: 0.85rem; color: var(--ink-soft); line-height: 1.55; }
+  .maqvt-card .mq-who { margin: 14px 0 12px; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--petrol-faint); font-size: 0.86rem; color: var(--ink); line-height: 1.5; }
+  .maqvt-card .mq-who strong { display: block; font-family: var(--font-display); font-size: 0.95rem; }
+  .maqvt-card a { color: var(--accent); }
+  .maqvt-card .mq-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .maqvt-card .mq-actions a, .maqvt-card .mq-actions button { text-decoration: none; display: inline-flex; align-items: center; }
+  .maqvt-card .mq-actions a.btn-primary { color: #fff; }
+
   .quest-field-row {
     display: grid;
     grid-template-columns: 1fr 168px;
@@ -1012,6 +1161,7 @@
     <button type="button" class="topnav-tab" data-page="themes">Thématiques</button>
     <button type="button" class="topnav-tab" data-page="quest">Questionnaires</button>
     <button type="button" class="topnav-tab" data-page="dashboard">Tableau de bord</button>
+    <button type="button" class="topnav-tab" data-page="resources">Ressources</button>
   </div>
   <div class="data-actions" role="group" aria-label="Sauvegarde des données">
     <button type="button" class="data-btn" id="btn-export-nav">⬇ Exporter</button>
@@ -1026,10 +1176,11 @@
       <p class="eyebrow">ActivESS Conseil · Outil de pilotage ESS/IAE</p>
       <h1>Tout Roule</h1>
       <p class="tagline">Pilotez l'<span class="em">ESS</span>entiel, gardez le cap.</p>
-      <p class="lede">Un outil de pilotage stratégique pour les structures de l'ESS et de l'IAE : douze thématiques, un diagnostic sur chacune, les actions à mener à moyen terme, et les tâches positionnées dans l'année avec leur responsable.</p>
+      <p class="lede">Un outil de pilotage stratégique pour les structures de l'ESS et de l'IAE : treize thématiques, un diagnostic sur chacune, les actions à mener à moyen terme, et les tâches positionnées dans l'année avec leur responsable.</p>
       <span class="example-flag">Exemple illustratif — « Racines &amp; Chemins », chantier d'insertion fictif</span>
+      <div data-identity-slot="home"></div>
       <div class="hero-cta-row">
-        <button type="button" class="hero-cta" data-goto="themes">Découvrir les 12 thématiques</button>
+        <button type="button" class="hero-cta" data-goto="themes">Découvrir les 13 thématiques</button>
         <button type="button" class="hero-cta" data-goto="quest">Répondre aux questionnaires</button>
         <button type="button" class="hero-cta is-primary" data-goto="dashboard">Ouvrir le tableau de bord →</button>
       </div>
@@ -1039,7 +1190,7 @@
       <div class="hiw-card">
         <span class="hiw-num">01</span>
         <h4>Diagnostiquer</h4>
-        <p>Douze thématiques, chacune avec son questionnaire ou ses indicateurs chiffrés. Vous répondez, l'outil situe chaque axe sur une échelle d'alerte — sans jugement, juste un état des lieux.</p>
+        <p>Treize thématiques, chacune avec son questionnaire ou ses indicateurs chiffrés. Vous répondez, l'outil situe chaque axe sur une échelle d'alerte — sans jugement, juste un état des lieux.</p>
       </div>
       <div class="hiw-card">
         <span class="hiw-num">02</span>
@@ -1058,7 +1209,7 @@
         <h2>Pourquoi cet outil existe</h2>
         <p>Tout Roule n'est pas un audit de plus. C'est un outil que <strong>vous</strong> utilisez vous-même, thématique par thématique, pour transformer un diagnostic en actions réellement suivies — pas un rapport qu'on referme après la réunion de restitution.</p>
         <p>Il applique la posture qui structure tout l'accompagnement d'ActivESS Conseil : ce n'est ni nous qui décidons pour vous, ni nous qui remplissons l'outil à votre place. C'est votre conseil d'administration, votre direction et vos équipes qui s'en emparent, le mettent à jour, et en gardent la maîtrise longtemps après une mission.</p>
-        <p>Les données affichées par défaut sont celles d'un exemple fictif (« Racines &amp; Chemins »), pour que l'outil se présente déjà rempli plutôt que vide. Trois thématiques reposent déjà sur une vraie méthodologie sourcée — les neuf autres restent à enrichir, thématique par thématique, avec vos diagnostics réels.</p>
+        <p>Les données affichées par défaut sont celles d'un exemple fictif (« Racines &amp; Chemins »), pour que l'outil se présente déjà rempli plutôt que vide. Neuf thématiques reposent déjà sur une vraie méthodologie sourcée — les quatre autres restent à enrichir, thématique par thématique, avec vos diagnostics réels.</p>
       </div>
       <div class="posture-card">
         <p class="pc-eyebrow">Notre conviction</p>
@@ -1079,12 +1230,37 @@
         </div>
       </div>
     </div>
+
+    <div class="about-block" id="about-activess">
+      <div>
+        <p class="ab-eyebrow">Qui est derrière l'outil</p>
+        <h2>Jérôme Troquereau, fondateur d'ActiVESS Conseil</h2>
+        <p><strong>20 ans dans l'ESS, dont 12 ans en direction</strong> de structures d'insertion et d'associations employeuses. J'y ai piloté des équipes « en tension », négocié des CPOM, monté des dossiers FSE+ et défendu des modèles économiques devant des financeurs.</p>
+        <p>ActiVESS Conseil est un cabinet indépendant qui accompagne les dirigeants et les conseils d'administration de structures ESS, en Nouvelle-Aquitaine et en Occitanie (missions courtes et distanciel possibles). La posture est celle d'un pair : <strong>ni prescrire, ni faire à votre place, construire avec vous</strong>. Tout Roule est né de ces situations vécues.</p>
+        <p>Trois pôles : conseil et ingénierie ESS, formation et intelligence collective, coaching et accompagnement de dirigeants. Un premier échange de 45 minutes est offert.</p>
+        <div class="ab-links">
+          <a href="https://www.activ-ess.fr/qui-suis-je/" target="_blank" rel="noopener noreferrer">Lire le parcours complet</a>
+          <a href="https://www.activ-ess.fr/" target="_blank" rel="noopener noreferrer">activ-ess.fr</a>
+          <a href="mailto:jtroquereau@activ-ess.fr">jtroquereau@activ-ess.fr</a>
+        </div>
+      </div>
+      <div>
+        <ul class="ab-facts">
+          <li><strong>Mobilité inclusive</strong>APREVA et réseau Agil'ess, Prix du Jury Impact Ashoka – Fondation Macif 2015.</li>
+          <li><strong>Insertion</strong>Fondateur du Groupement d'Insertion du Confluent (2014, Lot-et-Garonne) : quatre structures d'insertion mutualisées.</li>
+          <li><strong>Fil rouge</strong>La gouvernance de l'ESS : rôles, pouvoirs, délégations, dialogue entre conseil d'administration et direction.</li>
+          <li><strong>Formation</strong>Psychologie du travail et ergonomie ; formé auditeur QVT (maQVT, WUNJO) ; coach professionnel en cours de certification.</li>
+          <li><strong>Podcast</strong>« Management de l'Humain », co-animé avec Valérie Warnet : épisodes courts de 20 à 25 minutes.</li>
+          <li><strong>Statut</strong>Cabinet en cours de création (EURL), qui vise le statut de société commerciale de l'ESS et l'agrément ESUS.</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <section class="page-view" data-page="themes" hidden>
     <header class="head">
       <p class="eyebrow">ActivESS Conseil · Douze axes de pilotage</p>
-      <h1>Les 12 thématiques</h1>
+      <h1>Les 13 thématiques</h1>
       <p class="lede">Chaque thématique couvre une dimension du pilotage d'une structure ESS/IAE. Certaines s'appuient déjà sur une méthodologie sourcée ; les autres sont des questionnaires construits en interne, à enrichir progressivement.</p>
     </header>
     <div class="themes-grid" id="themes-grid"></div>
@@ -1094,9 +1270,32 @@
     <header class="head">
       <p class="eyebrow">ActivESS Conseil · Accès direct</p>
       <h1>Questionnaires</h1>
-      <p class="lede">Un accès direct à chaque questionnaire, avec son statut actuel. Cliquez une thématique pour ouvrir sa fiche complète dans le tableau de bord.</p>
+      <p class="lede">Un accès direct à chaque questionnaire, avec son statut actuel. Cliquez une thématique pour ouvrir sa fiche : diagnostic, actions et tâches de cette thématique uniquement.</p>
     </header>
     <div class="quest-list" id="quest-list"></div>
+  </section>
+
+  <section class="page-view" data-page="fiche" hidden>
+    <div class="fiche-nav">
+      <button type="button" class="data-btn" data-goto="quest">← Tous les questionnaires</button>
+      <button type="button" class="data-btn" id="fiche-to-dash">Voir le tableau de bord</button>
+    </div>
+    <div class="fiche-wrap"><div class="card panel" id="fiche-panel"></div></div>
+  </section>
+
+  <section class="page-view" data-page="resources" hidden>
+    <header class="head res-head">
+      <p class="eyebrow">ActivESS Conseil · Sources et références</p>
+      <h1>Ressources et liens</h1>
+      <p class="lede">Pour chaque thématique : les documents et outils sur lesquels l'outil s'appuie, et ceux de ton dossier de travail qui peuvent l'enrichir. Chaque ligne indique si l'accès est libre, s'il faut un compte, un abonnement ou une adhésion, et ce qui a été vérifié.</p>
+      <p class="res-warn"><strong>Accès libre ne veut pas dire libre de droits.</strong> Seules les ressources marquées « Réutilisable » portent une licence ouverte (Licence Ouverte / Etalab) qui permet de les reprendre. Pour toutes les autres, on partage le lien : on ne republie pas le document.</p>
+      <div class="res-legend" id="res-legend"></div>
+      <div class="res-filters" id="res-filters" role="group" aria-label="Filtrer les ressources"></div>
+      <p class="res-count" id="res-count" aria-live="polite"></p>
+      <nav class="res-jump" id="res-jump" aria-label="Aller à une thématique"></nav>
+    </header>
+    <div id="res-list"></div>
+    <p class="res-foot">Vérifications faites le 05/11/2026 à partir des pages officielles des éditeurs ; quand une page n'a pas pu être lue, la ressource est marquée « À vérifier » plutôt que supposée libre. Les conditions d'accès, de tarif et de licence peuvent changer : reconfirme avant tout usage public. Ce n'est pas un avis juridique.</p>
   </section>
 
   <section class="page-view" data-page="dashboard" hidden>
@@ -1105,6 +1304,7 @@
       <h1>Tableau de bord</h1>
       <p class="lede">Une vue d'ensemble des thématiques de pilotage d'une structure ESS : le niveau de diagnostic sur chaque axe, les actions à mener à moyen terme, et les tâches positionnées dans l'année avec leur responsable.</p>
       <span class="example-flag">Exemple illustratif — « Racines &amp; Chemins », chantier d'insertion fictif</span>
+      <div data-identity-slot="dash"></div>
       <div class="stat-row" id="stat-row"></div>
       <div class="data-actions" role="group" aria-label="Sauvegarde des données">
         <button type="button" class="data-btn" id="btn-export-dash">⬇ Exporter mes données</button>
@@ -1125,7 +1325,7 @@
         <p class="hint" id="overview-hint">Cliquez un secteur pour ouvrir sa fiche détaillée.</p>
 
         <div id="wheel-view">
-          <svg class="wheel" viewBox="0 0 720 720" role="group" aria-label="Roue des 12 thématiques de pilotage">
+          <svg class="wheel" viewBox="0 0 720 720" role="group" aria-label="Roue des 13 thématiques de pilotage">
             <g id="wheel-root"></g>
           </svg>
           <div class="legend">
@@ -1153,7 +1353,7 @@
     </div>
 
     <footer class="note">
-      <strong>Prochaine étape :</strong> remplacer ces données d'exemple par vos diagnostics réels, thématique par thématique, à partir des sources que vous m'enverrez. Trois thématiques utilisent déjà une vraie méthodologie : « Maturité numérique » (autodiagnostic Solidatech, 2020), « Pilotage économique » (DiagFlash, France Active Nouvelle-Aquitaine / INAÉ) et « Projet associatif et projet d'insertion » (CNAR Sport / CNOSF, Ligue de l'enseignement). Sur « Pilotage économique », vous pouvez désormais saisir vos propres chiffres de bilan et de compte de résultat (bouton dans la fiche ECO) : le diagnostic, les actions et les tâches sont recalculés automatiquement selon les formules DiagFlash. Les 9 autres thématiques restent illustratives en attendant leurs sources. La structure (roue à 3 anneaux, 12 thématiques) reste la même — seul le contenu change.
+      <strong>Prochaine étape :</strong> remplacer ces données d'exemple par vos diagnostics réels, thématique par thématique, à partir des sources que vous m'enverrez. Neuf thématiques utilisent déjà une vraie méthodologie : « Maturité numérique » (autodiagnostic Solidatech, 2020), « Pilotage économique » (DiagFlash, France Active Nouvelle-Aquitaine / INAÉ), « Projet associatif et projet d'insertion » (CNAR Sport / CNOSF, Ligue de l'enseignement), « Responsabilité territoriale, utilité sociale et impact » (COORACE, Avise, réseau Chantier École) « Plan de montée en compétences / GPEC » (ARSARA, adapté ; Code du travail), « Qualité de vie au travail » (CIDES / CHORUM, Malakoff Humanis, ARSARA ; Code du travail), « Ressources humaines » (ARSARA, adapté ; Code du travail et Code de la sécurité sociale ; convention collective des ACI à titre d'exemple), « Gouvernance associative » (Gouvernomètre : INAÉ, EILAN Conseil, DLA, France Active Nouvelle-Aquitaine, CRESS Nouvelle-Aquitaine, Le Mouvement associatif Nouvelle-Aquitaine, Guid'Asso ; questions complémentaires : Fédération des acteurs de la solidarité, JF Conseil) et « Sécurité économique et continuité d'activité » (SGDSN, SISSE / DGE). Sur « Pilotage économique », vous pouvez désormais saisir vos propres chiffres de bilan et de compte de résultat (bouton dans la fiche ECO) : le diagnostic, les actions et les tâches sont recalculés automatiquement selon les formules DiagFlash. Les 4 autres thématiques restent illustratives en attendant leurs sources. La structure (roue à 3 anneaux, 13 thématiques) reste la même — seul le contenu change.
     </footer>
   </section>
 
@@ -1186,6 +1386,27 @@
         <button type="submit" class="btn-primary">Calculer le diagnostic</button>
       </div>
     </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="maqvt-overlay" hidden>
+  <div class="modal-card maqvt-card" role="dialog" aria-modal="true" aria-labelledby="maqvt-title">
+    <div class="modal-head">
+      <h3 id="maqvt-title">maQVT — un diagnostic accompagné, individuel ou collectif</h3>
+      <button type="button" class="modal-close" id="maqvt-close" aria-label="Fermer">×</button>
+    </div>
+    <p class="modal-hint">Le questionnaire QVT de Tout Roule donne le regard de la direction sur l'organisation. maQVT complète ce regard en mesurant ce que vivent les personnes : utile pour objectiver la perception d'une équipe ou accompagner un salarié.</p>
+    <div class="mq-sec"><h4>L'outil</h4><p>WebApp d'évaluation de la qualité de vie au travail éditée par WUNJO (cabinet QVT, marque de KREACTIV'). Elle repose sur un modèle « Humaniste » conçu par WUNJO en 2021, qui réinterprète la pyramide de Maslow : 5 grandes catégories et 30 besoins fondamentaux. Compte environ 25 à 30 minutes de passation.</p></div>
+    <div class="mq-sec"><h4>Diagnostic individuel</h4><p>Un entretien en tête-à-tête, puis un rapport visuel et chiffré qui distingue les points à préserver et les axes d'amélioration. Un suivi dans le temps est possible.</p></div>
+    <div class="mq-sec"><h4>Diagnostic collectif</h4><p>Passation simultanée de l'équipe, dans une fresque de la QVT ou sous forme de baromètre. Chacun reçoit son rapport individuel, et un rapport collectif est construit à partir des données individuelles anonymisées.</p></div>
+    <div class="mq-sec"><h4>Un accompagnement systématique</h4><p>Selon l'éditeur, la passation est toujours accompagnée par un·e professionnel·le, consultant·e certifié·e par WUNJO.</p></div>
+    <div class="mq-who"><strong>Jérôme Troquereau — formé auditeur QVT</strong>Formé par WUNJO à l'utilisation de maQVT. Pour un diagnostic individuel ou collectif accompagné : <a href="mailto:jtroquereau@activ-ess.fr">jtroquereau@activ-ess.fr</a></div>
+    <p class="modal-hint limits">À savoir : la page de l'éditeur n'affiche pas de tarifs, et ne détaille pas les règles d'anonymat (nombre minimal de répondants, hébergement et conservation des données). Ces points se précisent avant tout diagnostic collectif. Source : page « WebApp maQVT » de WUNJO (wunjo.life/ma-qvt), consultée le 05/11/2026, contenu reformulé.</p>
+    <div class="mq-actions">
+      <a class="btn-primary" href="mailto:jtroquereau@activ-ess.fr?subject=Diagnostic%20maQVT">Me contacter</a>
+      <a class="btn-secondary" href="https://www.wunjo.life/ma-qvt/" target="_blank" rel="noopener noreferrer">Page de l'éditeur ↗</a>
+      <button type="button" class="btn-secondary" id="maqvt-close2">Fermer</button>
+    </div>
   </div>
 </div>
 
@@ -1261,6 +1482,584 @@
     tres_grave: "Très grave"
   };
 
+  var RESOURCES = {
+ "ins": [
+  {
+   "t": "Plateforme et kit d'écriture du projet associatif",
+   "p": "CNOSF — Centre de ressources DLA Sport (CNAR Sport)",
+   "y": "kit en ligne, 2025-2026",
+   "a": "free",
+   "use": "used",
+   "u": "https://ressources-associations-sportives.franceolympique.com",
+   "n": "Le questionnaire s'inspire de « La construction du projet associatif — un outil d'aide à la structuration ». Ce titre exact n'a pas été retrouvé en ligne ; l'équivalent public est le kit d'écriture du projet associatif et la plateforme dédiée (projetassociatif.franceolympique.com).",
+   "v": "Pages du site CNOSF lues le 05/11/2026 : téléchargement direct sans compte, aucune licence indiquée."
+  },
+  {
+   "t": "Guide pratique de l'association",
+   "p": "Ligue de l'enseignement — FAL 44 (Loire-Atlantique)",
+   "y": "",
+   "a": "check",
+   "use": "used",
+   "u": "https://laligue44.org",
+   "n": "Source citée dans l'outil. Le guide n'est ni téléchargeable ni en vente sur l'espace ressources de la fédération ; son « espace administrateurs » est privé. À demander directement à la fédération.",
+   "v": "Site laligue44.org et son espace ressources consultés le 05/11/2026 : guide non trouvé."
+  },
+  {
+   "t": "Projet associatif : une obligation pour les associations non lucratives",
+   "p": "FIDAL — support de formation (mai 2018 d'après le fichier)",
+   "y": "2018",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Support de formation reçu dans ton dossier. Il ne figure pas parmi les pages fidal.com consultées ; il n'est donc pas à republier ni à lier tant que sa diffusion n'est pas confirmée.",
+   "v": "Accueil fidal.com et première page de la liste d'actualités consultés le 05/11/2026 : titre non trouvé (la liste complète n'a pas été parcourue)."
+  },
+  {
+   "t": "Guides de capitalisation du Plan d'investissement dans les compétences (7 guides)",
+   "p": "Haut-commissariat aux compétences — ministère du Travail",
+   "y": "octobre 2022",
+   "a": "free",
+   "use": "avail",
+   "u": "https://travail-emploi.gouv.fr/sites/travail-emploi/files/files-spip/pdf/hcc_no6_construire_de_nouvelles_relations_aux_entreprises_v221019.pdf",
+   "n": "Sept thèmes dont remobilisation, parcours sans rupture, reconnaissance des compétences par des voies adaptées, relations aux entreprises. Utile aussi pour COMP et PART. Le lien ouvre le guide n°6 ; les autres sont sur le même site.",
+   "v": "Diffusion publique sur travail-emploi.gouv.fr relevée par recherche le 05/11/2026 ; la page n'a pas pu être lue (protection anti-robot) : licence non vérifiée."
+  }
+ ],
+ "qvt": [
+  {
+   "t": "Qualité de vie au travail — Fiches repères (2e édition)",
+   "p": "CHORUM (avec le CIDES)",
+   "y": "septembre 2017",
+   "a": "free",
+   "use": "used",
+   "u": "https://ess-et-moi.harmonie-mutuelle.fr/sites/default/files/media/fiches-reperes-qualite-vie-travail-bqvt2017-v022022.pdf",
+   "n": "L'outil s'appuie sur la 1re édition CIDES / CHORUM (2015, dans ton dossier, issue du baromètre d'octobre 2013). La version en ligne est la 2e édition de 2017, qui ajoute le numérique.",
+   "v": "PDF lu le 05/11/2026 : accès direct, mention « © Chorum 2017 », aucune licence ouverte."
+  },
+  {
+   "t": "Kit Enjeux RH — Risques psychosociaux",
+   "p": "Malakoff Humanis",
+   "y": "2020 (d'après le fichier)",
+   "a": "check",
+   "use": "used",
+   "u": "https://www.malakoffhumanis.com/s-informer/sante/prevention-des-risques-psychosociaux-en-pme-et-tpe/",
+   "n": "La page de Malakoff Humanis présente bien les « Kits Enjeux RH ». La page du kit lui-même n'a pas pu être lue : les conditions d'accès (libre, formulaire, clients) restent à confirmer. Le kit de ton dossier est un scan de 94 pages.",
+   "v": "Page lue le 05/11/2026 (mise à jour affichée du 08/09/2026) ; page du kit en erreur."
+  },
+  {
+   "t": "Outil-guide « Barométrie Ressources Humaines » (fiches 5, 7, 8, 9, 13)",
+   "p": "ARS Auvergne-Rhône-Alpes (ARSARA)",
+   "y": "septembre 2017",
+   "a": "free",
+   "use": "used",
+   "u": "https://www.auvergne-rhone-alpes.ars.sante.fr/media/18506/download",
+   "n": "Voir la thématique COMP pour le détail. Conçu pour les établissements sociaux et médico-sociaux, utilisé ici par adaptation.",
+   "v": "Guide et communiqué du 29/09/2017 lus le 05/11/2026 : PDF et Excel en téléchargement libre, aucune licence indiquée."
+  },
+  {
+   "t": "maQVT — diagnostic QVT individuel ou collectif accompagné",
+   "p": "WUNJO (marque de KREACTIV')",
+   "y": "page modifiée le 17/07/2025",
+   "a": "paid",
+   "use": "used",
+   "u": "https://www.wunjo.life/ma-qvt/",
+   "n": "La passation est toujours accompagnée par un consultant certifié par WUNJO ; aucun tarif affiché (devis via le formulaire de contact). Présenté dans le pop-up de la fiche QVT.",
+   "v": "Pages ma-qvt, contact-maqvt et devenir-consultant lues le 05/11/2026."
+  },
+  {
+   "t": "Livre blanc « Engagement collaborateur, fidélisation et performance »",
+   "p": "LumApps",
+   "y": "2023",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Document commercial (« © 2023 LumApps, tous droits réservés »). Utilisé uniquement comme source d'idées d'actions, jamais pour des chiffres. Conditions d'accès non vérifiées.",
+   "v": "Fichier de ton dossier lu ; page de diffusion non recherchée."
+  },
+  {
+   "t": "Leviers QCVT v1",
+   "p": "source non identifiable",
+   "y": "",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Non cité dans l'outil : aucune source ni auteur identifiable dans le fichier. À ne pas utiliser en l'état.",
+   "v": "Fichier de ton dossier lu."
+  }
+ ],
+ "eco": [
+  {
+   "t": "DiagFlash — outil de suivi économique et financier (Excel vierge) et replay de présentation",
+   "p": "INAÉ Nouvelle-Aquitaine (avec France Active Nouvelle-Aquitaine)",
+   "y": "avril 2026",
+   "a": "free",
+   "use": "used",
+   "u": "https://inae-nouvelleaquitaine.org/ressources/outil-de-suivi-economique-et-financier-diagflash/",
+   "n": "Fichier « Outil-DiagFlash-Autodiagnostic-V01.2026-vierge.xlsx » (170 Ko). Le site propose aussi un espace « Se connecter » : d'autres contenus peuvent y être réservés.",
+   "v": "Page INAÉ lue le 05/11/2026 : téléchargement direct, sans connexion, aucune mention de droits."
+  },
+  {
+   "t": "Le guide du chef d'entreprise — 50 fiches pédagogiques",
+   "p": "cabinet d'expertise comptable (nom non indiqué dans le fichier)",
+   "y": "octobre 2025",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Guide de gestion quotidienne du dirigeant. Éditeur non identifiable dans le fichier : diffusion et droits à vérifier avant tout usage public.",
+   "v": "Fichier de ton dossier lu (88 pages)."
+  }
+ ],
+ "num": [
+  {
+   "t": "Autodiagnostic numérique des associations (60 questions, 7 thématiques)",
+   "p": "Solidatech",
+   "y": "2020, outil 100 % en ligne depuis 2021",
+   "a": "signup",
+   "use": "used",
+   "u": "https://diagnostic-numerique.solidatech.fr/",
+   "n": "Création d'un compte nécessaire. Solidatech annonce un outil gratuit dans ses webinaires ; les conditions actuelles n'ont pas été rouvertes dans l'outil.",
+   "v": "Article Solidatech sur Carenews (04/02/2021) lu le 05/11/2026 : « Je crée un compte en moins d'une minute »."
+  },
+  {
+   "t": "Guide de bonnes pratiques numérique responsable pour les organisations",
+   "p": "DINUM — mission iNumEco, avec le ministère de la Transition écologique",
+   "y": "version 1, 2023",
+   "a": "open",
+   "use": "avail",
+   "u": "https://www.data.gouv.fr/datasets/guide-de-bonnes-pratiques-numerique-responsable-pour-les-organisations",
+   "n": "Les données du guide (CSV, JSON) sont sous Licence Ouverte 2.0. Le PDF de 114 pages est hébergé sur ecoresponsable.numerique.gouv.fr : sa licence propre n'a pas été vérifiée.",
+   "v": "Jeu de données data.gouv.fr lu le 05/11/2026 : « Licence Ouverte / Open Licence version 2.0 », dernière mise à jour 09/09/2024."
+  },
+  {
+   "t": "Guide pratique du travail collaboratif : théories, méthodes et outils",
+   "p": "Alexandre Piquet, pour le « Groupe Communication » du réseau Isolement Social (Brest)",
+   "y": "août 2009",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Document ancien (80 pages) : à lire pour les méthodes, pas pour les outils cités. Diffusion et droits non vérifiés.",
+   "v": "Fichier de ton dossier lu."
+  }
+ ],
+ "sec": [
+  {
+   "t": "Guide pour réaliser un plan de continuité d'activité",
+   "p": "SGDSN — Premier ministre",
+   "y": "édition 2013",
+   "a": "free",
+   "use": "used",
+   "u": "https://armement.defense.gouv.fr/sites/default/files/2022-04/20130612_NP_SGDSN_guide_pca.pdf",
+   "n": "Guide de référence de l'outil. Hébergé sur le site du ministère des Armées.",
+   "v": "PDF lu le 05/11/2026 : accès direct ; aucune mention de licence dans les pages 1 et 2 (dernière page non vérifiée)."
+  },
+  {
+   "t": "La sécurité économique en 29 fiches thématiques",
+   "p": "Direction générale des Entreprises — SISSE",
+   "y": "publié le 08/12/2022, mis à jour le 13/05/2026",
+   "a": "open",
+   "use": "used",
+   "u": "https://www.entreprises.gouv.fr/la-dge/publications/la-securite-economique-en-29-fiches-thematiques",
+   "n": "Ton dossier contient l'édition de novembre 2021 en 28 fiches ; l'édition 2026 compte 29 fiches (non comparées une à une). La licence est celle du site, non spécifique au guide.",
+   "v": "Page DGE lue le 05/11/2026 : « Sauf mention explicite de propriété intellectuelle détenue par des tiers, les contenus de ce site sont proposés sous licence etalab-2.0 »."
+  },
+  {
+   "t": "Diagseco — diagnostic de sécurité économique",
+   "p": "Direction générale des Entreprises",
+   "y": "page publiée le 09/01/2025",
+   "a": "free",
+   "use": "avail",
+   "u": "https://diagseco.finances.gouv.fr/home",
+   "n": "Outil en ligne pour toutes les entreprises, sans valeur réglementaire ; la DGE indique qu'aucune donnée saisie n'est stockée ni transmise. Il remplace l'ancien outil DIESE (fichier de 2014 dans ton dossier).",
+   "v": "Page DGE lue le 05/11/2026 : aucun compte ni paiement mentionné ; gratuité non indiquée explicitement."
+  },
+  {
+   "t": "Guide des atteintes à la sécurité économique",
+   "p": "Gendarmerie nationale (SDAO / DGGN)",
+   "y": "date non indiquée",
+   "a": "free",
+   "use": "avail",
+   "u": "https://www.gendarmerie.interieur.gouv.fr/content/download/61216/file/Guide_Atteintes_S%C3%A9curit%C3%A9_Economique_Gendarmerie_nationale.pdf",
+   "n": "Édition révisée du « Jeu des huit familles d'atteintes à la sécurité économique ». Les 48 fiches « JD8FASECO » de ton dossier n'ont pas été retrouvées en ligne : éditeur et édition non identifiés, à vérifier avant usage public.",
+   "v": "PDF lu le 05/11/2026 : accès direct, aucune mention de droits lue (fin du document non lue)."
+  },
+  {
+   "t": "Élaborer un plan de continuité d'activité",
+   "p": "Secrétariat général de la zone de défense et de sécurité de Paris",
+   "y": "version 1 du 29/04/2019",
+   "a": "check",
+   "use": "used",
+   "u": "",
+   "n": "Source citée dans l'outil. Page de diffusion non retrouvée : à vérifier avant de renvoyer un public vers ce document.",
+   "v": "Fichier de ton dossier lu."
+  },
+  {
+   "t": "Guide des bonnes pratiques de la continuité d'activité à l'attention des directions des ressources humaines",
+   "p": "Club de la continuité d'activité",
+   "y": "octobre 2010",
+   "a": "check",
+   "use": "used",
+   "u": "https://www.clubpca.eu",
+   "n": "Source citée dans l'outil. Le site de l'éditeur refuse la lecture automatique : accès libre ou réservé aux membres non déterminé.",
+   "v": "Site clubpca.eu consulté le 05/11/2026 : lecture refusée."
+  },
+  {
+   "t": "Plan de continuité d'activité à l'usage du chef d'entreprise en cas de crise majeure (kit TPE-PME)",
+   "p": "non indiqué dans le fichier",
+   "y": "juillet 2015",
+   "a": "check",
+   "use": "used",
+   "u": "",
+   "n": "Source citée dans l'outil. Page de diffusion non retrouvée.",
+   "v": "Fichier de ton dossier lu."
+  },
+  {
+   "t": "Business Continuity Planning Checklist",
+   "p": "Information Services Group (ISG)",
+   "y": "16/03/2020",
+   "a": "locked",
+   "use": "avail",
+   "u": "",
+   "n": "Mention du fichier : « All Rights Reserved. Proprietary and Confidential », reproduction interdite sans autorisation écrite. Ne pas redistribuer.",
+   "v": "Fichier Excel de ton dossier lu."
+  },
+  {
+   "t": "Plan d'action pour la continuité des activités (crise COVID-19)",
+   "p": "ADA (microfinance)",
+   "y": "2020",
+   "a": "check",
+   "use": "avail",
+   "u": "https://www.ada-microfinance.org",
+   "n": "Modèle destiné aux institutions de microfinance ; à adapter. Conditions de réutilisation non vérifiées.",
+   "v": "Fichier Excel de ton dossier lu."
+  },
+  {
+   "t": "Grille PCA et plan de prévention COVID-19 (application Excel)",
+   "p": "auteur non indiqué",
+   "y": "avril 2021",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Le fichier se dit « mis gratuitement à la disposition des entreprises », sans valeur juridique. Auteur non identifié.",
+   "v": "Fichier Excel de ton dossier lu."
+  },
+  {
+   "t": "Continuity Assessment Tool",
+   "p": "FEMA (États-Unis)",
+   "y": "date non indiquée",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Outil d'évaluation d'une agence fédérale américaine, en anglais. Conditions de réutilisation non vérifiées.",
+   "v": "Fichier Excel de ton dossier lu."
+  },
+  {
+   "t": "10 conseils pour prévenir la malhonnêteté des employés",
+   "p": "Northbridge Assurance",
+   "y": "",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Bulletin d'information d'un assureur canadien. Droits non précisés.",
+   "v": "Fichier de ton dossier lu."
+  }
+ ],
+ "terr": [
+  {
+   "t": "Registres, critères et indicateurs de l'utilité sociale territoriale",
+   "p": "COORACE",
+   "y": "2015 (travaux de 2013)",
+   "a": "check",
+   "use": "used",
+   "u": "https://www.coorace.org",
+   "n": "Source citée dans l'outil. Le site de COORACE refuse la lecture automatique : accès libre ou réservé aux adhérents non déterminé.",
+   "v": "Site coorace.org consulté le 05/11/2026 : lecture refusée (robots.txt)."
+  },
+  {
+   "t": "Démarche de développement de territoires solidaires — des constats et des propositions",
+   "p": "COORACE",
+   "y": "2010",
+   "a": "check",
+   "use": "avail",
+   "u": "https://www.coorace.org",
+   "n": "Guide de 164 pages dans ton dossier. Même limite d'accès que ci-dessus.",
+   "v": "Site coorace.org consulté le 05/11/2026 : lecture refusée."
+  },
+  {
+   "t": "Évaluer l'utilité sociale de son activité — conduire une démarche d'auto-évaluation (Cahier n°5)",
+   "p": "Avise (auteure : Hélène Duclos, Culture et Promotion)",
+   "y": "2007",
+   "a": "free",
+   "use": "used",
+   "u": "https://www.avise.org/sites/default/files/atoms/files/200711_avise_cahier_evaluationutilitesociale.pdf",
+   "n": "Accès libre mais droits réservés : seules les courtes citations justifiées sont autorisées. À lier, pas à republier.",
+   "v": "PDF lu le 05/11/2026 : « © Avise 2007 tous droits réservés »."
+  },
+  {
+   "t": "Petit précis de l'évaluation de l'impact social",
+   "p": "Avise, ESSEC IIES, Mouves",
+   "y": "octobre 2013",
+   "a": "free",
+   "use": "used",
+   "u": "https://impactinitiative.essec.edu/wp-content/uploads/2021/05/petit-precis.pdf",
+   "n": "Hébergé par l'ESSEC. Aucune licence ni mention de copyright lues dans le texte.",
+   "v": "PDF lu le 05/11/2026 : accès direct sans compte."
+  },
+  {
+   "t": "Guide de la mesure d'impact social",
+   "p": "Fondation Rexel, réalisé par (IM)PROVE",
+   "y": "2015 (d'après le fichier)",
+   "a": "free",
+   "use": "avail",
+   "u": "https://precarite-energie.org/IMG/pdf/fondation_rexel_-_guide_de_la_mesure_dimpact_social.pdf",
+   "n": "Présenté comme « un guide méthodologique libre, simple et illustré ». Le PDF lu est hébergé sur un site tiers (precarite-energie.org) ; les sites d'origine sont rexel-foundation.com et im-prove.fr.",
+   "v": "PDF lu le 05/11/2026 : accès direct ; aucune licence indiquée."
+  },
+  {
+   "t": "Outil de mesure de l'utilité sociale (VSB) et formation associée",
+   "p": "réseau Chantier École",
+   "y": "outil de 2020 d'après le fichier",
+   "a": "members",
+   "use": "used",
+   "u": "https://cdr-chantierecole.org/",
+   "n": "Le centre de ressources indique que les ressources pratiques sont réservées aux adhérents de l'année en cours ; le tarif d'adhésion n'est pas affiché. L'outil VSB lui-même n'a pas pu être repéré (rubrique derrière une connexion). Contact indiqué : adhesion@chantierecole.org.",
+   "v": "Site cdr-chantierecole.org lu le 05/11/2026 : « exclusivement dédiées aux adhérents du réseau CHANTIER école »."
+  }
+ ],
+ "comp": [
+  {
+   "t": "Outil-guide « Barométrie Ressources Humaines » (fiches 1, 3, 10, 11, 14)",
+   "p": "ARS Auvergne-Rhône-Alpes (ARSARA)",
+   "y": "septembre 2017",
+   "a": "free",
+   "use": "used",
+   "u": "https://www.auvergne-rhone-alpes.ars.sante.fr/media/18506/download",
+   "n": "Le PDF et le fichier Excel de ton dossier sont les deux formats publiés. Usage volontaire selon le guide ; sans valeur réglementaire.",
+   "v": "Guide lu le 05/11/2026 : téléchargement libre, aucune licence indiquée."
+  },
+  {
+   "t": "Code du travail — articles L6315-1, L6323-13, L2242-20",
+   "p": "Légifrance (Secrétariat général du Gouvernement, DILA)",
+   "y": "vérifiés le 05/11/2026",
+   "a": "open",
+   "use": "used",
+   "u": "https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006072050",
+   "n": "Entretien de parcours professionnel, abondement du CPF, négociation GPEC. Chercher l'article par son numéro dans le code.",
+   "v": "Mentions légales Légifrance lues le 05/11/2026 : « Sauf mention contraire, tous les contenus de ce site sont sous licence etalab-2.0 »."
+  }
+ ],
+ "gouv": [
+  {
+   "t": "Le Gouvernomètre — Agir pour les gouvernances associatives",
+   "p": "INAÉ, EILAN Conseil, DLA, France Active NA, CRESS NA, Le Mouvement associatif NA, Guid'Asso",
+   "y": "page datée d'octobre 2026",
+   "a": "free",
+   "use": "used",
+   "u": "https://inae-nouvelleaquitaine.org/ressources/le-gouvernometre-agir-pour-les-gouvernances-associatives/",
+   "n": "PDF de 472 Ko. Repris en l'état dans l'outil avec le crédit complet ; un accord écrit des auteurs reste conseillé avant diffusion publique.",
+   "v": "Page INAÉ lue le 05/11/2026 : téléchargement direct sans connexion ; mention de droits non indiquée."
+  },
+  {
+   "t": "Rôles et missions des administrateur·rices et des dirigeant·es salarié·es (fiche pratique V2)",
+   "p": "Fédération des acteurs de la solidarité (cofinancée par l'Union européenne, la DGCS et la DGEFP)",
+   "y": "avril 2022 (d'après l'adresse du fichier)",
+   "a": "free",
+   "use": "used",
+   "u": "https://www.federationsolidarite.org/wp-content/uploads/2022/04/FAS-fiche-roles-missions-V2.pdf",
+   "n": "Aucune date ni licence dans le texte.",
+   "v": "PDF lu le 05/11/2026 : accès libre sans compte, aucune licence indiquée."
+  },
+  {
+   "t": "Fiches de mission « Président·e d'association » et « Trésorier(ère) d'association »",
+   "p": "reproductions de fiches de JF Conseil (Josselin Fouquet), hébergées par INAÉ",
+   "y": "téléversées en juillet 2026",
+   "a": "free",
+   "use": "used",
+   "u": "https://inae-nouvelleaquitaine.org/wp-content/uploads/2026/07/Fiche-de-Mission-President.e-dassociation.pdf",
+   "n": "Deuxième fiche : Fiche-de-Mission-Tresorierere-dassociation-.pdf sur le même site. La mention « Reproduction de la fiche de poste réalisée par JF Conseil » indique la provenance, pas une licence : un accord écrit de JF Conseil est nécessaire pour les réutiliser telles quelles.",
+   "v": "PDF lus le 05/11/2026 : accès libre sans compte."
+  },
+  {
+   "t": "Guide « Dirigeants de fait » et fiscalité de la gestion désintéressée",
+   "p": "Associathèque",
+   "y": "page publiée le 13/05/2026",
+   "a": "free",
+   "use": "used",
+   "u": "https://www.associatheque.fr/fr/guides/fiscalite-association/exoneration/methode/dirigeants-fait.html",
+   "n": "À croiser avec la doctrine BOFiP BOI-IS-CHAMP-10-50-10-20 (version du 12/09/2012 lue ; version en vigueur non relue) : https://bofip.impots.gouv.fr/bofip/2358-PGP.html/identifiant%3DBOI-IS-CHAMP-10-50-10-20-20120912",
+   "v": "Page lue le 05/11/2026."
+  },
+  {
+   "t": "Code du travail — article L1311-2 (règlement intérieur à partir de 50 salariés)",
+   "p": "Légifrance",
+   "y": "vérifié le 05/11/2026",
+   "a": "open",
+   "use": "used",
+   "u": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038610176",
+   "n": "Ne pas confondre avec le règlement intérieur associatif (facultatif), qui détaille la gouvernance.",
+   "v": "Mentions légales Légifrance lues le 05/11/2026 : licence etalab-2.0."
+  },
+  {
+   "t": "Les risques liés aux délégations de pouvoirs",
+   "p": "FIDAL — support de formation (mai 2018 d'après le fichier)",
+   "y": "2018",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Support de 54 pages reçu dans ton dossier ; non retrouvé en ligne : ne pas republier ni lier.",
+   "v": "Accueil fidal.com et première page des actualités consultés le 05/11/2026 : titre non trouvé."
+  },
+  {
+   "t": "Livre blanc « Gestion des délégations : bonnes pratiques et recommandations »",
+   "p": "GT et GT Avocats (d'après le titre du fichier)",
+   "y": "janvier 2016",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Livre blanc de 28 pages reçu dans ton dossier ; non retrouvé sur grantthornton.fr. Éditeur à confirmer.",
+   "v": "Site grantthornton.fr consulté le 05/11/2026 : livre blanc non trouvé."
+  }
+ ],
+ "rh": [
+  {
+   "t": "Outil-guide « Barométrie Ressources Humaines » (fiches 2, 3 et 4, indicateurs complémentaires)",
+   "p": "ARS Auvergne-Rhône-Alpes (ARSARA)",
+   "y": "septembre 2017",
+   "a": "free",
+   "use": "used",
+   "u": "https://www.auvergne-rhone-alpes.ars.sante.fr/media/18506/download",
+   "n": "Fiche 2 « Politique et stratégie RH », fiche 3 « Recrutement » (aussi utilisée en COMP) et fiche 4 « Mouvements de personnels et gestion des remplacements », avec l'annexe 2 (taux de départs prématurés, de postes vacants à plus de 6 mois). Conçu pour les établissements sociaux et médico-sociaux, adapté ici ; sans valeur réglementaire.",
+   "v": "Guide lu le 05/11/2026 : téléchargement libre, aucune licence indiquée."
+  },
+  {
+   "t": "Code du travail et Code de la sécurité sociale — articles L1221-6, L1221-10, L1221-13, L1242-12, L2262-5, L2242-11, L2242-13, L2311-2, L3221-2, L1142-8, L5132-5, L5132-15-1, L5212-1, L5212-2 ; art. L911-7 du Code de la sécurité sociale",
+   "p": "Légifrance (Secrétariat général du Gouvernement, DILA)",
+   "y": "relus le 05/11/2026",
+   "a": "open",
+   "use": "used",
+   "u": "https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006072050",
+   "n": "Chercher chaque article par son numéro dans le code. Embauche et registre du personnel, CDD, convention collective, négociation annuelle, CSE à partir de 11 salariés, égalité de rémunération et indicateurs à partir de 50 salariés, contrats d'insertion en ACI et en EI, obligation d'emploi de travailleurs handicapés à partir de 20 salariés, complémentaire santé.",
+   "v": "Mentions légales Légifrance lues le 05/11/2026 : « Sauf mention contraire, tous les contenus de ce site sont sous licence etalab-2.0 »."
+  },
+  {
+   "t": "Convention collective nationale des ateliers et chantiers d'insertion du 31 mars 2011 (IDCC 3016)",
+   "p": "Légifrance — base des conventions collectives (KALI)",
+   "y": "texte du 31/03/2011, consulté le 05/11/2026",
+   "a": "open",
+   "use": "used",
+   "u": "https://www.legifrance.gouv.fr/conv_coll/id/KALITEXT000027181040",
+   "n": "Cité en exemple dans l'outil : ta branche peut être différente (EI, structures de l'animation, du médico-social, etc.). La base KALI donne le texte en vigueur et ses avenants, dont l'accord du 9 juillet 2014 sur l'égalité professionnelle.",
+   "v": "Notice KALI consultée le 05/11/2026 : texte étendu en vigueur ; licence du site Légifrance (etalab-2.0) lue pour le Code du travail, non relue pour cette base."
+  },
+  {
+   "t": "Guide des obligations sociales (Performance sociale)",
+   "p": "Malakoff Humanis, leDoTank, avec le cabinet Ellipse Avocats",
+   "y": "janvier 2023",
+   "a": "locked",
+   "use": "used",
+   "u": "",
+   "n": "Utilisé uniquement comme repère des seuils d'effectifs (11, 20, 50 salariés…) : aucun contenu reproduit, et chaque obligation retenue a été relue dans le Code du travail. Le guide indique « droits réservés — toute reproduction des informations contenues dans le présent guide est interdite » et se dit non exhaustif ; sa page de diffusion n'a pas été retrouvée.",
+   "v": "Fichier de ton dossier lu (99 pages) ; mentions de droits relevées sur la page 2."
+  }
+ ],
+ "env": [
+  {
+   "t": "Diagnostic à 360° sur la transition écologique",
+   "p": "Mission Transition écologique des entreprises (ADEME)",
+   "y": "",
+   "a": "free",
+   "use": "avail",
+   "u": "https://mission-transition-ecologique.beta.gouv.fr/projets-entreprise/diag-360",
+   "n": "Pour TPE et PME. Aucun compte mentionné ; tarif du diagnostic non indiqué. La licence AGPL citée concerne l'application, pas le diagnostic.",
+   "v": "Page lue le 05/11/2026."
+  },
+  {
+   "t": "Face aux aléas climatiques, êtes-vous exposé·es et vulnérables ?",
+   "p": "Les Ateliers de l'Adaptation au Changement Climatique",
+   "y": "",
+   "a": "free",
+   "use": "avail",
+   "u": "https://ateliers-adaptationclimat.fr/ressources/face-aux-aleas-climatiques-etes-vous-exposes-et-vulnerables/",
+   "n": "Questionnaire en ligne de quelques minutes, sans compte ; gratuité non indiquée explicitement.",
+   "v": "Page lue le 05/11/2026."
+  },
+  {
+   "t": "Autodiagnostic des risques « Votre autodiagnostic en quelques clics »",
+   "p": "AMRAE, en partenariat avec l'ADEME",
+   "y": "",
+   "a": "signup",
+   "use": "avail",
+   "u": "https://macarto-climat.fr/back/4416",
+   "n": "Pour PME et ETI ; compte requis ; gratuité non indiquée.",
+   "v": "Page lue le 05/11/2026 : « Créer un compte »."
+  },
+  {
+   "t": "Pages ADEME « Agir pour la transition » et « Plus frais au travail »",
+   "p": "ADEME ; beta.gouv.fr",
+   "y": "",
+   "a": "check",
+   "use": "avail",
+   "u": "https://agirpourlatransition.ademe.fr/entreprises/conseils/transverse/strategie/adaptation-climatique",
+   "n": "Liens issus de ton fichier divers.docx ; pages en erreur à la lecture automatique : à ouvrir dans un navigateur (autre lien : plusfraisautravail.beta.gouv.fr).",
+   "v": "Lecture en erreur le 05/11/2026."
+  },
+  {
+   "t": "Chantier & environnement — guide pratique, démarche ISO 14001",
+   "p": "FSM (démarche « Chantier Propre FSM »)",
+   "y": "août 2013",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Guide d'entreprise (20 pages) ; diffusion publique non vérifiée. À lire comme exemple de charte de chantier propre.",
+   "v": "Fichier de ton dossier lu."
+  },
+  {
+   "t": "Tableau des 8 gaspillages (affiche lean)",
+   "p": "éditeur non indiqué",
+   "y": "2009",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Affiche d'amélioration continue. Éditeur non identifiable dans le fichier : droits à vérifier avant usage public.",
+   "v": "Fichier de ton dossier lu."
+  }
+ ],
+ "part": [
+  {
+   "t": "Guide méthodologique — conduite de projets partenariaux de développement territorial par l'insertion par l'activité économique",
+   "p": "COORACE — centre de ressources VITA",
+   "y": "mars 2008",
+   "a": "check",
+   "use": "avail",
+   "u": "https://www.coorace.org",
+   "n": "Guide de 34 pages dans ton dossier. Accès libre ou adhérents non déterminé (site refusant la lecture automatique).",
+   "v": "Site coorace.org consulté le 05/11/2026 : lecture refusée."
+  },
+  {
+   "t": "Guides de capitalisation du PIC — n°6 « Construire de nouvelles relations aux entreprises »",
+   "p": "Haut-commissariat aux compétences — ministère du Travail",
+   "y": "octobre 2022",
+   "a": "free",
+   "use": "avail",
+   "u": "https://travail-emploi.gouv.fr/sites/travail-emploi/files/files-spip/pdf/hcc_no6_construire_de_nouvelles_relations_aux_entreprises_v221019.pdf",
+   "n": "Voir aussi la thématique INS pour la collection complète.",
+   "v": "Diffusion publique relevée le 05/11/2026 ; licence non vérifiée."
+  }
+ ],
+ "com": [
+  {
+   "t": "Comment faire un plan de communication",
+   "p": "présentation de Chrystel Skowron, Côte-d'Or Tourisme",
+   "y": "mars 2012",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Support de 17 pages dans ton dossier, issu du secteur du tourisme. Diffusion et droits non vérifiés.",
+   "v": "Fichier de ton dossier lu."
+  }
+ ],
+ "lab": []
+};
+
   var DATA = [
     { id: "ins", code: "INS", label: "Projet associatif et projet d'insertion",
       source: "Questionnaire inspiré de « La construction du projet associatif — un outil d'aide à la structuration » (CNAR Sport / CNOSF) et du « Guide pratique de l'association » (Ligue de l'enseignement Loire-Atlantique) — outils issus du secteur sportif, adaptés ici à l'ESS/IAE. Le volet financier et logistique du projet associatif est couvert par « Pilotage économique » ; l'ancrage territorial et les partenariats par les thématiques dédiées, pour éviter les doublons.",
@@ -1293,16 +2092,47 @@
           task: { task: "Bilan annuel agrément IAE", period: "T4", responsible: "Direction" } }
       ] },
     { id: "qvt", code: "QVT", label: "Qualité de vie au travail",
+      source: "Questionnaire construit à partir de trois sources reformulées pour une structure ESS ou IAE : (1) « S'engager dans une démarche de qualité de vie au travail — fiches repère » (CIDES / CHORUM, juin 2015), fondées sur le baromètre CHORUM d'octobre 2013 auprès de 6 261 répondants de l'ESS, fiches 1 à 10 (sens du travail, projection dans l'avenir, missions et encadrement, expression, relations dans le collectif, conditions de travail des cadres, tensions avec les usagers, pénibilité physique, communication interne, vie professionnelle et personnelle) ; (2) « Kit Enjeux RH — Risques psychosociaux » (Malakoff Humanis, 2020) : définitions du stress, de la violence et du harcèlement, six familles de facteurs de risques, comité de pilotage, indicateurs, prévention primaire, secondaire et tertiaire, réseau interne et externe ; (3) outil-guide « Baromètre RH » (ARSARA, établissements médico-sociaux), fiches 5 « Temps et charge de travail », 7 « Pilotage de la qualité de vie au travail », 8 « Risques liés à l'exercice professionnel », 9 « Équilibre vie professionnelle / personnelle » et 13 « Situation sociale », adaptées (la charte de l'outil autorise l'adaptation, il n'a pas de valeur réglementaire). Cadre légal vérifié sur Légifrance le 05/11/2026 : article L4121-1 du Code du travail (l'employeur prend les mesures nécessaires pour protéger la santé physique et mentale des travailleurs : prévention, information et formation, organisation adaptée) ; article L1152-4 (prévention du harcèlement moral et information du personnel sur l'article 222-33-2 du Code pénal) ; article L1153-5-1 (référent harcèlement sexuel et agissements sexistes obligatoire à partir de 250 salariés) ; articles L2242-1 et L2242-17 (négociation sur l'égalité professionnelle et la qualité de vie et des conditions de travail, au moins tous les quatre ans, uniquement dans les structures où une section syndicale d'organisation représentative est constituée ; elle peut porter sur l'articulation vie personnelle et professionnelle, le droit d'expression et le droit à la déconnexion). Limites : les fiches CIDES datent de 2015 et le kit Malakoff Humanis de 2020, qui parle encore de CHSCT alors que le CSE l'a remplacé depuis 2018 ; ARSARA vise le secteur médico-social ; ces documents sont des guides de bonnes pratiques, pas des obligations. Les réponses traduisent le regard de la direction : seule l'enquête anonyme auprès des salariés (question 2) mesure leur perception. Le document unique d'évaluation des risques relève de « Sécurité économique et continuité d'activité » ; les entretiens professionnels et la GPEC de « Plan de montée en compétences / GPEC » ; le turnover des encadrants et la grille salariale de « Ressources humaines » ; la communication interne institutionnelle de « Communication ».",
       questions: [
-        { q: "Un accord ou baromètre QVT a-t-il été mené au cours des 2 dernières années ?", a: "non_besoin",
-          action: "Lancer une enquête QVT (baromètre social) auprès de l'ensemble des salariés",
-          task: { task: "Diffusion du baromètre social", period: "T1", responsible: "RH" } },
-        { q: "Le taux d'absentéisme est-il suivi et maîtrisé ?", a: "non_besoin",
-          action: "Mettre en place un suivi mensuel de l'absentéisme partagé avec l'encadrement",
-          task: { task: "Suivi mensuel de l'absentéisme", period: "T1-T4", responsible: "RH" } },
-        { q: "Des actions de prévention des risques psychosociaux sont-elles en place ?", a: "ne_sait_pas",
-          action: "Négocier un accord QVT / prévention des risques psychosociaux avec les représentants du personnel",
-          task: { task: "Négociation accord QVT", period: "T2-T3", responsible: "Direction / CSE" } }
+        { q: "Une démarche de qualité de vie au travail est-elle formalisée : une personne ou un petit comité de pilotage (direction, encadrants, représentant du personnel, salarié en parcours), un plan d'actions écrit et un point de suivi régulier ?", a: "en_cours",
+          action: "Constituer un comité de pilotage QVT de 4 à 6 personnes et rédiger un plan d'actions suivi chaque trimestre",
+          task: { task: "Mise en place du comité QVT et du plan d'actions", period: "T1", responsible: "Direction / Représentants du personnel" } },
+        { q: "Une enquête anonyme auprès des salariés (permanents et en parcours) a-t-elle été menée au cours des 2 dernières années, avec une restitution des résultats à l'équipe et des suites annoncées ?", a: "non_besoin",
+          action: "Lancer un baromètre social anonyme court, construit sur les six familles de facteurs de risques psychosociaux, et en restituer les résultats en réunion d'équipe sous deux mois",
+          task: { task: "Baromètre social anonyme et restitution", period: "T1-T2", responsible: "Direction / Comité QVT" } },
+        { q: "L'absentéisme (dont les arrêts courts et répétés), les départs et les accidents du travail sont-ils suivis au moins chaque trimestre, par équipe ou par poste, et examinés avec l'encadrement et les représentants du personnel ?", a: "en_cours",
+          action: "Construire un tableau de bord trimestriel (absentéisme, départs, accidents du travail) par équipe et le présenter au comité QVT ou au CSE",
+          task: { task: "Tableau de bord des signaux sociaux", period: "T1-T4", responsible: "RH / Direction" } },
+        { q: "Les salariés ont-ils des occasions régulières d'échanger sur le sens de leur travail et son utilité (pour les personnes accompagnées, pour le territoire), et ce travail est-il reconnu par la direction, les partenaires et les clients ?", a: "oui",
+          action: "Organiser des temps d'échange sur le sens du travail : retours sur les sorties positives, visites de clients et de partenaires, parole donnée aux salariés",
+          task: { task: "Temps d'échange sur le sens et la reconnaissance du travail", period: "T2-T4", responsible: "Encadrants / Direction" } },
+        { q: "Chaque salarié, y compris en parcours, sait-il ce qu'on attend de lui et sur quels critères il est évalué (fiche de poste ou consignes, objectifs réalistes, critères énoncés à l'avance) ?", a: "en_cours",
+          action: "Actualiser les fiches de poste et formaliser pour chaque poste les attentes et les critères d'évaluation, en les discutant avec chaque salarié",
+          task: { task: "Actualisation des fiches de poste et des critères d'évaluation", period: "T2", responsible: "Direction / Encadrants" } },
+        { q: "La charge et le temps de travail sont-ils mesurés et ajustés : répartition équitable entre les professionnels, plannings connus à l'avance, adaptation aux pics d'activité, amplitude horaire régulée y compris pour l'encadrement, règles sur les messages et réunions hors temps de travail ?", a: "en_cours",
+          action: "Mesurer la charge par poste (heures supplémentaires, missions cumulées, périodes de pointe), en débattre en réunion d'équipe et fixer des règles écrites sur les plannings, les horaires de réunion et les messages hors temps de travail",
+          task: { task: "Analyse de la charge de travail et règles sur le temps de travail", period: "T2", responsible: "Direction / Encadrants" } },
+        { q: "Les salariés disposent-ils de marges de manœuvre pour organiser leur travail et d'un espace d'expression sur le travail réel (réunion d'équipe structurée, en dehors des instances représentatives), avec une réponse apportée aux remarques ?", a: "oui",
+          action: "Instaurer une réunion d'équipe régulière avec ordre du jour, temps d'expression et compte rendu des suites données",
+          task: { task: "Réunion d'équipe avec temps d'expression", period: "T1-T4", responsible: "Encadrants" } },
+        { q: "Les conflits et tensions entre salariés, ou avec l'encadrement, sont-ils traités rapidement (intervention immédiate, médiation, soutien de l'encadrant) selon une règle connue de tous ?", a: "en_cours",
+          action: "Définir une procédure simple de traitement des conflits (qui saisir, sous quel délai, avec quelle médiation) et la communiquer à tous",
+          task: { task: "Procédure de traitement des conflits", period: "T2", responsible: "Direction / Encadrants" } },
+        { q: "Les agressions verbales ou physiques et les situations de tension avec des personnes accompagnées ou des tiers sont-elles recensées et analysées après chaque incident, avec une procédure d'alerte et un soutien (référent, soutien psychologique) pour les salariés concernés ?", a: "non_besoin",
+          action: "Mettre en place un registre des incidents, une procédure d'alerte et un temps d'analyse collective après chaque incident ; identifier un référent et un relais de soutien psychologique",
+          task: { task: "Registre des incidents et procédure d'alerte", period: "T1-T2", responsible: "Direction / Encadrants" } },
+        { q: "Une procédure de signalement du harcèlement moral ou sexuel et des agissements sexistes est-elle connue de tous, avec des personnes-ressources identifiées en interne et à l'extérieur (représentants du personnel, médecin du travail), et le personnel a-t-il été informé du texte du Code pénal prévu par la loi ?", a: "ne_sait_pas",
+          action: "Rédiger et afficher la procédure de signalement, nommer des personnes-ressources internes et externes, et informer le personnel du texte de l'article 222-33-2 du Code pénal",
+          task: { task: "Procédure de signalement et information du personnel", period: "T1", responsible: "Direction / Représentants du personnel" } },
+        { q: "Les facteurs de risques psychosociaux (exigences de travail, exigences émotionnelles, autonomie, rapports sociaux, conflits de valeurs, insécurité de la situation de travail) ont-ils été repérés avec les équipes, et des mesures portent-elles sur l'organisation du travail et pas seulement sur le soutien individuel ?", a: "en_cours",
+          action: "Repérer avec chaque équipe les familles de facteurs présentes, puis retenir deux ou trois actions de prévention portant sur l'organisation (remplacements, horaires, répartition des tâches)",
+          task: { task: "Repérage des facteurs de risques et choix des actions de prévention", period: "T2-T3", responsible: "Comité QVT" } },
+        { q: "La pénibilité physique (postures, manutention, port de charges, bruit sur les chantiers et ateliers) fait-elle l'objet d'une analyse avec les salariés concernés et de mesures concrètes (rotation, binômes, matériel adapté et testé avant achat, formation aux gestes et postures) ?", a: "oui",
+          action: "Faire avec les salariés un tour des postes pénibles, prioriser trois améliorations, tester le matériel avant achat et solliciter la Carsat ou le service de prévention et de santé au travail",
+          task: { task: "Tour des postes pénibles et plan d'amélioration", period: "T2-T3", responsible: "Encadrants / Représentants du personnel" } },
+        { q: "La direction et l'encadrement bénéficient-ils eux-mêmes de ressources : échanges entre pairs ou analyse de pratiques, appui formalisé du CA, formation à la conduite d'équipe, appui technique ?", a: "en_cours",
+          action: "Mettre en place un temps régulier d'échange de pratiques pour la direction et l'encadrement (réseau de pairs ou supervision) et un point annuel de soutien avec le président ou le bureau",
+          task: { task: "Dispositif de soutien à la direction et à l'encadrement", period: "T2-T4", responsible: "CA / Direction" } }
       ] },
     { id: "eco", code: "ECO", label: "Pilotage économique, financier et modèle de ressources",
       source: "Indicateurs issus de l'outil DiagFlash — autodiagnostic financier flash co-construit par France Active Nouvelle-Aquitaine et INAÉ Nouvelle-Aquitaine, à destination des SIAE.",
@@ -1362,53 +2192,210 @@
           action: "Inscrire le numérique à l'ordre du jour du CA avec un budget dédié",
           task: { task: "Point numérique au CA + budget", period: "T4", responsible: "Direction / CA" } }
       ] },
-    { id: "terr", code: "TERR", label: "Responsabilité territoriale, utilité sociale et impact",
+    { id: "sec", code: "SEC", label: "Sécurité économique et continuité d'activité",
+      source: "Questionnaire construit à partir de sources publiques, reformulées pour une structure ESS ou IAE : « Guide pour réaliser un plan de continuité d'activité » (SGDSN, Premier ministre, édition 2013), notamment sa fiche d'auto-évaluation des bonnes pratiques ; guide « Plan de continuité d'activité à l'usage du chef d'entreprise en cas de crise majeure » (juillet 2015) ; « La sécurité économique au quotidien » (SISSE / Direction générale des entreprises, édition de novembre 2021 en 28 fiches ; le guide a été mis à jour en mai 2026 et compte désormais 29 fiches, non comparées une à une ici) ; guide « Élaborer un plan de continuité d'activité » (SGZDS de Paris, 2019) ; guide des bonnes pratiques à l'attention des directions des ressources humaines (Club de la continuité d'activité, 2010). Cadre légal vérifié sur Légifrance le 05/11/2026 : article L4121-3-1 du Code du travail (document unique d'évaluation des risques professionnels). Hors ce document unique, ces guides sont des recommandations, non des obligations. Les sauvegardes régulières, antivirus, mots de passe et conformité RGPD relèvent de « Maturité numérique » ; la diversité des financeurs de « Relations partenariales » ; la perte d'un savoir-faire détenu par une seule personne de « Plan de montée en compétences / GPEC ».",
       questions: [
-        { q: "Des indicateurs d'impact social sont-ils suivis annuellement ?", a: "oui",
-          action: "Structurer un tableau de bord d'indicateurs d'impact social suivi annuellement",
-          task: { task: "Collecte des indicateurs d'impact N-1", period: "T1", responsible: "Direction" } },
-        { q: "Un rapport d'impact est-il diffusé publiquement ?", a: "en_cours",
-          action: "Construire un rapport d'impact social annuel diffusé publiquement",
-          task: { task: "Publication du rapport d'impact", period: "T2", responsible: "Communication" } },
-        { q: "La structure est-elle reconnue par la CRESS ou un réseau régional ?", a: "oui",
-          action: "Renforcer les partenariats avec les prescripteurs locaux (France Travail, Mission locale)",
-          task: { task: "Prospection de nouveaux prescripteurs locaux", period: "T3", responsible: "Direction" } }
+        { q: "Une personne est-elle désignée (avec un suppléant) pour piloter la sécurité et la continuité d'activité, avec le soutien explicite de la direction et du CA ?", a: "en_cours",
+          action: "Désigner un responsable sécurité et continuité et son suppléant, par une décision écrite de la direction présentée au CA",
+          task: { task: "Désignation du responsable sécurité / continuité et de son suppléant", period: "T1", responsible: "Direction / CA" } },
+        { q: "Les activités essentielles (celles dont l'arrêt ferait perdre un financement, un agrément ou un client, ou mettrait des salariés en difficulté) sont-elles identifiées, avec le délai d'interruption maximal acceptable pour chacune ?", a: "en_cours",
+          action: "Lister les activités essentielles de la structure et fixer pour chacune la durée d'interruption maximale acceptable (en heures ou en jours)",
+          task: { task: "Atelier activités essentielles et délais d'interruption acceptables", period: "T1", responsible: "Direction / Encadrants" } },
+        { q: "Les informations stratégiques à protéger (dossiers des salariés en parcours, données financières, contrats, fichiers des financeurs) sont-elles listées, avec les personnes autorisées à y accéder ?", a: "en_cours",
+          action: "Dresser la liste des informations stratégiques et sensibles, préciser où elles sont conservées et qui y a accès",
+          task: { task: "Inventaire des informations à protéger et des droits d'accès", period: "T2", responsible: "Direction / Responsable sécurité" } },
+        { q: "Les risques prioritaires sont-ils listés et classés selon leur gravité et leur probabilité (panne ou cyberattaque, sinistre sur un site ou un chantier, défaillance d'un prestataire, absence prolongée de personnes clés, accident grave) ?", a: "ne_sait_pas",
+          action: "Lister les scénarios de risque et les classer par gravité et probabilité, pour retenir ceux qui justifient un traitement prioritaire",
+          task: { task: "Cartographie et hiérarchisation des risques", period: "T2", responsible: "Direction / Responsable sécurité" } },
+        { q: "Le document unique d'évaluation des risques professionnels est-il à jour, y compris pour les chantiers, les ateliers et les postes tenus par des salariés en parcours ?", a: "oui",
+          action: "Mettre à jour le document unique d'évaluation des risques professionnels (art. L4121-3-1 du Code du travail) en y intégrant chantiers, ateliers et postes des salariés en parcours, et consigner les actions de prévention",
+          task: { task: "Mise à jour du document unique d'évaluation des risques", period: "T1", responsible: "Direction / Encadrants" } },
+        { q: "Les fournisseurs et prestataires dont vous ne pouvez pas vous passer (informatique, comptabilité, énergie, véhicules, matériaux) sont-ils identifiés, avec une solution de remplacement en cas de défaillance ?", a: "en_cours",
+          action: "Identifier les prestataires critiques, vérifier leur propre capacité à continuer en cas de crise et prévoir pour chacun une solution de remplacement",
+          task: { task: "Liste des prestataires critiques et solutions de remplacement", period: "T2", responsible: "Direction / Comptabilité" } },
+        { q: "Tout paiement inhabituel ou changement de coordonnées bancaires est-il soumis à une double validation et à un contre-appel au correspondant habituel, quelle que soit l'urgence invoquée ?", a: "oui",
+          action: "Écrire et diffuser la procédure de paiement sécurisée : double validation, rappel au numéro connu, refus de toute urgence invoquée par un interlocuteur (fraude au faux ordre de virement)",
+          task: { task: "Procédure de double validation des paiements", period: "T1", responsible: "Direction / Comptabilité" } },
+        { q: "Savez-vous en combien de temps vous retrouveriez vos données et vos outils essentiels après une panne ou une cyberattaque, et l'avez-vous vérifié par une restauration réelle ?", a: "en_cours",
+          action: "Tester une restauration complète des données essentielles, mesurer le temps nécessaire et le comparer au délai acceptable fixé pour chaque activité",
+          task: { task: "Test de restauration des données et outils essentiels", period: "T3", responsible: "Responsable numérique / Prestataire" } },
+        { q: "Toute l'équipe, y compris les salariés en parcours, les stagiaires et les nouveaux arrivants, est-elle sensibilisée aux fraudes et à l'hameçonnage, et sait-elle comment signaler un incident ou un fait inhabituel ?", a: "en_cours",
+          action: "Organiser une sensibilisation annuelle pour toute l'équipe, nouveaux arrivants et salariés en parcours compris, et mettre en place un canal simple de signalement des incidents",
+          task: { task: "Séance annuelle de sensibilisation et canal de signalement", period: "T2", responsible: "Responsable sécurité / Encadrants" } },
+        { q: "Pour chaque activité essentielle, un fonctionnement minimal est-il écrit pour les cas d'indisponibilité des locaux, du personnel, du matériel, du téléphone, du système informatique ou d'un prestataire ?", a: "ne_sait_pas",
+          action: "Rédiger pour chaque activité essentielle une fiche de fonctionnement dégradé couvrant locaux, personnel, matériel, téléphonie, système informatique et prestataires",
+          task: { task: "Fiches de fonctionnement dégradé par activité essentielle", period: "T3", responsible: "Direction / Encadrants" } },
+        { q: "Les suppléances, les délégations de signature et un annuaire de crise (consultable sans le système informatique) sont-ils prévus pour les personnes clés ?", a: "en_cours",
+          action: "Formaliser suppléances et délégations de signature pour les fonctions clés et tenir à jour un annuaire de crise imprimé et hors ligne (équipe, financeurs, banque, assureur, prestataires)",
+          task: { task: "Délégations, suppléances et annuaire de crise hors ligne", period: "T2", responsible: "Direction / CA" } },
+        { q: "Les contrats d'assurance (dommages, pertes d'exploitation, cyber, responsabilité civile) ont-ils été relus au regard des scénarios de risque retenus ?", a: "en_cours",
+          action: "Relire les contrats d'assurance avec le courtier ou l'assureur au regard des scénarios retenus : garanties, exclusions, franchises, délais d'indemnisation",
+          task: { task: "Revue des contrats d'assurance par scénario", period: "T4", responsible: "Direction / Comptabilité" } },
+        { q: "Le dispositif (cellule de crise, personnes à alerter, communication aux salariés et aux financeurs) est-il testé au moins une fois par an, avec un retour d'expérience écrit et une mise à jour du plan ?", a: "non_besoin",
+          action: "Organiser chaque année un exercice de crise de 2 heures sur un scénario réaliste, rédiger un retour d'expérience et mettre à jour le plan",
+          task: { task: "Exercice annuel de crise et retour d'expérience", period: "T4", responsible: "Direction / Responsable sécurité" } }
+      ] },
+    { id: "terr", code: "TERR", label: "Responsabilité territoriale, utilité sociale et impact",
+      source: "Questionnaire inspiré du référentiel « Registres, critères et indicateurs de l'utilité sociale territoriale » (COORACE, 2013, avec Hélène Duclos / Transformation), de la démarche d'auto-évaluation des Cahiers de l'Avise n°5 « Évaluer l'utilité sociale de son activité » (Avise / Culture et Promotion, 2007) et des données collectées par l'outil de mesure de la valeur ajoutée des ACI du réseau Chantier École (Goodwill Management, 2019-2020). Il évalue la capacité de la structure à mesurer son utilité sociale ; il ne calcule pas de retour social sur investissement. Le partenariat et la reconnaissance par les réseaux sont couverts par « Relations partenariales » et « Labellisation et réseaux », pour éviter les doublons.",
+      questions: [
+        { q: "La structure a-t-elle défini par écrit les dimensions d'utilité sociale qu'elle veut mettre en avant (accès à l'emploi de qualité, pouvoir d'agir, « faire société », développement économique local, transformation sociétale) ?", a: "en_cours",
+          action: "Définir collectivement les registres d'utilité sociale de la structure (accès à l'emploi de qualité, pouvoir d'agir, faire société, développement économique local, transformation sociétale)",
+          task: { task: "Atelier de définition des registres d'utilité sociale", period: "T1", responsible: "Direction / CA" } },
+        { q: "Un référentiel écrit relie-t-il ces dimensions à des critères, puis à des indicateurs de réalisation, de résultat et d'impact ?", a: "en_cours",
+          action: "Construire un référentiel d'évaluation : pour chaque registre, des critères puis des indicateurs de réalisation, de résultat et d'impact",
+          task: { task: "Rédaction du référentiel registres / critères / indicateurs", period: "T2", responsible: "Direction" } },
+        { q: "Les parties prenantes (salariés en parcours, encadrants, administrateurs, financeurs) sont-elles associées à la définition des critères d'évaluation ?", a: "ne_sait_pas",
+          action: "Associer salariés en parcours, encadrants, CA et financeurs à la construction des critères d'évaluation (démarche d'auto-évaluation participative)",
+          task: { task: "Groupe de travail parties prenantes sur les critères", period: "T2", responsible: "Direction / CA" } },
+        { q: "Les sorties des salariés en parcours (emploi, formation) sont-elles suivies à la sortie et à 6 mois ?", a: "en_cours",
+          action: "Mettre en place un suivi des sorties à 1 mois et à 6 mois (emploi, formation) pour tous les salariés en parcours",
+          task: { task: "Relances des sortants à 1 mois et 6 mois", period: "T1-T4", responsible: "Équipe d'insertion" } },
+        { q: "Les compétences acquises en parcours sont-elles comptabilisées (attestations de compétences, CQP, habilitations, nombre de personnes formées par type de formation) ?", a: "oui",
+          action: "Tenir un registre annuel des acquis des salariés en parcours (attestations, CQP, habilitations, formations suivies)",
+          task: { task: "Bilan annuel des acquis de compétences", period: "T4", responsible: "Équipe d'insertion" } },
+        { q: "Les freins périphériques levés pendant le parcours (mobilité, accès aux droits, logement, surendettement) sont-ils repérés et suivis ?", a: "en_cours",
+          action: "Suivre dans le dossier de chaque salarié les freins périphériques repérés et levés (mobilité, droits, logement, surendettement)",
+          task: { task: "Grille de suivi des freins périphériques", period: "T2", responsible: "Équipe d'insertion" } },
+        { q: "Le ressenti des salariés en parcours (confiance en soi, sentiment d'appartenance, capacité à se projeter) est-il recueilli à l'entrée et à la sortie ?", a: "non_besoin",
+          action: "Recueillir à l'entrée et à la sortie le ressenti des salariés (confiance en soi, appartenance, projection à 6 mois) par un court entretien ou questionnaire",
+          task: { task: "Conception du questionnaire entrée / sortie", period: "T2", responsible: "Équipe d'insertion / Direction" } },
+        { q: "L'empreinte économique locale est-elle chiffrée (masse salariale, part des salariés résidant sur le territoire, part des achats auprès de fournisseurs de la région, valeur ajoutée) ?", a: "en_cours",
+          action: "Chiffrer chaque année l'empreinte économique locale : masse salariale, part des achats régionaux, valeur ajoutée, salariés résidant sur le territoire",
+          task: { task: "Extraction comptable de l'empreinte économique locale", period: "T1", responsible: "Direction / Comptabilité" } },
+        { q: "Les coûts évités pour la collectivité (RSA, allocations chômage) ou un retour social sur investissement (SROI) ont-ils été estimés ?", a: "ne_sait_pas",
+          action: "Estimer les coûts évités pour la collectivité et le retour social sur investissement (pour un ACI : outil de mesure du réseau Chantier École)",
+          task: { task: "Estimation des coûts évités / SROI", period: "T3", responsible: "Direction" } },
+        { q: "Les besoins non couverts du territoire auxquels la structure répond (nouveaux biens et services, nouvelles activités) sont-ils identifiés et documentés ?", a: "oui",
+          action: "Documenter chaque année les besoins du territoire auxquels répond la structure (activités nouvelles, clients satisfaits, heures obtenues sur marchés publics locaux)",
+          task: { task: "Fiche annuelle « besoins du territoire »", period: "T3", responsible: "Direction" } },
+        { q: "Une synthèse d'utilité sociale est-elle restituée chaque année aux financeurs, aux salariés et au public ?", a: "en_cours",
+          action: "Produire une synthèse annuelle d'utilité sociale et la restituer aux financeurs, aux salariés et au public",
+          task: { task: "Publication de la synthèse d'utilité sociale", period: "T2", responsible: "Direction / Communication" } }
       ] },
     { id: "comp", code: "COMP", label: "Plan de montée en compétences / GPEC",
+      source: "Questionnaire adapté de l'outil-guide « Baromètre RH » conçu pour les établissements et services sociaux et médico-sociaux (ARSARA), fiches 1 « Besoins en effectifs / en emplois », 3 « Recrutement », 10 « Expertise métiers et pratiques professionnelles » et 11 « Parcours professionnels ». Ces fiches sont reformulées pour une structure d'insertion par l'activité économique (encadrants techniques, conseillers en insertion, équipe permanente) ; la charte de l'outil autorise l'adaptation et il n'a pas de valeur réglementaire. Il porte sur les salariés permanents : le parcours des salariés en insertion relève de « Responsabilité territoriale, utilité sociale et impact » et de « Projet associatif et projet d'insertion ». Cadre légal vérifié sur Légifrance le 05/11/2026 : article L6315-1 du Code du travail dans sa version issue de la loi n° 2025-1403 du 30/12/2025 (entretien de parcours professionnel tous les 4 ans, état des lieux récapitulatif tous les 8 ans) ; article L2242-20 (négociation triennale GEPP obligatoire à partir de 300 salariés seulement, donc facultative pour la plupart des structures d'insertion). Le recrutement, l'intégration des nouveaux arrivants, la rémunération et le climat social relèvent de « Ressources humaines » et de « Qualité de vie au travail ».",
       questions: [
-        { q: "Les entretiens professionnels sont-ils réalisés pour l'ensemble des salariés ?", a: "en_cours",
-          action: "Systématiser les entretiens professionnels tous les 2 ans pour l'ensemble des salariés",
-          task: { task: "Recueil des besoins en formation", period: "T1", responsible: "RH" } },
-        { q: "Un plan de formation pluriannuel existe-t-il ?", a: "non_besoin",
-          action: "Construire un plan de développement des compétences à 3 ans",
-          task: { task: "Plan de développement des compétences", period: "T4", responsible: "Direction / RH" } },
-        { q: "La mobilité interne des encadrants est-elle organisée ?", a: "ne_sait_pas",
-          action: "Organiser un dispositif de mobilité interne pour les encadrants",
-          task: { task: "Cartographie des parcours et mobilités internes", period: "T3", responsible: "Direction / RH" } }
+        { q: "Les besoins en emplois et en compétences sont-ils estimés poste par poste (direction, encadrants techniques, conseillers en insertion, fonctions support), en lien avec l'évolution de l'activité ?", a: "en_cours",
+          action: "Dresser la cartographie des postes de l'équipe permanente avec, pour chacun, les compétences requises, les personnes qui les détiennent et la charge d'activité prévue",
+          task: { task: "Cartographie des postes et des compétences de l'équipe permanente", period: "T1", responsible: "Direction" } },
+        { q: "La structure a-t-elle réfléchi aux besoins à 3 ans : départs en retraite prévisibles (pyramide des âges), évolution des activités support, de l'agrément ou des financements, publics accueillis ?", a: "non_besoin",
+          action: "Rédiger une GPEC allégée sur une page : postes clés, départs prévisibles à 3 ans, compétences à acquérir (la négociation triennale n'est obligatoire qu'à partir de 300 salariés, mais la démarche protège de la perte d'un savoir-faire clé)",
+          task: { task: "GPEC allégée : postes clés, départs prévisibles, compétences à acquérir", period: "T2", responsible: "Direction / CA" } },
+        { q: "Les diplômes, qualifications et habilitations de chaque professionnel correspondent-ils aux fonctions réellement exercées (accompagnement socioprofessionnel, encadrement technique, sécurité sur les chantiers) ?", a: "oui",
+          action: "Comparer annuellement qualifications et habilitations détenues avec celles qu'exige chaque fonction, et inscrire les écarts au plan de développement des compétences",
+          task: { task: "Contrôle annuel qualifications / habilitations par poste", period: "T1", responsible: "Direction / RH" } },
+        { q: "Un entretien de parcours professionnel est-il organisé la première année de chaque salarié, puis tous les 4 ans, distinct de l'évaluation du travail, et consigné dans un écrit remis au salarié ?", a: "en_cours",
+          action: "Organiser l'entretien de parcours professionnel (première année, puis tous les 4 ans, consacré aux compétences, aux projets, à la formation, au CPF et au conseil en évolution professionnelle) avec un écrit remis au salarié, séparé de l'entretien d'évaluation annuel (art. L6315-1 du Code du travail)",
+          task: { task: "Planification et conduite des entretiens de parcours professionnel", period: "T1-T4", responsible: "Direction / RH" } },
+        { q: "Un tableau suit, salarié par salarié, la date du dernier entretien de parcours et le bilan à 8 ans (au moins une formation, une certification ou VAE, ou une progression salariale ou professionnelle) ?", a: "ne_sait_pas",
+          action: "Créer un tableau de suivi individuel : date du dernier entretien, formations suivies, certifications, progression, échéance du bilan à 8 ans (une absence de suivi expose, dès 50 salariés, à un abondement du CPF, art. L6323-13)",
+          task: { task: "Tableau de suivi des entretiens et du bilan à 8 ans", period: "T1", responsible: "RH / Direction" } },
+        { q: "Les besoins repérés en entretien sont-ils consolidés dans un plan de développement des compétences pluriannuel, chiffré et validé par la direction ou le CA ?", a: "en_cours",
+          action: "Consolider les besoins issus des entretiens dans un plan de développement des compétences sur 3 ans, avec priorités, budget et calendrier, validé par la direction et présenté au CA",
+          task: { task: "Plan de développement des compétences à 3 ans", period: "T4", responsible: "Direction / RH" } },
+        { q: "Les financements de la formation sont-ils mobilisés de façon systématique (OPCO, compte personnel de formation, aides régionales, dispositifs de branche) et le contact est-il établi avec les organismes de formation et les acteurs de l'emploi ?", a: "oui",
+          action: "Établir chaque année la liste des financements possibles pour chaque action prévue (OPCO, CPF, aides régionales) et formaliser le lien avec les organismes de formation partenaires",
+          task: { task: "Plan de financement de la formation et contacts OPCO / organismes", period: "T1", responsible: "Direction / RH" } },
+        { q: "Les encadrants techniques et les conseillers en insertion sont-ils formés à l'évolution des publics accueillis (santé mentale, illettrisme, freins périphériques, nouveaux dispositifs) ?", a: "oui",
+          action: "Inscrire au plan de formation les évolutions des publics accueillis : formation des encadrants et des conseillers en insertion, échanges de pratiques entre pairs, interventions de partenaires du territoire",
+          task: { task: "Programme annuel de formation sur les évolutions des publics", period: "T2", responsible: "Direction / Équipe d'insertion" } },
+        { q: "Les savoir-faire détenus par une seule personne sont-ils repérés, et des mesures de transmission existent-elles (tutorat, binôme, procédures écrites, passation de poste préparée) ?", a: "en_cours",
+          action: "Repérer les savoir-faire détenus par une seule personne et organiser leur transmission : binômes, procédures écrites, période de tutorat avant tout départ prévisible",
+          task: { task: "Repérage des savoir-faire critiques et plan de transmission", period: "T2", responsible: "Direction / Encadrants" } },
+        { q: "Les demandes individuelles (formation, VAE, bilan de compétences, évolution de poste, mobilité interne) reçoivent-elles une réponse argumentée, et la mobilité interne des encadrants est-elle envisagée ?", a: "non_besoin",
+          action: "Définir une règle de traitement des demandes individuelles (délai, critères, réponse écrite) et lister les passerelles internes possibles, en particulier pour les encadrants techniques",
+          task: { task: "Procédure de traitement des demandes individuelles et passerelles internes", period: "T3", responsible: "Direction / RH" } },
+        { q: "L'exécution du plan de formation est-elle suivie et mesurée : taux de salariés formés, budget consommé, effets constatés sur les pratiques, bilan annuel présenté au CA ?", a: "ne_sait_pas",
+          action: "Suivre chaque année le taux de salariés formés par catégorie, le budget formation consommé et les effets observés, et présenter ce bilan au CA",
+          task: { task: "Bilan annuel de la formation présenté au CA", period: "T4", responsible: "Direction / RH" } }
       ] },
     { id: "gouv", code: "GOUV", label: "Gouvernance associative",
+      gouvernometre: true, gvPos: 9,
+      modalSource: "Le Gouvernomètre est repris en l'état (crédit complet sous l'échelle). Les onze questions complémentaires en fin de formulaire ne font pas partie du Gouvernomètre : elles sont construites à partir de trois fiches pratiques sur les rôles des dirigeants (voir la source de la thématique) et reformulées.",
+      source: "Le Gouvernomètre (« Agir pour les gouvernances associatives ») est repris en l'état : 21 constats répartis en trois zones, son texte d'introduction et ses acteurs-ressources. Réalisé par INAÉ, EILAN Conseil, DLA, France Active Nouvelle-Aquitaine, CRESS Nouvelle-Aquitaine, Le Mouvement associatif Nouvelle-Aquitaine et Guid'Asso. Les onze questions complémentaires qui suivent ne font pas partie du Gouvernomètre : elles sont construites à partir de trois fiches pratiques, reformulées : (1) « Rôles et missions des administrateur·rices et des dirigeant·es salarié·es » (Fédération des acteurs de la solidarité, fiche pratique V2, avril 2022, action cofinancée par l'Union européenne, la DGCS et la DGEFP) ; (2) « Fiche de mission — Président·e d'association » et (3) « Fiche de mission — Trésorier(ère) d'association », reproductions de fiches réalisées par JF Conseil (Josselin Fouquet), reçues dans le dossier de ressources. Vérifications : article L1311-2 du Code du travail contrôlé sur Légifrance le 05/11/2026 (le règlement intérieur du travail est obligatoire à partir de 50 salariés, 12 mois après le franchissement du seuil) ; il est distinct du règlement intérieur associatif, facultatif, dont parle la fiche FAS, qui sert à détailler la gouvernance sans modifier les statuts. Sur le risque de « dirigeant de fait » : la doctrine fiscale BOI-IS-CHAMP-10-50-10-20 (lue dans sa version du 12/09/2012, version en vigueur non relue) et le guide Associathèque (13/05/2026) vont dans le même sens que la fiche FAS ; l'administration doit prouver la gestion de fait, et la requalification d'un directeur salarié vise surtout le cas où le CA ne joue pas son rôle de contrôle. Les délégations de pouvoirs ne sont pas encadrées par un texte : leurs conditions de validité relèvent de la pratique et de la jurisprudence, non revérifiée ici. Ces fiches sont des repères de bonne pratique, pas des obligations ; elles ne remplacent pas l'avis d'un juriste ou d'un expert-comptable.",
       questions: [
-        { q: "Le conseil d'administration est-il renouvelé régulièrement (âge, ancienneté équilibrés) ?", a: "non_besoin",
-          action: "Lancer une campagne de recrutement d'administrateurs pour rééquilibrer le CA",
-          task: { task: "Campagne de recrutement d'administrateurs", period: "T1-T2", responsible: "Présidence" } },
-        { q: "Tous les postes du bureau sont-ils pourvus ?", a: "non_besoin",
-          action: "Pourvoir les postes vacants du bureau lors du prochain renouvellement",
-          task: { task: "Renouvellement du bureau", period: "T2", responsible: "Présidence" } },
-        { q: "Le quorum est-il facilement atteint en assemblée générale ?", a: "ne_sait_pas",
-          action: "Réviser les statuts pour faciliter la participation (visio, procurations)",
-          task: { task: "Assemblée générale", period: "T2", responsible: "CA" } }
+        { q: "Les statuts précisent-ils les pouvoirs du conseil d'administration, y compris une clause lui attribuant les pouvoirs non expressément réservés à l'assemblée générale (à défaut, ses compétences se limitent à l'administration et à la gestion courante) ?", a: "en_cours",
+          action: "Faire relire les statuts par le bureau et, si besoin, proposer à la prochaine assemblée générale une clause attribuant au CA les pouvoirs non réservés à l'AG",
+          task: { task: "Relecture des statuts sur les pouvoirs du CA", period: "T1-T2", responsible: "Présidence / Bureau" } },
+        { q: "Chaque fonction du bureau a-t-elle une fiche de mission écrite : missions, durée du mandat et mode de désignation, devoirs (disponibilité, réunions), responsabilités civile, pénale et financière, liens avec les autres acteurs, remboursement des frais ?", a: "non_besoin",
+          action: "Rédiger une fiche de mission pour la présidence, la trésorerie, le secrétariat et les administrateurs, puis la valider en CA et la remettre à chaque nouvel élu",
+          task: { task: "Fiches de mission des administrateurs", period: "T1-T2", responsible: "Bureau / Direction" } },
+        { q: "La présidence exerce-t-elle ses missions clés : impulser et suivre le projet associatif, préparer et présider bureau, CA et assemblée générale, représenter l'association, arbitrer, être l'interlocutrice des partenaires, avec un lien hiérarchique clair avec la direction salariée ?", a: "en_cours",
+          action: "Faire le point en bureau sur les quatre domaines de la fonction de présidence (stratégie, animation des instances, représentation, suivi) et clarifier le lien avec la direction",
+          task: { task: "Point annuel sur l'exercice de la présidence", period: "T2", responsible: "Présidence / Bureau" } },
+        { q: "La trésorerie exerce-t-elle réellement sa fonction : supervision de la comptabilité, suivi des encaissements et décaissements, participation au budget et à son suivi, situation financière présentée régulièrement au bureau et au CA, alerte des instances en cas de difficulté, éléments financiers préparés pour l'assemblée générale ?", a: "oui",
+          action: "Fixer un point financier à chaque réunion de bureau et de CA, présenté par la trésorerie avec un tableau de bord stable",
+          task: { task: "Point financier récurrent en bureau et en CA", period: "T1-T4", responsible: "Trésorerie / Direction" } },
+        { q: "Les pouvoirs confiés à la direction salariée font-ils l'objet d'une délégation écrite précise : qui délègue à qui, quelles missions de façon exhaustive, durée avec dates de début et de fin, signatures datées (et non une délégation trop générale) ?", a: "non_besoin",
+          action: "Vérifier que les statuts autorisent la délégation, puis rédiger une délégation de pouvoirs écrite, limitée à une partie des pouvoirs, signée et datée, avec durée définie",
+          task: { task: "Délégation de pouvoirs à la direction salariée", period: "T1-T2", responsible: "Présidence / Direction" } },
+        { q: "Le périmètre de décision de la direction salariée est-il clair sur les domaines délégables (achats, engagements financiers, fournisseurs, recrutement, politique salariale, sanctions et licenciements, conventions et financeurs, représentation) : sait-on ce qu'elle décide seule et ce qui revient au bureau ou au CA ?", a: "en_cours",
+          action: "Construire un tableau « qui décide quoi » (direction, bureau, CA, AG) sur les domaines délégables et l'annexer à la délégation de pouvoirs",
+          task: { task: "Tableau « qui décide quoi »", period: "T2", responsible: "CA / Direction" } },
+        { q: "Le CA a-t-il examiné le risque de requalification du dirigeant salarié en dirigeant de fait, lié à un contrôle effectif de l'association laissé à la direction salariée, avec ses conséquences possibles sur la non-lucrativité fiscale ?", a: "ne_sait_pas",
+          action: "Inscrire le sujet à l'ordre du jour du CA, vérifier la situation avec l'expert-comptable et s'assurer que le CA exerce réellement son contrôle (orientations, budget, suivi)",
+          task: { task: "Examen du risque de dirigeant de fait", period: "T2", responsible: "CA / Expert-comptable" } },
+        { q: "L'équilibre entre le CA et la direction est-il tenu : un CA qui suit la mise en œuvre des orientations sans multiplier les interlocuteurs ni ralentir les décisions, et sans être absent au point de ne pouvoir corriger ?", a: "en_cours",
+          action: "Définir en CA les points de reporting de la direction (fréquence, indicateurs) et les décisions qui lui reviennent, puis les revoir chaque année",
+          task: { task: "Reporting direction vers CA", period: "T2-T4", responsible: "Présidence / Direction" } },
+        { q: "Le fonctionnement de la gouvernance (missions des administrateurs, convocations, décisions) est-il détaillé dans un règlement intérieur de l'association, afin de ne pas réviser les statuts à chaque évolution ?", a: "en_cours",
+          action: "Rédiger un règlement intérieur associatif reprenant les fiches de mission et les règles de fonctionnement des instances",
+          task: { task: "Règlement intérieur associatif", period: "T3", responsible: "Bureau" } },
+        { q: "Les administrateurs connaissent-ils leurs obligations d'employeur (droit du travail, processus RH) et sont-ils formés ou outillés (webinaires, formations, centres de ressources pour bénévoles) ?", a: "oui",
+          action: "Prévoir une session annuelle de formation des administrateurs aux obligations d'employeur, à l'arrivée de chaque nouvel élu",
+          task: { task: "Formation des administrateurs au rôle d'employeur", period: "T3", responsible: "Présidence / Direction" } },
+        { q: "Le CA porte-t-il une démarche partagée de lutte contre les discriminations et d'égalité professionnelle entre les femmes et les hommes, dans la structure employeuse et pour les personnes en parcours ?", a: "en_cours",
+          action: "Inscrire la lutte contre les discriminations et l'égalité professionnelle dans le plan d'actions du CA, avec un indicateur suivi chaque année",
+          task: { task: "Plan d'actions égalité et lutte contre les discriminations", period: "T3-T4", responsible: "CA / Direction" } }
       ] },
     { id: "rh", code: "RH", label: "Ressources humaines / conditions d'emploi",
+      source: "Questionnaire construit à partir de trois sources reformulées pour une structure ESS ou IAE : (1) l'outil-guide « Baromètre Ressources Humaines » conçu pour les établissements sociaux et médico-sociaux (ARS Auvergne-Rhône-Alpes, septembre 2017), fiches 2 « Politique et stratégie ressources humaines », 3 « Recrutement des personnels » et 4 « Mouvements de personnels et gestion des remplacements », avec les indicateurs complémentaires de l'annexe 2 (taux de départs prématurés, taux de postes vacants à plus de 6 mois) ; adapté ici à une structure ESS, sans valeur réglementaire ; (2) le Code du travail et le Code de la sécurité sociale, articles relus sur Légifrance le 05/11/2026 (L1221-6, L1221-10, L1221-13, L1242-12, L2262-5, L2242-11, L2242-13, L2311-2, L3221-2, L1142-8, L5132-5, L5132-15-1, L5212-1, L5212-2, art. L911-7 du Code de la sécurité sociale) et la convention collective nationale des ateliers et chantiers d'insertion du 31 mars 2011 (IDCC 3016, utilisée en exemple : ta branche peut être différente) ; (3) à titre de simple repère sur les seuils d'effectifs, le « Guide des obligations sociales » (Malakoff Humanis et leDoTank, avec Ellipse Avocats, janvier 2023), dont aucun contenu n'est reproduit. Les entretiens de parcours et la GPEC relèvent de la thématique « Plan de montée en compétences », l'absentéisme et les risques psychosociaux de « Qualité de vie au travail », la délégation de pouvoirs de « Gouvernance associative ». Outil d'aide à la décision, sans valeur d'avis juridique : les seuils et délais sont à confirmer avec ta convention collective et ton OPCO ou conseil.",
       questions: [
-        { q: "Le turnover des encadrants techniques est-il maîtrisé (moins de 15 %/an) ?", a: "non_besoin",
-          action: "Analyser les causes du turnover des encadrants techniques et engager un plan de fidélisation",
-          task: { task: "Diagnostic turnover encadrants", period: "T1", responsible: "RH" } },
-        { q: "La grille salariale a-t-elle été revue au cours des 2 dernières années ?", a: "en_cours",
-          action: "Revoir la grille salariale au regard de la convention collective",
-          task: { task: "Étude comparative de la grille salariale", period: "T2", responsible: "RH" } },
-        { q: "Un parcours d'intégration existe-t-il pour les nouveaux encadrants ?", a: "en_cours",
-          action: "Structurer un parcours d'intégration pour les nouveaux encadrants",
-          task: { task: "Déploiement du parcours d'intégration", period: "T3", responsible: "RH" } }
+        { q: "Le projet associatif ou le plan stratégique comporte-t-il un volet ressources humaines : effectifs visés par fonction (direction, encadrement technique, accompagnement socioprofessionnel, support), priorités sur 3 ans et budget de masse salariale, présenté chaque année au CA ?", a: "en_cours",
+          action: "Rédiger un volet RH de deux pages dans le plan stratégique (effectifs visés par fonction, priorités sur 3 ans, masse salariale prévisionnelle) et le présenter au CA avec le budget",
+          task: { task: "Volet RH du plan stratégique", period: "T1", responsible: "Direction / CA" } },
+        { q: "Un organigramme à jour existe-t-il, et chaque salarié (permanents et encadrement technique) dispose-t-il d'une fiche de poste actualisée précisant missions, responsabilités, rattachement hiérarchique et niveau de classification conventionnelle ?", a: "en_cours",
+          action: "Établir l'organigramme et une fiche de poste par fonction (missions, responsabilités, rattachement, classification), validée avec chaque titulaire ; les délégations de pouvoirs se traitent dans la thématique Gouvernance",
+          task: { task: "Organigramme et fiches de poste", period: "T1", responsible: "Direction / RH" } },
+        { q: "À chaque embauche, la déclaration préalable à l'embauche est-elle faite avant l'arrivée du salarié, le contrat écrit signé (obligatoire pour un CDD, qui doit en préciser le motif et l'intitulé de la convention collective), et le registre unique du personnel tenu à jour, avec sa partie réservée aux stagiaires et aux volontaires en service civique ?", a: "oui",
+          action: "Contrôler chaque année un échantillon de dossiers : déclaration avant l'embauche (L1221-10), contrat écrit et mentions obligatoires (L1242-12 pour les CDD), inscription au registre unique du personnel (L1221-13)",
+          task: { task: "Contrôle annuel des formalités d'embauche et du registre", period: "T1", responsible: "RH / Direction" } },
+        { q: "La convention collective applicable est-elle identifiée sans ambiguïté, mise à disposition des salariés et de leurs représentants, et la classification de chaque poste (coefficient, échelon) est-elle vérifiée par rapport aux fonctions réellement exercées ?", a: "oui",
+          action: "Afficher ou mettre en ligne le texte de la convention (par exemple celle des ateliers et chantiers d'insertion, IDCC 3016, si elle est la tienne) et vérifier une fois par an le coefficient de chaque poste (L2262-5)",
+          task: { task: "Vérification de la classification par poste", period: "T2", responsible: "RH / Direction" } },
+        { q: "La politique de rémunération est-elle écrite (grille ou règles d'évolution), comparée à la convention collective et revue au moins tous les 2 ans, avec une négociation annuelle sur les salaires lorsque l'obligation s'applique (présence d'un délégué syndical) ?", a: "en_cours",
+          action: "Écrire la grille de rémunération, la comparer aux minima conventionnels et à la valeur du point en vigueur, et en présenter une synthèse au CSE ou aux salariés ; ouvrir chaque année la négociation si un délégué syndical est présent, sauf accord d'entreprise fixant une autre périodicité, jusqu'à 4 ans (L2242-13 et L2242-11)",
+          task: { task: "Revue de la grille salariale et négociation annuelle", period: "T2", responsible: "Direction / CSE" } },
+        { q: "L'égalité de rémunération entre femmes et hommes à travail égal ou de valeur égale est-elle vérifiée par comparaison poste par poste, et, à partir de 50 salariés, les indicateurs d'écarts de rémunération sont-ils publiés chaque année ?", a: "ne_sait_pas",
+          action: "Comparer les rémunérations par poste et par niveau de classification, corriger les écarts non justifiés (L3221-2) et, dès 50 salariés, publier chaque année les indicateurs (L1142-8)",
+          task: { task: "Analyse annuelle des écarts de rémunération F/H", period: "T1", responsible: "RH / Direction" } },
+        { q: "Une procédure de recrutement écrite existe-t-elle (besoin validé, fiche de poste, diffusion de l'offre, entretiens avec grille commune, décision, réponse à tous les candidats), et les informations demandées au candidat se limitent-elles à ce qui est lié directement à l'emploi ?", a: "en_cours",
+          action: "Formaliser la procédure en une page avec une grille d'entretien commune ; limiter les questions aux aptitudes et à la capacité à tenir le poste (L1221-6) ; répondre à chaque candidat reçu en entretien",
+          task: { task: "Procédure de recrutement et grille d'entretien", period: "T2", responsible: "Direction / RH" } },
+        { q: "Les valeurs de la structure, le projet et les conditions réelles du poste (horaires, déplacements, public accueilli, niveau de rémunération) sont-ils annoncés dès l'offre, et les canaux de diffusion sont-ils diversifiés (réseaux de l'ESS, écoles et organismes de formation, acteurs de l'emploi, réseaux sociaux, entretiens à distance) ?", a: "oui",
+          action: "Réécrire le modèle d'annonce avec valeurs, conditions du poste et rémunération, et tenir une liste de 5 à 10 canaux de diffusion par type de poste, dont l'encadrement technique",
+          task: { task: "Modèle d'annonce et canaux de diffusion", period: "T2", responsible: "RH / Communication" } },
+        { q: "L'arrivée d'un nouveau salarié est-elle organisée : livret d'accueil, référent ou tuteur nommé, points formalisés pendant la période d'essai (par exemple à 1 mois et avant l'échéance), présentation à l'équipe et aux partenaires ?", a: "en_cours",
+          action: "Structurer un parcours d'intégration : livret d'accueil, tuteur désigné, points écrits à des dates fixes pendant la période d'essai, avec bilan avant son terme",
+          task: { task: "Parcours d'intégration des nouveaux salariés", period: "T3", responsible: "RH / Encadrants" } },
+        { q: "Un tableau de bord RH annuel, présenté au CA, suit au moins le taux de rotation, le taux de départs prématurés (départs de salariés en CDI de moins de 6 mois par rapport à l'ensemble des départs), les postes vacants depuis plus de 6 mois et les motifs de départ (démission, rupture conventionnelle, retraite) ?", a: "non_besoin",
+          action: "Construire un tableau de bord RH annuel avec ces quatre indicateurs, calculés chaque année avec la même formule écrite, analysés par fonction (encadrants techniques, conseillers, support) et présentés au CA",
+          task: { task: "Tableau de bord RH annuel (rotation, départs prématurés, vacances)", period: "T1", responsible: "RH / Direction / CA" } },
+        { q: "Les départs prévisibles (retraite, fin de contrat, congé long) et les absences de longue durée sont-ils anticipés, avec un dispositif de remplacement prêt (vivier de remplaçants, CDD, partage de poste entre structures du réseau) et une passation de poste préparée ?", a: "en_cours",
+          action: "Recenser les départs prévisibles à 12 mois, constituer un vivier de remplaçants et prévoir une passation écrite avant chaque départ ; étudier une mutualisation de postes avec des structures voisines du réseau",
+          task: { task: "Plan de remplacement et vivier de remplaçants", period: "T3", responsible: "Direction / RH" } },
+        { q: "Pour les salariés en insertion, la durée de chaque contrat, ses renouvellements et la durée hebdomadaire (au moins 20 heures, sauf dérogation) sont-ils suivis dans un tableau avec les échéances (durée minimale de 4 mois, maximum de 24 mois sauf prolongations prévues par le Code du travail) ?", a: "oui",
+          action: "Tenir un tableau de suivi des contrats d'insertion : date de début, échéance, renouvellements, durée hebdomadaire, motif de toute prolongation ; l'examiner avec les conseillers en insertion tous les trimestres (L5132-15-1 pour un ACI, L5132-5 pour une EI)",
+          task: { task: "Tableau de suivi des contrats d'insertion", period: "T1-T4", responsible: "Direction / Conseillers en insertion" } },
+        { q: "La complémentaire santé collective à adhésion obligatoire est-elle en place, avec une prise en charge de l'employeur d'au moins la moitié de la cotisation, et les salariés ont-ils été informés de leurs garanties et des cas de dispense ?", a: "oui",
+          action: "Relire chaque année le contrat de complémentaire santé : garanties au moins égales au minimum légal, part employeur d'au moins 50 %, information écrite des salariés (art. L911-7 du Code de la sécurité sociale)",
+          task: { task: "Revue annuelle de la complémentaire santé", period: "T4", responsible: "RH / Direction" } },
+        { q: "Un comité social et économique est-il en place si l'effectif a atteint 11 salariés pendant 12 mois consécutifs, avec élections organisées par l'employeur ou procès-verbal de carence, et les réunions et consultations obligatoires sont-elles tenues ?", a: "oui",
+          action: "Suivre l'effectif mois par mois pour repérer le franchissement du seuil de 11 salariés (L2311-2), planifier les élections et le calendrier des réunions ; les seuils supérieurs (50 salariés notamment) sont à vérifier à chaque évolution d'effectif",
+          task: { task: "Suivi des seuils d'effectif et calendrier du CSE", period: "T1", responsible: "Direction / CSE" } },
+        { q: "Si la structure compte au moins 20 salariés, l'obligation d'emploi de travailleurs handicapés (6 % de l'effectif) est-elle suivie, avec une déclaration annuelle, un référent désigné et des mesures d'aménagement de poste connues des encadrants ?", a: "ne_sait_pas",
+          action: "Calculer l'effectif d'assujettissement et le nombre de bénéficiaires de l'obligation d'emploi, puis fixer un plan d'action (L5212-1 et L5212-2) : recrutement, maintien dans l'emploi, aménagements, recours au secteur adapté",
+          task: { task: "Calcul et suivi de l'obligation d'emploi", period: "T1", responsible: "RH / Direction" } }
       ] },
     { id: "env", code: "ENV", label: "Impact environnemental / transition écologique",
       questions: [
@@ -1462,12 +2449,64 @@
 
   var STATUS_LABEL = { good: "Maîtrisée", watch: "En progrès", urgent: "Urgente" };
 
+  // --- Gouvernomètre : repris en l'état (INAÉ, EILAN Conseil, DLA, France Active NA, CRESS NA, Le Mouvement associatif NA, Guid'Asso) ---
+  var GV_ITEMS = [
+    "Les rôles et les responsabilités sont clairs",
+    "Le collectif est au service du projet associatif",
+    "Les décisions stratégiques sont collectives",
+    "Les profils d’administrateurs sont variés",
+    "Les nouveaux sont bien intégrés",
+    "Les bénévoles se forment régulièrement",
+    "L'engagement bénévole est source d’épanouissement",
+    "Quelques personnes portent l'essentiel des sujets",
+    "Certains administrateurs restent en retrait",
+    "Les débats sont peu nourris",
+    "Les nouveaux administrateurs sont rares",
+    "Les valeurs affichées ne sont pas toujours incarnées",
+    "La place de chacun devient floue",
+    "Des signes d'essoufflement apparaissent",
+    "Les mêmes responsables sont en place depuis longtemps",
+    "Les désaccords se taisent",
+    "Les décisions se prennent ailleurs",
+    "L'information ne circule pas équitablement",
+    "Il y a très peu de lien entre le CA et les salariés",
+    "Les départs se multiplient et les forces vives sont épuisées",
+    "Le projet associatif ne rassemble plus"
+  ];
+  var GV_ZONES = [
+    { label: "Gouvernance vivante et apprenante", from: 1, to: 7, status: "good" },
+    { label: "Vigilances à traiter", from: 8, to: 14, status: "watch" },
+    { label: "Risques élevés de dysfonctionnement", from: 15, to: 21, status: "urgent" }
+  ];
+  var GV_STOPS = [[0, [126, 217, 87]], [0.36, [255, 189, 89]], [0.6, [255, 145, 77]], [0.8, [255, 87, 87]], [1, [255, 49, 49]]];
+  function gvColor(i) {
+    var t = i / (GV_ITEMS.length - 1);
+    for (var k = 1; k < GV_STOPS.length; k++) {
+      if (t <= GV_STOPS[k][0]) {
+        var a = GV_STOPS[k - 1], b = GV_STOPS[k];
+        var u = (t - a[0]) / (b[0] - a[0]);
+        var c = [0, 1, 2].map(function (j) { return Math.round(a[1][j] + (b[1][j] - a[1][j]) * u); });
+        return "rgb(" + c.join(",") + ")";
+      }
+    }
+    return "rgb(255,49,49)";
+  }
+  function gvZoneIndex(pos) {
+    if (!pos) return -1;
+    return pos <= 7 ? 0 : (pos <= 14 ? 1 : 2);
+  }
+
   function computeStatus(theme) {
     var gaps = theme.questions.filter(function (x) { return x.a === "non_besoin" || x.a === "grave" || x.a === "tres_grave"; }).length;
     var inProgress = theme.questions.filter(function (x) { return x.a === "en_cours" || x.a === "ne_sait_pas" || x.a === "preoccupant"; }).length;
     var status = "good";
     if (gaps >= 2) status = "urgent";
     else if (gaps === 1 || inProgress >= 2) status = "watch";
+    if (theme.gouvernometre && theme.gvPos) {
+      var zs = GV_ZONES[gvZoneIndex(theme.gvPos)].status;
+      var rank = { good: 0, watch: 1, urgent: 2 };
+      if (rank[zs] > rank[status]) status = zs;
+    }
     theme.gaps = gaps;
     theme.status = status;
   }
@@ -1477,11 +2516,18 @@
   var QUAL_GAP_VALUES = ["non_besoin", "grave", "tres_grave", "en_cours", "ne_sait_pas", "preoccupant"];
   var QUAL_ANSWER_OPTIONS = ["oui", "en_cours", "non_besoin", "non_pas_besoin", "ne_sait_pas"];
 
-  function deriveActionsAndTasks(questions) {
+  function deriveActionsAndTasks(questions, gvPos) {
     var actions = [];
     var tasks = [];
     var seenActions = {};
     var seenTasks = {};
+    var gz = gvZoneIndex(gvPos);
+    if (gz >= 1) {
+      actions.push("Mettre le Gouvernomètre en discussion au CA : chaque administrateur se positionne individuellement, puis le collectif compare les positions (zone retenue : « " + GV_ZONES[gz].label + " »)");
+      tasks.push({ task: "Séance Gouvernomètre au CA (positionnements individuels puis échange)", period: "T1", responsible: "Présidence / CA" });
+      actions.push("Solliciter un acteur d'appui selon le besoin : premier accueil et sensibilisation (CRESS, INAÉ, Mouvement associatif Nouvelle-Aquitaine), formation (OPCO, consultants), accompagnement (DLA), réseautage et financement (France Active Nouvelle-Aquitaine)");
+      tasks.push({ task: "Prise de contact avec un acteur d'appui", period: "T1-T2", responsible: "Présidence / Direction" });
+    }
     questions.forEach(function (q) {
       if (!q.action || QUAL_GAP_VALUES.indexOf(q.a) === -1) return;
       if (!seenActions[q.action]) {
@@ -1502,7 +2548,7 @@
 
   DATA.forEach(function (theme) {
     if (theme.id === "eco") return;
-    var result = deriveActionsAndTasks(theme.questions);
+    var result = deriveActionsAndTasks(theme.questions, theme.gvPos);
     theme.actions = result.actions;
     theme.tasks = result.tasks;
   });
@@ -1514,7 +2560,8 @@
         var saved = JSON.parse(localStorage.getItem("toutroule-quest-" + theme.id) || "null");
         if (!saved || !saved.answers || saved.answers.length !== theme.questions.length) return;
         theme.questions.forEach(function (q, i) { q.a = saved.answers[i]; });
-        var result = deriveActionsAndTasks(theme.questions);
+        if (theme.gouvernometre && saved.gvPos !== undefined) theme.gvPos = saved.gvPos;
+        var result = deriveActionsAndTasks(theme.questions, theme.gvPos);
         theme.actions = result.actions;
         theme.tasks = result.tasks;
         theme.isUserData = true;
@@ -1806,7 +2853,7 @@
   var hubTitle = svgEl("text", { class: "hub-title", x: CX, y: CY - 4, "text-anchor": "middle" });
   hubTitle.textContent = "R & C";
   var hubSub = svgEl("text", { class: "hub-sub", x: CX, y: CY + 16, "text-anchor": "middle" });
-  hubSub.textContent = "12 axes de pilotage";
+  hubSub.textContent = "13 axes de pilotage";
   hub.appendChild(hubTitle);
   hub.appendChild(hubSub);
   root.appendChild(hub);
@@ -1837,12 +2884,69 @@
     });
 
     renderPanel(theme);
+    if (typeof pageViews !== "undefined" && pageViews && pageViews.fiche && !pageViews.fiche.hidden && ficheThemeId === id) renderFiche();
   }
 
   var ANSWER_ORDER = ["oui", "ok", "en_cours", "preoccupant", "non_besoin", "grave", "tres_grave", "non_pas_besoin", "ne_sait_pas"];
 
-  function renderPanel(theme) {
-    var panel = document.getElementById("panel");
+  function gvScaleHtml(pos, interactive) {
+    var html = "<div class=\"gv-scale\">";
+    GV_ZONES.forEach(function (z) {
+      html += "<div class=\"gv-zone\"><div class=\"gv-zone-label\">" + z.label + "</div><div class=\"gv-rows\">";
+      for (var n = z.from; n <= z.to; n++) {
+        var sel = pos === n;
+        var inner = "<span class=\"gv-txt\">" + GV_ITEMS[n - 1] + "</span><span class=\"gv-num\">" + n + "</span><span class=\"gv-ticks\" aria-hidden=\"true\"></span>";
+        var style = "background:" + gvColor(n - 1);
+        if (interactive) {
+          html += "<button type=\"button\" class=\"gv-row" + (sel ? " is-selected" : "") + "\" data-gv-pos=\"" + n + "\" aria-pressed=\"" + sel + "\" style=\"" + style + "\">" + inner + "</button>";
+        } else {
+          html += "<div class=\"gv-row" + (sel ? " is-selected" : "") + "\" style=\"" + style + "\">" + inner + "</div>";
+        }
+      }
+      html += "</div></div>";
+    });
+    return html + "</div>";
+  }
+
+  var GV_INTRO = "Le Gouvernomètre est un outil d’auto-diagnostic vous permettant d’évaluer la qualité de votre gouvernance associative. Il permet d’identifier les forces, fragilités et priorités d’amélioration. Il ne s’agit pas d’un jugement mais d’un levier d’évolution.";
+  var GV_CREDIT = "Source : « Le Gouvernomètre — Agir pour les gouvernances associatives », réalisé par INAÉ, EILAN Conseil, DLA, France Active Nouvelle-Aquitaine, CRESS Nouvelle-Aquitaine, Le Mouvement associatif Nouvelle-Aquitaine et Guid’Asso.";
+  var GV_NEEDS = ["1er accueil · Sensibilisation", "Formation", "Accompagnement", "Réseautage et financement"];
+  var GV_ACTORS = [
+    { who: "CRESS · INAÉ · Mouvement associatif Nouvelle-Aquitaine", more: "Autres réseaux (Guid’Asso, Réseau Renaitre, Ligue de l’enseignement, CDOS, URSCOP, RIM, Coop Tiers Lieux…)", needs: [0, 1, 2, 3] },
+    { who: "OPCO · Consultants", more: "OPCO (Uniformation, Afdas, OPCO Santé, OPCommerce, AKTO, OCAPIAT…) · Consultants (ex. EILAN Conseil…)", needs: [1, 2] },
+    { who: "DLA · UDES · Passerelles & Compétences…", more: "DLA : Dispositif Local d’Accompagnement", needs: [2] },
+    { who: "France Active Nouvelle-Aquitaine", more: "", needs: [3] }
+  ];
+
+  function gvResourcesHtml() {
+    var rows = GV_ACTORS.map(function (a) {
+      var tags = a.needs.map(function (i) { return "<span class=\"gv-tag\">" + GV_NEEDS[i] + "</span>"; }).join("");
+      return "<li><strong>" + a.who + "</strong>" + (a.more ? "<span class=\"gv-more\">" + a.more + "</span>" : "") + "<span class=\"gv-tags\">" + tags + "</span></li>";
+    }).join("");
+    return "<div class=\"gv-resources\"><p class=\"gv-res-title\">Vous identifiez des points de vigilance ou risques de dysfonctionnement ? Des solutions adaptées à votre situation existent. Pour en savoir plus, contactez les acteurs ci-dessous.</p><ul>" + rows + "</ul></div>";
+  }
+
+  function gvRolesHtml() {
+    return "<div class=\"role-fiches\"><p class=\"rf-title\">Fiches de mission et de rôles (résumés reformulés)</p><details><summary>Fiche pratique FAS — Rôles et missions des administrateurs et des dirigeants salariés</summary><p class=\"rf-obj\">Dans une association employeuse, comme beaucoup de SIAE, les administrateurs bénévoles sont aussi des employeurs : clarifier les rôles prévient les dysfonctionnements.</p><h4>Rappels</h4><ul><li>Les statuts définissent les pouvoirs du CA ; sans précision, ses compétences se limitent à l'administration et à la gestion courante.</li><li>Le dirigeant salarié garantit le fonctionnement des activités et fait le lien avec les bénévoles ; son autonomie est limitée par son contrat de travail et ses délégations.</li><li>Les deux risques : la requalification du dirigeant salarié en dirigeant de fait (avec un risque de fiscalisation) et le déséquilibre des pouvoirs, par excès ou par absence du CA.</li></ul><h4>Trois outils de formalisation</h4><ul><li>Fiches de mission des administrateurs : missions, durée du mandat, devoirs, responsabilités civile, pénale et financière, liens, remboursement des frais.</li><li>Délégation de pouvoirs écrite : identités et fonctions, missions déléguées de façon exhaustive mais partielle, durée avec dates, signatures datées ; transfert de pouvoir = transfert de responsabilité ; une délégation trop générale n'est pas valable.</li><li>Règlement intérieur de l'association : détaille la gouvernance sans réviser les statuts à chaque évolution.</li></ul><h4>Domaines délégables cités</h4><ul><li>Gestion financière (achats, engagements, fournisseurs, expertises, contentieux).</li><li>Gestion du personnel (droit social, recrutement, politique salariale, sanctions et licenciement).</li><li>Conventions (recherche, négociation, bilans, contrôles) et gestion politique (adhésions, représentativité).</li></ul></details><details><summary>Fiche de mission — Président·e d'association</summary><p class=\"rf-obj\">Dirige et représente l'association, impulse le projet associatif, veille à sa mise en œuvre et au bon fonctionnement de la structure, en fédérant les acteurs et en développant les partenariats.</p><h4>Quatre domaines de mission</h4><ul><li>Direction et stratégie : définir les orientations, veiller à la cohérence du projet associatif, arbitrer les décisions importantes, garantir la pérennité.</li><li>Gouvernance et animation : convoquer, préparer et présider bureau, CA et assemblées générales ; veiller au respect des statuts ; favoriser la participation des membres.</li><li>Représentation et partenariats : représenter l'association dans les actes de la vie civile, juridique et publique ; entretenir les relations avec les partenaires.</li><li>Pilotage et suivi : suivre la mise en œuvre des décisions, la gestion avec la trésorerie, les indicateurs clés ; anticiper les risques.</li></ul><h4>Devoirs</h4><ul><li>Agir dans l'intérêt de l'association, respecter statuts, règlement intérieur et décisions des instances.</li><li>Représenter avec loyauté et intégrité, garantir le respect des valeurs, favoriser la transparence.</li><li>Préserver la confidentialité et informer les dirigeants de toute difficulté.</li></ul><p class=\"rf-obj\">Relations : bureau, administrateurs, trésorerie, secrétariat, adhérents, partenaires ; lien hiérarchique avec la direction salariée.</p></details><details><summary>Fiche de mission — Trésorier(ère) d'association</summary><p class=\"rf-obj\">Contribue à la bonne gestion financière : suivi des ressources, des dépenses et de la trésorerie, dans le respect des décisions des instances.</p><h4>Cinq domaines de mission</h4><ul><li>Gestion financière et trésorerie : suivre encaissements et décaissements, comptes bancaires, situation de trésorerie ; signaler toute difficulté aux instances.</li><li>Suivi comptable : superviser la comptabilité, veiller à la conservation des pièces et à l'enregistrement régulier des opérations.</li><li>Budget et pilotage : participer au budget prévisionnel et à son suivi, présenter régulièrement la situation au bureau et au CA, proposer des ajustements.</li><li>Information financière : préparer les éléments présentés à l'assemblée générale et contribuer à la transparence financière.</li><li>Recherche et suivi des financements : participer aux dossiers de subvention, suivre les financements obtenus et leur bonne utilisation.</li></ul><h4>Devoirs</h4><ul><li>Agir dans l'intérêt de l'association, respecter statuts, règlement intérieur et décisions des instances.</li><li>Garantir la fiabilité des informations financières et préserver leur confidentialité.</li><li>Assurer un suivi régulier et informer les instances de toute situation nécessitant attention.</li></ul></details><p class=\"rf-src\">Sources : Fédération des acteurs de la solidarité, fiche pratique « Rôles et missions des administrateur·rices et des dirigeant·es salarié·es » (V2, avril 2022) ; fiches de mission Président·e et Trésorier(ère) d'association, reproductions de fiches de JF Conseil (Josselin Fouquet). Résumés reformulés, à compléter avec les statuts de la structure.</p></div>";
+  }
+
+  function gvBlockHtml(theme) {
+    var zi = gvZoneIndex(theme.gvPos);
+    var verdict = zi < 0
+      ? "<p class=\"gv-verdict\">Aucun positionnement renseigné — cliquez sur « Répondre au questionnaire » pour vous placer sur l’échelle.</p>"
+      : "<p class=\"gv-verdict gv-v-" + GV_ZONES[zi].status + "\"><strong>Position n° " + theme.gvPos + " sur 21</strong> — « " + GV_ZONES[zi].label + " »</p>";
+    return "<div class=\"gv-block\">" +
+      "<p class=\"section-label\">Gouvernomètre</p>" +
+      "<p class=\"gv-intro\">" + GV_INTRO + "</p>" +
+      verdict +
+      gvScaleHtml(theme.gvPos, false) +
+      (zi >= 1 ? gvResourcesHtml() : "") +
+      "<p class=\"gv-credit\">" + GV_CREDIT + "</p>" +
+    "</div>";
+  }
+
+  function renderPanel(theme, target) {
+    var panel = target || document.getElementById("panel");
     var actionsHtml = theme.actions.map(function (a) { return "<li>" + a + "</li>"; }).join("");
     var tasksHtml = theme.tasks.map(function (t) {
       return "<tr><td>" + t.task + "</td><td class=\"period\">" + t.period + "</td><td class=\"resp\">" + t.responsible + "</td></tr>";
@@ -1877,6 +2981,9 @@
       "</div>";
     }
 
+    var gvHtml = theme.gouvernometre ? gvBlockHtml(theme) : "";
+    var rolesHtml = theme.gouvernometre ? gvRolesHtml() : "";
+
     var linkToolHtml = "";
     if (theme.writeTool) {
       linkToolHtml = "<a class=\"theme-link-cta\" href=\"" + theme.writeTool.url + "\" target=\"_blank\" rel=\"noopener noreferrer\">" +
@@ -1893,6 +3000,7 @@
       "</div>" +
       linkToolHtml +
       ctaHtml +
+      gvHtml +
       "<p class=\"section-label\">① Diagnostic — " + total + " questions</p>" +
       "<div class=\"diag-summary\">" +
         "<div class=\"diag-bar\">" + barHtml + "</div>" +
@@ -1903,15 +3011,22 @@
       "<p class=\"section-label\">② Actions moyen terme</p>" +
       "<ul class=\"actions\">" + actionsHtml + "</ul>" +
       "<p class=\"section-label\">③ Tâches de l'année</p>" +
-      "<table class=\"tasks\"><thead><tr><th>Tâche</th><th>Période</th><th>Responsable</th></tr></thead><tbody>" + tasksHtml + "</tbody></table>";
+      "<table class=\"tasks\"><thead><tr><th>Tâche</th><th>Période</th><th>Responsable</th></tr></thead><tbody>" + tasksHtml + "</tbody></table>" +
+      rolesHtml +
+      (theme.id === "qvt" ? "<p class=\"maqvt-aside\">Besoin d'un diagnostic individuel ou collectif accompagné, qui mesure la perception des personnes ? <button type=\"button\" class=\"maqvt-open\" id=\"btn-open-maqvt\">Découvrir maQVT</button></p>" : "") +
+      resAsideHtml(theme.id);
 
     if (theme.id === "eco") {
-      var openBtn = document.getElementById("btn-open-eco-form");
+      var openBtn = panel.querySelector("#btn-open-eco-form");
       if (openBtn) openBtn.addEventListener("click", openEcoForm);
     } else {
       var qBtn = panel.querySelector("[data-quest-theme]");
       if (qBtn) qBtn.addEventListener("click", function () { openQuestForm(theme.id); });
     }
+    var resBtn = panel.querySelector("[data-res-theme]");
+    if (resBtn) resBtn.addEventListener("click", function () { openResources(resBtn.getAttribute("data-res-theme")); });
+    var mqBtn = panel.querySelector("#btn-open-maqvt");
+    if (mqBtn) mqBtn.addEventListener("click", function () { openMaqvt(mqBtn); });
   }
 
   function renderStats() {
@@ -2037,24 +3152,65 @@
   var questForm = document.getElementById("quest-form");
   var currentQuestThemeId = null;
 
+  var pendingGvPos = null;
+  document.getElementById("quest-fields").addEventListener("click", function (e) {
+    var btn = e.target.closest ? e.target.closest("[data-gv-pos]") : null;
+    if (!btn) return;
+    var n = parseInt(btn.getAttribute("data-gv-pos"), 10);
+    pendingGvPos = (pendingGvPos === n) ? null : n;
+    document.querySelectorAll("#gv-picker .gv-row").forEach(function (b) {
+      var on = parseInt(b.getAttribute("data-gv-pos"), 10) === pendingGvPos;
+      b.classList.toggle("is-selected", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  });
   function openQuestForm(themeId) {
     var theme = DATA.filter(function (t) { return t.id === themeId; })[0];
     if (!theme) return;
     currentQuestThemeId = themeId;
     document.getElementById("quest-modal-title").textContent = theme.label + " — questionnaire";
-    document.getElementById("quest-modal-source").textContent = theme.source
+    document.getElementById("quest-modal-source").textContent = theme.modalSource
+      ? "Source : " + theme.modalSource
+      : theme.source
       ? "Source des questions : " + theme.source
       : "Questionnaire illustratif — aucune source méthodologique communiquée pour cette thématique à ce stade.";
+    pendingGvPos = theme.gouvernometre ? (theme.gvPos || null) : null;
+    var gvModalHtml = "";
+    if (theme.gouvernometre) {
+      gvModalHtml = "<div class=\"gv-block gv-modal\"><p class=\"gv-intro\">" + GV_INTRO + "</p>" +
+        "<ul class=\"gv-howto\"><li>Comment l’utiliser ? En vous positionnant individuellement.</li><li>Ou en le proposant comme base d’échange au sein de votre gouvernance.</li></ul>" +
+        "<p class=\"gv-pick\">Cliquez sur le constat qui décrit le mieux votre gouvernance aujourd’hui.</p>" +
+        "<div id=\"gv-picker\">" + gvScaleHtml(pendingGvPos, true) + "</div>" +
+        "<p class=\"gv-credit\">" + GV_CREDIT + "</p>" +
+        "<p class=\"gv-sep\">Questions complémentaires — rôles, pouvoirs et délégations</p></div>";
+    }
     var fieldsHtml = theme.questions.map(function (q, i) {
       var optionsHtml = QUAL_ANSWER_OPTIONS.map(function (k) {
         return "<option value=\"" + k + "\"" + (q.a === k ? " selected" : "") + ">" + ANSWER_LABEL[k] + "</option>";
       }).join("");
       return "<div class=\"quest-field-row\"><span class=\"ql\">" + q.q + "</span><select data-idx=\"" + i + "\">" + optionsHtml + "</select></div>";
     }).join("");
-    document.getElementById("quest-fields").innerHTML = fieldsHtml;
+    document.getElementById("quest-fields").innerHTML = gvModalHtml + fieldsHtml;
     questOverlay.hidden = false;
   }
   function closeQuestForm() { questOverlay.hidden = true; }
+
+  // --- Pop-up maQVT (QVT) ---
+  var maqvtOverlay = document.getElementById("maqvt-overlay");
+  var maqvtOpener = null;
+  function openMaqvt(opener) {
+    maqvtOpener = opener || null;
+    maqvtOverlay.hidden = false;
+    document.getElementById("maqvt-close").focus();
+  }
+  function closeMaqvt() {
+    maqvtOverlay.hidden = true;
+    if (maqvtOpener && document.body.contains(maqvtOpener)) maqvtOpener.focus();
+  }
+  document.getElementById("maqvt-close").addEventListener("click", closeMaqvt);
+  document.getElementById("maqvt-close2").addEventListener("click", closeMaqvt);
+  maqvtOverlay.addEventListener("click", function (e) { if (e.target === maqvtOverlay) closeMaqvt(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !maqvtOverlay.hidden) closeMaqvt(); });
 
   document.getElementById("quest-modal-close").addEventListener("click", closeQuestForm);
   document.getElementById("quest-modal-cancel").addEventListener("click", closeQuestForm);
@@ -2068,7 +3224,8 @@
       var idx = parseInt(sel.getAttribute("data-idx"), 10);
       theme.questions[idx].a = sel.value;
     });
-    var result = deriveActionsAndTasks(theme.questions);
+    if (theme.gouvernometre) theme.gvPos = pendingGvPos;
+    var result = deriveActionsAndTasks(theme.questions, theme.gvPos);
     theme.actions = result.actions;
     theme.tasks = result.tasks;
     theme.isUserData = true;
@@ -2080,10 +3237,13 @@
     renderDashboard();
     renderQuestPage();
     selectTheme(theme.id);
+    if (pageViews.fiche && !pageViews.fiche.hidden) renderFiche();
 
     try {
       var answers = theme.questions.map(function (q) { return q.a; });
-      localStorage.setItem("toutroule-quest-" + theme.id, JSON.stringify({ answers: answers, dataDate: theme.dataDate }));
+      var payload = { answers: answers, dataDate: theme.dataDate };
+      if (theme.gouvernometre) payload.gvPos = theme.gvPos || null;
+      localStorage.setItem("toutroule-quest-" + theme.id, JSON.stringify(payload));
     } catch (e) {}
 
     closeQuestForm();
@@ -2113,13 +3273,14 @@
   // --- Sens des thématiques (page « Thématiques » et teasers « Questionnaires ») ---
   var THEME_MEANING = {
     ins: { meaning: "Le projet associatif est le socle : pourquoi la structure existe, ce qu'elle vise, comment elle s'organise pour y arriver. Ce thème vérifie s'il est écrit, connu de tous, construit collectivement, et décliné en plan d'actions — jusqu'au référentiel de parcours d'insertion et au bilan de l'agrément IAE.", sourceTag: "CNAR Sport / CNOSF, Ligue de l'enseignement" },
-    qvt: { meaning: "Baromètre social, absentéisme, prévention des risques psychosociaux : ce thème regarde si la structure prend le pouls de ses équipes avant que les tensions ne deviennent des départs ou des arrêts.", sourceTag: null },
+    qvt: { meaning: "Ce thème regarde si la structure prend le pouls de ses équipes avant que les tensions ne deviennent des départs ou des arrêts : démarche pilotée, baromètre et indicateurs sociaux, sens et reconnaissance du travail, charge et temps de travail, expression, conflits, violences et harcèlement, pénibilité physique, soutien à l'encadrement. Les réponses disent le regard de la direction ; la perception des salariés se mesure par l'enquête anonyme.", sourceTag: "CIDES / CHORUM (2015) · Malakoff Humanis (2020) · ARSARA" },
     eco: { meaning: "Dix indicateurs chiffrés — fonds propres, fonds de roulement, trésorerie, délais de paiement, résultat net — pour objectiver la santé financière plutôt que la deviner. Seule thématique où vous pouvez saisir vos propres chiffres de bilan et de compte de résultat : le diagnostic se recalcule automatiquement.", sourceTag: "DiagFlash — France Active Nouvelle-Aquitaine / INAÉ" },
     num: { meaning: "Cloud et coédition, outils collaboratifs, antivirus, sauvegardes, RGPD : ce thème couvre à la fois l'efficacité collective et la sécurité numérique, souvent traitées à la légère faute de temps.", sourceTag: "Autodiagnostic Solidatech (2020)" },
-    terr: { meaning: "Indicateurs d'impact suivis, rapport diffusé publiquement, reconnaissance par la CRESS ou un réseau régional : ce thème mesure si l'utilité sociale de la structure est démontrée, ou seulement affirmée.", sourceTag: null },
-    comp: { meaning: "Entretiens professionnels, plan de formation pluriannuel, mobilité interne des encadrants : ce thème anticipe les compétences dont la structure aura besoin, plutôt que de les découvrir au moment d'un départ.", sourceTag: null },
-    gouv: { meaning: "Renouvellement du conseil d'administration, postes du bureau pourvus, quorum en assemblée générale : ce thème regarde si les instances dirigeantes fonctionnent réellement, ou seulement sur le papier.", sourceTag: null },
-    rh: { meaning: "Turnover des encadrants techniques, grille salariale, parcours d'intégration : ce thème couvre les conditions concrètes qui donnent envie de rester — au-delà du seul climat social couvert par la Qualité de vie au travail.", sourceTag: null },
+    terr: { meaning: "Ce thème regarde si la structure sait démontrer son utilité sociale sur son territoire, ou seulement l'affirmer. Il s'appuie sur cinq registres — accès à l'emploi de qualité, pouvoir d'agir, « faire société », développement économique local, transformation sociétale — déclinés en critères et en indicateurs de réalisation, de résultat et d'impact.", sourceTag: "COORACE (2013), Avise (2007), réseau Chantier École (2019-2020)" },
+    sec: { meaning: "Ce thème regarde si la structure saurait continuer, ou reprendre vite, après une cyberattaque, un sinistre, une fraude au virement ou le départ d'une personne clé. Il vérifie les activités essentielles, les risques prioritaires, les paiements, les sauvegardes réellement restaurables, le fonctionnement dégradé, la gestion de crise et les exercices.", sourceTag: "SGDSN (PCA, 2013) · SISSE / DGE (sécurité économique) · Code du travail L4121-3-1" },
+    comp: { meaning: "Ce thème regarde si la structure anticipe les compétences dont elle aura besoin, plutôt que de les découvrir au moment d'un départ. Il vérifie la cartographie des postes, l'entretien de parcours professionnel (tous les 4 ans depuis la loi du 30/12/2025), le plan de développement des compétences, le financement de la formation et la transmission des savoir-faire critiques.", sourceTag: "ARSARA, Baromètre RH (adapté) · Code du travail L6315-1" },
+    gouv: { meaning: "Ce thème regarde si les instances dirigeantes fonctionnent réellement, ou seulement sur le papier. Il repose sur le Gouvernomètre, un outil d'auto-diagnostic en 21 constats qui place la gouvernance sur une échelle : gouvernance vivante et apprenante, vigilances à traiter, risques élevés de dysfonctionnement. Onze questions complémentaires portent sur les rôles du bureau, la direction salariée, les délégations de pouvoirs et le risque de dirigeant de fait.", sourceTag: "Gouvernomètre — INAÉ, EILAN Conseil, DLA, France Active NA, CRESS NA, Le Mouvement associatif NA, Guid'Asso · FAS (2022) · JF Conseil" },
+    rh: { meaning: "Recrutement, intégration, rémunération, formalités d'embauche, départs et remplacements, contrats d'insertion, obligations liées à l'effectif : ce thème couvre la gestion courante des ressources humaines. Les parcours professionnels relèvent de la thématique « Plan de montée en compétences » et le climat de travail de la « Qualité de vie au travail ».", sourceTag: "ARSARA (2017, adapté) · Code du travail · Légifrance" },
     env: { meaning: "Bilan carbone, tri des déchets sur les chantiers, critères environnementaux dans les achats : ce thème regarde si la transition écologique reste un principe affiché ou devient une pratique sur le terrain.", sourceTag: null },
     part: { meaning: "CPOM et diversité des financeurs, cartographie des partenaires, présence dans les instances territoriales (DLA, CRESS) : ce thème mesure la solidité et la diversité du réseau qui soutient la structure.", sourceTag: null },
     com: { meaning: "Site internet à jour, présence active sur un réseau social, communication interne régulière : ce thème couvre à la fois l'image renvoyée à l'extérieur et l'information qui circule en interne.", sourceTag: null },
@@ -2142,6 +3303,17 @@
     }).join("");
   }
 
+  var ficheThemeId = null;
+  function renderFiche() {
+    var theme = DATA.filter(function (t) { return t.id === ficheThemeId; })[0];
+    var el = document.getElementById("fiche-panel");
+    if (theme && el) renderPanel(theme, el);
+  }
+  function openFiche(id) {
+    ficheThemeId = id;
+    renderFiche();
+    setPage("fiche");
+  }
   function renderQuestPage() {
     var list = document.getElementById("quest-list");
     if (!list) return;
@@ -2157,15 +3329,111 @@
       "</button>";
     }).join("");
     list.querySelectorAll("[data-goto-theme]").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        selectTheme(btn.getAttribute("data-goto-theme"));
-        setPage("dashboard");
+      btn.addEventListener("click", function () { openFiche(btn.getAttribute("data-goto-theme")); });
+    });
+  }
+
+  // --- Page « Ressources et liens » ---
+  var RES_ACCESS = {
+    open:    { label: "Réutilisable", def: "Licence ouverte (Etalab / Licence Ouverte) : tu peux reprendre et republier, en citant la source." },
+    free:    { label: "Accès libre, droits réservés", def: "Lisible et téléchargeable sans compte, mais non republiable : tu renvoies le lien." },
+    signup:  { label: "Compte gratuit requis", def: "Un compte est demandé pour utiliser la ressource." },
+    paid:    { label: "Payant", def: "Prestation ou outil sur devis ou abonnement." },
+    members: { label: "Réservé aux adhérents", def: "Accès conditionné à l'adhésion à un réseau." },
+    locked:  { label: "Confidentiel", def: "Document marqué « droits réservés » ou confidentiel : lecture personnelle, aucune diffusion." },
+    check:   { label: "À vérifier", def: "Conditions d'accès ou de droits non confirmées (page illisible ou introuvable)." }
+  };
+  var RES_ORDER = ["open", "free", "signup", "members", "paid", "locked", "check"];
+  var resFilter = { access: "all", usedOnly: false };
+
+  function resEsc(t) {
+    return String(t == null ? "" : t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function resSafeUrl(u) { return /^https?:\/\//i.test(u || "") ? u : ""; }
+  function resCount(themeId) { return (RESOURCES[themeId] || []).length; }
+  function resAsideHtml(themeId) {
+    var n = resCount(themeId);
+    if (!n) return "";
+    return "<p class=\"res-aside\"><button type=\"button\" class=\"maqvt-open\" data-res-theme=\"" + themeId + "\">Ressources et liens de cette thématique (" + n + ")</button></p>";
+  }
+
+  function resItemHtml(r) {
+    var url = resSafeUrl(r.u);
+    var title = url
+      ? "<a class=\"res-link\" href=\"" + resEsc(url) + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + resEsc(r.t) + "</a>"
+      : resEsc(r.t);
+    var acc = RES_ACCESS[r.a] || RES_ACCESS.check;
+    return "<li class=\"res-item\">" +
+      "<h3>" + title + "</h3>" +
+      "<p class=\"res-meta\">" + resEsc(r.p) + (r.y ? " · " + resEsc(r.y) : "") + "</p>" +
+      "<div class=\"res-tags\"><span class=\"res-badge a-" + r.a + "\">" + resEsc(acc.label) + "</span>" +
+        "<span class=\"res-badge " + (r.use === "used" ? "u-used" : "") + "\">" + (r.use === "used" ? "Utilisée dans l'outil" : "Pour aller plus loin") + "</span></div>" +
+      "<p class=\"res-note\">" + resEsc(r.n) + "</p>" +
+      "<p class=\"res-proof\">Vérification : " + resEsc(r.v) + "</p>" +
+      (url ? "<p class=\"res-url\">" + resEsc(url) + "</p>" : "") +
+      "</li>";
+  }
+
+  function renderResourcesPage() {
+    var legend = document.getElementById("res-legend");
+    legend.innerHTML = RES_ORDER.map(function (k) {
+      return "<p><span class=\"res-badge a-" + k + "\">" + resEsc(RES_ACCESS[k].label) + "</span>" + resEsc(RES_ACCESS[k].def) + "</p>";
+    }).join("");
+
+    var all = [];
+    Object.keys(RESOURCES).forEach(function (k) { RESOURCES[k].forEach(function (r) { all.push(r); }); });
+    var filters = document.getElementById("res-filters");
+    var chips = [{ key: "all", label: "Tout (" + all.length + ")" }].concat(RES_ORDER.map(function (k) {
+      var n = all.filter(function (r) { return r.a === k; }).length;
+      return n ? { key: k, label: RES_ACCESS[k].label + " (" + n + ")" } : null;
+    }).filter(Boolean));
+    filters.innerHTML = chips.map(function (c) {
+      return "<button type=\"button\" class=\"res-chip\" data-res-access=\"" + c.key + "\" aria-pressed=\"" + (resFilter.access === c.key) + "\">" + resEsc(c.label) + "</button>";
+    }).join("") +
+      "<button type=\"button\" class=\"res-chip\" data-res-used=\"1\" aria-pressed=\"" + resFilter.usedOnly + "\">Seulement celles utilisées dans l'outil</button>";
+    filters.querySelectorAll("[data-res-access]").forEach(function (b) {
+      b.addEventListener("click", function () { resFilter.access = b.getAttribute("data-res-access"); renderResourcesPage(); });
+    });
+    filters.querySelector("[data-res-used]").addEventListener("click", function () { resFilter.usedOnly = !resFilter.usedOnly; renderResourcesPage(); });
+
+    var shown = 0, jump = [], html = "";
+    DATA.forEach(function (t) {
+      var items = (RESOURCES[t.id] || []).filter(function (r) {
+        return (resFilter.access === "all" || r.a === resFilter.access) && (!resFilter.usedOnly || r.use === "used");
+      });
+      var filtering = resFilter.access !== "all" || resFilter.usedOnly;
+      if (filtering && !items.length) return;
+      shown += items.length;
+      jump.push("<a href=\"#res-" + t.id + "\" data-res-jump=\"" + t.id + "\">" + resEsc(t.code) + "</a>");
+      html += "<section class=\"res-theme\" id=\"res-" + t.id + "\"><h2><span class=\"res-code\">" + resEsc(t.code) + "</span>" + resEsc(t.label) + "</h2>" +
+        (items.length
+          ? "<ul class=\"res-list\">" + items.map(resItemHtml).join("") + "</ul>"
+          : "<p class=\"res-empty\">Aucune ressource externe pour cette thématique : le questionnaire reste illustratif et sera enrichi à partir de sources à identifier.</p>") +
+        "</section>";
+    });
+    document.getElementById("res-list").innerHTML = html;
+    document.getElementById("res-count").textContent = shown + " ressource" + (shown > 1 ? "s" : "") + " affichée" + (shown > 1 ? "s" : "") + " sur " + all.length;
+    var nav = document.getElementById("res-jump");
+    nav.innerHTML = jump.join("");
+    nav.querySelectorAll("[data-res-jump]").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        var el = document.getElementById("res-" + a.getAttribute("data-res-jump"));
+        if (el) el.scrollIntoView({ behavior: "auto", block: "start" });
       });
     });
   }
 
-  // --- Navigation entre les 4 pages (Accueil / Thématiques / Questionnaires / Tableau de bord) ---
-  var PAGE_IDS = ["home", "themes", "quest", "dashboard"];
+  function openResources(themeId) {
+    resFilter = { access: "all", usedOnly: false };
+    renderResourcesPage();
+    setPage("resources");
+    var el = themeId ? document.getElementById("res-" + themeId) : null;
+    if (el) el.scrollIntoView({ behavior: "auto", block: "start" });
+  }
+
+  // --- Navigation entre les pages (Accueil / Thématiques / Questionnaires / Tableau de bord / Ressources) ---
+  var PAGE_IDS = ["home", "themes", "quest", "fiche", "dashboard", "resources"];
   var pageViews = {};
   PAGE_IDS.forEach(function (id) {
     pageViews[id] = document.querySelector('.page-view[data-page="' + id + '"]');
@@ -2178,13 +3446,17 @@
       if (pageViews[id]) pageViews[id].hidden = id !== page;
     });
     topnavTabs.forEach(function (b) {
-      b.classList.toggle("is-active", b.getAttribute("data-page") === page);
+      b.classList.toggle("is-active", b.getAttribute("data-page") === (page === "fiche" ? "quest" : page));
     });
-    try { localStorage.setItem("toutroule-page", page); } catch (e) {}
+    try { localStorage.setItem("toutroule-page", page === "fiche" ? "quest" : page); } catch (e) {}
     window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
   }
   topnavTabs.forEach(function (b) {
     b.addEventListener("click", function () { setPage(b.getAttribute("data-page")); });
+  });
+  document.getElementById("fiche-to-dash").addEventListener("click", function () {
+    if (ficheThemeId) selectTheme(ficheThemeId);
+    setPage("dashboard");
   });
   document.querySelectorAll("[data-goto]").forEach(function (b) {
     b.addEventListener("click", function () { setPage(b.getAttribute("data-goto")); });
@@ -2194,6 +3466,7 @@
   renderDashboard();
   renderThemesPage();
   renderQuestPage();
+  renderResourcesPage();
   selectTheme("eco");
 
   var savedView = "wheel";
@@ -2278,6 +3551,65 @@
     }
   }
 
+  // --- Identité de la session : structure, personne, date (sessionStorage : effacée à la fermeture de l'onglet ou au vidage des données du site) ---
+  var IDENTITY_KEY = "toutroule-identity";
+  var identityMem = null;
+  function todayIso() {
+    var d = new Date();
+    return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate());
+  }
+  function cleanIdentity(o) {
+    o = o || {};
+    var d = String(o.date || "");
+    return {
+      structure: String(o.structure || "").slice(0, 120),
+      person: String(o.person || "").slice(0, 120),
+      date: /^\d{4}-\d{2}-\d{2}$/.test(d) ? d : ""
+    };
+  }
+  var identity = (function () {
+    try {
+      var raw = sessionStorage.getItem(IDENTITY_KEY);
+      if (raw) return cleanIdentity(JSON.parse(raw));
+    } catch (e) {}
+    return identityMem || { structure: "", person: "", date: todayIso() };
+  })();
+  function syncIdentityInputs(except) {
+    document.querySelectorAll("input[data-id-field]").forEach(function (inp) {
+      if (inp === except) return;
+      inp.value = identity[inp.getAttribute("data-id-field")] || "";
+    });
+  }
+  function setIdentity(patch, sourceInput) {
+    var merged = {};
+    ["structure", "person", "date"].forEach(function (k) { merged[k] = patch.hasOwnProperty(k) ? patch[k] : identity[k]; });
+    identity = cleanIdentity(merged);
+    identityMem = { structure: identity.structure, person: identity.person, date: identity.date };
+    try { sessionStorage.setItem(IDENTITY_KEY, JSON.stringify(identity)); } catch (e) {}
+    syncIdentityInputs(sourceInput);
+  }
+  function renderIdentityCards() {
+    document.querySelectorAll("[data-identity-slot]").forEach(function (slot) {
+      var k = slot.getAttribute("data-identity-slot");
+      slot.innerHTML =
+        "<div class=\"identity-card\">" +
+          "<div class=\"id-field\"><label for=\"id-structure-" + k + "\">Structure</label><input type=\"text\" id=\"id-structure-" + k + "\" data-id-field=\"structure\" maxlength=\"120\" placeholder=\"Nom de la structure\" autocomplete=\"off\"></div>" +
+          "<div class=\"id-field\"><label for=\"id-person-" + k + "\">Renseigné par</label><input type=\"text\" id=\"id-person-" + k + "\" data-id-field=\"person\" maxlength=\"120\" placeholder=\"Prénom et nom\" autocomplete=\"off\"></div>" +
+          "<div class=\"id-field\"><label for=\"id-date-" + k + "\">Date</label><input type=\"date\" id=\"id-date-" + k + "\" data-id-field=\"date\"></div>" +
+          "<p class=\"id-hint\">Ces trois informations s'effacent à la fermeture de l'onglet ou du navigateur, ou si les données du site sont supprimées. Elles sont incluses dans l'export.</p>" +
+        "</div>";
+      slot.querySelectorAll("input[data-id-field]").forEach(function (inp) {
+        inp.addEventListener("input", function () {
+          var p = {};
+          p[inp.getAttribute("data-id-field")] = inp.value;
+          setIdentity(p, inp);
+        });
+      });
+    });
+    syncIdentityInputs(null);
+  }
+  renderIdentityCards();
+
   function performExport(structureName) {
     var data = collectToutRouleData();
     var payload = {
@@ -2285,6 +3617,7 @@
       version: 1,
       exportedAt: new Date().toISOString(),
       structure: structureName || "",
+      identity: { structure: structureName || identity.structure.trim(), person: identity.person.trim(), date: identity.date },
       data: data
     };
     var slug = slugifyStructureName(structureName);
@@ -2302,7 +3635,7 @@
   var exportNameInput = document.getElementById("export-structure-name");
 
   function openExportModal() {
-    if (exportNameInput) exportNameInput.value = "";
+    if (exportNameInput) exportNameInput.value = identity.structure;
     exportOverlay.hidden = false;
     if (exportNameInput) exportNameInput.focus();
   }
@@ -2315,7 +3648,9 @@
   exportOverlay.addEventListener("click", function (e) { if (e.target === exportOverlay) closeExportModal(); });
   exportForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    performExport(exportNameInput ? exportNameInput.value.trim() : "");
+    var exportName = exportNameInput ? exportNameInput.value.trim() : "";
+    if (exportName !== identity.structure.trim()) setIdentity({ structure: exportName });
+    performExport(exportName);
     closeExportModal();
   });
 
@@ -2369,6 +3704,7 @@
     renderDashboard();
     renderThemesPage();
     renderQuestPage();
+    if (pageViews.fiche && !pageViews.fiche.hidden) renderFiche();
     if (currentSelectedThemeId) {
       var current = DATA.filter(function (t) { return t.id === currentSelectedThemeId; })[0];
       if (current) renderPanel(current);
@@ -2383,6 +3719,8 @@
 
   function applyPendingImport() {
     if (!pendingImportPayload) return;
+    var impIdentity = pendingImportPayload.identity;
+    var impStructure = pendingImportPayload.structure;
     var data = pendingImportPayload.data;
     var applied = 0;
     try {
@@ -2396,6 +3734,11 @@
       closeImportConfirm();
       showToast("Échec de l'import : le stockage local est inaccessible sur ce navigateur.", "error");
       return;
+    }
+    if (impIdentity && typeof impIdentity === "object") {
+      setIdentity({ structure: impIdentity.structure, person: impIdentity.person, date: impIdentity.date });
+    } else if (typeof impStructure === "string" && impStructure) {
+      setIdentity({ structure: impStructure });
     }
     closeImportConfirm();
     refreshAllViewsAfterImport();
@@ -2438,3 +3781,4 @@
   importConfirmOverlay.addEventListener("click", function (e) { if (e.target === importConfirmOverlay) closeImportConfirm(); });
 })();
 </script>
+
