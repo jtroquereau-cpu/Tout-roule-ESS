@@ -1146,6 +1146,71 @@
     .data-actions { width: 100%; }
     .data-btn { flex: 1 1 auto; justify-content: center; }
   }
+
+  /* ---------- Résumé exécutif (écran + impression A4) ---------- */
+  .exec-card { padding: 1.4rem 1.5rem; margin-bottom: 2rem; }
+  .exec-head { display: flex; gap: 1rem; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; margin-bottom: 1rem; }
+  .exec-head h2 { margin: 0 0 0.3rem; }
+  .exec-head p { margin: 0; font-size: 0.85rem; color: var(--ink-soft); line-height: 1.5; max-width: 62ch; }
+  .exec-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .exec-actions .data-btn.is-primary { background: var(--petrol); color: #fff; border-color: var(--petrol); }
+  .exec-scroll { background: var(--line); border-radius: 12px; padding: 14px; overflow-x: auto; }
+  #exec-print-root { display: none; }
+
+  .xs { --xs-ink: #1f2a33; --xs-soft: #55626b; --xs-line: #d9ddd6; --xs-petrol: #283c50; --xs-sage: #648c78; --xs-terra: #b4643c;
+    --xs-urgent: #a83232; --xs-watch: #9a6f1c; --xs-good: #3f7253;
+    background: #fff; color: var(--xs-ink); font-family: Inter, system-ui, sans-serif; font-size: 11px; line-height: 1.38;
+    width: 100%; max-width: 794px; margin: 0 auto; padding: 0 0 14px; box-sizing: border-box; box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
+  .xs * { box-sizing: border-box; }
+  .xs-top { background: var(--xs-petrol); color: #fff; padding: 0.9em 1.3em; display: flex; justify-content: space-between; align-items: flex-end; gap: 1em; flex-wrap: wrap; }
+  .xs-top h3 { margin: 0; font-family: Poppins, Inter, sans-serif; font-size: 1.55em; font-weight: 600; letter-spacing: 0; color: #fff; }
+  .xs-top .xs-sub { margin: 0.15em 0 0; font-size: 0.82em; opacity: 0.85; }
+  .xs-id { text-align: right; font-size: 0.85em; line-height: 1.45; }
+  .xs-id strong { font-weight: 600; }
+  .xs-body { padding: 0.9em 1.3em 0; }
+  .xs-sec { font-family: Poppins, Inter, sans-serif; font-size: 0.78em; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--xs-terra); margin: 0.9em 0 0.3em; }
+  .xs p { margin: 0 0 0.35em; }
+  .xs-kpis { display: flex; gap: 0.5em; flex-wrap: wrap; margin: 0.7em 0 0.2em; }
+  .xs-kpi { flex: 1 1 7em; border: 1px solid var(--xs-line); border-top-width: 3px; border-radius: 4px; padding: 0.4em 0.6em; }
+  .xs-kpi b { display: block; font-family: Poppins, Inter, sans-serif; font-size: 1.7em; line-height: 1.1; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .xs-kpi span { font-size: 0.82em; color: var(--xs-soft); }
+  .xs-kpi.k-urgent { border-top-color: var(--xs-urgent); } .xs-kpi.k-urgent b { color: var(--xs-urgent); }
+  .xs-kpi.k-watch { border-top-color: var(--xs-watch); } .xs-kpi.k-watch b { color: var(--xs-watch); }
+  .xs-kpi.k-good { border-top-color: var(--xs-good); } .xs-kpi.k-good b { color: var(--xs-good); }
+  .xs-kpi.k-all { border-top-color: var(--xs-petrol); } .xs-kpi.k-all b { color: var(--xs-petrol); }
+  .xs-warn { border: 1px solid var(--xs-terra); background: #fbf1ea; color: #6b3a1f; border-radius: 4px; padding: 0.4em 0.7em; margin: 0.5em 0 0; font-size: 0.92em; }
+  .xs-row { display: grid; grid-template-columns: 3.4em minmax(0, 1fr) 8.6em; gap: 0.6em; padding: 0.3em 0 0.3em 0.55em; border-bottom: 1px solid var(--xs-line); border-left: 3px solid var(--xs-line); break-inside: avoid; }
+  .xs-row.st-urgent { border-left-color: var(--xs-urgent); }
+  .xs-row.st-watch { border-left-color: var(--xs-watch); }
+  .xs-row.st-good { border-left-color: var(--xs-good); }
+  .xs-code { font-family: Poppins, Inter, sans-serif; font-weight: 600; font-size: 0.95em; color: var(--xs-petrol); padding-top: 0.05em; }
+  .xs-title { font-weight: 600; font-size: 1.02em; }
+  .xs-base { font-weight: 500; font-size: 0.78em; color: var(--xs-soft); border: 1px solid var(--xs-line); border-radius: 100px; padding: 0 0.5em; margin-left: 0.4em; white-space: nowrap; }
+  .xs-line { color: var(--xs-ink); margin-top: 0.1em; }
+  .xs-line b { color: var(--xs-soft); font-weight: 600; font-size: 0.86em; text-transform: uppercase; letter-spacing: 0.04em; margin-right: 0.3em; }
+  .xs-side { text-align: right; }
+  .xs-pill { display: inline-block; font-weight: 600; font-size: 0.82em; padding: 0.05em 0.7em; border-radius: 100px; color: #fff; }
+  .st-urgent .xs-pill { background: var(--xs-urgent); } .st-watch .xs-pill { background: var(--xs-watch); } .st-good .xs-pill { background: var(--xs-good); }
+  .xs-bar { height: 5px; background: #e8ebe6; border-radius: 3px; margin: 0.4em 0 0.15em auto; width: 100%; overflow: hidden; }
+  .xs-bar i { display: block; height: 100%; background: var(--xs-sage); }
+  .xs-pct { font-size: 0.8em; color: var(--xs-soft); font-variant-numeric: tabular-nums; }
+  .xs-dec { margin: 0; padding-left: 1.2em; }
+  .xs-dec li { margin: 0 0 0.2em; }
+  .xs-foot { font-size: 0.78em; color: var(--xs-soft); border-top: 1px solid var(--xs-line); margin: 0.9em 1.3em 0; padding-top: 0.5em; line-height: 1.45; }
+  @media (max-width: 600px) {
+    .exec-card { padding: 1rem; }
+    .xs-row { grid-template-columns: 3em minmax(0, 1fr); }
+    .xs-side { grid-column: 2; text-align: left; display: flex; align-items: center; gap: 0.6em; }
+    .xs-bar { margin: 0; flex: 1; }
+  }
+  @media print {
+    @page { size: A4; margin: 8mm; }
+    body.printing-exec .topnav, body.printing-exec .page, body.printing-exec .site-footer, body.printing-exec .modal-overlay, body.printing-exec .toast-wrap { display: none !important; }
+    body.printing-exec { background: #fff !important; margin: 0 !important; padding: 0 !important; }
+    body.printing-exec #exec-print-root { display: block !important; }
+    body.printing-exec .xs { width: 100%; max-width: none; box-shadow: none; font-size: 7.55pt; padding: 0; }
+    body.printing-exec .xs, body.printing-exec .xs * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
 </style>
 
 <nav class="topnav">
@@ -1209,7 +1274,7 @@
         <h2>Pourquoi cet outil existe</h2>
         <p>Tout Roule n'est pas un audit de plus. C'est un outil que <strong>vous</strong> utilisez vous-même, thématique par thématique, pour transformer un diagnostic en actions réellement suivies — pas un rapport qu'on referme après la réunion de restitution.</p>
         <p>Il applique la posture qui structure tout l'accompagnement d'ActivESS Conseil : ce n'est ni nous qui décidons pour vous, ni nous qui remplissons l'outil à votre place. C'est votre conseil d'administration, votre direction et vos équipes qui s'en emparent, le mettent à jour, et en gardent la maîtrise longtemps après une mission.</p>
-        <p>Les données affichées par défaut sont celles d'un exemple fictif (« Racines &amp; Chemins »), pour que l'outil se présente déjà rempli plutôt que vide. Neuf thématiques reposent déjà sur une vraie méthodologie sourcée — les quatre autres restent à enrichir, thématique par thématique, avec vos diagnostics réels.</p>
+        <p>Les données affichées par défaut sont celles d'un exemple fictif (« Racines &amp; Chemins »), pour que l'outil se présente déjà rempli plutôt que vide. Onze thématiques reposent déjà sur une vraie méthodologie sourcée — les deux autres restent à enrichir, thématique par thématique, avec vos diagnostics réels.</p>
       </div>
       <div class="posture-card">
         <p class="pc-eyebrow">Notre conviction</p>
@@ -1313,6 +1378,19 @@
       <p class="data-hint">Vos réponses sont enregistrées uniquement sur ce navigateur. Exportez-les régulièrement et rangez le fichier dans le dossier partagé de votre structure.</p>
     </header>
 
+    <section class="card exec-card" id="exec-card" aria-labelledby="exec-title">
+      <div class="exec-head">
+        <div>
+          <h2 id="exec-title">Résumé exécutif pour la gouvernance</h2>
+          <p>Une page A4 pour le conseil d'administration ou le comité de direction : la démarche, le niveau d'avancement de chaque thématique, les travaux à mener et pourquoi. Elle se recalcule à chaque modification de vos réponses.</p>
+        </div>
+        <div class="exec-actions">
+          <button type="button" class="data-btn is-primary" id="btn-exec-print">Imprimer / enregistrer en PDF (A4)</button>
+        </div>
+      </div>
+      <div class="exec-scroll"><div id="exec-sheet-inline"></div></div>
+    </section>
+
     <div class="layout">
       <div class="card wheel-card">
         <div class="view-toggle-row">
@@ -1353,7 +1431,7 @@
     </div>
 
     <footer class="note">
-      <strong>Prochaine étape :</strong> remplacer ces données d'exemple par vos diagnostics réels, thématique par thématique, à partir des sources que vous m'enverrez. Neuf thématiques utilisent déjà une vraie méthodologie : « Maturité numérique » (autodiagnostic Solidatech, 2020), « Pilotage économique » (DiagFlash, France Active Nouvelle-Aquitaine / INAÉ), « Projet associatif et projet d'insertion » (CNAR Sport / CNOSF, Ligue de l'enseignement), « Responsabilité territoriale, utilité sociale et impact » (COORACE, Avise, réseau Chantier École) « Plan de montée en compétences / GPEC » (ARSARA, adapté ; Code du travail), « Qualité de vie au travail » (CIDES / CHORUM, Malakoff Humanis, ARSARA ; Code du travail), « Ressources humaines » (ARSARA, adapté ; Code du travail et Code de la sécurité sociale ; convention collective des ACI à titre d'exemple), « Gouvernance associative » (Gouvernomètre : INAÉ, EILAN Conseil, DLA, France Active Nouvelle-Aquitaine, CRESS Nouvelle-Aquitaine, Le Mouvement associatif Nouvelle-Aquitaine, Guid'Asso ; questions complémentaires : Fédération des acteurs de la solidarité, JF Conseil) et « Sécurité économique et continuité d'activité » (SGDSN, SISSE / DGE). Sur « Pilotage économique », vous pouvez désormais saisir vos propres chiffres de bilan et de compte de résultat (bouton dans la fiche ECO) : le diagnostic, les actions et les tâches sont recalculés automatiquement selon les formules DiagFlash. Les 4 autres thématiques restent illustratives en attendant leurs sources. La structure (roue à 3 anneaux, 13 thématiques) reste la même — seul le contenu change.
+      <strong>Prochaine étape :</strong> remplacer ces données d'exemple par vos diagnostics réels, thématique par thématique, à partir des sources que vous m'enverrez. Onze thématiques utilisent déjà une vraie méthodologie : « Maturité numérique » (autodiagnostic Solidatech, 2020), « Pilotage économique » (DiagFlash, France Active Nouvelle-Aquitaine / INAÉ), « Projet associatif et projet d'insertion » (CNAR Sport / CNOSF, Ligue de l'enseignement), « Responsabilité territoriale, utilité sociale et impact » (COORACE, Avise, réseau Chantier École) « Plan de montée en compétences / GPEC » (ARSARA, adapté ; Code du travail), « Qualité de vie au travail » (CIDES / CHORUM, Malakoff Humanis, ARSARA ; Code du travail), « Ressources humaines » (ARSARA, adapté ; Code du travail et Code de la sécurité sociale ; convention collective des ACI à titre d'exemple), « Impact environnemental » (axes du guide TEDDA ; Code de l'environnement et Code du travail ; Trackdéchets), « Relations partenariales et institutionnelles » (guide COORACE/VITA ; guide PIC n° 6 ; Code de la commande publique ; contrat d'engagement républicain), « Gouvernance associative » (Gouvernomètre : INAÉ, EILAN Conseil, DLA, France Active Nouvelle-Aquitaine, CRESS Nouvelle-Aquitaine, Le Mouvement associatif Nouvelle-Aquitaine, Guid'Asso ; questions complémentaires : Fédération des acteurs de la solidarité, JF Conseil) et « Sécurité économique et continuité d'activité » (SGDSN, SISSE / DGE). Sur « Pilotage économique », vous pouvez désormais saisir vos propres chiffres de bilan et de compte de résultat (bouton dans la fiche ECO) : le diagnostic, les actions et les tâches sont recalculés automatiquement selon les formules DiagFlash. Les 2 autres thématiques restent illustratives en attendant leurs sources. La structure (roue à 3 anneaux, 13 thématiques) reste la même — seul le contenu change.
     </footer>
   </section>
 
@@ -1465,6 +1543,8 @@
 <input type="file" id="import-file-input" accept=".json,application/json" hidden aria-hidden="true">
 
 <div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
+
+<div id="exec-print-root" aria-hidden="true"></div>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
 
@@ -1963,13 +2043,53 @@
  ],
  "env": [
   {
+   "t": "Engager sa transition écologique — guide méthodologique pour améliorer les pratiques internes des associations (projet TEDDA)",
+   "p": "Apes, CEPS Projectes Socials, Maison des associations de Tourcoing, MRES Hauts-de-France, Pour la Solidarité (Erasmus+)",
+   "y": "version française, vraisemblablement 2023",
+   "a": "free",
+   "use": "used",
+   "u": "https://www.tedda.eu/fr/ressources/resultat-3-un-guide-methodologique-pour-engager-sa-transition-ecologique/",
+   "n": "Six axes : achats, déchets, bâtiment et flux, mobilité, numérique, biodiversité ; six fiches-outils à télécharger (une par axe). Licence Creative Commons BY-NC-ND 3.0 : reproduction sans modification, source citée, usage non commercial. Une reprise dans une prestation payante d'ActiVESS ou une adaptation demande un accord écrit de CEPS : seule la structure en six axes est reprise ici, les questions sont rédigées indépendamment. Public visé : associations de 0 à 25 salariés.",
+   "v": "Pages tedda.eu et mentions légales lues le 05/11/2026 : licence CC BY-NC-ND 3.0 (texte espagnol ; version française des mentions non lue) ; téléchargement direct, sans compte."
+  },
+  {
+   "t": "Code de l'environnement — articles L229-25, L541-2, L541-21-1, L541-21-2 ; Code du travail — articles L2312-8, R4411-73, R4412-38, R4463-1, R4463-3, R4463-7",
+   "p": "Légifrance (Secrétariat général du Gouvernement, DILA)",
+   "y": "relus le 05/11/2026",
+   "a": "open",
+   "use": "used",
+   "u": "https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006074220",
+   "n": "Chercher chaque article par son numéro dans le code (les articles du Code du travail sont dans le texte LEGITEXT000006072050). Bilan d'émissions obligatoire au-delà de 500 salariés, responsabilité du producteur de déchets, tri à la source des biodéchets et des principaux flux, fiches de données de sécurité, prévention des épisodes de chaleur intense, information du CSE sur les conséquences environnementales.",
+   "v": "Mentions légales Légifrance lues le 05/11/2026 : « Sauf mention contraire, tous les contenus de ce site sont sous licence etalab-2.0 »."
+  },
+  {
+   "t": "Traçabilité des déchets, des terres excavées et des sédiments",
+   "p": "Ministère de la Transition écologique (ecologie.gouv.fr)",
+   "y": "publié le 14/01/2022, mis à jour le 10/12/2025",
+   "a": "free",
+   "use": "used",
+   "u": "https://www.ecologie.gouv.fr/politiques-publiques/tracabilite-dechets-terres-excavees-sediments",
+   "n": "Bordereaux de suivi dématérialisés obligatoires pour les déchets dangereux et amiantés depuis le 1er janvier 2022, via Trackdéchets ; registres nationaux transmis par Trackdéchets depuis le 5 mai 2025. La page vise les gestionnaires et producteurs de déchets dangereux ou amiantés ; elle ne crée pas d'obligation générale pour une structure qui n'en produit pas.",
+   "v": "Page lue le 05/11/2026 : accès libre ; licence de la page non relevée."
+  },
+  {
+   "t": "Trackdéchets — service de traçabilité des déchets",
+   "p": "Ministère en charge de l'Environnement (service numérique)",
+   "y": "",
+   "a": "signup",
+   "use": "used",
+   "u": "https://trackdechets.beta.gouv.fr/",
+   "n": "Création de compte pour émettre ou signer des bordereaux. La gratuité n'est pas indiquée sur les pages lues ; des sessions de formation hebdomadaires sont annoncées (le jeudi à 15 h).",
+   "v": "Accueil et FAQ lus le 05/11/2026 : « Créer mon compte » ; coût non mentionné."
+  },
+  {
    "t": "Diagnostic à 360° sur la transition écologique",
    "p": "Mission Transition écologique des entreprises (ADEME)",
    "y": "",
    "a": "free",
-   "use": "avail",
+   "use": "used",
    "u": "https://mission-transition-ecologique.beta.gouv.fr/projets-entreprise/diag-360",
-   "n": "Pour TPE et PME. Aucun compte mentionné ; tarif du diagnostic non indiqué. La licence AGPL citée concerne l'application, pas le diagnostic.",
+   "n": "Énergie, isolation, eau, déchets, matières premières, achats, mobilité, avec conseils et plan d'action. Pour TPE et PME : l'éligibilité d'une association est à confirmer. Aucun compte mentionné ; tarif du diagnostic non indiqué. La licence AGPL citée concerne l'application, pas le diagnostic.",
    "v": "Page lue le 05/11/2026."
   },
   {
@@ -1977,10 +2097,40 @@
    "p": "Les Ateliers de l'Adaptation au Changement Climatique",
    "y": "",
    "a": "free",
-   "use": "avail",
+   "use": "used",
    "u": "https://ateliers-adaptationclimat.fr/ressources/face-aux-aleas-climatiques-etes-vous-exposes-et-vulnerables/",
    "n": "Questionnaire en ligne de quelques minutes, sans compte ; gratuité non indiquée explicitement.",
    "v": "Page lue le 05/11/2026."
+  },
+  {
+   "t": "Chantier & environnement — guide pratique, démarche ISO 14001",
+   "p": "FSM (démarche « Chantier Propre FSM », Melun)",
+   "y": "août 2013",
+   "a": "check",
+   "use": "used",
+   "u": "",
+   "n": "Guide d'entreprise de 20 pages. Utilisé seulement pour l'organisation d'un chantier propre (référent, carnet de bord, réunions mensuelles, kit de dépollution). Ses références réglementaires de 2012 sont dépassées : ne pas les reprendre. Diffusion publique non vérifiée.",
+   "v": "Fichier de ton dossier lu."
+  },
+  {
+   "t": "Bilan Carbone® — formation, adhésion « acteur non économique » et plateforme associée",
+   "p": "Association pour la transition Bas Carbone (ABC)",
+   "y": "pages mises à jour de septembre 2026",
+   "a": "members",
+   "use": "used",
+   "u": "https://abc-transitionbascarbone.fr/produit/adhesion-2026-acteur-non-economique/",
+   "n": "Bilan Carbone® est une marque déposée de l'ABC, qui exige une formation pour appliquer la méthode (module Découverte 240 € HT ; Initiation 1 300 € HT, éligible CPF). L'adhésion « acteur non économique » (associations, fédérations) ouvre une déclinaison gratuite de la plateforme pour structures associatives, mais le tarif dépend du budget et n'est pas lisible : à demander à l'ABC.",
+   "v": "Pages adhésion (modifiée le 28/09/2026) et formation (03/09/2026) lues le 05/11/2026."
+  },
+  {
+   "t": "Guide de bonnes pratiques numérique responsable pour les organisations",
+   "p": "DINUM — mission iNumEco, avec le ministère de la Transition écologique",
+   "y": "version 1, 2023",
+   "a": "open",
+   "use": "used",
+   "u": "https://www.data.gouv.fr/datasets/guide-de-bonnes-pratiques-numerique-responsable-pour-les-organisations",
+   "n": "Voir la thématique Maturité numérique. Les données du guide (CSV, JSON) sont sous Licence Ouverte 2.0 ; le PDF de 114 pages est hébergé sur ecoresponsable.numerique.gouv.fr, sa licence propre n'a pas été vérifiée.",
+   "v": "Jeu de données data.gouv.fr lu le 05/11/2026 : « Licence Ouverte / Open Licence version 2.0 »."
   },
   {
    "t": "Autodiagnostic des risques « Votre autodiagnostic en quelques clics »",
@@ -1989,7 +2139,7 @@
    "a": "signup",
    "use": "avail",
    "u": "https://macarto-climat.fr/back/4416",
-   "n": "Pour PME et ETI ; compte requis ; gratuité non indiquée.",
+   "n": "Pour PME et ETI ; compte requis ; gratuité non indiquée ; une association n'est peut-être pas dans la cible.",
    "v": "Page lue le 05/11/2026 : « Créer un compte »."
   },
   {
@@ -2000,49 +2150,119 @@
    "use": "avail",
    "u": "https://agirpourlatransition.ademe.fr/entreprises/conseils/transverse/strategie/adaptation-climatique",
    "n": "Liens issus de ton fichier divers.docx ; pages en erreur à la lecture automatique : à ouvrir dans un navigateur (autre lien : plusfraisautravail.beta.gouv.fr).",
-   "v": "Lecture en erreur le 05/11/2026."
+   "v": "Lecture en erreur en novembre 2026."
   },
   {
-   "t": "Chantier & environnement — guide pratique, démarche ISO 14001",
-   "p": "FSM (démarche « Chantier Propre FSM »)",
-   "y": "août 2013",
+   "t": "Transformation écologique et réseaux de l'ESS",
+   "p": "ESS France",
+   "y": "avril 2026 d'après le dossier de dépôt",
    "a": "check",
    "use": "avail",
-   "u": "",
-   "n": "Guide d'entreprise (20 pages) ; diffusion publique non vérifiée. À lire comme exemple de charte de chantier propre.",
-   "v": "Fichier de ton dossier lu."
+   "u": "https://www.ess-france.org/system/files/2026-04/ESS%20France_Transformation%20%C3%A9cologique%20et%20r%C3%A9seaux%20de%20l%27ESS.pdf",
+   "n": "Le lien renvoie vers une page de connexion du site ESS France : le contenu n'a pas pu être lu. Mention du site : « Tous les droits réservés ». À demander à ESS France ou à ton réseau avant de t'y appuyer.",
+   "v": "Lien lu le 05/11/2026 : page de connexion à la place du PDF."
   },
   {
-   "t": "Tableau des 8 gaspillages (affiche lean)",
+   "t": "Tableau des 8 gaspillages (affiche d'amélioration continue)",
    "p": "éditeur non indiqué",
    "y": "2009",
    "a": "check",
    "use": "avail",
    "u": "",
-   "n": "Affiche d'amélioration continue. Éditeur non identifiable dans le fichier : droits à vérifier avant usage public.",
+   "n": "Les huit gaspillages du lean sont un cadre classique de l'amélioration continue ; cette affiche n'est pas utilisée comme source. Éditeur non identifiable dans le fichier : droits à vérifier avant usage public.",
    "v": "Fichier de ton dossier lu."
   }
  ],
  "part": [
   {
    "t": "Guide méthodologique — conduite de projets partenariaux de développement territorial par l'insertion par l'activité économique",
-   "p": "COORACE — centre de ressources VITA",
+   "p": "COORACE — centre de ressources VITA (avec Extra Muros)",
    "y": "mars 2008",
    "a": "check",
-   "use": "avail",
+   "use": "used",
    "u": "https://www.coorace.org",
-   "n": "Guide de 34 pages dans ton dossier. Accès libre ou adhérents non déterminé (site refusant la lecture automatique).",
-   "v": "Site coorace.org consulté le 05/11/2026 : lecture refusée."
+   "n": "Guide de 34 pages dans ton dossier. Trois outils repris comme grilles de lecture : profil stratégique, arbre de services selon trois logiques (contractualisation publique, marchande, réciprocité), système d'acteurs actuel et potentiel. Les institutions citées (DDTEFP, ANPE, Conseil général) ont disparu : seule la méthode est utilisée. Accès libre ou adhérents non déterminé ; droits non précisés dans le fichier.",
+   "v": "Fichier de ton dossier lu le 05/11/2026 ; site coorace.org : lecture automatique refusée."
   },
   {
    "t": "Guides de capitalisation du PIC — n°6 « Construire de nouvelles relations aux entreprises »",
    "p": "Haut-commissariat aux compétences — ministère du Travail",
    "y": "octobre 2022",
    "a": "free",
-   "use": "avail",
+   "use": "used",
    "u": "https://travail-emploi.gouv.fr/sites/travail-emploi/files/files-spip/pdf/hcc_no6_construire_de_nouvelles_relations_aux_entreprises_v221019.pdf",
-   "n": "Voir aussi la thématique INS pour la collection complète.",
-   "v": "Diffusion publique relevée le 05/11/2026 ; licence non vérifiée."
+   "n": "Bonnes pratiques de mobilisation des entreprises dans des parcours d'inclusion : rencontres hors entretien d'embauche, immersions, mentors, accompagnement des entreprises. Les actions des structures d'insertion elles-mêmes ne sont pas au centre du guide. Voir aussi la thématique INS pour la collection complète.",
+   "v": "Fichier de ton dossier lu le 05/11/2026 ; diffusion publique relevée, licence non vérifiée."
+  },
+  {
+   "t": "Code de la commande publique — articles L2112-2, L2113-13, L2113-15, L2113-16, R2113-7 ; Code du travail — articles L5132-2, L5132-3, L5132-4",
+   "p": "Légifrance (Secrétariat général du Gouvernement, DILA)",
+   "y": "relus le 05/11/2026",
+   "a": "open",
+   "use": "used",
+   "u": "https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000037701019",
+   "n": "Marchés réservés aux structures d'insertion, aux entreprises adaptées et aux entreprises de l'ESS ; proportion minimale d'au moins 50 % de travailleurs défavorisés pour réserver ; conventions de l'État avec les structures d'insertion. Les articles du Code du travail sont dans le texte LEGITEXT000006072050.",
+   "v": "Mentions légales Légifrance lues le 05/11/2026 : contenus sous licence etalab-2.0 sauf mention contraire."
+  },
+  {
+   "t": "Décret n° 2001-495 du 6 juin 2001 pris pour l'application de l'article 10 de la loi du 12 avril 2000 (transparence financière des aides)",
+   "p": "Premier ministre — copie hébergée par la DREAL Occitanie",
+   "y": "version consolidée au 28/01/2008",
+   "a": "free",
+   "use": "used",
+   "u": "https://www.occitanie.developpement-durable.gouv.fr/IMG/pdf/Decret_2001-06-06_no2001-495_transparence_subventions_cle042f21.pdf",
+   "n": "Seuil de 23 000 € de subvention annuelle au-delà duquel une convention est obligatoire ; seuil de 153 000 € pour l'obligation de dépôt. Version de 2008 : à reconfirmer sur Légifrance avant de citer ces seuils en 2026.",
+   "v": "Document lu le 05/11/2026 : accès libre ; licence de la copie non relevée."
+  },
+  {
+   "t": "Le contrat d'engagement républicain — guide pratique et FAQ",
+   "p": "associations.gouv.fr (ministère chargé de la Vie associative)",
+   "y": "février 2023 (fichier mis en ligne en octobre 2025)",
+   "a": "open",
+   "use": "used",
+   "u": "https://associations.gouv.fr/le-contrat-dengagement-republicain-le-guide-pratique",
+   "n": "Sept engagements ; concerne les associations et certaines fondations qui demandent une subvention ou un agrément ; applicable aux demandes déposées à partir du 2 janvier 2022. L'agrément ESUS en est exclu selon le guide. Le décret 2021-1947 lui-même n'a pas pu être lu sur Légifrance.",
+   "v": "Page et FAQ lues le 05/11/2026 ; pied de page du site associations.gouv.fr : licence etalab-2.0."
+  },
+  {
+   "t": "Subventions, marchés publics et aides d'État",
+   "p": "associations.gouv.fr",
+   "y": "consulté en novembre 2026",
+   "a": "open",
+   "use": "avail",
+   "u": "https://associations.gouv.fr/subventions-marches-publics-et-aides-detat",
+   "n": "Page de liste qui renvoie notamment vers un « Guide d'usage de la subvention » daté du 8 juin 2026, non lu : à ouvrir avant de t'appuyer sur ce point.",
+   "v": "Page lue le 05/11/2026 : licence etalab-2.0 indiquée en pied de page."
+  },
+  {
+   "t": "Dispositif local d'accompagnement (DLA)",
+   "p": "Avise et réseau des DLA",
+   "y": "",
+   "a": "check",
+   "use": "avail",
+   "u": "https://dla.avise.org",
+   "n": "Le site interdit la lecture automatique : conditions d'éligibilité, gratuité et financeurs non vérifiés. À ouvrir dans un navigateur ou à demander au DLA régional.",
+   "v": "Lecture refusée le 05/11/2026 (robots.txt)."
+  },
+  {
+   "t": "Charte d'engagements réciproques (14 février 2014) et circulaire du Premier ministre du 29 septembre 2015 sur les relations entre pouvoirs publics et associations",
+   "p": "État, collectivités, Mouvement associatif ; Premier ministre",
+   "y": "2014 ; 2015",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "Références connues, contenu non lu : les sites officiels n'ont pas pu être consultés. À vérifier avant d'invoquer les conventions pluriannuelles d'objectifs auprès d'un financeur.",
+   "v": "Lecture non réussie le 05/11/2026 (Mouvement associatif : robots.txt ; circulaires.legifrance : redirection)."
+  },
+  {
+   "t": "Guide de la commande publique sociale / prise en compte de l'insertion dans les marchés",
+   "p": "Direction des affaires juridiques de Bercy ; facilitateurs de clauses sociales",
+   "y": "",
+   "a": "check",
+   "use": "avail",
+   "u": "",
+   "n": "La page de la DAJ a renvoyé une erreur : aucun guide récent n'a été retenu. À chercher auprès du facilitateur de clauses sociales de ton territoire.",
+   "v": "Lecture en erreur le 05/11/2026."
   }
  ],
  "com": [
@@ -2398,28 +2618,96 @@
           task: { task: "Calcul et suivi de l'obligation d'emploi", period: "T1", responsible: "RH / Direction" } }
       ] },
     { id: "env", code: "ENV", label: "Impact environnemental / transition écologique",
+      source: "Questionnaire construit à partir de quatre sources reformulées pour une structure ESS ou IAE : (1) le guide « Engager sa transition écologique : guide méthodologique pour améliorer les pratiques internes des associations » (projet TEDDA, Erasmus+ : Apes, CEPS, Maison des associations de Tourcoing, MRES Hauts-de-France, Pour la Solidarité ; version française vraisemblablement de 2023), dont seuls les six axes d'intervention sont repris (achats, déchets, bâtiment et flux, mobilité, numérique, biodiversité) : les questions sont rédigées indépendamment, car le guide est publié sous licence Creative Commons BY-NC-ND 3.0 (usage non commercial, sans adaptation) ; (2) le Code de l'environnement (L229-25, L541-2, L541-21-1, L541-21-2) et le Code du travail (L2312-8, R4411-73, R4412-38, R4463-1, R4463-3, R4463-7), relus sur Légifrance le 05/11/2026 ; (3) la page « Traçabilité des déchets » du ministère de la Transition écologique (mise à jour le 10 décembre 2025) et le service Trackdéchets ; (4) le guide « Chantier et environnement — démarche ISO 14001 » (FSM, août 2013), utilisé seulement pour l'organisation d'un chantier propre (référent, carnet de bord, kit de dépollution) : ses références réglementaires de 2012 sont dépassées, les bordereaux de déchets dangereux étant dématérialisés depuis le 1er janvier 2022. Les diagnostics de la Mission Transition Écologique et des Ateliers de l'adaptation au changement climatique complètent les pistes d'action. Outil d'aide à la décision, sans valeur d'avis juridique : les obligations dépendent des déchets produits, des sites et de l'effectif ; confirme-les auprès de ta DREAL, de ton OPCO ou d'un conseil.",
       questions: [
-        { q: "Un bilan carbone, même simplifié, a-t-il été réalisé ?", a: "non_besoin",
-          action: "Réaliser un bilan carbone simplifié (méthode ADEME)",
-          task: { task: "Bilan carbone simplifié", period: "T2", responsible: "Direction" } },
-        { q: "Le tri des déchets est-il organisé sur l'ensemble des chantiers/sites ?", a: "en_cours",
-          action: "Généraliser le tri des déchets sur l'ensemble des chantiers et sites",
-          task: { task: "Déploiement du tri des déchets", period: "T2-T3", responsible: "Direction" } },
-        { q: "Des critères environnementaux sont-ils intégrés à la politique d'achats ?", a: "ne_sait_pas",
-          action: "Intégrer des critères environnementaux dans la politique d'achats",
-          task: { task: "Charte achats responsables", period: "T4", responsible: "Direction" } }
+        { q: "Un référent de la transition écologique est-il nommé, avec du temps de travail dédié, et un état des lieux partagé (salariés, salariés en parcours, bénévoles) a-t-il été réalisé sur les six axes : achats, déchets, bâtiment et énergie, mobilité, numérique, biodiversité ?", a: "en_cours",
+          action: "Nommer un référent légitimé par la direction et le CA, lui affecter du temps, puis dresser avec l'équipe un état des lieux par axe ; en commencer un par le diagnostic à 360° de la Mission Transition Écologique ; dès 50 salariés, le CSE est informé et consulté sur les conséquences environnementales des décisions (L2312-8)",
+          task: { task: "Désignation du référent et état des lieux par axe", period: "T1", responsible: "Direction / CA" } },
+        { q: "Les principales sources d'émissions de gaz à effet de serre (déplacements, énergie des locaux, achats, déchets, numérique) ont-elles été estimées, même simplement, au cours des 3 dernières années ?", a: "non_besoin",
+          action: "Estimer les émissions avec un outil de calcul simplifié ; le bilan d'émissions n'est obligatoire qu'au-delà de 500 salariés pour une personne morale de droit privé (L229-25) ; la méthode Bilan Carbone® est une marque déposée de l'Association pour la transition Bas Carbone, qui exige une formation pour l'appliquer",
+          task: { task: "Estimation simplifiée des émissions de gaz à effet de serre", period: "T2", responsible: "Direction" } },
+        { q: "Le tri à la source est-il organisé sur tous les sites et chantiers, au moins pour le papier, le métal, le plastique, le verre, le bois et les textiles (et, pour les chantiers de construction ou de démolition, les fractions minérales et le plâtre), avec des contenants identifiés et des consignes affichées ?", a: "en_cours",
+          action: "Équiper chaque site de contenants par flux avec consignes affichées, et prévoir sur les chantiers de construction ou de démolition des bennes ou contenants par type de déchet (L541-21-2)",
+          task: { task: "Déploiement du tri à la source sur les sites et chantiers", period: "T2-T3", responsible: "Direction / Encadrants" } },
+        { q: "Les biodéchets (restes de repas, déchets verts, déchets de cuisine) sont-ils triés à la source et valorisés par compostage sur place ou collecte séparée, sans aucun brûlage à l'air libre ?", a: "ne_sait_pas",
+          action: "Vérifier avec la collectivité ou un prestataire la solution de tri à la source des biodéchets, applicable à tous les producteurs depuis fin 2023 ; interdire tout brûlage de déchets verts (L541-21-1)",
+          task: { task: "Solution de tri et de valorisation des biodéchets", period: "T2", responsible: "Direction / Encadrants" } },
+        { q: "Pour chaque flux de déchets, le prestataire de collecte est-il identifié et autorisé à les prendre en charge, et les justificatifs d'enlèvement (bordereaux, bons de collecte) sont-ils conservés ?", a: "oui",
+          action: "Tenir une liste des prestataires par flux avec leur autorisation et classer les justificatifs d'enlèvement : le producteur reste responsable de ses déchets jusqu'à leur élimination ou valorisation finale (L541-2)",
+          task: { task: "Liste des prestataires et justificatifs d'enlèvement", period: "T1", responsible: "Direction / Administration" } },
+        { q: "Les déchets dangereux (peintures, solvants, huiles, batteries, produits phytosanitaires, amiante) sont-ils stockés à part, sans mélange, avec un bordereau de suivi dématérialisé sur Trackdéchets lorsque la structure en produit ?", a: "en_cours",
+          action: "Repérer les déchets dangereux produits, aménager un stockage séparé et ouvrir un compte Trackdéchets ; le bordereau dématérialisé est obligatoire pour les déchets dangereux et amiantés depuis le 1er janvier 2022 (exceptions éventuelles à confirmer auprès de la DREAL)",
+          task: { task: "Inventaire des déchets dangereux et accès à Trackdéchets", period: "T1", responsible: "Direction / Encadrants" } },
+        { q: "Les produits chimiques utilisés (solvants, peintures, huiles, produits d'entretien et phytosanitaires) sont-ils inventoriés, avec une fiche de données de sécurité à jour, un stockage adapté, des contenants étiquetés, et les salariés informés et formés à leurs précautions d'emploi ?", a: "oui",
+          action: "Tenir l'inventaire avec les fiches de données de sécurité accessibles aux salariés et au CSE, former les utilisateurs et transmettre les fiches au service de santé au travail (R4411-73, R4412-38) ; prévoir un kit de dépollution sur les sites à risque",
+          task: { task: "Inventaire des produits chimiques et fiches de données de sécurité", period: "T1", responsible: "Encadrants / Direction" } },
+        { q: "La politique d'achats intègre-t-elle des critères écrits (le besoin est-il réel, location ou emprunt possible, réemploi, proximité, fournisseurs de l'ESS, durée de vie, impact environnemental) et une personne est-elle chargée de l'approvisionnement ?", a: "ne_sait_pas",
+          action: "Rédiger une charte d'achats d'une page (questions à se poser avant tout achat, critères de choix, part des fournisseurs de l'ESS) et désigner une personne chargée de la suivre",
+          task: { task: "Charte d'achats responsables", period: "T4", responsible: "Direction / Administration" } },
+        { q: "Les consommations d'énergie (électricité, gaz, fioul) et d'eau de chaque site sont-elles relevées au moins chaque année, avec un plan d'actions (chauffage, éclairage, isolation, fournisseur d'énergie renouvelable, appareils énergivores) ?", a: "en_cours",
+          action: "Relever les compteurs à date fixe, repérer les trois premiers postes de consommation par site et chiffrer les actions les moins coûteuses (réglages, éclairage, usages) avant les travaux",
+          task: { task: "Relevé annuel des consommations et plan d'économies", period: "T2", responsible: "Direction / Administration" } },
+        { q: "Les déplacements professionnels et les trajets domicile-travail (permanents et salariés en parcours) ont-ils été analysés, avec des mesures concrètes : transports en commun, vélo, covoiturage, charte de mobilité, véhicules de l'activité entretenus et mutualisés ?", a: "en_cours",
+          action: "Cartographier les trajets, repérer les situations sans solution de mobilité et adopter une charte de mobilité de deux pages ; vérifier l'effet sur l'accès à l'emploi des salariés en parcours",
+          task: { task: "Analyse des déplacements et charte de mobilité", period: "T3", responsible: "Direction / Conseillers en insertion" } },
+        { q: "Le parc numérique (ordinateurs, téléphones, imprimantes) est-il inventorié, sa durée de vie prolongée, le matériel réemployé ou reconditionné, et les équipements en fin de vie confiés à une filière de collecte agréée ?", a: "en_cours",
+          action: "Inventorier le parc, fixer une règle de renouvellement par durée de vie plutôt que par mode, privilégier le reconditionné et organiser la collecte des équipements usagés ; voir la thématique Maturité numérique",
+          task: { task: "Inventaire du parc numérique et règle de renouvellement", period: "T3", responsible: "Direction / Référent numérique" } },
+        { q: "Sur les chantiers et espaces verts, les pratiques protègent-elles les sols, l'eau, l'air et la biodiversité : gestion des eaux de lavage et des laitances, poussières, bruit, entretien des engins, kit de dépollution, un référent environnement par chantier et un carnet de bord (bordereaux, fiches de données de sécurité, incidents) ?", a: "oui",
+          action: "Désigner un référent environnement par chantier, tenir un carnet de bord (bordereaux, fiches de données de sécurité, incidents, plaintes de riverains) et organiser un point mensuel avec l'équipe, sur le modèle d'une charte de chantier propre",
+          task: { task: "Charte chantier propre et carnet de bord environnement", period: "T2", responsible: "Encadrants / Direction" } },
+        { q: "L'exposition aux aléas climatiques (fortes chaleurs, inondations, tempêtes) a-t-elle été évaluée pour les locaux, les chantiers et les salariés, avec des mesures prévues en cas d'épisode de chaleur intense (horaires, eau potable, pauses, équipements) et intégrées au document unique ?", a: "ne_sait_pas",
+          action: "Évaluer l'exposition des sites et postes de travail, intégrer le risque de chaleur au document unique et préparer des mesures par poste : adaptation des horaires, eau fraîche, périodes de repos, équipements (R4463-3 et R4463-7, en vigueur depuis le 2 juin 2025)",
+          task: { task: "Évaluation des aléas climatiques et plan chaleur", period: "T1-T2", responsible: "Direction / Encadrants" } },
+        { q: "Les gaspillages de matières, de stocks, d'énergie et de déplacements sont-ils repérés dans les ateliers (surproduction, attentes, trajets inutiles, rebuts, stocks dormants), et les matériaux ou objets réemployables sont-ils triés avant d'être jetés ?", a: "en_cours",
+          action: "Organiser un tour d'atelier avec l'équipe, y compris les salariés en parcours, pour repérer les gaspillages (grille classique des huit gaspillages du lean) et fixer une action de réemploi par atelier",
+          task: { task: "Tour d'atelier sur les gaspillages et le réemploi", period: "T3", responsible: "Encadrants / Direction" } }
       ] },
     { id: "part", code: "PART", label: "Relations partenariales et institutionnelles",
+      source: "Questionnaire construit à partir de quatre sources reformulées pour une structure ESS ou IAE : (1) le guide méthodologique « Conduite de projets partenariaux de développement territorial » (COORACE, centre de ressources VITA, avec la coopérative Extra Muros, mars 2008), dont sont repris trois outils de diagnostic : le profil stratégique, l'arbre de services selon trois logiques (contractualisation publique, marchande, réciprocité) et le système d'acteurs actuel et potentiel ; ce guide date de 2008 : ses exemples d'institutions (DDTEFP, ANPE, Conseil général) sont dépassés, seule sa méthode est utilisée ; (2) le guide de capitalisation n° 6 du Plan d'investissement dans les compétences « Construire de nouvelles relations aux entreprises » (Haut-commissariat aux compétences, octobre 2022) pour les relations avec les entreprises (immersions, mentors, rencontres hors entretien d'embauche) ; (3) le Code de la commande publique (L2112-2, L2113-13, L2113-15, L2113-16, R2113-7) et le Code du travail (L5132-2, L5132-3, L5132-4), relus sur Légifrance le 05/11/2026 ; (4) le décret n° 2001-495 du 6 juin 2001 (convention obligatoire au-delà de 23 000 € de subvention annuelle ; texte lu dans sa version consolidée au 28/01/2008, seuil non reconfirmé en 2026) et le contrat d'engagement républicain (décret n° 2021-1947, guide de l'administration de février 2023). Non vérifiés faute d'accès aux sites officiels : l'article 10 de la loi du 12 avril 2000 lui-même, la circulaire du 29 septembre 2015 sur les conventions pluriannuelles, la charte d'engagements réciproques de 2014, le fonctionnement du DLA et la durée du conventionnement IAE. Outil d'aide à la décision, sans valeur d'avis juridique : confirme les seuils et les obligations auprès de ton financeur, de la DDETS ou de la DREETS, ou d'un conseil.",
       questions: [
-        { q: "La structure dispose-t-elle d'un CPOM ou de conventions avec plusieurs financeurs ?", a: "oui",
-          action: "Diversifier les financeurs au-delà des 3 principaux",
-          task: { task: "Prospection de nouveaux financeurs", period: "T3", responsible: "Direction" } },
-        { q: "Une cartographie des partenaires et de leur niveau d'engagement existe-t-elle ?", a: "en_cours",
-          action: "Formaliser une cartographie des partenaires et de leur niveau d'engagement",
-          task: { task: "Cartographie des partenaires", period: "T1", responsible: "Direction" } },
-        { q: "La structure siège-t-elle dans une instance territoriale (DLA, CRESS...) ?", a: "oui",
-          action: "Renforcer la présence dans les instances territoriales (DLA, CRESS)",
-          task: { task: "Participation aux instances territoriales", period: "T1-T4", responsible: "Direction" } }
+        { q: "Une cartographie des partenaires existe-t-elle (financeurs, prescripteurs, clients et donneurs d'ordre, entreprises, réseaux de l'ESS, formation), indiquant pour chacun la nature de la relation actuelle et son intérêt pour les deux ou trois prochaines années ?", a: "en_cours",
+          action: "Dresser un tableau du système d'acteurs en quatre colonnes (partenaire, relation actuelle, enjeu pour demain, personne référente), le faire relire en équipe puis par le CA, et le mettre à jour chaque année",
+          task: { task: "Cartographie des partenaires et de leur enjeu", period: "T1", responsible: "Direction" } },
+        { q: "Les ressources de la structure sont-elles réparties entre subventions et contractualisation publique, ventes de produits ou de services, et réciprocité (mises à disposition, mutualisations, bénévolat) ? Aucun financeur ne dépasse-t-il à lui seul environ la moitié des ressources de fonctionnement ?", a: "non_besoin",
+          action: "Calculer la part de chaque financeur dans les produits de l'an dernier ; le seuil d'environ 50 % est un repère de prudence, pas une norme ; fixer une cible de diversification et un calendrier de prospection pour les deux ou trois premiers financeurs",
+          task: { task: "Analyse de la dépendance aux financeurs et cible de diversification", period: "T2", responsible: "Direction / Trésorier" } },
+        { q: "Chaque subvention supérieure à 23 000 € par an fait-elle l'objet d'une convention écrite avec l'objet, le montant et les conditions d'utilisation, et le compte rendu financier ou le bilan demandé par le financeur est-il suivi dans un calendrier ?", a: "oui",
+          action: "Tenir un tableau des subventions avec le montant, la convention, l'échéance du compte rendu et la personne qui le prépare ; le seuil de 23 000 € vient du décret de 2001 (à reconfirmer sur Légifrance avant de le citer)",
+          task: { task: "Tableau de suivi des conventions et comptes rendus de subvention", period: "T1", responsible: "Direction / Administration" } },
+        { q: "Pour les financeurs publics principaux, la structure connaît-elle les dates de fin de ses conventions et de ses financements, et a-t-elle un calendrier de renouvellement (dépôt des dossiers, dialogue de gestion, bilans) anticipé au moins six mois avant l'échéance ?", a: "en_cours",
+          action: "Dresser un calendrier glissant des échéances de tous les financeurs et fixer à l'avance les dates de préparation interne ; pour une structure d'insertion, y inclure l'échéance du conventionnement avec l'État (L5132-2, durée à vérifier auprès de la DDETS)",
+          task: { task: "Calendrier des échéances de financement et de conventionnement", period: "T1", responsible: "Direction / Administration" } },
+        { q: "Si la structure est une association qui demande des subventions, a-t-elle signé le contrat d'engagement républicain lors de ses demandes, informé ses membres, ses salariés et ses bénévoles, et défini quoi faire en cas de manquement ?", a: "ne_sait_pas",
+          action: "Lire le contrat d'engagement républicain (sept engagements), l'inclure dans la procédure de demande de subvention et en informer par écrit les dirigeants, salariés et bénévoles ; un manquement peut conduire au retrait de la subvention et à la restitution de sommes (guide officiel de février 2023) ; ne concerne pas une société commerciale",
+          task: { task: "Information sur le contrat d'engagement républicain", period: "T1", responsible: "Direction / CA" } },
+        { q: "La structure suit-elle les marchés publics et les marchés réservés (aux structures d'insertion, aux entreprises adaptées, aux entreprises de l'ESS pour certains services sociaux) sur son territoire, et sait-elle quand y répondre seule, en groupement ou en sous-traitance ?", a: "non_besoin",
+          action: "Mettre en place une veille hebdomadaire sur la plateforme des achats de l'État et celles des collectivités du territoire ; un acheteur peut réserver un marché aux structures d'insertion (L2113-13) lorsqu'elles emploient au moins 50 % de travailleurs défavorisés (R2113-7) ; la durée d'un marché réservé ESS ne peut dépasser trois ans (L2113-16)",
+          task: { task: "Veille des marchés réservés et grille de réponse", period: "T2", responsible: "Direction" } },
+        { q: "Les clauses sociales d'insertion des marchés du territoire sont-elles repérées, et la structure est-elle en relation avec le facilitateur de clauses sociales ou la collectivité qui les pilote, pour se positionner comme opérateur d'insertion ?", a: "en_cours",
+          action: "Identifier les facilitateurs des clauses sociales du territoire (maison de l'emploi, PLIE, métropole ou département) et leur présenter l'offre d'insertion de la structure ; les conditions d'exécution peuvent prendre en compte le domaine social et l'emploi (L2112-2)",
+          task: { task: "Prise de contact avec les facilitateurs de clauses sociales", period: "T2", responsible: "Direction / Conseillers en insertion" } },
+        { q: "Des relations durables avec des entreprises du territoire existent-elles au-delà de la vente de prestations : immersions et périodes de mise en situation, parrainage ou mentorat, visites, offres d'emploi transmises, clubs d'entreprises inclusives ?", a: "en_cours",
+          action: "Fixer un objectif de nombre d'entreprises partenaires, proposer des formats de rencontre hors entretien d'embauche et organiser un suivi avec un contact nommé par entreprise (pistes du guide n° 6 du PIC)",
+          task: { task: "Plan de relations aux entreprises partenaires", period: "T3", responsible: "Direction / Chargé de relations entreprises" } },
+        { q: "La structure siège-t-elle ou intervient-elle dans les instances où se décident les orientations et les financements du territoire (comités départementaux ou régionaux de l'insertion, CRESS, réseaux et fédérations, collectifs locaux), avec un représentant désigné et un compte rendu en retour à l'équipe ?", a: "oui",
+          action: "Lister les instances pertinentes, désigner un représentant par instance et un mandat clair, et organiser un retour écrit après chaque réunion ; arbitrer les mandats au regard de leur coût en temps",
+          task: { task: "Cartographie des instances et désignation des représentants", period: "T1", responsible: "Direction / CA" } },
+        { q: "Un appui extérieur (dispositif local d'accompagnement, réseau, fédération, tête de réseau) a-t-il été sollicité au cours des trois dernières années pour consolider le modèle économique ou le projet de la structure ?", a: "non_besoin",
+          action: "Contacter le dispositif local d'accompagnement de la région et la fédération ou le réseau d'appartenance pour examiner l'éligibilité et les modalités ; vérifier les conditions auprès de ces structures (site officiel du DLA non lisible lors de la préparation)",
+          task: { task: "Demande d'appui extérieur sur le modèle économique", period: "T2", responsible: "Direction" } },
+        { q: "Les partenariats importants sont-ils formalisés par écrit (convention, accord de sous-traitance ou de cotraitance) avec le rôle de chacun, la durée, les conditions de sortie, les règles sur les données et la propriété intellectuelle ?", a: "en_cours",
+          action: "Utiliser un modèle de convention de partenariat d'une à deux pages avec rôles, durée, sortie, données, propriété intellectuelle et communication ; exiger un accord écrit avant toute coproduction de contenus ou d'outils",
+          task: { task: "Modèle de convention de partenariat et mise à jour des conventions", period: "T2", responsible: "Direction" } },
+        { q: "Les nouveaux projets partenariaux sont-ils préparés avec un diagnostic partagé (cohérence avec les finalités de la structure, apports et attentes de chaque partie prenante, valeur ajoutée pour le territoire) et un pilotage identifié avant d'engager la structure ?", a: "ne_sait_pas",
+          action: "Avant tout engagement, réunir les parties prenantes autour de trois questions : que change le projet pour la structure, pour le territoire et pour chaque partenaire ; consigner les réponses et la décision du CA (méthode VITA de coproduction)",
+          task: { task: "Grille de décision pour les projets partenariaux", period: "T3", responsible: "Direction / CA" } },
+        { q: "La structure valorise-t-elle la réciprocité avec ses partenaires (mutualisation de moyens, prêt de locaux, appuis techniques, échanges de savoir-faire, bénévoles, réseaux) et la compte-t-elle comme une ressource, au même titre que les financements ?", a: "ne_sait_pas",
+          action: "Recenser les échanges non monétaires reçus et donnés sur douze mois, les valoriser en nature quand c'est utile et décider lesquels développer",
+          task: { task: "Recensement des échanges non monétaires", period: "T4", responsible: "Direction / Administration" } },
+        { q: "Chaque financeur et chaque partenaire principal reçoit-il au moins une fois par an des résultats chiffrés et un échange direct (bilan d'activité, sorties vers l'emploi, apports pour le territoire), avec un interlocuteur de la structure identifié ?", a: "oui",
+          action: "Préparer un bilan annuel standardisé et un rendez-vous de restitution avec les trois à cinq financeurs et partenaires les plus importants ; en tirer les attentes pour l'année suivante",
+          task: { task: "Bilan annuel aux financeurs et partenaires principaux", period: "T4", responsible: "Direction" } }
       ] },
     { id: "com", code: "COM", label: "Communication et image",
       questions: [
@@ -3029,6 +3317,171 @@
     if (mqBtn) mqBtn.addEventListener("click", function () { openMaqvt(mqBtn); });
   }
 
+
+  // --- Résumé exécutif (une page A4) ---
+  var XS_RANK = { tres_grave: 0, grave: 1, non_besoin: 2, preoccupant: 3, en_cours: 4, ne_sait_pas: 5 };
+  function xsEsc(t) {
+    return String(t == null ? "" : t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function xsStem(text, max) {
+    var t = String(text).replace(/\s+/g, " ").trim().replace(/\?$/, "");
+    var cut = -1;
+    var re = /\s\(|\s:\s|;/g, m;
+    while ((m = re.exec(t))) {
+      var min = m[0].indexOf("(") >= 0 ? 25 : 38;
+      if (m.index >= min) { cut = m.index; break; }
+    }
+    if (cut > 0 && cut < t.length) t = t.slice(0, cut);
+    if (t.length > max) {
+      t = t.slice(0, max);
+      t = t.slice(0, t.lastIndexOf(" ")) + "…";
+    }
+    return t.replace(/[,;:\s]+$/, "");
+  }
+  function xsShort(text, max) {
+    var t = String(text).replace(/\s+/g, " ").trim();
+    if (t.length <= max) return t;
+    t = t.slice(0, max);
+    return t.slice(0, t.lastIndexOf(" ")) + "…";
+  }
+  function xsDateFr(iso) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
+    return m ? m[3] + "/" + m[2] + "/" + m[1] : new Date().toLocaleDateString("fr-FR");
+  }
+  function xsThemeInfo(theme) {
+    var qs = theme.questions;
+    var done = 0, na = 0, gaps = 0, prog = 0;
+    var worst = null;
+    qs.forEach(function (x) {
+      if (x.a === "oui" || x.a === "ok") done++;
+      else if (x.a === "non_pas_besoin") na++;
+      else {
+        if (x.a === "non_besoin" || x.a === "grave" || x.a === "tres_grave") gaps++;
+        else prog++;
+        if (XS_RANK[x.a] !== undefined && (!worst || XS_RANK[x.a] < XS_RANK[worst.a])) worst = x;
+      }
+    });
+    var denom = qs.length - na;
+    var pct = denom > 0 ? Math.round((done / denom) * 100) : 100;
+    var why;
+    if (theme.status === "good" && !worst) {
+      why = "Aucun besoin identifié sur " + qs.length + " questions : maintenir les pratiques, suivi annuel.";
+    } else {
+      why = (gaps ? gaps + " besoin" + (gaps > 1 ? "s" : "") : "Aucun besoin avéré") + (prog ? (gaps ? ", " : " mais ") + prog + " en cours ou à vérifier" : "") + " sur " + qs.length + " questions.";
+      if (worst) why += " Priorité : « " + xsStem(worst.q, 78) + (worst.value ? " : " + worst.value : "") + " ».";
+      if (theme.gouvernometre && theme.gvPos) why += " Gouvernomètre : zone « " + GV_ZONES[gvZoneIndex(theme.gvPos)].label + " ».";
+    }
+    var task = theme.tasks && theme.tasks[0];
+    var more = theme.tasks ? theme.tasks.length - 1 : 0;
+    var todo = task ? xsShort(task.task, 90) + " (" + task.period + ", " + task.responsible + ")" + (more > 0 ? " + " + more + " autre" + (more > 1 ? "s" : "") : "") : "Point de suivi annuel.";
+    return { pct: pct, why: why, todo: todo, gaps: gaps, done: done, denom: denom };
+  }
+  function buildExecSheet() {
+    var idn = (typeof identity !== "undefined" && identity) ? identity : { structure: "", person: "", date: "" };
+    var order = { urgent: 0, watch: 1, good: 2 };
+    var themes = DATA.slice().sort(function (a, b) { return order[a.status] - order[b.status] || b.gaps - a.gaps; });
+    var counts = { urgent: 0, watch: 0, good: 0 };
+    var userN = 0, sourcedN = 0, doneAll = 0, denomAll = 0, q = { 1: 0, 2: 0, 3: 0, 4: 0 };
+    var illu = [];
+    var infos = {};
+    DATA.forEach(function (t) {
+      counts[t.status]++;
+      if (t.isUserData) userN++;
+      var meaning = THEME_MEANING[t.id];
+      if (meaning && meaning.sourceTag) sourcedN++; else illu.push(t.code);
+      var inf = xsThemeInfo(t); infos[t.id] = inf;
+      doneAll += inf.done; denomAll += inf.denom;
+      (t.tasks || []).forEach(function (tk) { var m = /T([1-4])/.exec(tk.period || ""); if (m) q[m[1]]++; });
+    });
+    var globalPct = denomAll ? Math.round((doneAll / denomAll) * 100) : 0;
+    var urgentCodes = themes.filter(function (t) { return t.status === "urgent"; }).map(function (t) { return t.code; });
+    var watchCodes = themes.filter(function (t) { return t.status === "watch"; }).map(function (t) { return t.code; });
+
+    var warn = "";
+    if (userN < DATA.length) {
+      warn = "<p class=\"xs-warn\"><strong>À lire avant diffusion :</strong> " + (userN === 0 ? "aucune thématique n'est encore renseignée avec les réponses de la structure" : (DATA.length - userN) + " thématique" + (DATA.length - userN > 1 ? "s" : "") + " sur " + DATA.length + " reposent encore sur des données d'exemple") + ". Les statuts correspondants sont illustratifs et ne décrivent pas la situation réelle de la structure.</p>";
+    }
+
+    var rows = themes.map(function (t) {
+      var inf = infos[t.id];
+      var base = t.isUserData ? "Vos réponses" + (t.dataDate ? " · " + xsEsc(t.dataDate) : "") : "Exemple";
+      var label = { urgent: "Urgente", watch: "En progrès", good: "Maîtrisée" }[t.status];
+      return "<div class=\"xs-row st-" + t.status + "\">" +
+        "<div class=\"xs-code\">" + xsEsc(t.code) + "</div>" +
+        "<div class=\"xs-main\"><div class=\"xs-title\">" + xsEsc(t.label) + "<span class=\"xs-base\">" + base + "</span></div>" +
+          "<div class=\"xs-line\"><b>Pourquoi</b>" + xsEsc(inf.why) + "</div>" +
+          "<div class=\"xs-line\"><b>À mener</b>" + xsEsc(inf.todo) + "</div></div>" +
+        "<div class=\"xs-side\"><span class=\"xs-pill\">" + label + "</span><div class=\"xs-bar\"><i style=\"width:" + inf.pct + "%\"></i></div><span class=\"xs-pct\">" + inf.pct + " % conforme</span></div>" +
+      "</div>";
+    }).join("");
+
+    var decisions = [];
+    if (urgentCodes.length) decisions.push("Arbitrer l'ordre de traitement des thématiques urgentes (" + urgentCodes.join(", ") + ") et n'en lancer qu'un nombre compatible avec la capacité de l'équipe.");
+    decisions.push("Valider un responsable et une échéance pour chaque tâche retenue ; charge positionnée par trimestre (première échéance) : T1 " + q[1] + " · T2 " + q[2] + " · T3 " + q[3] + " · T4 " + q[4] + ".");
+    if (watchCodes.length) decisions.push("Suivre en comité les thématiques en progrès (" + watchCodes.join(", ") + ") sans les ouvrir en chantier tant que les urgences ne sont pas traitées.");
+    if (userN < DATA.length) decisions.push("Faire renseigner les questionnaires manquants par les personnes concernées avant de présenter ce résumé comme état des lieux.");
+
+    var structure = idn.structure && idn.structure.trim() ? xsEsc(idn.structure.trim()) : "Structure non renseignée";
+    var person = idn.person && idn.person.trim() ? "<br>Renseigné par " + xsEsc(idn.person.trim()) : "";
+
+    return "<div class=\"xs\">" +
+      "<div class=\"xs-top\"><div><h3>Résumé exécutif — pilotage stratégique</h3><p class=\"xs-sub\">Tableau de bord Tout Roule · ActivESS Conseil</p></div>" +
+        "<div class=\"xs-id\"><strong>" + structure + "</strong><br>" + xsDateFr(idn.date) + person + "</div></div>" +
+      "<div class=\"xs-body\">" +
+        "<div class=\"xs-sec\">La démarche</div>" +
+        "<p>La structure est passée au crible de " + DATA.length + " thématiques de pilotage (projet, économie, ressources humaines, qualité de vie au travail, gouvernance, partenariats, environnement, numérique, sécurité…). Chaque questionnaire reprend des méthodes et des textes cités dans l'outil (" + sourcedN + " thématiques sur " + DATA.length + " sont sourcées" + (illu.length ? " ; " + illu.join(" et ") + " restent illustratives" : "") + "). Les réponses donnent un statut — <strong>urgente</strong> dès 2 besoins identifiés, <strong>en progrès</strong> dès 1 besoin ou 2 points en cours, <strong>maîtrisée</strong> sinon —, des actions à moyen terme et des tâches datées (T1 à T4) avec un responsable. « Conforme » : part des réponses positives, hors questions non concernées. Aide à la décision, pas un audit.</p>" +
+        "<div class=\"xs-kpis\">" +
+          "<div class=\"xs-kpi k-urgent\"><b>" + counts.urgent + "</b><span>thématiques urgentes</span></div>" +
+          "<div class=\"xs-kpi k-watch\"><b>" + counts.watch + "</b><span>en progrès</span></div>" +
+          "<div class=\"xs-kpi k-good\"><b>" + counts.good + "</b><span>maîtrisées</span></div>" +
+          "<div class=\"xs-kpi k-all\"><b>" + globalPct + " %</b><span>de réponses conformes</span></div>" +
+          "<div class=\"xs-kpi k-all\"><b>" + userN + "/" + DATA.length + "</b><span>thématiques renseignées</span></div>" +
+        "</div>" + warn +
+        "<div class=\"xs-sec\">Où en est chaque thématique, pourquoi, et que faire</div>" + rows +
+        "<div class=\"xs-sec\">Décisions attendues de la gouvernance</div>" +
+        "<ol class=\"xs-dec\">" + decisions.map(function (d) { return "<li>" + xsEsc(d) + "</li>"; }).join("") + "</ol>" +
+      "</div>" +
+      "<div class=\"xs-foot\">Synthèse générée automatiquement par Tout Roule à partir des réponses saisies dans ce navigateur. Outil d'aide à la décision, sans valeur d'avis juridique, comptable ou d'audit : les obligations légales citées dans les questionnaires dépendent de l'effectif, des sites et des financeurs. Sources détaillées : page « Ressources » de l'outil. ActivESS Conseil · www.activ-ess.fr</div>" +
+    "</div>";
+  }
+  function renderExecSummary() {
+    var host = document.getElementById("exec-sheet-inline");
+    if (!host) return;
+    host.innerHTML = buildExecSheet();
+  }
+  function fitExecToPage(root) {
+    var sheet = root.querySelector(".xs");
+    if (!sheet) return;
+    sheet.style.zoom = "";
+    root.style.cssText = "display:block;position:absolute;left:-10000px;top:0;width:194mm;visibility:hidden";
+    sheet.style.cssText = "width:100%;max-width:none;padding:0;font-size:7.55pt;box-shadow:none";
+    var h = sheet.getBoundingClientRect().height;
+    var avail = 281 * 96 / 25.4 - 6;
+    sheet.style.cssText = "";
+    root.style.cssText = "";
+    if (h > avail) sheet.style.zoom = Math.max(0.7, avail / h).toFixed(3);
+  }
+  function printExecSummary() {
+    var root = document.getElementById("exec-print-root");
+    if (!root) return;
+    root.innerHTML = buildExecSheet();
+    fitExecToPage(root);
+    document.body.classList.add("printing-exec");
+    var cleanup = function () {
+      document.body.classList.remove("printing-exec");
+      root.innerHTML = "";
+      window.removeEventListener("afterprint", cleanup);
+    };
+    window.addEventListener("afterprint", cleanup);
+    try {
+      window.print();
+    } catch (e) {
+      cleanup();
+      showToast("Impression indisponible ici. Utilise Ctrl/Cmd + P depuis la page publiée.", "error");
+    }
+  }
+  document.getElementById("btn-exec-print").addEventListener("click", printExecSummary);
+
   function renderStats() {
     var counts = { urgent: 0, watch: 0, good: 0 };
     DATA.forEach(function (t) { counts[t.status]++; });
@@ -3041,6 +3494,7 @@
     row.innerHTML = order.map(function (o) {
       return "<div class=\"stat-chip\"><span class=\"dot status-dot status-" + o.key + "\" style=\"width:8px;height:8px;border-radius:50%;background:var(--status-" + o.key + ")\"></span><strong>" + counts[o.key] + "</strong><span class=\"label\">" + o.label + "</span></div>";
     }).join("");
+    renderExecSummary();
   }
 
   function renderDashboard() {
@@ -3281,8 +3735,8 @@
     comp: { meaning: "Ce thème regarde si la structure anticipe les compétences dont elle aura besoin, plutôt que de les découvrir au moment d'un départ. Il vérifie la cartographie des postes, l'entretien de parcours professionnel (tous les 4 ans depuis la loi du 30/12/2025), le plan de développement des compétences, le financement de la formation et la transmission des savoir-faire critiques.", sourceTag: "ARSARA, Baromètre RH (adapté) · Code du travail L6315-1" },
     gouv: { meaning: "Ce thème regarde si les instances dirigeantes fonctionnent réellement, ou seulement sur le papier. Il repose sur le Gouvernomètre, un outil d'auto-diagnostic en 21 constats qui place la gouvernance sur une échelle : gouvernance vivante et apprenante, vigilances à traiter, risques élevés de dysfonctionnement. Onze questions complémentaires portent sur les rôles du bureau, la direction salariée, les délégations de pouvoirs et le risque de dirigeant de fait.", sourceTag: "Gouvernomètre — INAÉ, EILAN Conseil, DLA, France Active NA, CRESS NA, Le Mouvement associatif NA, Guid'Asso · FAS (2022) · JF Conseil" },
     rh: { meaning: "Recrutement, intégration, rémunération, formalités d'embauche, départs et remplacements, contrats d'insertion, obligations liées à l'effectif : ce thème couvre la gestion courante des ressources humaines. Les parcours professionnels relèvent de la thématique « Plan de montée en compétences » et le climat de travail de la « Qualité de vie au travail ».", sourceTag: "ARSARA (2017, adapté) · Code du travail · Légifrance" },
-    env: { meaning: "Bilan carbone, tri des déchets sur les chantiers, critères environnementaux dans les achats : ce thème regarde si la transition écologique reste un principe affiché ou devient une pratique sur le terrain.", sourceTag: null },
-    part: { meaning: "CPOM et diversité des financeurs, cartographie des partenaires, présence dans les instances territoriales (DLA, CRESS) : ce thème mesure la solidité et la diversité du réseau qui soutient la structure.", sourceTag: null },
+    env: { meaning: "Pilotage, déchets, produits dangereux, achats, énergie, mobilité, numérique, chantiers, aléas climatiques : ce thème regarde si la transition écologique reste un principe affiché ou devient une pratique de terrain, avec les obligations qui s'y attachent.", sourceTag: "TEDDA (axes) · Code de l'environnement · Code du travail · Trackdéchets" },
+    part: { meaning: "Cartographie des partenaires, diversité des financeurs, conventions et subventions, marchés réservés et clauses sociales, relations aux entreprises, instances du territoire : ce thème mesure la solidité, la diversité et la formalisation du réseau qui soutient la structure.", sourceTag: "Guide COORACE/VITA · Guide PIC n° 6 · Code de la commande publique · Contrat d'engagement républicain" },
     com: { meaning: "Site internet à jour, présence active sur un réseau social, communication interne régulière : ce thème couvre à la fois l'image renvoyée à l'extérieur et l'information qui circule en interne.", sourceTag: null },
     lab: { meaning: "Adhésion à un réseau représentatif (CRESS, Coorace...), labels qualité à jour (Qualiopi), veille sur d'autres labels (ESUS) : ce thème vérifie que la structure entretient activement sa reconnaissance externe, plutôt que de la laisser expirer.", sourceTag: null }
   };
@@ -3587,6 +4041,7 @@
     identityMem = { structure: identity.structure, person: identity.person, date: identity.date };
     try { sessionStorage.setItem(IDENTITY_KEY, JSON.stringify(identity)); } catch (e) {}
     syncIdentityInputs(sourceInput);
+    if (typeof renderExecSummary === "function") renderExecSummary();
   }
   function renderIdentityCards() {
     document.querySelectorAll("[data-identity-slot]").forEach(function (slot) {
